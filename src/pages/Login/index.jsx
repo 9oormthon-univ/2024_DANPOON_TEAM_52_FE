@@ -4,9 +4,9 @@ import {
   Title,
   Text,
   LogoContainer,
-  GradientBackground
-} from "./styled";
-import KakaoLoginButton from "../../components/KakaoLoginButton";
+  GradientBackground,
+} from "./styled"
+import KakaoLoginButton from "../../components/KakaoLoginButton"
 
 export default function Login() {
   return (
@@ -19,5 +19,5 @@ export default function Login() {
       <Text>SNS로 간단하게 시작하기</Text>
       <KakaoLoginButton />
     </Container>
-  );
+  )
 }

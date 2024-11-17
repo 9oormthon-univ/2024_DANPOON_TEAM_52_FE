@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
-import { Typography } from "antd";
+import { Typography } from "antd"
 
 export const Title = styled(Typography.Title)`
   &&& {
@@ -9,7 +9,7 @@ export const Title = styled(Typography.Title)`
     color: white;
     font-family: "Pretendard-Regular";
   }
-`;
+`
 
 export const Text = styled(Typography.Paragraph)`
   &&& {
@@ -17,9 +17,9 @@ export const Text = styled(Typography.Paragraph)`
     font-family: "Pretendard-Regular";
     color: white;
   }
-`;
+`
 
 export default {
   Title,
-  Text
-};
+  Text,
+}

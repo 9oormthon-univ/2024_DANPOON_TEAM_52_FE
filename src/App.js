@@ -1,13 +1,13 @@
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom"
 import {
   ROUTES_BASENAME,
   ROUTES_PATH_ROOT,
   ROUTES_PATH_HOME,
   ROUTES_PATH_LOGIN,
   ROUTES_PATH_SPLASH,
-} from "./constants/routes";
-import Login from "./pages/Login";
-import Splash from "./pages/Splash";
+} from "./constants/routes"
+import Login from "./pages/Login"
+import Splash from "./pages/Splash"
 
 export default function App() {
   return (
@@ -21,5 +21,5 @@ export default function App() {
         />
       </Routes>
     </BrowserRouter>
-  );
+  )
 }

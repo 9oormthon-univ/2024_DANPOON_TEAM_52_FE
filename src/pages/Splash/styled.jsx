@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { motion } from "framer-motion";
+import styled from "styled-components"
+import { motion } from "framer-motion"
 
 export const Container = styled.div`
   display: flex;
@@ -8,12 +8,12 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
-`;
+`
 
 export const AnimatedLogo = styled(motion.div)`
   position: relative;
   overflow: visible;
-`;
+`
 
 export const GradientBackground = styled(motion.div)`
   position: absolute;
@@ -31,12 +31,12 @@ export const GradientBackground = styled(motion.div)`
     rgba(195, 248, 206, 0.3) 88.6%
   );
   filter: blur(73.30000305175781px);
-`;
+`
 
-export const LogoContainer = styled(motion.div)``;
+export const LogoContainer = styled(motion.div)``
 
 export const StarContainer = styled(motion.div)`
   position: absolute;
   top: 5px;
   left: 130px;
-`;
+`
