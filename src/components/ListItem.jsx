@@ -1,5 +1,6 @@
 import { styled } from "styled-components"
 import { Flex } from "antd"
+import { Skeleton } from "antd"
 
 const ListItemContainer = styled.div`
   display: flex;
@@ -56,3 +57,14 @@ export default function ListItem({ icon, title, description, label, onClick }) {
     </ListItemContainer>
   )
 }
+
+export const ListItemSkeleton = styled(Skeleton.Node)`
+  width: 100%;
+  height: 60px;
+  border-radius: 10px;
+  background-color: #2c2c2c;
+  & > div {
+    width: 100% !important;
+    height: 100% !important;
+  }
+`
