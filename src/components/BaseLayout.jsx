@@ -13,6 +13,13 @@ const Container = styled.div`
   height: 100%;
 `
 
+const ChildrenContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+`
+
 const NavLink = styled(Link)`
   text-decoration: none;
   color: ${(props) => (props.$highlight ? "#fff" : "#aaa")};
@@ -62,9 +69,7 @@ const Nav = () => {
 export default function BaseLayout({ children }) {
   return (
     <Container>
-      <Flex vertical flex={1}>
-        {children}
-      </Flex>
+      <ChildrenContainer>{children}</ChildrenContainer>
       <Nav />
     </Container>
   )
