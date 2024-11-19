@@ -9,6 +9,7 @@ import {
 } from "./constants/routes"
 import Login from "./pages/Login"
 import Splash from "./pages/Splash"
+import Home from "./pages/Home"
 import InfoPage from "./pages/Info/Index"
 
 export default function App() {
@@ -17,11 +18,12 @@ export default function App() {
       <Routes>
         <Route path={ROUTES_PATH_LOGIN} element={<Login />} />
         <Route path={ROUTES_PATH_SPLASH} element={<Splash />} />
+        <Route path={ROUTES_PATH_HOME} element={<Home />} />
         <Route
           path={ROUTES_PATH_ROOT}
           element={<Navigate to={ROUTES_PATH_HOME} />}
         />
-        <Route path={ROUTES_PATH_ONBOARD} element={<InfoPage />}/>
+        <Route path={ROUTES_PATH_ONBOARD} element={<InfoPage />} />
       </Routes>
     </BrowserRouter>
   )

@@ -5,17 +5,16 @@ import { Typography } from "antd"
 export const Title = styled(Typography.Title)`
   &&& {
     font-size: 24px;
-    font-weight: bold;
+    font-weight: 600;
     color: white;
-    font-family: "Pretendard-Regular";
   }
 `
 
 export const Text = styled(Typography.Paragraph)`
   &&& {
     font-size: 15px;
-    font-family: "Pretendard-Regular";
     color: white;
+    font-weight: 400;
   }
 `
 
