@@ -156,6 +156,7 @@ html {
   width: 100vw;
   height: 100dvh;
   background-color: #fcfcfc;
+  overflow: hidden;
 }
 
 body {
@@ -165,6 +166,8 @@ body {
   min-width: 370px;
   max-width: 576px;
   background-color: black;
+  overflow: hidden;
+  position: relative;
 }
 
 #root {
