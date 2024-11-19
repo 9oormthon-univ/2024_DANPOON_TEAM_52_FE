@@ -9,6 +9,7 @@ export const Container = styled.div`
   align-items: start;
   justify-content: start;
   padding: 70px 30px 0;
+  overflow: hidden;
 `
 
 export const Title = styled(TypoComponent.Title)`
