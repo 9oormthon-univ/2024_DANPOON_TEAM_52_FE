@@ -2,8 +2,8 @@ import { useState } from "react"
 import BaseLayout from "../../components/BaseLayout"
 import { Container, Description, Title } from "./styled"
 import { TabsContent, TabsHeader } from "../../components/Tabs"
-import ListItem from "../../components/ListItem"
 import ProgressGoals from "./ProgressGoals"
+import CompleteGoals from "./CompleteGoals"
 
 export default function Home() {
   const [selectedTab, setSelectedTab] = useState(0)
@@ -16,13 +16,7 @@ export default function Home() {
     {
       title: "완료한 목표",
       description: "달성한 목표를 별자리 형태로 확인해요",
-      content: (
-        <ListItem
-          icon={"🪪"}
-          title={"데이터 기반 기획 능력 강화하기"}
-          label={"2/3"}
-        />
-      ),
+      content: <CompleteGoals />,
     },
   ]
   return (
