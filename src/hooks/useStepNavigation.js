@@ -17,5 +17,5 @@ export function useStepNavigation() {
     });
   };
 
-  return { step, paramsJobItem, paramsInterestItem, updateStep, navigate };
+  return { step, paramsJobItem, paramsInterestItem, updateStep, navigate, setSearchParams };
 }
