@@ -51,14 +51,3 @@ export const Text = styled(TypoComponent.Text)`
     margin-bottom: 20px;
   }
 `
-
-export const LoginButton = styled.button`
-  width: 100%;
-  height: 50px;
-  background-color: #000;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-`

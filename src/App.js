@@ -12,12 +12,15 @@ import Login from "./pages/Login"
 import Splash from "./pages/Splash"
 import InfoPage from "./pages/Info"
 import OnBoardingPage from "./pages/Onboarding"
+import Home from "./pages/Home"
+import InfoPage from "./pages/Info/Index"
 export default function App() {
   return (
     <BrowserRouter basename={ROUTES_BASENAME}>
       <Routes>
         <Route path={ROUTES_PATH_LOGIN} element={<Login />} />
         <Route path={ROUTES_PATH_SPLASH} element={<Splash />} />
+        <Route path={ROUTES_PATH_HOME} element={<Home />} />
         <Route
           path={ROUTES_PATH_ROOT}
           element={<Navigate to={ROUTES_PATH_HOME} />}
