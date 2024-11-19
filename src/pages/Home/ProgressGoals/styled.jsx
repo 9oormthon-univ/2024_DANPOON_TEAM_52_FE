@@ -5,8 +5,8 @@ export const Container = styled.div`
   flex-direction: column;
   width: 100%;
   flex: 1;
-  gap: 40px;
-  padding: 40px 0 20px;
+  gap: 20px;
+  padding: 20px 0 20px;
   overflow: hidden;
 `
 
