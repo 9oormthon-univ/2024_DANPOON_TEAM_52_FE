@@ -68,7 +68,10 @@ export default function Splash() {
           }
         }}
       >
-        <GradientBackground variants={opacityVariants} layoutId="background" />
+        <GradientBackground
+          variants={opacityVariants}
+          layoutId="gradientBackground"
+        />
         <StarContainer variants={starVariants}>
           <StarSVG />
         </StarContainer>
