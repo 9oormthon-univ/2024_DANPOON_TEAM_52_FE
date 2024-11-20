@@ -8,7 +8,7 @@ export const Container = styled.div`
   height: 100%;
   align-items: start;
   justify-content: start;
-  padding: 70px 30px 0;
+  padding: 30px 30px 0;
   overflow: hidden;
 `
 
