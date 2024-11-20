@@ -1,26 +1,36 @@
-import { Flex } from "antd"
 import Constellation from "../../../components/Constellation"
-import { Container } from "./styled"
+import {
+  ShadowContainer,
+  Container,
+  MonthContainer,
+  Month,
+  GoalContainer,
+  GoalTitle,
+  ConsterllationContainer,
+} from "./styled"
 
 export default function CompleteGoals() {
   return (
-    <Flex
-      style={{
-        width: "100%",
-        flex: 1,
-        overflow: "scroll",
-      }}
-    >
-      <Flex flex={1} vertical>
-        {new Array(4).fill().map((_, index) => (
-          <Constellation key={index} id={0} starCount={index + 3} />
+    <ShadowContainer>
+      <Container>
+        {new Array(10).fill().map((_, index) => (
+          <MonthContainer key={index}>
+            <Month>11월</Month>
+            <GoalContainer direction="left">
+              <ConsterllationContainer>
+                <GoalTitle>🏆 마케팅 아이디어 공모전 동상</GoalTitle>
+                <Constellation id={index * 2 + 0} starCount={4} />
+              </ConsterllationContainer>
+            </GoalContainer>
+            <GoalContainer direction="right">
+              <ConsterllationContainer>
+                <GoalTitle>🏫 마케팅 교육 세미나</GoalTitle>
+                <Constellation id={index * 2 + 1} starCount={4} />
+              </ConsterllationContainer>
+            </GoalContainer>
+          </MonthContainer>
         ))}
-      </Flex>
-      <Flex flex={1} vertical>
-        {new Array(4).fill().map((_, index) => (
-          <Constellation key={index} id={1} starCount={index + 3} />
-        ))}
-      </Flex>
-    </Flex>
+      </Container>
+    </ShadowContainer>
   )
 }
