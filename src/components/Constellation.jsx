@@ -1,9 +1,5 @@
 import React, { useEffect, useRef } from "react"
-
-const seededRandom = (seed) => {
-  const x = Math.sin(seed) * 10000
-  return Math.abs(x - Math.floor(x))
-}
+import seedrandom from "seedrandom"
 
 const distance = (star1, star2) => {
   return Math.sqrt(
@@ -88,7 +84,7 @@ export default function Constellation({ starCount, id }) {
     const isOverlap = (x, y, size, stars) => {
       for (let star of stars) {
         const dist = distance({ x, y }, star)
-        if (dist < size + star.size) {
+        if (dist < size + star.size + 30) {
           return true
         }
       }
@@ -96,15 +92,20 @@ export default function Constellation({ starCount, id }) {
     }
 
     const drawStars = () => {
+      const random = seedrandom(id)
       ctx.clearRect(0, 0, width, height)
 
       for (let i = 1; i <= starCount; i++) {
-        const seed = id * 10 + i
+        const starSize = Math.floor(random() * 3 + 3)
 
-        const starSize = Math.floor(seededRandom(seed) * 3 + 5)
-
-        const x = seededRandom(seed) * (width - 3 * padding) + padding * 2
-        const y = seededRandom(seed + 1) * (height - 2 * padding) + padding
+        let x, y
+        for (let j = 0; j < 10; j++) {
+          x = random() * (width - 2 * padding) + padding
+          y = random() * (height - 2 * padding) + padding
+          if (!isOverlap(x, y, starSize, stars)) {
+            break
+          }
+        }
 
         stars.push({ x, y, size: starSize })
       }
