@@ -1,7 +1,7 @@
 import Calendar from "react-calendar"
 import styled from "styled-components"
 import "react-calendar/dist/Calendar.css"
-import { DatePicker } from "antd";
+import { Checkbox, DatePicker } from "antd"
 export const StyledCalendarWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -17,8 +17,8 @@ export const StyledCalendarWrapper = styled.div`
     padding: 3% 5%;
     background-color: white;
   }
-.ant-picker-cell-selected .ant-picker-cell-inner {
-    background-color: #184149; /* 동그라미 배경색 */
+
+  .ant-picker-cell-selected .ant-picker-cell-inner {
     color: white; /* 텍스트 색상 */
     border-radius: 50%; /* 동그라미 모양 */
     width: 20px; /* 너비 설정 */
@@ -27,11 +27,11 @@ export const StyledCalendarWrapper = styled.div`
     justify-content: center; /* 가로 정렬 */
     align-items: center; /* 세로 정렬 */
   }
-
+    
   /* 전체 폰트 컬러 */
   .react-calendar__month-view {
     abbr {
-      color: #C3C3C3;
+      color: #c3c3c3;
       font-size: 15px;
     }
   }
@@ -68,7 +68,7 @@ export const StyledCalendarWrapper = styled.div`
   .react-calendar__month-view__weekdays abbr {
     text-decoration: none;
     font-weight: 500;
-    color:white;
+    color: white;
   }
 
   /* 오늘 날짜 폰트 컬러 */
@@ -109,19 +109,11 @@ export const StyledCalendarWrapper = styled.div`
     font-weight: 600;
     color: ${(props) => props.theme.gray_1};
   }
-
-  /* 선택한 날짜 스타일 적용 */
-  .react-calendar__tile:enabled:hover,
-  .react-calendar__tile:enabled:focus,
-  .react-calendar__tile--active {
-    background-color: #184149;
-    border-radius: 50%;
-  }
 `
 
 export const StyledCalendar = styled(Calendar)`
   &&& {
-    background:none;
+    background: none;
   }
 `
 
@@ -138,7 +130,7 @@ export const StyledToday = styled.div`
 
 /* 일정있는 날짜에 점 표시 스타일 */
 export const StyledDot = styled.div`
-  background-color: #8AFAF1;
+  background-color: #8afaf1;
   border-radius: 50%;
   width: 0.3rem;
   height: 0.3rem;
@@ -158,7 +150,7 @@ export const ModalOverlay = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
-`;
+`
 
 export const ModalContent = styled.div`
   background: black;
@@ -169,7 +161,7 @@ export const ModalContent = styled.div`
   text-align: center;
   color: white;
   box-shadow: 1px 1px 13.7px 0px rgba(138, 250, 241, 0.3);
-`;
+`
 
 export const ModalInput = styled.input`
   width: 100%;
@@ -180,29 +172,45 @@ export const ModalInput = styled.input`
   font-size: 16px;
   border: 1px solid #333;
   border-radius: 10px;
-  background: #2f2f2f;
+  background: #262827;
   color: white;
-  &:focus{
+  text-align: center;
+  &:focus {
     outline: none;
   }
-`;
+`
 
+export const SingleCheckbox = styled(Checkbox)`
+  &&& {
+    .ant-checkbox-inner {
+      background-color: #262827 !important;
+      border: none;
+    }
+    .ant-checkbox-checked {
+      background-color: #262827 !important;
+      border: none !important;
+    }
+    .ant-checkbox {
+      background-color: #262827 !important;
+    }
+  }
+`
 export const ModalButtonGroup = styled.div`
   display: flex;
   justify-content: center;
   gap: 10px;
   margin-top: 20px;
-`;
+`
 
 export const ModalButton = styled.button`
-  width: 45%;
+  width: 50%;
   padding: 10px 20px;
-  font-size: 16px;
+  font-size: 14px;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   font-family: "Pretendard";
-`;
+`
 
 export const AddScheduleButton = styled.button`
   position: absolute;
@@ -227,7 +235,15 @@ export const AddScheduleButton = styled.button`
   &:active {
     background: #1f1f1f; /* 클릭 시 배경색 */
   }
-`;
+`
+
+export const StyledDatePicker = styled(DatePicker)`
+width:"50%", background:"#262827", border:"none", color:"white"
+
+.ant-picker-suffix {
+  color: white !important; /* 달력 아이콘 색상 */
+}
+`
 
 export const StyledRangePicker = styled(DatePicker.RangePicker)`
   &&& {
@@ -238,25 +254,19 @@ export const StyledRangePicker = styled(DatePicker.RangePicker)`
     border: none; /* 테두리 제거 */
     border-radius: 8px; /* 둥근 모서리 */
     padding: 8px 12px;
-
     .ant-picker-input > input {
       color: white !important; /* 입력 글씨 색상 */
       border: none; /* 입력 필드 테두리 제거 */
       outline: none; /* 포커스 시 외곽선 제거 */
     }
-    .ant-picker-header {
-      width:50px;
-    }
-
     .ant-picker-suffix {
       color: white !important; /* 달력 아이콘 색상 */
     }
-
     &:hover {
       border: none; /* 호버 시 테두리 제거 */
     }
-  }
-`;
+`
+
 /* 드롭다운 스타일 강제 적용 */
 export const GlobalStyle = styled.div`
   .ant-picker-dropdown {
@@ -281,4 +291,4 @@ export const GlobalStyle = styled.div`
   .ant-picker-footer {
     background-color: #262827 !important; /* 드롭다운 하단 배경색 */
   }
-`;
+`

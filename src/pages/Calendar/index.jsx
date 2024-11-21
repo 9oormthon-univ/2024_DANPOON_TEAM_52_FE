@@ -6,7 +6,6 @@ import { StyledCalendarWrapper } from "./styled"
 import BaseLayout from "../../components/BaseLayout"
 import { useDateFunc } from "../../hooks/useDateFunc"
 const CalendarPage = () => {
-  const [showDetails, setShowDetails] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [newEvent, setNewEvent] = useState({
     title: "",
@@ -14,52 +13,45 @@ const CalendarPage = () => {
     endDate: null,
   })
   const {
+    events,
+    questData,
     date,
-    selectedDate,
     setDate,
-    setSelectedDate,
     handleSaveEvent,
     renderDotsForDate,
-    events,
-    questData
+    selectDate,
+    setShowDetails,
+    showDetails,
+    selectedDate
   } = useDateFunc()
-
   return (
     <BaseLayout>
       <StyledCalendarWrapper>
         <CalendarComponent
           date={date}
           onDateChange={setDate}
-          onDayClick={(clickedDate) => {
-            setSelectedDate(clickedDate.toISOString().split("T")[0])
-            setShowDetails(true)
+          onActiveStartDateChange={(newDate) => {
+            setDate(new Date(newDate)) // 항상 Date 객체로 변환
           }}
-          activeStartDate={date}
-          onActiveStartDateChange={setDate}
           renderDotsForDate={renderDotsForDate}
+          setIsModalOpen={setIsModalOpen}
+          selectDate={selectDate}
         />
         <ModalComponent
           isModalOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
           newEvent={newEvent}
           onTitleChange={(title) => setNewEvent({ ...newEvent, title })}
-          onStartDateChange={(date, dateString) =>
-            setNewEvent({ ...newEvent, startDate: dateString })
-          }
-          onEndDateChange={(date, dateString) =>
-            setNewEvent({ ...newEvent, endDate: dateString })
-          }
-          onSave={() => {
-            handleSaveEvent(newEvent)
-          }}
+          handleSaveEvent={handleSaveEvent}
+          setIsModalOpen={setIsModalOpen}
         />
         {showDetails && (
           <EventDetails
-            key={selectedDate}
+            setShowDetails={setShowDetails}
             selectedDate={selectedDate}
             events={events}
             questData={questData}
-            onClose={() => setShowDetails(false)}
+            setShowDetail={setShowDetails}
           />
         )}
       </StyledCalendarWrapper>

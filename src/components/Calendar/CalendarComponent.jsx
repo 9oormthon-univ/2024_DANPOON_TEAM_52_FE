@@ -1,30 +1,38 @@
-import React from "react"
-import { StyledCalendar } from "../../pages/Calendar/styled"
+import React, { useState } from "react"
+import { StyledCalendar, AddScheduleButton} from "../../pages/Calendar/styled"
 
 const CalendarComponent = ({
   date,
-  onDateChange,
   onDayClick,
   activeStartDate,
   onActiveStartDateChange,
   renderDotsForDate,
+  setIsModalOpen,
+  selectDate,
+  selectedDate
 }) => {
   return (
+    <>
     <StyledCalendar
+      key={selectedDate}
       value={date}
-      onChange={onDateChange}
       formatDay={(locale, date) => date.getDate()} // 숫자만 표시
       calendarType="gregory"
       showNeighboringMonth={false}
       next2Label={null}
       prev2Label={null}
       minDetail="year"
-      tileContent={() => renderDotsForDate()}
+      tileContent={(date) => renderDotsForDate(date)}
       activeStartDate={activeStartDate}
       onActiveStartDateChange={onActiveStartDateChange}
-      onClickDay={onDayClick}
+      onClickDay={(date)=>{selectDate(date)}}
     />
+    <AddScheduleButton onClick={()=>{setIsModalOpen(true)}}>
+      +
+    </AddScheduleButton>
+    </>
   )
 }
 
 export default CalendarComponent
+
