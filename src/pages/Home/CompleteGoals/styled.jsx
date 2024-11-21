@@ -80,6 +80,7 @@ export const Container = styled.div`
   );
   background-size: 100% 1500px;
   background-attachment: local;
+  gap: 15px;
 `
 
 export const MonthContainer = styled.div`
@@ -88,6 +89,7 @@ export const MonthContainer = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 0px;
+  gap: 15px;
 `
 
 export const Month = styled.span`
@@ -115,7 +117,7 @@ export const GoalContainer = styled.div`
 `
 
 export const GoalTitle = styled.h3`
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: #fff;
   white-space: nowrap;
