@@ -18,7 +18,12 @@ export const Text = styled(Typography.Paragraph)`
   }
 `
 
+export const Highlight = styled.span`
+  color: #8afaf1;
+`
+
 export default {
   Title,
   Text,
+  Highlight,
 }
