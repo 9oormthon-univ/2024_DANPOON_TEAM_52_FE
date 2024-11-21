@@ -14,6 +14,7 @@ const CalendarPage = () => {
   })
   const {
     events,
+    setEvents,
     questData,
     date,
     setDate,
@@ -44,12 +45,14 @@ const CalendarPage = () => {
           onTitleChange={(title) => setNewEvent({ ...newEvent, title })}
           handleSaveEvent={handleSaveEvent}
           setIsModalOpen={setIsModalOpen}
+          events={events}
         />
         {showDetails && (
           <EventDetails
             setShowDetails={setShowDetails}
             selectedDate={selectedDate}
             events={events}
+            setEvents={setEvents}
             questData={questData}
             setShowDetail={setShowDetails}
           />

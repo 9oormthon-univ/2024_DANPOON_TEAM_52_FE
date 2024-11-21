@@ -3,7 +3,6 @@ import { StyledCalendar, AddScheduleButton} from "../../pages/Calendar/styled"
 
 const CalendarComponent = ({
   date,
-  onDayClick,
   activeStartDate,
   onActiveStartDateChange,
   renderDotsForDate,

@@ -9,6 +9,8 @@ const ModalComponent = ({
   onTitleChange,
   setIsModalOpen,
   handleSaveEvent,
+  setEvents,
+  events,
 }) => {
   if (!isModalOpen) return null;
   const [isSingleDate, setIsSingleDate] = useState(false);
@@ -29,13 +31,13 @@ const ModalComponent = ({
             style={{width:"100%", background:"#262827", border:"none",color:"white"}}
             placeholder="날짜"
             onChange={(event)=>{handleSaveEvent(event, setIsModalOpen)}}
-            format="YYYY.MM.DD"
+            format="YYYY-MM-DD"
           />):(<StyledRangePicker></StyledRangePicker>)}
         </div>
         <SingleCheckbox style={{position:"relative", top:"10px", right:"40%",color:"white"}} onChange={handleChecked}>단일</SingleCheckbox>
         <ModalButtonGroup>
           <ModalButton onClick={onClose}>취소</ModalButton>
-          <ModalButton onClick={()=>{console.log(newEvent)}} disabled={!newEvent.startDate || !newEvent.endDate}>
+          <ModalButton onClick={console.log(events)} disabled={!newEvent.startDate || !newEvent.endDate}>
             추가
           </ModalButton>
         </ModalButtonGroup>
