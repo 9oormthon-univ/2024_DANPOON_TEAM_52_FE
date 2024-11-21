@@ -21,7 +21,7 @@ const TabsHeaderItem = styled(Radio.Button)`
     outline: none;
     text-align: center;
     color: #7d7d7d;
-    padding: 10px 0;
+    padding: 5px 0;
     height: auto;
     z-index: 1;
     overflow: hidden;

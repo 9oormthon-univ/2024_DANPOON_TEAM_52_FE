@@ -61,7 +61,7 @@ export default function ProgressGoals() {
       <Goals goals={list} loading={loading} />
       <Flex vertical gap={14}>
         <Button $variant="secondary">
-          <PlusSVG /> 목표 추가하기
+          <PlusSVG stroke="#fff" /> 목표 추가하기
         </Button>
         <Button $variant="primary">AI에게 목표 추천 받기</Button>
       </Flex>

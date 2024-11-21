@@ -1,6 +1,6 @@
 <svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g id="plus">
-<path id="Line 53" d="M2 6.54248H12" stroke="white" stroke-width="2.02052" stroke-linecap="round"/>
-<path id="Line 54" d="M6.95898 1.41675L6.95898 11.4167" stroke="white" stroke-width="2.02052" stroke-linecap="round"/>
+<path id="Line 53" d="M2 6.54248H12" stroke="current" stroke-width="2.02052" stroke-linecap="round"/>
+<path id="Line 54" d="M6.95898 1.41675L6.95898 11.4167" stroke="current" stroke-width="2.02052" stroke-linecap="round"/>
 </g>
 </svg>
