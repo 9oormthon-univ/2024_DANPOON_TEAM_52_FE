@@ -9,6 +9,7 @@ import {
   ROUTES_PATH_ONBOARD
 } from "./constants/routes"
 import { ApiClientSetting } from "./apis/apiClient"
+import KakaoInit from "./components/KakaoInit"
 import Login from "./pages/Login"
 import Splash from "./pages/Splash"
 import InfoPage from "./pages/Info"
@@ -18,6 +19,7 @@ export default function App() {
   return (
     <BrowserRouter basename={ROUTES_BASENAME}>
       <ApiClientSetting />
+      <KakaoInit />
       <Routes>
         <Route path={ROUTES_PATH_LOGIN} element={<Login />} />
         <Route path={ROUTES_PATH_SPLASH} element={<Splash />} />
