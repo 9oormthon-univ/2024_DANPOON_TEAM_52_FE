@@ -32,7 +32,7 @@ export default function StarBackground() {
 
     const drawStars = () => {
       ctx.clearRect(0, 0, width, height)
-      for (let i = 0; i < 1000; i++) {
+      for (let i = 0; i < height; i++) {
         const x = Math.random() * canvas.width
         const y = Math.random() * canvas.height
         const size = Math.random() * 1 + 0.3
