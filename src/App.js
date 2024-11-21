@@ -8,6 +8,7 @@ import {
   ROUTES_PATH_INFO,
   ROUTES_PATH_ONBOARD
 } from "./constants/routes"
+import { ApiClientSetting } from "./apis/apiClient"
 import Login from "./pages/Login"
 import Splash from "./pages/Splash"
 import InfoPage from "./pages/Info"
@@ -16,6 +17,7 @@ import Home from "./pages/Home"
 export default function App() {
   return (
     <BrowserRouter basename={ROUTES_BASENAME}>
+      <ApiClientSetting />
       <Routes>
         <Route path={ROUTES_PATH_LOGIN} element={<Login />} />
         <Route path={ROUTES_PATH_SPLASH} element={<Splash />} />
