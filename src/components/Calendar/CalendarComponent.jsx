@@ -8,7 +8,8 @@ const CalendarComponent = ({
   renderDotsForDate,
   setIsModalOpen,
   selectDate,
-  selectedDate
+  selectedDate,
+  events
 }) => {
   return (
     <>

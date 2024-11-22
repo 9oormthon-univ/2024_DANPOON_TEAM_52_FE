@@ -25,7 +25,9 @@ const CalendarPage = () => {
     showDetails,
     selectedDate,
     addDate,
-    onClickAddBtn
+    onClickAddBtn,
+    startDate,
+    endDate
   } = useDateFunc()
   return (
     <BaseLayout>
@@ -39,6 +41,7 @@ const CalendarPage = () => {
           renderDotsForDate={renderDotsForDate}
           setIsModalOpen={setIsModalOpen}
           selectDate={selectDate}
+          events={events}
         />
         <ModalComponent
           isModalOpen={isModalOpen}
@@ -50,6 +53,8 @@ const CalendarPage = () => {
           events={events}
           addDate={addDate}
           onClickAddBtn={onClickAddBtn}
+          startDate={startDate}
+          endDate={endDate}
         />
         {showDetails && (
           <EventDetails

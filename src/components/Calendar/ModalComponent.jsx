@@ -16,15 +16,17 @@ const ModalComponent = ({
   setIsModalOpen,
   handleSaveEvent,
   addDate,
-  onClickAddBtn
+  onClickAddBtn,
+  startDate,
+  endDate
 }) => {
   if (!isModalOpen) return null
   const [isSingleDate, setIsSingleDate] = useState(false)
   const [title, setTitle] = useState("")
   //일정 객체
   const addTodo = {
-    startDate: addDate,
-    endDate: addDate,
+    startDate: startDate,
+    endDate: endDate,
     title: title,
   }
   const handleChecked = (event) => {
@@ -54,12 +56,33 @@ const ModalComponent = ({
               }}
               placeholder="날짜"
               onChange={(event) => {
-                handleSaveEvent(event)
+                handleSaveEvent(event, true)
               }}
               format="YYYY-MM-DD"
             />
           ) : (
-            <StyledRangePicker></StyledRangePicker>
+            <div style={{ width:"100%", display:"flex", justifyContent:"center", alignItems:"center", gap:"5px"}}>
+            <DatePicker style={{
+                width: "100%",
+                background: "#262827",
+                border: "none",
+                color: "white",
+                
+              }}
+              onChange={(event) => {
+                handleSaveEvent(event, true)
+              }}></DatePicker>
+            <div style={{
+                border: "none",
+                color: "white",
+              }}>~</div>
+            <DatePicker style={{
+                width: "100%",
+                background: "#262827",
+                border: "none",
+                color: "white",
+              }}></DatePicker>
+            </div>
           )}
         </div>
         <SingleCheckbox

@@ -58,7 +58,7 @@ const EventDetails = ({ selectedDate, events, questData, setShowDetails }) => {
         </div>
         <ul>
           {events.map((el, index) => {
-            if (el.startDate == selectedDate.toISOString().split("T")[0]) {
+            if (el.startDate == selectedDate.toLocaleDateString("en-CA").split("T")[0]) {
               return (
                 <div
                   style={{
