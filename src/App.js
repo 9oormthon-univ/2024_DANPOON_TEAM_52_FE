@@ -4,6 +4,7 @@ import {
   ROUTES_PATH_ROOT,
   ROUTES_PATH_HOME,
   ROUTES_PATH_LOGIN,
+  ROUTES_PATH_LOGIN_KAKAO,
   ROUTES_PATH_SPLASH,
   ROUTES_PATH_INFO,
   ROUTES_PATH_ONBOARD
@@ -15,6 +16,8 @@ import Splash from "./pages/Splash"
 import InfoPage from "./pages/Info"
 import OnBoardingPage from "./pages/Onboarding"
 import Home from "./pages/Home"
+import Kakao from "./pages/Login/Kakao"
+
 export default function App() {
   return (
     <BrowserRouter basename={ROUTES_BASENAME}>
@@ -22,6 +25,7 @@ export default function App() {
       <KakaoInit />
       <Routes>
         <Route path={ROUTES_PATH_LOGIN} element={<Login />} />
+        <Route path={ROUTES_PATH_LOGIN_KAKAO} element={<Kakao />} />
         <Route path={ROUTES_PATH_SPLASH} element={<Splash />} />
         <Route path={ROUTES_PATH_HOME} element={<Home />} />
         <Route

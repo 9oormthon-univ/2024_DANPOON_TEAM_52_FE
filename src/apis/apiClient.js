@@ -1,25 +1,15 @@
 import axios from "axios";
-import { ROUTES_PATH_LOGIN } from "../constants/routes";
-import { AUTH_TOKEN_KEY } from "../constants/auth";
-import { useNavigate } from "react-router-dom";
+import { AUTH_ACCESS_TOKEN } from "../constants/auth";
 
 export const apiClient = axios.create();
 
 export function ApiClientSetting() {
-  const navigate = useNavigate();
-
-  apiClient.defaults.baseURL = '/api';
+  apiClient.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
   apiClient.defaults.headers.common["Content-Type"] = "application/json";
-  apiClient.defaults.headers.common.token = `${window.localStorage.getItem(AUTH_TOKEN_KEY)}`;
+  apiClient.defaults.headers.common.token = `${window.localStorage.getItem(AUTH_ACCESS_TOKEN)}`;
 
   apiClient.interceptors.response.use(
     (response) => {
-      if (response.data.code !== 200) {
-        localStorage.removeItem(AUTH_TOKEN_KEY);
-        navigate(ROUTES_PATH_LOGIN);
-        if (response.data.message) alert(response.data.message);
-        return Promise.reject(new Error(response.data.message));
-      }
       return response;
     },
     (error) => {
@@ -30,3 +20,5 @@ export function ApiClientSetting() {
 
   return <></>;
 }
+
+export default apiClient;
