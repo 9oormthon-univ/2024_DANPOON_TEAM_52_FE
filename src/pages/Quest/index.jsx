@@ -75,20 +75,8 @@ export default function Quest() {
       },
     ],
   }
-  const onSubmit = (e) => {
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    const data = {
-      quests: [],
-    }
-    formData.forEach((value, key) => {
-      if (key === "quests") data.quests.push(value)
-      else data[key] = value
-    })
-    console.log(data)
-  }
   return (
-    <Container onSubmit={onSubmit}>
+    <Container>
       <Header>
         <BackwardButton />
         <HeaderFlex>
@@ -106,7 +94,7 @@ export default function Quest() {
       <QuestContainer>
         <CheckQuests quests={goals.quests} />
       </QuestContainer>
-      <Button $variant="primary" htmlType="submit">
+      <Button $variant="primary">
         <PlusSVG stroke="#000" /> 퀘스트 추가하기
       </Button>
     </Container>
