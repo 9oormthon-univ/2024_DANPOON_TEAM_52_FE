@@ -31,9 +31,9 @@ export default function Goals({ goals, loading }) {
       <Container>
         {loading ? (
           <>
-            <ListItemSkeleton active={true} style={{ width: 160 }} />
-            <ListItemSkeleton active={true} style={{ width: 160 }} />
-            <ListItemSkeleton active={true} style={{ width: 160 }} />
+            <ListItemSkeleton active={true} />
+            <ListItemSkeleton active={true} />
+            <ListItemSkeleton active={true} />
           </>
         ) : (
           <>
