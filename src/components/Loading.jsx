@@ -1,6 +1,7 @@
 import Logo from "./Logo"
 import styled from "styled-components"
 import { motion } from "framer-motion"
+import { Spin } from "antd"
 
 const Container = styled.div`
   position: relative;
@@ -10,6 +11,11 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   overflow: hidden;
+`
+
+const LogoContainer = styled.div`
+  position: relative;
+  margin-bottom: 100px;
 `
 
 const GradientBackground = styled(motion.div)`
@@ -30,20 +36,33 @@ const GradientBackground = styled(motion.div)`
   filter: blur(73.30000305175781px);
 `
 
+const Spinner = styled(Spin)`
+  position: absolute;
+  bottom: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  & .ant-spin-dot-holder {
+    color: #8afaf1;
+  }
+`
+
 export default function Loading() {
   return (
     <Container>
-      <GradientBackground
-        animate={{
-          opacity: [0.3, 1],
-        }}
-        transition={{
-          duration: 1,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-      />
-      <Logo />
+      <LogoContainer>
+        <GradientBackground
+          animate={{
+            opacity: [0.3, 1],
+          }}
+          transition={{
+            duration: 1,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        />
+        <Logo />
+      </LogoContainer>
+      <Spinner size="large" />
     </Container>
   )
 }
