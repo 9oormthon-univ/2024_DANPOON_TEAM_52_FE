@@ -19,10 +19,12 @@ const OnBoardingPage = () => {
   const carouselRef = useRef(null)
   const navigate = useNavigate()
 
-  const onChange = (currentSlide) => {
-    setSlideIndex(currentSlide)
+  const onBeforeChange = (from, to) => {
+    // 슬라이드가 넘어가기 전에 인덱스 업데이트
+    setSlideIndex(to)
+
     // 버튼 텍스트 업데이트
-    if (currentSlide === intros.length - 1) {
+    if (to === intros.length - 1) {
       setButtonText("시작하기")
     } else {
       setButtonText("다음")
@@ -43,10 +45,10 @@ const OnBoardingPage = () => {
       {!isStart && (
         <BodyWrapper>
           {/* 캐러셀 */}
-          <Carousel ref={carouselRef} afterChange={onChange} dots={true}>
-            {intros.map(({ img }, index) => (
+          <Carousel ref={carouselRef} beforeChange={onChange} dots={true}>
+            {intros.map(({ img, content }, index) => (
               <div key={index}>
-                <Content>{intros[slideIndex]?.content}</Content>
+                <Content>{content}</Content>
                 <SlideImgContainer>
                   <SlideImg src={img} alt={`슬라이드 이미지 ${index}`} />
                 </SlideImgContainer>
