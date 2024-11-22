@@ -3,36 +3,8 @@ import ScrollContainer from "./ScrollContainer"
 import ListItem, { ListItemSkeleton } from "./ListItem"
 import { useNavigate } from "react-router-dom"
 import { ROUTES_PATH_QUEST } from "../constants/routes"
+import ShadowContainer from "./ShadowContainer"
 
-export const ShadowContainer = styled.div`
-  position: relative;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow: hidden;
-  &::before,
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: calc(100% - 20px);
-    height: 30px;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  &::before {
-    top: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), transparent);
-  }
-
-  &::after {
-    bottom: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
-  }
-`
 export const Container = styled(ScrollContainer)`
   display: flex;
   flex-direction: column;
