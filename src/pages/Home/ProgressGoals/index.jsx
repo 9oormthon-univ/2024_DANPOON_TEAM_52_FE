@@ -10,42 +10,49 @@ import { ROUTES_PATH_RECOMMENDED_GOALS } from "../../../constants/routes"
 export default function ProgressGoals() {
   const list = [
     {
+      id: 1,
       icon: "️🗓️",
       title: "구름톤 회의",
       description: "2024.01.03",
       label: "일정",
     },
     {
+      id: 2,
       icon: "📝",
       title: "구름톤 회의록 작성",
       description: "2024.01.03",
       label: "일정",
     },
     {
+      id: 3,
       icon: "📞",
       title: "구름톤 회의록 검토",
       description: "2024.01.03",
       label: "일정",
     },
     {
+      id: 4,
       icon: "📞",
       title: "구름톤 회의록 검토",
       description: "2024.01.03",
       label: "일정",
     },
     {
+      id: 5,
       icon: "📞",
       title: "구름톤 회의록 검토",
       description: "2024.01.03",
       label: "일정",
     },
     {
+      id: 6,
       icon: "📞",
       title: "구름톤 회의록 검토",
       description: "2024.01.03",
       label: "일정",
     },
     {
+      id: 7,
       icon: "📞",
       title: "구름톤 회의록 검토",
       description: "2024.01.03",

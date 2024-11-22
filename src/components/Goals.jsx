@@ -1,6 +1,9 @@
 import { styled } from "styled-components"
 import ScrollContainer from "./ScrollContainer"
 import ListItem, { ListItemSkeleton } from "./ListItem"
+import { useNavigate } from "react-router-dom"
+import { ROUTES_PATH_QUEST } from "../constants/routes"
+
 export const ShadowContainer = styled.div`
   position: relative;
   width: 100%;
@@ -50,6 +53,7 @@ export const Container = styled(ScrollContainer)`
 `
 
 export default function Goals({ goals, loading }) {
+  const navigate = useNavigate()
   return (
     <ShadowContainer>
       <Container>
@@ -67,6 +71,7 @@ export default function Goals({ goals, loading }) {
                 icon={item.icon}
                 title={item.title}
                 label={item.label}
+                onClick={() => navigate(`${ROUTES_PATH_QUEST}/${item.id}`)}
               />
             ))}
           </>
