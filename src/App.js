@@ -9,7 +9,7 @@ import {
   ROUTES_PATH_INFO,
   ROUTES_PATH_ONBOARD,
   ROUTES_PATH_RECOMMENDED_GOALS,
-  ROUTES_PATH_QUEST,
+  ROUTES_PATH_GOAL,
   ROUTES_PATH_CALENDAR
 } from "./constants/routes"
 import { ApiClientSetting } from "./apis/apiClient"
@@ -21,7 +21,7 @@ import OnBoardingPage from "./pages/Onboarding"
 import Home from "./pages/Home"
 import RecommandedGoals from "./pages/RecommandedGoals"
 import Kakao from "./pages/Login/Kakao"
-import Quest from "./pages/Quest"
+import Goal from "./pages/Goal"
 import CalendarPage from "./pages/Calendar"
 export default function App() {
   return (
@@ -41,7 +41,7 @@ export default function App() {
         <Route path={ROUTES_PATH_ONBOARD} element={<OnBoardingPage />} />
         <Route path={ROUTES_PATH_RECOMMENDED_GOALS} element={<RecommandedGoals />} />
         <Route path={ROUTES_PATH_CALENDAR} element={<CalendarPage />} />
-        <Route path={`${ROUTES_PATH_QUEST}/:id`} element={<Quest />} />
+        <Route path={`${ROUTES_PATH_GOAL}/:id`} element={<Goal />} />
       </Routes>
     </BrowserRouter>
   )
