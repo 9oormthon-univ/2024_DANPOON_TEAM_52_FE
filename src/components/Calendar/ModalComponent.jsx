@@ -9,12 +9,30 @@ import {
 } from "../../pages/Calendar/styled"
 import { DatePicker } from "antd"
 import { useState } from "react"
+import styled from "styled-components"
+const DatePickerWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+`
+const DateRangeWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+`
+const DateDivide = styled.div`
+  border: none;
+  color: white;
+`
 const ModalComponent = ({
   isModalOpen,
   onClose,
   setIsModalOpen,
   handleSaveEvent,
-  addDate,
   onClickAddBtn,
   startDate,
   endDate,
@@ -36,15 +54,7 @@ const ModalComponent = ({
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <h3>일정 추가하기</h3>
         <ModalInput onChange={(e) => setTitle(e.target.value)} />
-        <div
-          style={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "center",
-            gap: "10px",
-            marginTop: "20px",
-          }}
-        >
+        <DatePickerWrapper>
           {isSingleDate ? (
             <DatePicker
               style={{
@@ -60,7 +70,7 @@ const ModalComponent = ({
               format="YYYY-MM-DD"
             />
           ) : (
-            <div
+            <DateRangeWrapper
               style={{
                 width: "100%",
                 display: "flex",
@@ -80,14 +90,7 @@ const ModalComponent = ({
                   handleSaveEvent(event, "start")
                 }}
               ></DatePicker>
-              <div
-                style={{
-                  border: "none",
-                  color: "white",
-                }}
-              >
-                ~
-              </div>
+              <DateDivide>~</DateDivide>
               <DatePicker
                 style={{
                   width: "100%",
@@ -99,9 +102,9 @@ const ModalComponent = ({
                   handleSaveEvent(event, "end")
                 }}
               ></DatePicker>
-            </div>
+            </DateRangeWrapper>
           )}
-        </div>
+        </DatePickerWrapper>
         <SingleCheckbox
           style={{
             position: "relative",
