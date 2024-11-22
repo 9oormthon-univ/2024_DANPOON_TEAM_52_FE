@@ -14,6 +14,7 @@ import BackwardButton from "../../components/BackwardButton"
 import { Flex } from "antd"
 import Button from "../../components/Button"
 import { ReactComponent as PlusSVG } from "../../svgs/plus.svg"
+import CheckQuests from "../../components/CheckQuests"
 
 export default function Quest() {
   const goals = {
@@ -25,12 +26,12 @@ export default function Quest() {
       {
         id: 1,
         title: "희망 기업 인턴 공고 확인하기",
-        isDone: false,
+        isDone: true,
       },
       {
         id: 2,
         title: "이력서 작성하기",
-        isDone: false,
+        isDone: true,
       },
       {
         id: 3,
@@ -42,10 +43,52 @@ export default function Quest() {
         title: "면접 준비하기",
         isDone: false,
       },
+      {
+        id: 5,
+        title: "인턴 면접 보기",
+        isDone: false,
+      },
+      {
+        id: 6,
+        title: "인턴 합격하기",
+        isDone: false,
+      },
+      {
+        id: 7,
+        title: "인턴 시작하기",
+        isDone: false,
+      },
+      {
+        id: 8,
+        title: "인턴 끝내기",
+        isDone: false,
+      },
+      {
+        id: 9,
+        title: "인턴 후기 작성하기",
+        isDone: false,
+      },
+      {
+        id: 10,
+        title: "인턴 후기 제출하기",
+        isDone: false,
+      },
     ],
   }
+  const onSubmit = (e) => {
+    e.preventDefault()
+    const formData = new FormData(e.target)
+    const data = {
+      quests: [],
+    }
+    formData.forEach((value, key) => {
+      if (key === "quests") data.quests.push(value)
+      else data[key] = value
+    })
+    console.log(data)
+  }
   return (
-    <Container>
+    <Container onSubmit={onSubmit}>
       <Header>
         <BackwardButton />
         <HeaderFlex>
@@ -58,10 +101,12 @@ export default function Quest() {
       </Header>
       <CompleteButton $variant="secondary">목표 완료</CompleteButton>
       <Description>
-        해당 목표를 위한 <Highlight>퀘스트 목록</Highlight>이에요
+        해당 목표를 위한 <Highlight>퀘스트</Highlight>
       </Description>
-      <QuestContainer></QuestContainer>
-      <Button $variant="primary">
+      <QuestContainer>
+        <CheckQuests quests={goals.quests} />
+      </QuestContainer>
+      <Button $variant="primary" htmlType="submit">
         <PlusSVG stroke="#000" /> 퀘스트 추가하기
       </Button>
     </Container>

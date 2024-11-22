@@ -2,7 +2,7 @@ import styled from "styled-components"
 import TypoComponent from "../../components/Typo"
 import Button from "../../components/Button"
 
-export const Container = styled.div`
+export const Container = styled.form`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -51,7 +51,7 @@ export const CompleteButton = styled(Button)`
 
 export const Description = styled(TypoComponent.Text)`
   &&& {
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 500;
     margin-bottom: 14px;
   }
@@ -59,7 +59,7 @@ export const Description = styled(TypoComponent.Text)`
 
 export const Highlight = styled(TypoComponent.Highlight)`
   font-weight: 500;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
 `
 
