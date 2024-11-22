@@ -23,7 +23,9 @@ const CalendarPage = () => {
     selectDate,
     setShowDetails,
     showDetails,
-    selectedDate
+    selectedDate,
+    addDate,
+    onClickAddBtn
   } = useDateFunc()
   return (
     <BaseLayout>
@@ -46,6 +48,8 @@ const CalendarPage = () => {
           handleSaveEvent={handleSaveEvent}
           setIsModalOpen={setIsModalOpen}
           events={events}
+          addDate={addDate}
+          onClickAddBtn={onClickAddBtn}
         />
         {showDetails && (
           <EventDetails

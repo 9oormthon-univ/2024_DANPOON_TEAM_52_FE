@@ -230,3 +230,14 @@ body {
   background-color: #4D4D4D !important;
   border-radius: 50% !important;
 }
+.react-calendar__navigation__arrow, react-calendar__navigation__next-button {
+  background: none !important;
+}
+  .react-calendar__navigation__arrow, react-calendar__navigation__prev-button {
+  background: none !important;
+}
+
+.react-calendar__tile, react-calendar__month-view__days__day{
+  aspect-ratio: 1 / 1 !important;
+  padding: 0 !important;
+}

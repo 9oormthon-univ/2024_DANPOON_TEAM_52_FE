@@ -3,15 +3,20 @@ import { useState, useEffect } from "react"
 export function useDateFunc() {
   const [date, setDate] = useState(() => new Date())
   //모든 일정을 관리할 배열
-  const [events, setEvents] = useState(["2024-11-05"])
+  const [events, setEvents] = useState([{
+    startDate: "2024-11-10",
+    endDate: "2024-11-12",
+    title: "Workshop"}])
+  //일정추가할 날짜
+  const [addDate, setAddDate] = useState("");
   const [selectedDate, setSelectedDate] = useState(null)
   const [showDetails, setShowDetails] = useState(false)
   const questData = ["2024-11-22", "2024-11-24"]
   //일정 추가 버튼 클릭 -> 포맷화된 데이터를 저장(서버에 POST 후 다시 조회 -> 렌더링)
-  const handleSaveEvent = (newEvent, ModalOpen) => {
+  const handleSaveEvent = (newEvent) => {
     const formattedDate = newEvent.toISOString().split("T")[0]
+    setAddDate(formattedDate);
     setEvents((prev) => [...prev, formattedDate])
-    ModalOpen(false)
   }
 
   //날짜 클릭했을 때 -> 해당 날짜 일정 확인(모달)
@@ -28,6 +33,12 @@ export function useDateFunc() {
     }
   }
 
+  const onClickAddBtn = (addData, ModalOpen) => {
+    //일정추가할 데이터 데이터추가(서버전송)
+    setEvents((prev)=>[...prev, addData])
+    ModalOpen(false)
+  }
+
   const renderDotsForDate = (date) => {
     // Date 객체를 YYYY-MM-DD 형식으로 변환
     const formattedDate =
@@ -39,31 +50,37 @@ export function useDateFunc() {
       return null // 유효하지 않은 날짜는 렌더링하지 않음
     }
     // 날짜가 events 배열에 포함되어 있으면 동그란 원을 렌더링
-    if (events.includes(formattedDate)) {
+    if (events.includes(formattedDate) || questData.includes(formattedDate)) {
       return (
         <div
           style={{
-            background: "white",
-            width: "8px",
-            height: "8px",
-            borderRadius: "50%",
-            margin: "0 auto", // 원을 중앙에 배치
+            display: "flex", // 가로 정렬
+            justifyContent: "center", // 중앙 정렬
+            gap: "1px", // 동그라미 간격
           }}
-        />
-      )
-    }
-    if (questData.includes(formattedDate)) {
-      return (
-        <div
-          style={{
-            background: "#8AFAF1",
-            width: "8px",
-            height: "8px",
-            borderRadius: "50%",
-            margin: "0 auto", // 원을 중앙에 배치
-          }}
-        />
-      )
+        >
+          {events.includes(formattedDate) && (
+            <div
+              style={{
+                background: "white",
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+              }}
+            />
+          )}
+          {questData.includes(formattedDate) && (
+            <div
+              style={{
+                background: "#8AFAF1",
+                width: "8px",
+                height: "8px",
+                borderRadius: "50%",
+              }}
+            />
+          )}
+        </div>
+      );
     }
 
     return null // 해당 날짜가 events에 없으면 아무것도 렌더링하지 않음
@@ -82,5 +99,7 @@ export function useDateFunc() {
     setShowDetails,
     setEvents,
     showDetails,
+    addDate,
+    onClickAddBtn
   }
 }

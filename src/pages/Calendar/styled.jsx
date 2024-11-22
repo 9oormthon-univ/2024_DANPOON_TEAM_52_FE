@@ -9,6 +9,7 @@ export const StyledCalendarWrapper = styled.div`
   justify-content: center;
   position: relative;
   font-family: "Pretendard";
+  padding: 100px 30px;
   .react-calendar {
     width: 100%;
     border: none;
@@ -214,14 +215,14 @@ export const ModalButton = styled.button`
 
 export const AddScheduleButton = styled.button`
   position: absolute;
-  top: 15px;
-  right: 30px;
+  top: 115px;
+  right: 55px;
   background: #2f2f2f; /* 버튼 배경색 */
   color: white; /* 텍스트 색상 */
   border: none; /* 테두리 없음 */
   border-radius: 50%; /* 완전한 원 모양 */
-  width: 40px; /* 버튼 크기 (너비) */
-  height: 40px; /* 버튼 크기 (높이) */
+  width: 35px; /* 버튼 크기 (너비) */
+  height: 35px; /* 버튼 크기 (높이) */
   font-size: 24px; /* 텍스트 크기 */
   cursor: pointer; /* 마우스 커서 변경 */
   display: flex; /* 내용 중앙 정렬을 위한 flexbox */
