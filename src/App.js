@@ -7,7 +7,8 @@ import {
   ROUTES_PATH_LOGIN_KAKAO,
   ROUTES_PATH_SPLASH,
   ROUTES_PATH_INFO,
-  ROUTES_PATH_ONBOARD
+  ROUTES_PATH_ONBOARD,
+  ROUTES_PATH_RECOMMENDED_GOALS
 } from "./constants/routes"
 import { ApiClientSetting } from "./apis/apiClient"
 import KakaoInit from "./components/KakaoInit"
@@ -16,6 +17,7 @@ import Splash from "./pages/Splash"
 import InfoPage from "./pages/Info"
 import OnBoardingPage from "./pages/Onboarding"
 import Home from "./pages/Home"
+import RecommandedGoals from "./pages/RecommandedGoals"
 import Kakao from "./pages/Login/Kakao"
 
 export default function App() {
@@ -32,8 +34,10 @@ export default function App() {
           path={ROUTES_PATH_ROOT}
           element={<Navigate to={ROUTES_PATH_HOME} />}
         />
-        <Route path={ROUTES_PATH_INFO} element={<InfoPage />}/>
-        <Route path={ROUTES_PATH_ONBOARD} element={<OnBoardingPage />}/>
+        <Route path={ROUTES_PATH_INFO} element={<InfoPage />} />
+        <Route path={ROUTES_PATH_ONBOARD} element={<OnBoardingPage />} />
+        <Route path={ROUTES_PATH_ONBOARD} element={<InfoPage />} />
+        <Route path={ROUTES_PATH_RECOMMENDED_GOALS} element={<RecommandedGoals />} />
       </Routes>
     </BrowserRouter>
   )

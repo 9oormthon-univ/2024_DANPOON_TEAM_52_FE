@@ -4,6 +4,8 @@ import { ReactComponent as PlusSVG } from "../../../svgs/plus.svg"
 import Goals from "../../../components/Goals"
 import { Flex } from "antd"
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { ROUTES_PATH_RECOMMENDED_GOALS } from "../../../constants/routes"
 
 export default function ProgressGoals() {
   const list = [
@@ -50,6 +52,7 @@ export default function ProgressGoals() {
       label: "일정",
     },
   ]
+  const navigate = useNavigate()
   const [loading, setLoading] = useState(true)
   useEffect(() => {
     setTimeout(() => {
@@ -63,7 +66,12 @@ export default function ProgressGoals() {
         <Button $variant="secondary">
           <PlusSVG stroke="#fff" /> 목표 추가하기
         </Button>
-        <Button $variant="primary">AI에게 목표 추천 받기</Button>
+        <Button
+          $variant="primary"
+          onClick={() => navigate(ROUTES_PATH_RECOMMENDED_GOALS)}
+        >
+          AI에게 목표 추천 받기
+        </Button>
       </Flex>
     </Container>
   )
