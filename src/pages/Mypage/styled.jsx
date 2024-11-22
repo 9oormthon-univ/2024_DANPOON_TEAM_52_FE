@@ -1,0 +1,101 @@
+import styled from "styled-components"
+import Button from "../../components/Button"
+import { Text } from "../../components/Typo"
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  padding: 100px 19px;
+`
+export const ProfileInfo = styled.div`
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: 15px;
+  margin-bottom: 12px;
+`
+export const ProfileImg = styled.img`
+  width: 50px;
+  height: 50px;
+`
+export const InfoGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+`
+export const InfoText = styled.div`
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+`
+export const InfoSubText = styled.div`
+  font-size: 13px;
+  color: #c3c3c3;
+`
+
+export const FeedbackBtn = styled(Button)`
+&&&{
+    width: 100%;
+    height: 32px;
+    font-size; 15px;
+    background: linear-gradient(90deg, #E0FFC6 0%, #8AFAF1 100%) !important;
+}
+`
+export const ContentWrapper = styled.div`
+  max-height: 600px;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #cccccc;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #aaaaaa;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f5f5f5;
+  }
+`
+export const CategoryWrapper = styled.div`
+  height: auto;
+  background: rgba(44, 44, 44, 0.8);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 13.8px 20px 12px 20px;
+  margin-bottom: 10px;
+`
+export const CategoryGroup = styled.div`
+  display: flex;
+  text-align: center;
+  gap: 9px;
+`
+export const CategoryIcon = styled.img`
+  width: 18px;
+  height: 18px;
+  margin-top: 3px;
+`
+
+export const CategoryName = styled(Text)`
+  &&& {
+    font-weight: bold;
+  }
+`
+export const ItemGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+export const ItemDate = styled(Text)`
+  &&& {
+    font-size: 12px;
+    color: #b2b2b2;
+  }
+`
+export const ItemName = styled(Text)`
+  &&& {
+    font-weight: bold;
+  }
+`

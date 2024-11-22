@@ -47,5 +47,4 @@ const TodayMessage = ({ events }) => {
     </MessageContainer>
   )
 }
-
-export default TodayMessage
+export default TodayMessage;
