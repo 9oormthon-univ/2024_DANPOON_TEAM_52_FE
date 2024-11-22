@@ -8,8 +8,7 @@ export const Container = styled.div`
   height: 100%;
   padding: 30px 20px 20px;
   gap: 42px;
-  overflow-x: visible;
-  overflow-y: hidden;
+  overflow: hidden;
 `
 export const Title = styled(TypoComponent.Title)`
   margin-left: 12px;
@@ -19,7 +18,8 @@ export const RecommendedGoalsContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100vw;
-  margin-left: -20px;
+  max-width: 576px;
+  transform: translateX(-20px);
   flex: 1;
   justify-content: center;
   overflow: visible;
