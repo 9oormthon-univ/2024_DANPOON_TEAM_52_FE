@@ -2,9 +2,7 @@ import React from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { useDateFunc } from "../../hooks/useDateFunc"
 import { useState } from "react"
-const EventDetails = ({ selectedDate, events, questData, setShowDetails }) => {
-  const hasEvents = events.includes(selectedDate)
-  const hasQuestDeadline = questData.includes(selectedDate)
+const EventDetails = ({ selectedDate, events, questData, setShowDetails, getDatesInRange }) => {
   const handleDragEnd = (_, info) => {
     if (info.offset.y > 100) {
       // 100px 이상 아래로 드래그하면 닫힘
@@ -18,7 +16,8 @@ const EventDetails = ({ selectedDate, events, questData, setShowDetails }) => {
         animate={{ y: "0%", opacity: 1 }}
         exit={{ y: "100%", opacity: 1 }}
         transition={{
-          duration: 0.4, ease:"linear"
+          duration: 0.4,
+          ease: "linear",
         }}
         drag="y" // 세로 방향 드래그 활성화
         dragConstraints={{ top: 0, bottom: 300 }} // 드래그 범위 제한
@@ -58,22 +57,26 @@ const EventDetails = ({ selectedDate, events, questData, setShowDetails }) => {
         </div>
         <ul>
           {events.map((el, index) => {
-            if (el.startDate == selectedDate.toLocaleDateString("en-CA").split("T")[0]) {
+            // 선택된 날짜가 범위 내에 있는지 확인
+            const eventDates = getDatesInRange(el.startDate, el.endDate)
+            if (eventDates.includes(selectedDate.toLocaleDateString("en-CA"))) {
               return (
                 <div
                   style={{
                     height: "60px",
                     background: "rgba(44, 44, 44, 0.8)",
                     borderRadius: "15px",
-                    display:"flex",
-                    gap:"30px",
-                    alignItems:"center",
-                    padding:"10px",
-                    marginBottom:"10px"
+                    display: "flex",
+                    gap: "30px",
+                    alignItems: "center",
+                    padding: "10px",
+                    marginBottom: "10px",
                   }}
                   key={index}
                 >
-                  <div className="category" style={{background:"silver"}}>이미지</div>
+                  <div className="category" style={{ background: "silver" }}>
+                    이미지
+                  </div>
                   <div
                     style={{
                       display: "flex",
@@ -88,22 +91,23 @@ const EventDetails = ({ selectedDate, events, questData, setShowDetails }) => {
                         fontWeight: "bold",
                       }}
                     >
-                      {el.startDate}
+                      {el.startDate} ~ {el.endDate} {/* 일정 범위 표시 */}
                     </div>
                     <div
                       style={{
                         fontSize: "15px",
                         fontFamily: "Pretendard",
                         fontWeight: "700",
-                        marginTop:"5px"
+                        marginTop: "5px",
                       }}
                     >
-                      {el.title}
+                      {el.title} {/* 일정 제목 표시 */}
                     </div>
                   </div>
                 </div>
               )
             }
+            return null
           })}
         </ul>
       </motion.div>

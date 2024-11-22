@@ -27,7 +27,8 @@ const CalendarPage = () => {
     addDate,
     onClickAddBtn,
     startDate,
-    endDate
+    endDate,
+    getDatesInRange
   } = useDateFunc()
   return (
     <BaseLayout>
@@ -64,6 +65,7 @@ const CalendarPage = () => {
             setEvents={setEvents}
             questData={questData}
             setShowDetail={setShowDetails}
+            getDatesInRange={getDatesInRange}
           />
         )}
       </StyledCalendarWrapper>

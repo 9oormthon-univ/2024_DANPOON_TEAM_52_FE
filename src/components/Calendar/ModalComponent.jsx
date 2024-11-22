@@ -6,7 +6,6 @@ import {
   ModalButtonGroup,
   ModalButton,
   SingleCheckbox,
-  StyledRangePicker,
 } from "../../pages/Calendar/styled"
 import { DatePicker } from "antd"
 import { useState } from "react"
@@ -18,7 +17,7 @@ const ModalComponent = ({
   addDate,
   onClickAddBtn,
   startDate,
-  endDate
+  endDate,
 }) => {
   if (!isModalOpen) return null
   const [isSingleDate, setIsSingleDate] = useState(false)
@@ -30,7 +29,7 @@ const ModalComponent = ({
     title: title,
   }
   const handleChecked = (event) => {
-    setIsSingleDate(event.target.checked);
+    setIsSingleDate(event.target.checked)
   }
   return (
     <ModalOverlay>
@@ -56,32 +55,50 @@ const ModalComponent = ({
               }}
               placeholder="날짜"
               onChange={(event) => {
-                handleSaveEvent(event, true)
+                handleSaveEvent(event, "single")
               }}
               format="YYYY-MM-DD"
             />
           ) : (
-            <div style={{ width:"100%", display:"flex", justifyContent:"center", alignItems:"center", gap:"5px"}}>
-            <DatePicker style={{
+            <div
+              style={{
                 width: "100%",
-                background: "#262827",
-                border: "none",
-                color: "white",
-                
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                gap: "5px",
               }}
-              onChange={(event) => {
-                handleSaveEvent(event, true)
-              }}></DatePicker>
-            <div style={{
-                border: "none",
-                color: "white",
-              }}>~</div>
-            <DatePicker style={{
-                width: "100%",
-                background: "#262827",
-                border: "none",
-                color: "white",
-              }}></DatePicker>
+            >
+              <DatePicker
+                style={{
+                  width: "100%",
+                  background: "#262827",
+                  border: "none",
+                  color: "white",
+                }}
+                onChange={(event) => {
+                  handleSaveEvent(event, "start")
+                }}
+              ></DatePicker>
+              <div
+                style={{
+                  border: "none",
+                  color: "white",
+                }}
+              >
+                ~
+              </div>
+              <DatePicker
+                style={{
+                  width: "100%",
+                  background: "#262827",
+                  border: "none",
+                  color: "white",
+                }}
+                onChange={(event) => {
+                  handleSaveEvent(event, "end")
+                }}
+              ></DatePicker>
             </div>
           )}
         </div>
@@ -98,7 +115,11 @@ const ModalComponent = ({
         </SingleCheckbox>
         <ModalButtonGroup>
           <ModalButton onClick={onClose}>취소</ModalButton>
-          <ModalButton onClick={()=>{onClickAddBtn(addTodo, setIsModalOpen)}}>
+          <ModalButton
+            onClick={() => {
+              onClickAddBtn(addTodo, setIsModalOpen)
+            }}
+          >
             추가
           </ModalButton>
         </ModalButtonGroup>

@@ -15,19 +15,20 @@ export function useDateFunc() {
   const [showDetails, setShowDetails] = useState(false)
   const questData = ["2024-11-22", "2024-11-24"]
   //일정 추가 버튼 클릭 -> 포맷화된 데이터를 저장(서버에 POST 후 다시 조회 -> 렌더링)
-  const handleSaveEvent = (newEvent, isSingle) => {
+  const handleSaveEvent = (newEvent, option) => {
     const eventDate = new Date(newEvent); // newEvent를 Date 객체로 변환
     const formattedDate = eventDate.toLocaleDateString("en-CA");
-    console.log(formattedDate)
-    if(isSingle){
+    if(option == "single"){
     setStartDate(formattedDate);
     setEndDate(formattedDate);
     }
-    else{
-      if(!startDate) setStartDate(formattedDate)
-      else setEndDate(formattedDate)
+    else if(option == "start"){
+      setStartDate(formattedDate)
     }
-    console.log(startDate,endDate)
+    else if(option == "end"){
+      setEndDate(formattedDate)
+    }
+    console.log(startDate, endDate)
   }
 
   //날짜 클릭했을 때 -> 해당 날짜 일정 확인(모달)
@@ -49,6 +50,7 @@ export function useDateFunc() {
     setEvents((prev)=>[...prev, addData])
     ModalOpen(false)
   }
+
   //범위내 날짜들 계산
   const getDatesInRange = (startDate, endDate) => {
     const date = new Date(startDate);
@@ -61,13 +63,11 @@ export function useDateFunc() {
   
     return dates;
   };
-
   const renderDotsForDate = (tileDate) => {
     const formattedDate =
       tileDate.date instanceof Date && !isNaN(tileDate.date)
         ? tileDate.date.toLocaleDateString("en-CA").split("T")[0] // YYYY-MM-DD 형식으로 변환
         : null;
-        console.log(formattedDate)
     if (!formattedDate) {
       return null; // 유효하지 않은 날짜는 렌더링하지 않음
     }
@@ -79,7 +79,7 @@ export function useDateFunc() {
     });
   
     const isQuestDate = questData.includes(formattedDate);
-  
+  //타일컨텐트
     if (matchingEvents.length > 0 || isQuestDate) {
       return (
         <div
@@ -131,6 +131,7 @@ export function useDateFunc() {
     selectDate,
     setShowDetails,
     setEvents,
-    onClickAddBtn
+    onClickAddBtn,
+    getDatesInRange
   }
 }
