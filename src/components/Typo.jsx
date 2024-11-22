@@ -20,6 +20,7 @@ export const Text = styled(Typography.Paragraph)`
 
 export const Highlight = styled.span`
   color: #8afaf1;
+  font-weight: 700;
 `
 
 export default {
