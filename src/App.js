@@ -10,7 +10,8 @@ import {
   ROUTES_PATH_ONBOARD,
   ROUTES_PATH_RECOMMENDED_GOALS,
   ROUTES_PATH_GOAL,
-  ROUTES_PATH_CALENDAR
+  ROUTES_PATH_CALENDAR,
+  ROUTES_PATH_GOAL_CONSTELLATION
 } from "./constants/routes"
 import { ApiClientSetting } from "./apis/apiClient"
 import KakaoInit from "./components/KakaoInit"
@@ -22,7 +23,9 @@ import Home from "./pages/Home"
 import RecommandedGoals from "./pages/RecommandedGoals"
 import Kakao from "./pages/Login/Kakao"
 import Goal from "./pages/Goal"
+import GoalConstellation from "./pages/Goal/Constellation"
 import CalendarPage from "./pages/Calendar"
+
 export default function App() {
   return (
     <BrowserRouter basename={ROUTES_BASENAME}>
@@ -42,6 +45,7 @@ export default function App() {
         <Route path={ROUTES_PATH_RECOMMENDED_GOALS} element={<RecommandedGoals />} />
         <Route path={ROUTES_PATH_CALENDAR} element={<CalendarPage />} />
         <Route path={`${ROUTES_PATH_GOAL}/:id`} element={<Goal />} />
+        <Route path={`${ROUTES_PATH_GOAL_CONSTELLATION}/:id`} element={<GoalConstellation />} />
       </Routes>
     </BrowserRouter>
   )
