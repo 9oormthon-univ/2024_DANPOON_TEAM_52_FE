@@ -91,7 +91,8 @@ const EventDetails = ({ selectedDate, events, questData, setShowDetails, getDate
                         fontWeight: "bold",
                       }}
                     >
-                      {el.startDate} ~ {el.endDate} {/* 일정 범위 표시 */}
+                      {el.startDate === el.endDate ? `${el.startDate}` : `${el.startDate} ~ ${el.endDate}` }
+                      {/* 일정 범위 표시 */}
                     </div>
                     <div
                       style={{

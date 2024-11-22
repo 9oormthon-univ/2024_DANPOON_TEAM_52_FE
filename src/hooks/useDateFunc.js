@@ -4,9 +4,9 @@ export function useDateFunc() {
   const [date, setDate] = useState(() => new Date())
   //모든 일정을 관리할 배열
   const [events, setEvents] = useState([{
-    startDate: "2024-11-10",
-    endDate: "2024-11-12",
-    title: "Workshop"
+    startDate: "2024-11-23",
+    endDate: "2024-11-25",
+    title: "Test"
   }])
   //일정추가할 날짜
   const [startDate, setStartDate]= useState("");

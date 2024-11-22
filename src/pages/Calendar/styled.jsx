@@ -215,8 +215,8 @@ export const ModalButton = styled.button`
 
 export const AddScheduleButton = styled.button`
   position: absolute;
-  top: 115px;
-  right: 55px;
+  top: 102px;
+  right: 40px;
   background: #2f2f2f; /* 버튼 배경색 */
   color: white; /* 텍스트 색상 */
   border: none; /* 테두리 없음 */

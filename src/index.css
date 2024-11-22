@@ -232,6 +232,9 @@ body {
 }
 .react-calendar__navigation__arrow, react-calendar__navigation__next-button {
   background: none !important;
+  font-size: 18px !important;
+  font-weight: 500 !important;
+  margin-bottom: 5px !important;
 }
   .react-calendar__navigation__arrow, react-calendar__navigation__prev-button {
   background: none !important;
@@ -240,4 +243,13 @@ body {
 .react-calendar__tile, react-calendar__month-view__days__day{
   aspect-ratio: 1 / 1 !important;
   padding: 0 !important;
+}
+.react-calendar__navigation{
+  margin-bottom: 87px !important;
+}
+.react-calendar__navigation__label__labelText,react-calendar__navigation__label__labelText--from{
+  font-size: 24px !important;
+}
+.react-calendar, sc-huXwEz gGZvA-D{
+  padding: 0px !important;
 }
