@@ -2,7 +2,7 @@ import { styled } from "styled-components"
 
 const ScrollContainer = styled.div`
   overflow: auto;
-  padding-right: 10px;
+  padding-right: 20px;
   &::-webkit-scrollbar {
     width: 10px;
     height: 10px;

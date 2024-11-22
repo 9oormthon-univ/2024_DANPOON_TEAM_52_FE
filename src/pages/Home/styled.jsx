@@ -15,6 +15,7 @@ export const Container = styled.div`
 export const Title = styled(TypoComponent.Title)`
   &&& {
     margin-bottom: 12px;
+    margin-left: 20px;
   }
 `
 export const Description = styled(TypoComponent.Text)`
@@ -23,5 +24,6 @@ export const Description = styled(TypoComponent.Text)`
     font-weight: 500;
     font-size: 13px;
     margin-bottom: 17px;
+    margin-left: 20px;
   }
 `

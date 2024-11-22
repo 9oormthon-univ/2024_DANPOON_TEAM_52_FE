@@ -1,34 +1,13 @@
 import { styled } from "styled-components"
+import ShadowContainerComponent from "../../../components/ShadowContainer"
 
-export const ShadowContainer = styled.div`
-  position: relative;
+export const ShadowContainer = styled(ShadowContainerComponent)`
   width: 100vw;
   max-width: 576px;
   transform: translateX(-30px);
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  overflow: hidden;
   &::before,
   &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
     width: calc(100%);
-    height: 30px;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  &::before {
-    top: 0;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 1), transparent);
-  }
-
-  &::after {
-    bottom: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
   }
 `
 
@@ -80,6 +59,7 @@ export const Container = styled.div`
   );
   background-size: 100% 1500px;
   background-attachment: local;
+  gap: 15px;
 `
 
 export const MonthContainer = styled.div`
@@ -88,6 +68,7 @@ export const MonthContainer = styled.div`
   flex-direction: column;
   width: 100%;
   padding: 0px;
+  gap: 15px;
 `
 
 export const Month = styled.span`
@@ -115,7 +96,7 @@ export const GoalContainer = styled.div`
 `
 
 export const GoalTitle = styled.h3`
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 600;
   color: #fff;
   white-space: nowrap;
