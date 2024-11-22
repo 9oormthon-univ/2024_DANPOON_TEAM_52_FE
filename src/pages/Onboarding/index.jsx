@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react"
 import { useNavigate } from "react-router-dom"
 import { intros } from "../../constants/data"
+import Carousel from "../../components/Carousel"
+
 import {
   Wrapper,
-  StyledCarousel,
   Content,
   SlideImgContainer,
   SlideImg,
@@ -42,7 +43,7 @@ const OnBoardingPage = () => {
       {!isStart && (
         <BodyWrapper>
           {/* 캐러셀 */}
-          <StyledCarousel ref={carouselRef} afterChange={onChange} dots={true}>
+          <Carousel ref={carouselRef} afterChange={onChange} dots={true}>
             {intros.map(({ img }, index) => (
               <div key={index}>
                 <Content>{intros[slideIndex]?.content}</Content>
@@ -51,7 +52,7 @@ const OnBoardingPage = () => {
                 </SlideImgContainer>
               </div>
             ))}
-          </StyledCarousel>
+          </Carousel>
           <NextBtn onClick={onClickNext}>{buttonText}</NextBtn>
         </BodyWrapper>
       )}
