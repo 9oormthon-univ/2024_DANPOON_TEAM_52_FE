@@ -45,7 +45,7 @@ const OnBoardingPage = () => {
       {!isStart && (
         <BodyWrapper>
           {/* 캐러셀 */}
-          <Carousel ref={carouselRef} beforeChange={onChange} dots={true}>
+          <Carousel ref={carouselRef} beforeChange={onBeforeChange} dots={true}>
             {intros.map(({ img, content }, index) => (
               <div key={index}>
                 <Content>{content}</Content>

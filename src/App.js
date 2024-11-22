@@ -38,9 +38,9 @@ export default function App() {
           element={<Navigate to={ROUTES_PATH_HOME} />}
         />
         <Route path={ROUTES_PATH_INFO} element={<InfoPage />} />
-        <Route path={ROUTES_PATH_ONBOARD} element={<OnBoardingPage />} 
+        <Route path={ROUTES_PATH_ONBOARD} element={<OnBoardingPage />} />
         <Route path={ROUTES_PATH_RECOMMENDED_GOALS} element={<RecommandedGoals />} />
-        <Route path={ROUTES_PATH_CALENDAR} element={<CalendarPage />}/>
+        <Route path={ROUTES_PATH_CALENDAR} element={<CalendarPage />} />
         <Route path={`${ROUTES_PATH_QUEST}/:id`} element={<Quest />} />
       </Routes>
     </BrowserRouter>
