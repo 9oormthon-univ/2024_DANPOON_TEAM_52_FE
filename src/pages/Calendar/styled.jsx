@@ -28,7 +28,7 @@ export const StyledCalendarWrapper = styled.div`
     justify-content: center; /* 가로 정렬 */
     align-items: center; /* 세로 정렬 */
   }
-    
+
   /* 전체 폰트 컬러 */
   .react-calendar__month-view {
     abbr {
@@ -239,11 +239,14 @@ export const AddScheduleButton = styled.button`
 `
 
 export const StyledDatePicker = styled(DatePicker)`
-width:"50%", background:"#262827", border:"none", color:"white"
+  width: "50%";
+  background: "#262827";
+  border: "none";
+  color: "white";
 
-.ant-picker-suffix {
-  color: white !important; /* 달력 아이콘 색상 */
-}
+  .ant-picker-suffix {
+    color: white !important; /* 달력 아이콘 색상 */
+  }
 `
 
 export const StyledRangePicker = styled(DatePicker.RangePicker)`
@@ -266,6 +269,7 @@ export const StyledRangePicker = styled(DatePicker.RangePicker)`
     &:hover {
       border: none; /* 호버 시 테두리 제거 */
     }
+  }
 `
 
 /* 드롭다운 스타일 강제 적용 */
