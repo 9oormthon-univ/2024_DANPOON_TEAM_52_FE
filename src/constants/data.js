@@ -116,55 +116,10 @@ export const MypageData = [
     // 학력
     {
       category: 1,
-      startDate: "2020-03-01",
+      startDate: "2020-02-10",
       endDate: "2024-02-28",
-      itemName: "구름대학교 경영학과 졸업",
-    },
-    {
-      category: 1,
-      startDate: "2016-03-01",
-      endDate: "2019-02-28",
-      itemName: "구름고등학교 졸업",
-    },
-    // 경력
-    {
-      category: 2,
-      startDate: "2023-01-01",
-      endDate: "2023-12-31",
-      itemName: "구름회사 인턴",
-    },
-    {
-      category: 2,
-      startDate: "2021-06-01",
-      endDate: "2022-12-31",
-      itemName: "스타트업 개발팀 근무",
-    },
-    // 자격·어학·수상
-    {
-      category: 3,
-      startDate: "2023-05-01",
-      endDate: "2023-05-01",
-      itemName: "TOEIC 900점",
-    },
-    {
-      category: 3,
-      startDate: "2022-10-01",
-      endDate: "2022-10-01",
-      itemName: "정보처리기사 자격증",
-    },
-    // 경험·활동·교육
-    {
-      category: 4,
-      startDate: "2022-01-01",
-      endDate: "2022-12-31",
-      itemName: "구름봉사단 활동",
-    },
-    //기타
-    {
-      category: 5,
-      startDate: "2022-01-01",
-      endDate: "2022-12-31",
-      itemName: "기타활동 예제입니다",
+      itemName: "인천대학교 컴퓨터공학과 졸업",
+      detail: "20학번"
     },
 ]
 

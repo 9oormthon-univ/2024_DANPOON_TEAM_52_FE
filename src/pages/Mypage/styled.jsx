@@ -98,6 +98,7 @@ export const ItemDate = styled(Text)`
 export const ItemName = styled(Text)`
   &&& {
     font-weight: 500;
+    margin: 0;
   }
 `
 export const StyledButton = styled.button`

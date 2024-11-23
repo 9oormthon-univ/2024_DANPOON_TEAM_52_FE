@@ -2,7 +2,6 @@ import SetJob from "./components/SetJob"
 import SetInterest from "./components/SetInterest"
 import { useStepNavigation } from "../../hooks/useStepNavigation"
 import { useNavigate } from "react-router-dom"
-import { reqGetJobs } from "../../apis/info"
 import { useEffect } from "react"
 import { useState } from "react"
 import { jobData } from "../../constants/data"
@@ -22,13 +21,6 @@ export default function InfoPage() {
       }
     }
   }
-    useEffect(async () => {
-      const res = await reqGetJobs();
-      if(res.status===200){
-        setJobData(res.data);
-      }
-    }, [])
-  return (
     <>
       {step === "1" && (
         <SetJob
@@ -43,5 +35,4 @@ export default function InfoPage() {
         ></SetInterest>
       )}
     </>
-  )
 }
