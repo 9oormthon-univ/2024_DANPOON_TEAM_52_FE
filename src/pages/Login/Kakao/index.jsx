@@ -24,7 +24,7 @@ export default function Kakao() {
         res.data.data.auth_token.refresh_token
       )
       localStorage.setItem("nickname", res.data.data.nickname)
-      navigate(ROUTES_PATH_HOME)
+      navigate(ROUTES_PATH_ROOT)
     } else {
       localStorage.removeItem(AUTH_ACCESS_TOKEN)
       localStorage.removeItem(AUTH_REFRESH_TOKEN)
