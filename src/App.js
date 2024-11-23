@@ -10,7 +10,8 @@ import {
   ROUTES_PATH_ONBOARD,
   ROUTES_PATH_RECOMMENDED_GOALS,
   ROUTES_PATH_QUEST,
-  ROUTES_PATH_CALENDAR
+  ROUTES_PATH_CALENDAR,
+  ROUTES_PATH_SEARCH
 } from "./constants/routes"
 import { ApiClientSetting } from "./apis/apiClient"
 import KakaoInit from "./components/KakaoInit"
@@ -23,6 +24,8 @@ import RecommandedGoals from "./pages/RecommandedGoals"
 import Kakao from "./pages/Login/Kakao"
 import Quest from "./pages/Quest"
 import CalendarPage from "./pages/Calendar"
+import Search from "./pages/Search"
+
 export default function App() {
   return (
     <BrowserRouter basename={ROUTES_BASENAME}>
@@ -42,6 +45,7 @@ export default function App() {
         <Route path={ROUTES_PATH_RECOMMENDED_GOALS} element={<RecommandedGoals />} />
         <Route path={ROUTES_PATH_CALENDAR} element={<CalendarPage />} />
         <Route path={`${ROUTES_PATH_QUEST}/:id`} element={<Quest />} />
+        <Route path={ROUTES_PATH_SEARCH} element={<Search />} />
       </Routes>
     </BrowserRouter>
   )
