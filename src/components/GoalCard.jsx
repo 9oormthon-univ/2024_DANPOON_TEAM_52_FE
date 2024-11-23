@@ -9,7 +9,7 @@ const Container = styled.div`
   gap: 25px;
   border-radius: 20px;
   background: #1a1a20cc;
-  margin: 100px 0 200px;
+  margin: 50px 0 150px;
   overflow: visible;
   box-shadow: 8px 6px 4px rgba(0, 0, 0, 0.5);
 `
