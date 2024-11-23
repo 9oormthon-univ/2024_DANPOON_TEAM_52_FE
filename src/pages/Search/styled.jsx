@@ -8,13 +8,13 @@ export const Container = styled.div`
   height: 100%;
   overflow: hidden;
   padding: 20px 33px 0;
-  gap: 30px;
 `
 
 export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 30px;
 `
 export const TitleButton = styled.button`
   display: flex;
