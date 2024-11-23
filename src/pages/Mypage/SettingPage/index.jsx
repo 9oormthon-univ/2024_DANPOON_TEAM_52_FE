@@ -9,21 +9,24 @@ import {
   ItemName,
   Option,
   Content,
-  Detail
 } from "./styled"
 import BackwardButton from "../../../components/BackwardButton"
 import StyledSwitch from "../../../components/Switch"
 import { useNavigate } from "react-router-dom"
+import { useState } from "react"
+import NicknamePage from "../Nickname/Nickname"
 const SettingPage = () => {
+  //별명변경 모달
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
   const userData = {
     userName: "아자아자석영",
     job: "기획 전략",
     interest: "서비스 기획, 앱 기획",
   }
-  const navigate = useNavigate();
   return (
     <Wrapper>
-      <BackwardButton />
+      <BackwardButton onClick={()=>{navigate('/mypage')}}/>
       <Group>
         <Title>환경설정</Title>
         <Profile src="/profileimg.png" />
@@ -32,7 +35,9 @@ const SettingPage = () => {
         <SettingItem>
           <ItemName>별명</ItemName>
           <Content>{userData.userName}</Content>
-          <Option>변경</Option>
+          <Option onClick={()=>{
+            setIsModalOpen(true);
+          }}>변경</Option>
         </SettingItem>
         <SettingItem>
           <ItemName>희망직무</ItemName>
@@ -62,6 +67,9 @@ const SettingPage = () => {
           <StyledSwitch />
         </SettingItem>
       </SettingItemWrapper>
+      {isModalOpen && (
+        <NicknamePage setIsModalOpen={setIsModalOpen}/>
+      )}
     </Wrapper>
   )
 }

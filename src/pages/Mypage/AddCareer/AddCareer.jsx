@@ -90,7 +90,6 @@ const AddCareerPage = ({ setIsModalOpen }) => {
     // 모달 닫기
     setIsModalOpen(false)
   }
-
   return (
     <ModalOverlay>
       <ModalContent onClick={(e) => e.stopPropagation()}>
