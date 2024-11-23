@@ -41,7 +41,7 @@ const NavContainer = styled.div`
 
 const NavButton = ({ title, src, icon, highlight }) => {
   return (
-    <NavLink to={src} $highlight={highlight}>
+    <NavLink to={src[0]} $highlight={highlight}>
       <Flex vertical justify="center" align="center" gap={10}>
         {highlight ? icon.highlight : icon.default}
         {title}
@@ -59,7 +59,7 @@ const Nav = () => {
           <NavButton
             key={index}
             {...nav}
-            highlight={location.pathname === nav.src}
+            highlight={nav.src.some((src) => location.pathname.startsWith(src))}
           />
         )
       })}

@@ -2,7 +2,7 @@ import { styled } from "styled-components"
 import ScrollContainer from "./ScrollContainer"
 import ListItem, { ListItemSkeleton } from "./ListItem"
 import { useNavigate } from "react-router-dom"
-import { ROUTES_PATH_QUEST } from "../constants/routes"
+import { ROUTES_PATH_GOAL } from "../constants/routes"
 import ShadowContainer from "./ShadowContainer"
 
 export const Container = styled(ScrollContainer)`

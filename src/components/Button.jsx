@@ -13,7 +13,7 @@ const Button = styled(ButtonComponent)`
     background: ${({ $variant }) => {
       switch ($variant) {
         case "primary":
-          return "linear-gradient(90deg, #7b80ff -16.96%, #8afaf1 74.78%)"
+          return "linear-gradient(90deg, #E0FFC6 -16.96%, #8AFAF1 126.4%)"
         case "secondary":
           return "#2F2F2F"
         default:

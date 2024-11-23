@@ -1,12 +1,22 @@
-import SetJob from "./components/SetJob";
-import SetInterest from "./components/SetInterest";
-import { useStepNavigation } from "../../hooks/useStepNavigation";
+import SetJob from "./components/SetJob"
+import SetInterest from "./components/SetInterest"
+import { useStepNavigation } from "../../hooks/useStepNavigation"
+import { useNavigate } from "react-router-dom"
 export default function InfoPage() {
-  const { step, paramsInterestItem, updateStep } = useStepNavigation();
+  const { step, paramsInterestItem, updateStep } = useStepNavigation()
+  const navigate = useNavigate();
   const onClickNext = (data) => {
     //jobItem주기
-    updateStep("2", data);
-  };
+    updateStep("2", data)
+    if (step == "2") {
+      //서버데이터 전송
+      if (localStorage.getItem("backURL")) {
+        navigate("/setting")
+      } else {
+        navigate("/home")
+      }
+    }
+  }
   return (
     <>
       {step === "1" && (
@@ -16,10 +26,9 @@ export default function InfoPage() {
         ></SetJob>
       )}
       {step === "2" && (
-        <SetInterest
-          interestItem={paramsInterestItem}
-        ></SetInterest>
+        <SetInterest interestItem={paramsInterestItem} onClickNext={onClickNext}></SetInterest>
       )}
     </>
-  );
+  )
 }
+

@@ -106,4 +106,5 @@ export const ConsterllationContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(50% + 30px);
+  cursor: pointer;
 `
