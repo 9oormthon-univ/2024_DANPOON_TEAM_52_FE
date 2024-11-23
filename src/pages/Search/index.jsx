@@ -18,70 +18,53 @@ import { useState } from "react"
 export default function Search() {
   const [open, setOpen] = useState(false)
   const [category, setCategory] = useState("all")
+  const [title, setTitle] = useState("전체 목표 탐색")
   const loading = false
   const list = [
     {
       id: 1,
       icon: "️🗓️",
       title: "구름톤 회의",
-      description: "2024.01.03",
-      label: "일정",
     },
     {
       id: 2,
       icon: "📝",
       title: "구름톤 회의록 작성",
-      description: "2024.01.03",
-      label: "일정",
     },
     {
       id: 3,
       icon: "📞",
       title: "구름톤 회의록 검토",
-      description: "2024.01.03",
-      label: "일정",
     },
     {
       id: 4,
       icon: "📞",
       title: "구름톤 회의록 검토",
-      description: "2024.01.03",
-      label: "일정",
     },
     {
       id: 5,
       icon: "📞",
       title: "구름톤 회의록 검토",
-      description: "2024.01.03",
-      label: "일정",
     },
     {
       id: 6,
       icon: "📞",
       title: "구름톤 회의록 검토",
-      description: "2024.01.03",
-      label: "일정",
     },
     {
       id: 7,
       icon: "📞",
       title: "구름톤 회의록 검토",
-      description: "2024.01.03",
-      label: "일정",
     },
     {
       id: 7,
       icon: "📞",
       title: "구름톤 회의록 검토",
-      description: "2024.01.03",
-      label: "일정",
     },
     {
       id: 7,
       icon: "📞",
       title: "구름톤 회의록 검토",
-      description: "2024.01.03",
-      label: "일정",
     },
   ]
   const categories = [
@@ -96,15 +79,15 @@ export default function Search() {
       <Container>
         <Header>
           <Flex vertical gap={12}>
-            <TitleButton>
-              전체 목표 탐색
+            <TitleButton onClick={() => setOpen(true)}>
+              {title}
               <DownSVG />
             </TitleButton>
             <Description>
               다른 사람들의 목표와 이력을 탐색할 수 있어요
             </Description>
           </Flex>
-          <IconButton onClick={() => setOpen(true)}>
+          <IconButton>
             <SortSVG />
           </IconButton>
         </Header>
@@ -118,7 +101,13 @@ export default function Search() {
         </CategoryContainer>
         <Goals goals={list} loading={loading} option={{ labelHidden: true }} />
       </Container>
-      <FilterDrawer open={open} onClose={() => setOpen(false)} />
+      <FilterDrawer
+        open={open}
+        onClose={(filter) => {
+          setOpen(false)
+          setTitle(filter.category)
+        }}
+      />
     </BaseLayout>
   )
 }

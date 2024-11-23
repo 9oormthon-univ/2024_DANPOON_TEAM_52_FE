@@ -4,6 +4,8 @@ import ListItem, { ListItemSkeleton } from "./ListItem"
 import { useNavigate } from "react-router-dom"
 import { ROUTES_PATH_GOAL } from "../constants/routes"
 import ShadowContainer from "./ShadowContainer"
+import { useRecoilState } from "recoil"
+import goalAtom from "../store/atoms/goal"
 
 const Container = styled(ScrollContainer)`
   display: flex;
@@ -35,8 +37,12 @@ const Placeholder = styled.div`
   line-height: 1.5;
 `
 
-export default function Goals({ goals, loading, option, onClick }) {
+export default function Goals({ loading, option, onEdit }) {
   const navigate = useNavigate()
+  const [goals, setGoals] = useRecoilState(goalAtom)
+  const onDelete = (id) => {
+    setGoals((prev) => prev.filter((v) => v.id !== id))
+  }
   return (
     <ShadowContainer>
       <Container>
@@ -60,12 +66,18 @@ export default function Goals({ goals, loading, option, onClick }) {
                 key={index}
                 icon={item.icon}
                 title={item.title}
-                label={option?.labelHidden ? "" : item.label}
-                onClick={
-                  onClick
-                    ? onClick
-                    : () => navigate(`${ROUTES_PATH_GOAL}/${item.id}`)
+                label={
+                  option?.labelHidden
+                    ? ""
+                    : `${item.quests.filter((v) => v.isComplete).length}/${item.quests.length}`
                 }
+                onClick={() => navigate(`${ROUTES_PATH_GOAL}/${item.id}`)}
+                onEdit={() => onEdit(item)}
+                onDelete={() => onDelete(item.id)}
+                option={{
+                  deleteVisible: option?.deleteVisible,
+                  editVisible: option?.editVisible,
+                }}
               />
             ))}
           </>

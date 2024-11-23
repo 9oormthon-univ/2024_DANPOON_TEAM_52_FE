@@ -13,46 +13,35 @@ import ShadowContainer from "../../../components/ShadowContainer"
 
 export default function GoalConstellation() {
   const goal = {
-    icon: "🌟",
+    id: 99,
+    icon: "🏫",
     label: "별자리 이름",
-    title: "데이터 기반 능력 강화하기",
-    description: "2024년 10월 11일 - 2024년 11월 23일",
+    title: "Spring Security 인강 듣기",
+    description: "2024년 11월 10일 - 2024년 12월 31일",
     quests: [
       {
         id: 1,
-        title: "SQL 기본 및 고급 쿼리 작성 연습",
+        title: "SecurityFilterChain 공부하기",
       },
       {
         id: 2,
-        title: "Kaggle 등 플랫폼에서 데이터 분석 대회 참여",
+        title: "Authentication 이해하기",
       },
       {
         id: 3,
-        title: "Kaggle 등 플랫폼에서 데이터 분석 대회 참여",
+        title: "Authentication Provider 공부하기",
       },
       {
         id: 4,
-        title: "Kaggle 등 플랫폼에서 데이터 분석 대회 참여",
+        title: "Authentication Manager 공부하기",
       },
       {
-        id: 4,
-        title: "Kaggle 등 플랫폼에서 데이터 분석 대회 참여",
+        id: 5,
+        title: "SecurityContextHolder 이해하기",
       },
       {
-        id: 4,
-        title: "Kaggle 등 플랫폼에서 데이터 분석 대회 참여",
-      },
-      {
-        id: 4,
-        title: "Kaggle 등 플랫폼에서 데이터 분석 대회 참여",
-      },
-      {
-        id: 4,
-        title: "Kaggle 등 플랫폼에서 데이터 분석 대회 참여",
-      },
-      {
-        id: 4,
-        title: "Kaggle 등 플랫폼에서 데이터 분석 대회 참여",
+        id: 6,
+        title: "jwt 구현해보기",
       },
     ],
   }

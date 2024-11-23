@@ -8,16 +8,17 @@ export default function FilterDrawer({ open, onClose }) {
   const [isOpen, setIsOpen] = useState(open)
   const [status, setStatus] = useState("filter")
   const [filter, setFilter] = useState({
-    category: "test",
+    category: "all",
     name: "all",
   })
   const close = () => {
     setIsOpen(false)
-    onClose()
+    onClose(filter)
   }
   useEffect(() => {
     setIsOpen(open)
   }, [open])
+  console.log(filter, status)
   return (
     <>
       <Drawer open={isOpen} onClose={close}>
@@ -43,6 +44,7 @@ export default function FilterDrawer({ open, onClose }) {
             setFilter={setFilter}
             status={status}
             setStatus={setStatus}
+            close={close}
           />
         )}
       </Drawer>
