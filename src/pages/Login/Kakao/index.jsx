@@ -3,7 +3,7 @@ import { useSearchParams, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { reqLogin } from "../../../apis/auth"
 import { AUTH_ACCESS_TOKEN, AUTH_REFRESH_TOKEN } from "../../../constants/auth"
-import { ROUTES_PATH_HOME } from "../../../constants/routes"
+import { ROUTES_PATH_ROOT } from "../../../constants/routes"
 
 export default function Kakao() {
   const navigate = useNavigate()

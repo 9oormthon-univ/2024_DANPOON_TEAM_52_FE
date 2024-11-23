@@ -2,9 +2,14 @@ import SetJob from "./components/SetJob"
 import SetInterest from "./components/SetInterest"
 import { useStepNavigation } from "../../hooks/useStepNavigation"
 import { useNavigate } from "react-router-dom"
+import { reqGetJobs } from "../../apis/info"
+import { useEffect } from "react"
+import { useState } from "react"
+import { jobData } from "../../constants/data"
 export default function InfoPage() {
   const { step, paramsInterestItem, updateStep } = useStepNavigation()
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const [jobData, setJobData] = useState(null);
   const onClickNext = (data) => {
     //jobItem주기
     updateStep("2", data)
@@ -17,6 +22,12 @@ export default function InfoPage() {
       }
     }
   }
+    useEffect(async () => {
+      const res = await reqGetJobs();
+      if(res.status===200){
+        setJobData(res.data);
+      }
+    }, [])
   return (
     <>
       {step === "1" && (
@@ -26,9 +37,11 @@ export default function InfoPage() {
         ></SetJob>
       )}
       {step === "2" && (
-        <SetInterest interestItem={paramsInterestItem} onClickNext={onClickNext}></SetInterest>
+        <SetInterest
+          interestItem={paramsInterestItem}
+          onClickNext={onClickNext}
+        ></SetInterest>
       )}
     </>
   )
 }
-

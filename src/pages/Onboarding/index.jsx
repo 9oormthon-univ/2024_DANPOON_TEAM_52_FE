@@ -36,6 +36,7 @@ const OnBoardingPage = () => {
       carouselRef.current.goTo(slideIndex + 1)
     } else {
       setIsStart(true)
+      localStorage.setItem("visited", true);
       navigate("/info")
     }
   }
