@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 import { ROUTES_PATH_GOAL } from "../constants/routes"
 import ShadowContainer from "./ShadowContainer"
 
-export const Container = styled(ScrollContainer)`
+const Container = styled(ScrollContainer)`
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -24,6 +24,17 @@ export const Container = styled(ScrollContainer)`
   }
 `
 
+const Placeholder = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #7d7d7d;
+  text-align: center;
+  line-height: 1.5;
+`
+
 export default function Goals({ goals, loading, option, onClick }) {
   const navigate = useNavigate()
   return (
@@ -37,6 +48,13 @@ export default function Goals({ goals, loading, option, onClick }) {
           </>
         ) : (
           <>
+            {goals.length === 0 && (
+              <Placeholder>
+                목표를 추가하고
+                <br />
+                퀘스트를 진행하여 달성해요
+              </Placeholder>
+            )}
             {goals.map((item, index) => (
               <ListItem
                 key={index}
