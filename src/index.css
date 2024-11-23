@@ -193,6 +193,9 @@ body {
   display: inline-block !important; /* 버튼을 강제로 표시 */
   visibility: visible !important;
 }
+.react-calendar__navigation__label{
+  font-family: "Pretendard" !important;
+}
 .ant-picker-now-btn {
   color: black !important;
 }

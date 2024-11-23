@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const MotionContainer = styled(motion.div)`
   width: 100%;
-  height: 400px;
+  height: 350px;
   position: fixed;
   bottom: 0;
   left: 0;
