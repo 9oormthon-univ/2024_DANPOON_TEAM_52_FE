@@ -8,7 +8,8 @@ import {
   ROUTES_PATH_INFO,
   ROUTES_PATH_ONBOARD,
   ROUTES_PATH_CALENDAR,
-  ROUTES_PATH_MYPAGE
+  ROUTES_PATH_MYPAGE,
+  ROUTES_PATH_SETTING
 } from "./constants/routes"
 import Login from "./pages/Login"
 import Splash from "./pages/Splash"
@@ -17,6 +18,7 @@ import OnBoardingPage from "./pages/Onboarding"
 import Home from "./pages/Home"
 import CalendarPage from "./pages/Calendar"
 import Mypage from "./pages/Mypage"
+import SettingPage from "./pages/Mypage/SettingPage"
 export default function App() {
   return (
     <BrowserRouter basename={ROUTES_BASENAME}>
@@ -32,6 +34,7 @@ export default function App() {
         <Route path={ROUTES_PATH_ONBOARD} element={<OnBoardingPage />}/>
         <Route path={ROUTES_PATH_CALENDAR} element={<CalendarPage />}/>
         <Route path={ROUTES_PATH_MYPAGE} element={<Mypage />}/>
+        <Route path={ROUTES_PATH_SETTING} element={<SettingPage />}/>
       </Routes>
     </BrowserRouter>
   )

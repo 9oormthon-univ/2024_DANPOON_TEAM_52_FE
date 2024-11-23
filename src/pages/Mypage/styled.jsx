@@ -87,6 +87,7 @@ export const CategoryName = styled(Text)`
 export const ItemGroup = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `
 export const ItemDate = styled(Text)`
   &&& {
@@ -96,6 +97,49 @@ export const ItemDate = styled(Text)`
 `
 export const ItemName = styled(Text)`
   &&& {
-    font-weight: bold;
+    font-weight: 500;
+  }
+`
+export const StyledButton = styled.button`
+  background-color: #222;
+  border: none;
+  border-radius: 50%;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  color: white;
+`
+
+export const StyledPlus = styled(StyledButton)`
+  &&& {
+    width:47px;
+    height:47px;
+    position: absolute;
+    right: 20px;
+    bottom: 140px;
+    background: #4D4D4D;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+  @media (min-width: 573px) {
+    bottom: 180px;
+  }
+}
+`
+export const NaviWrapper = styled.div`
+  display: flex;
+  position: absolute;
+  gap: 5px;
+  @media (min-width: 573px) {
+    left: 420px;
+    bottom: 520px;
+  }
+
+  @media (max-width: 573px) {
+    left: 75vw;
+    top: 70px;
+    width: 100vw;
   }
 `

@@ -1,5 +1,7 @@
 import React from "react"
 import BaseLayout from "../../components/BaseLayout"
+import { DatePicker } from "antd"
+import { useState } from "react"
 import {
   Wrapper,
   ProfileInfo,
@@ -16,18 +18,33 @@ import {
   ItemGroup,
   ItemName,
   ContentWrapper,
+  StyledButton,
+  NaviWrapper,
+  StyledPlus,
 } from "./styled"
+import { useNavigate } from "react-router-dom"
+import AddCareerPage from "./AddCareer/AddCareer"
+import { ReactComponent as Share } from "../../svgs/share.svg"
+import { ReactComponent as Plus } from "../../svgs/plus.svg"
+import { ReactComponent as Setting } from "../../svgs/Settings.svg"
 import { Highlight } from "../../components/Typo"
 import { MypageData, categories } from "../../constants/data"
 export default function Mypage() {
+  const navigate = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const userData = {
     userName: "김구름",
   }
-
+  
   const groupedData = categories.map((category) => ({
     ...category,
     items: MypageData.filter((item) => item.category === category.id),
   }))
+
+  //이력추가버튼 클릭
+  const onClickAddBtn = () => {
+    setIsModalOpen(true);
+  }
 
   return (
     <BaseLayout>
@@ -55,11 +72,24 @@ export default function Mypage() {
                     {item.startDate} ~ {item.endDate}
                   </ItemDate>
                   <ItemName>{item.itemName}</ItemName>
+                  <img src="/optionicon.png" width="2px" height="10px" style={{marginBottom:"15px"}}/>
                 </ItemGroup>
               ))}
             </CategoryWrapper>
           ))}
+          <NaviWrapper>
+            <StyledButton>
+              <Share />
+            </StyledButton>
+            <StyledButton>
+              <Setting onClick={()=>{navigate('/setting')}}/>
+            </StyledButton>
+          </NaviWrapper>
+          <StyledPlus onClick={onClickAddBtn}>
+            <Plus />
+          </StyledPlus>
         </ContentWrapper>
+        {isModalOpen && (<AddCareerPage setIsModalOpen={setIsModalOpen}/>)}
       </Wrapper>
     </BaseLayout>
   )

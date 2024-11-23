@@ -126,18 +126,6 @@ export const MypageData = [
       endDate: "2019-02-28",
       itemName: "구름고등학교 졸업",
     },
-    {
-      category: 1,
-      startDate: "2013-03-01",
-      endDate: "2016-02-28",
-      itemName: "구름중학교 졸업",
-    },
-    {
-      category: 1,
-      startDate: "2010-03-01",
-      endDate: "2013-02-28",
-      itemName: "구름초등학교 졸업",
-    },
     // 경력
     {
       category: 2,
@@ -150,12 +138,6 @@ export const MypageData = [
       startDate: "2021-06-01",
       endDate: "2022-12-31",
       itemName: "스타트업 개발팀 근무",
-    },
-    {
-      category: 2,
-      startDate: "2020-07-01",
-      endDate: "2021-05-31",
-      itemName: "교육기관 학습보조",
     },
     // 자격·어학·수상
     {
@@ -170,18 +152,6 @@ export const MypageData = [
       endDate: "2022-10-01",
       itemName: "정보처리기사 자격증",
     },
-    {
-      category: 3,
-      startDate: "2020-03-01",
-      endDate: "2020-03-01",
-      itemName: "중국어 HSK 6급 취득",
-    },
-    {
-      category: 3,
-      startDate: "2019-11-01",
-      endDate: "2019-11-01",
-      itemName: "국내 대학생 논문 공모전 금상",
-    },
     // 경험·활동·교육
     {
       category: 4,
@@ -189,17 +159,12 @@ export const MypageData = [
       endDate: "2022-12-31",
       itemName: "구름봉사단 활동",
     },
+    //기타
     {
-      category: 4,
-      startDate: "2021-07-01",
-      endDate: "2021-08-31",
-      itemName: "해외연수 (미국)",
-    },
-    {
-      category: 4,
-      startDate: "2020-05-01",
-      endDate: "2020-05-31",
-      itemName: "기술 세미나 발표",
+      category: 5,
+      startDate: "2022-01-01",
+      endDate: "2022-12-31",
+      itemName: "기타활동 예제입니다",
     },
 ]
 

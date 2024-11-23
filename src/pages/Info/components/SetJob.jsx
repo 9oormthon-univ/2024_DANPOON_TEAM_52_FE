@@ -57,4 +57,4 @@ const SetJob = ({ onClickNext }) => {
   )
 }
 
-export default SetJob
+export default SetJob;

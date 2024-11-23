@@ -12,12 +12,15 @@ import {
   Option,
   Wrapper,
 } from "../styled"
+import { useNavigate } from "react-router-dom"
 const SetInterest = ({ onClickNext }) => {
   const { paramsInterestItem, paramsJobItem } = useStepNavigation()
   const { pickedItems, toggleItem, sendData } = usePickedItems(
     paramsInterestItem,
     () => popStateFunc(2, paramsJobItem, pickedItems)
   )
+  const navigate = useNavigate();
+
   return (
     <Wrapper>
       <Content>
@@ -55,8 +58,8 @@ const SetInterest = ({ onClickNext }) => {
         <NextBtn
           $variant={pickedItems.length !== 0 ? "primary" : "secondary"}
           onClick={() => {
-            onClickNext()
-            sendData()
+            onClickNext(pickedItems);
+            sendData();
           }}
         >
           시작하기

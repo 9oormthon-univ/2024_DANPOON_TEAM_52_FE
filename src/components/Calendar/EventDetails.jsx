@@ -9,12 +9,16 @@ const MotionContainer = styled(motion.div)`
   bottom: 0;
   left: 0;
   right: 0;
-  background: #262827;
+  background: black;
+  opacity: 80%;
   color: white;
   padding: 30px;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   box-shadow: 5px 10px 15px 10px rgba(138, 250, 241, 0.5);
+  @media (min-width: 520px){
+    width: 520px;
+  }
 `;
 
 const DateText = styled.div`
