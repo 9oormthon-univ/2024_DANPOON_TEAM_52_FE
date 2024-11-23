@@ -48,7 +48,7 @@ export default function App() {
           <Route path={ROUTES_PATH_HOME} element={<Home />} />
           <Route
             path={ROUTES_PATH_ROOT}
-            element={<Navigate to={ROUTES_PATH_HOME} />}
+            element={localStorage.getItem("visited") ? (<Navigate to={ROUTES_PATH_HOME}/>) : (<Navigate to={ROUTES_PATH_ONBOARD}/>)}
           />
           <Route path={ROUTES_PATH_INFO} element={<InfoPage />} />
           <Route path={ROUTES_PATH_ONBOARD} element={<OnBoardingPage />} />
