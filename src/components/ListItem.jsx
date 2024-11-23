@@ -4,14 +4,32 @@ import { Skeleton } from "antd"
 
 const ListItemContainer = styled.div`
   display: flex;
+  min-height: 60px;
+  width: 100%;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  & > * {
+    scroll-snap-align: end;
+  }
+  &::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+  &::-webkit-scrollbar-thumb {
+    display: none;
+  }
+`
+
+const InnerContainer = styled.div`
+  display: flex;
   align-items: center;
   gap: 16px;
-  width: 100%;
+  min-width: 100%;
+  margin-right: 1px;
   background-color: #2c2c2ccc;
-  border-radius: 10px;
-  backdrop-filter: blur(2px);
   padding: 20px 27px;
-  cursor: pointer;
 `
 
 const Icon = styled.span`
@@ -46,15 +64,55 @@ const Label = styled.span`
   color: #7d7d7d;
 `
 
-export default function ListItem({ icon, title, description, label, onClick }) {
+const EditButton = styled.button`
+  padding: 23px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: #4d4d4d;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+`
+const DeleteButton = styled.button`
+  padding: 23px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  background-color: #d94242;
+  border: none;
+  outline: none;
+  white-space: nowrap;
+  cursor: pointer;
+`
+
+export default function ListItem({
+  icon,
+  title,
+  description,
+  label,
+  onClick,
+  onEdit,
+  onDelete,
+  option,
+}) {
   return (
-    <ListItemContainer onClick={onClick}>
-      <Icon>{icon}</Icon>
-      <Flex vertical flex={1} align="center" gap={5}>
-        <Title>{title}</Title>
-        {description && <Description>{description}</Description>}
+    <ListItemContainer>
+      <InnerContainer onClick={onClick}>
+        <Icon>{icon}</Icon>
+        <Flex vertical flex={1} align="center" gap={5}>
+          <Title>{title}</Title>
+          {description && <Description>{description}</Description>}
+        </Flex>
+        <Label>{label}</Label>
+      </InnerContainer>
+      <Flex>
+        {option?.editVisible && <EditButton onClick={onEdit}>수정</EditButton>}
+        {option?.deleteVisible && (
+          <DeleteButton onClick={onDelete}>삭제</DeleteButton>
+        )}
       </Flex>
-      <Label>{label}</Label>
     </ListItemContainer>
   )
 }

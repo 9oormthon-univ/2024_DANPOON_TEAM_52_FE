@@ -9,8 +9,10 @@ import {
   LeftIcon,
   RadioGroup,
 } from "./styled"
+import { useState } from "react"
 
-export default function CategoryPage({ setFilter, setStatus }) {
+export default function CategoryPage({ filter, setFilter, setStatus }) {
+  const [selected, setSelected] = useState(filter.category)
   const options = [
     {
       label: "직군 전체",
@@ -32,11 +34,23 @@ export default function CategoryPage({ setFilter, setStatus }) {
         <Title>직군 선택</Title>
       </Header>
       <ListContainer>
-        <RadioGroup options={options} />
+        <RadioGroup
+          options={options}
+          value={selected}
+          onChange={(e) => setSelected(e.target.value)}
+        />
       </ListContainer>
       <ButtonContainer>
         <InitButton>초기화</InitButton>
-        <SaveButton $variant="secondary">선택완료</SaveButton>
+        <SaveButton
+          $variant="secondary"
+          onClick={() => {
+            setFilter((prev) => ({ ...prev, category: selected }))
+            setStatus("name")
+          }}
+        >
+          선택완료
+        </SaveButton>
       </ButtonContainer>
     </Container>
   )

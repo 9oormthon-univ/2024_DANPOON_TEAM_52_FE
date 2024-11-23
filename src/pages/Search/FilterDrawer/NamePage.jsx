@@ -9,13 +9,11 @@ import {
   LeftIcon,
   CheckGroup,
 } from "./styled"
+import { useState } from "react"
 
-export default function NamePage({ setFilter, setStatus }) {
+export default function NamePage({ setFilter, setStatus, close }) {
+  const [selected, setSelected] = useState([])
   const options = [
-    {
-      label: "직군 전체",
-      value: "all",
-    },
     {
       label: "기획 · 전략",
       value: "기획 · 전략",
@@ -32,11 +30,23 @@ export default function NamePage({ setFilter, setStatus }) {
         <Title>직군 선택</Title>
       </Header>
       <ListContainer>
-        <CheckGroup options={options} />
+        <CheckGroup
+          options={options}
+          value={selected}
+          onChange={(e) => setSelected(e)}
+        />
       </ListContainer>
       <ButtonContainer>
         <InitButton>초기화</InitButton>
-        <SaveButton $variant="secondary">선택완료</SaveButton>
+        <SaveButton
+          $variant="secondary"
+          onClick={() => {
+            setFilter((prev) => ({ ...prev, name: selected }))
+            close()
+          }}
+        >
+          선택완료
+        </SaveButton>
       </ButtonContainer>
     </Container>
   )
