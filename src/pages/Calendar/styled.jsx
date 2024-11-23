@@ -146,7 +146,7 @@ export const ModalOverlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9);
+  background-color: rgba(32, 48, 55, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -175,10 +175,10 @@ export const ModalInput = styled.input`
   border-radius: 10px;
   background: #262827;
   color: white;
-  text-align: center;
   &:focus {
     outline: none;
   }
+    margin-bottom: 10px;
 `
 
 export const SingleCheckbox = styled(Checkbox)`
