@@ -1,0 +1,5 @@
+{
+  "rules": {
+    "no-anonymous-default-export": "off",
+  },
+}
