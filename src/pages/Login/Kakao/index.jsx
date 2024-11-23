@@ -15,9 +15,16 @@ export default function Kakao() {
   const loginHandler = async (code) => {
     const res = await reqLogin({ authorizationCode })
     if (res.status === 200) {
-      localStorage.setItem(AUTH_ACCESS_TOKEN, res.data.data.access_token)
-      localStorage.setItem(AUTH_REFRESH_TOKEN, res.data.data.refresh_token)
-      navigate(ROUTES_PATH_ROOT)
+      localStorage.setItem(
+        AUTH_ACCESS_TOKEN,
+        res.data.data.auth_token.access_token
+      )
+      localStorage.setItem(
+        AUTH_REFRESH_TOKEN,
+        res.data.data.auth_token.refresh_token
+      )
+      localStorage.setItem("nickname", res.data.data.nickname)
+      navigate(ROUTES_PATH_HOME)
     } else {
       localStorage.removeItem(AUTH_ACCESS_TOKEN)
       localStorage.removeItem(AUTH_REFRESH_TOKEN)

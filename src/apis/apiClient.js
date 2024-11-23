@@ -8,7 +8,8 @@ export function ApiClientSetting() {
   apiClient.defaults.headers.common["Content-Type"] = "application/json";
 
   apiClient.interceptors.request.use(config => {
-    config.headers.Authorization = `${window.localStorage.getItem(AUTH_ACCESS_TOKEN)}`;
+    if (config.url !== '/auth/kakao')
+      config.headers.Authorization = `${window.localStorage.getItem(AUTH_ACCESS_TOKEN)}`;
     return config;
   })
 
