@@ -5,9 +5,10 @@ const TabsHeaderContainer = styled(Radio.Group)`
   position: relative;
   display: flex;
   background-color: #262626;
-  width: 100%;
+  width: calc(100% - 40px);
   border-radius: 25px;
   overflow: hidden;
+  margin: 0 20px;
 `
 
 const TabsHeaderItem = styled(Radio.Button)`
@@ -30,7 +31,7 @@ const TabsHeaderItem = styled(Radio.Button)`
     display: none;
   }
   &&&.ant-radio-button-wrapper-checked {
-    color: #000;
+    color: #fff;
     border-radius: 25px;
   }
 `
@@ -38,7 +39,7 @@ const Glider = styled.div`
   position: absolute;
   width: calc(100% / ${(props) => props.$length});
   height: 100%;
-  background: linear-gradient(90deg, #7b80ff -16.96%, #8afaf1 74.78%);
+  background: #3f3f3f;
   border-radius: 25px;
   transition: 0.25s ease-out;
   transform: translateX(${(props) => props.$index * 100}%);

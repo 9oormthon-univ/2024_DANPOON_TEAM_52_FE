@@ -1,8 +1,7 @@
 import { styled } from "styled-components"
 import ScrollContainer from "./ScrollContainer"
-import ListItem, { ListItemSkeleton } from "./ListItem"
-import { useNavigate } from "react-router-dom"
-import { ROUTES_PATH_QUEST } from "../constants/routes"
+import CheckListItem from "./CheckListItem"
+import { ListItemSkeleton } from "./ListItem"
 import ShadowContainer from "./ShadowContainer"
 
 export const Container = styled(ScrollContainer)`
@@ -11,10 +10,10 @@ export const Container = styled(ScrollContainer)`
   width: 100%;
   flex: 1;
   gap: 15px;
-  & > div:first-child {
+  & > *:first-child {
     margin-top: 30px;
   }
-  & > div:last-child {
+  & > *:last-child {
     margin-bottom: 30px;
   }
   &::-webkit-scrollbar-button:vertical:start:increment,
@@ -24,27 +23,27 @@ export const Container = styled(ScrollContainer)`
   }
 `
 
-export default function Goals({ goals, loading }) {
-  const navigate = useNavigate()
+export default function CheckQuests({ quests, loading }) {
   return (
     <ShadowContainer>
       <Container>
         {loading ? (
           <>
-            <ListItemSkeleton active={true} />
-            <ListItemSkeleton active={true} />
-            <ListItemSkeleton active={true} />
+            {new Array(3).fill(0).map((_, index) => (
+              <ListItemSkeleton key={index} active={true} />
+            ))}
           </>
         ) : (
           <>
-            {goals.map((item, index) => (
-              <ListItem
+            {quests.map((item, index) => (
+              <CheckListItem
                 key={index}
-                icon={item.icon}
-                title={item.title}
-                label={item.label}
-                onClick={() => navigate(`${ROUTES_PATH_QUEST}/${item.id}`)}
-              />
+                name={"quests"}
+                value={item.id}
+                defaultChecked={item.isDone}
+              >
+                {item.title}
+              </CheckListItem>
             ))}
           </>
         )}

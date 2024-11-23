@@ -1,4 +1,5 @@
 import Constellation from "../../../components/Constellation"
+import StarBackground from "../../../components/StarBackground"
 import {
   ShadowContainer,
   Container,
@@ -30,6 +31,7 @@ export default function CompleteGoals() {
             </GoalContainer>
           </MonthContainer>
         ))}
+        <StarBackground />
       </Container>
     </ShadowContainer>
   )
