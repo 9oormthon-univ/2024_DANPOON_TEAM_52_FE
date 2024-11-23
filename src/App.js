@@ -56,7 +56,6 @@ export default function App() {
         <Route path={ROUTES_PATH_RECOMMENDED_GOALS} element={<RecommandedGoals />} />
         <Route path={`${ROUTES_PATH_GOAL}/:id`} element={<Goal />} />
         <Route path={`${ROUTES_PATH_GOAL_CONSTELLATION}/:id`} element={<GoalConstellation />} />
-        <Route path={`${ROUTES_PATH_QUEST}/:id`} element={<Quest />} />
         <Route path={ROUTES_PATH_SEARCH} element={<Search />} />
       </Routes>
     </BrowserRouter>

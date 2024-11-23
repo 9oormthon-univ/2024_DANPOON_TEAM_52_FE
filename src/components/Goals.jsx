@@ -46,7 +46,7 @@ export default function Goals({ goals, loading, option, onClick }) {
                 onClick={
                   onClick
                     ? onClick
-                    : () => navigate(`${ROUTES_PATH_QUEST}/${item.id}`)
+                    : () => navigate(`${ROUTES_PATH_GOAL}/${item.id}`)
                 }
               />
             ))}
