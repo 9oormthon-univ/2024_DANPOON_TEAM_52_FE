@@ -9,7 +9,7 @@ export function useEvents() {
       title: "Test",
     },
   ]);
-  const questData = ["2024-11-22", "2024-11-24"]
+  const questData = []
   const { getDatesInRange } = useDateRange(); // 범위 계산 로직 사용
 
   const renderDotsForDate = (tileDate) => {

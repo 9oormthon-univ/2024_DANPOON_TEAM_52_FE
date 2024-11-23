@@ -10,9 +10,9 @@ import * as S from "./styled"
 import styled from "styled-components"
 import { DatePicker } from "antd"
 import { useDateRange } from "../../../hooks/useDateRange"
-import { useEvents } from "../../../hooks/useEvents"
 import StyledSwitch from "../../../components/Switch"
-import {Text} from "../../../components/Typo"
+import { Text } from "../../../components/Typo"
+
 const DatePickerWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -20,6 +20,7 @@ const DatePickerWrapper = styled.div`
   gap: 10px;
   margin-top: 20px;
 `
+
 const DateRangeWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -27,12 +28,13 @@ const DateRangeWrapper = styled.div`
   align-items: center;
   gap: 5px;
 `
+
 const DateDivide = styled.div`
   border: none;
   color: white;
 `
 
-const AddCareerPage = ({ setIsModalOpen }) => {
+const AddCareerPage = ({ setIsModalOpen, onAddCareer }) => {
   const categories = [
     { id: 1, name: "학력" },
     { id: 2, name: "자격·어학·수상" },
@@ -51,8 +53,9 @@ const AddCareerPage = ({ setIsModalOpen }) => {
   })
 
   const { startDate, setStartDate, endDate, setEndDate } = useDateRange()
-  const { setEvents } = useEvents()
-
+  const handleAddCareer = (newCareer) => {
+    setItems((prevItems) => [...prevItems, newCareer]);
+  };
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
   }
@@ -66,10 +69,6 @@ const AddCareerPage = ({ setIsModalOpen }) => {
     return `/categories/category${id}.png` // 이미지 경로를 동적으로 생성
   }
 
-  const handleChecked = (event) => {
-    setIsSingleDate(event.target.checked)
-  }
-
   const onClickAddCareer = () => {
     if (!careerName || !selectedCategory.id || !startDate || !endDate) {
       alert("모든 항목을 입력해주세요.")
@@ -77,19 +76,20 @@ const AddCareerPage = ({ setIsModalOpen }) => {
     }
 
     const newCareer = {
-      categoryId: selectedCategory.id,
-      title: careerName,
+      category: selectedCategory.id,
+      itemName: careerName,
       detail,
       startDate,
       endDate,
     }
-    console.log(newCareer)
-    // 새로운 이벤트 추가
-    setEvents((prev) => [...prev, newCareer])
+
+    // 부모 컴포넌트의 업데이트 함수 호출
+    onAddCareer(newCareer)
 
     // 모달 닫기
     setIsModalOpen(false)
   }
+
   return (
     <ModalOverlay>
       <ModalContent onClick={(e) => e.stopPropagation()}>
@@ -123,28 +123,22 @@ const AddCareerPage = ({ setIsModalOpen }) => {
             ))}
           </S.DropdownMenu>
         </S.DropdownWrapper>
-        <div style={{display:"flex", justifyContent:"space-between"}}>
-        <Text>하루종일</Text>
-        <StyledSwitch onChange={(event)=>{setIsSingleDate(event)}}/>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Text>하루종일</Text>
+          <StyledSwitch onChange={(checked) => setIsSingleDate(checked)} />
         </div>
         <ModalInput
-          style={{
-            height: "40px",
-          }}
+          style={{ height: "40px" }}
           placeholder="활동명"
           value={careerName}
           onChange={(e) => setCareerName(e.target.value)}
         />
-
         <ModalInput
-          style={{
-            height: "40px",
-          }}
+          style={{ height: "40px" }}
           placeholder="세부사항"
           value={detail}
           onChange={(e) => setDetail(e.target.value)}
         />
-
         <DatePickerWrapper>
           {isSingleDate ? (
             <DatePicker
@@ -155,10 +149,10 @@ const AddCareerPage = ({ setIsModalOpen }) => {
                 color: "white",
               }}
               placeholder="날짜"
-              onChange={(event) => {
-                const date = new Date(event)
-                setStartDate(date.toLocaleDateString("en-CA").split("T")[0])
-                setEndDate(date.toLocaleDateString("en-CA").split("T")[0])
+              onChange={(date) => {
+                const formattedDate = date.format("YYYY-MM-DD")
+                setStartDate(formattedDate)
+                setEndDate(formattedDate)
               }}
               format="YYYY-MM-DD"
             />
@@ -171,10 +165,9 @@ const AddCareerPage = ({ setIsModalOpen }) => {
                   border: "none",
                   color: "white",
                 }}
-                onChange={(event) => {
-                  const date = new Date(event)
-                  setStartDate(date.toLocaleDateString("en-CA").split("T")[0])
-                }}
+                placeholder="시작 날짜"
+                onChange={(date) => setStartDate(date.format("YYYY-MM-DD"))}
+                format="YYYY-MM-DD"
               />
               <DateDivide>~</DateDivide>
               <DatePicker
@@ -184,15 +177,13 @@ const AddCareerPage = ({ setIsModalOpen }) => {
                   border: "none",
                   color: "white",
                 }}
-                onChange={(event) => {
-                  const date = new Date(event)
-                  setEndDate(date.toLocaleDateString("en-CA").split("T")[0])
-                }}
+                placeholder="종료 날짜"
+                onChange={(date) => setEndDate(date.format("YYYY-MM-DD"))}
+                format="YYYY-MM-DD"
               />
             </DateRangeWrapper>
           )}
         </DatePickerWrapper>
-
         <ModalButtonGroup>
           <ModalButton onClick={() => setIsModalOpen(false)}>취소</ModalButton>
           <ModalButton onClick={onClickAddCareer}>추가</ModalButton>

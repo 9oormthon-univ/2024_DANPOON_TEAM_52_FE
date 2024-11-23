@@ -15,8 +15,11 @@ import StyledSwitch from "../../../components/Switch"
 import { useNavigate } from "react-router-dom"
 import { useState } from "react"
 import NicknamePage from "../Nickname/Nickname"
+import { useRecoilValue } from "recoil"
+import userAtom from "../../../store/atoms/user"
 const SettingPage = () => {
   //별명변경 모달
+  const userAPIData = useRecoilValue(userAtom)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const userData = {
@@ -29,12 +32,12 @@ const SettingPage = () => {
       <BackwardButton onClick={()=>{navigate('/mypage')}}/>
       <Group>
         <Title>환경설정</Title>
-        <Profile src="/profileimg.png" />
+        <Profile src={userAPIData.img} />
       </Group>
       <SettingItemWrapper>
         <SettingItem>
           <ItemName>별명</ItemName>
-          <Content>{userData.userName}</Content>
+          <Content>{userAPIData.nickname}</Content>
           <Option onClick={()=>{
             setIsModalOpen(true);
           }}>변경</Option>
