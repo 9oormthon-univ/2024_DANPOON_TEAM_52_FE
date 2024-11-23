@@ -6,7 +6,12 @@ export const apiClient = axios.create();
 export function ApiClientSetting() {
   apiClient.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
   apiClient.defaults.headers.common["Content-Type"] = "application/json";
-  apiClient.defaults.headers.common.token = `${window.localStorage.getItem(AUTH_ACCESS_TOKEN)}`;
+
+  apiClient.interceptors.request.use(config => {
+    if (config.url !== '/auth/kakao')
+      config.headers.Authorization = `${window.localStorage.getItem(AUTH_ACCESS_TOKEN)}`;
+    return config;
+  })
 
   apiClient.interceptors.response.use(
     (response) => {
