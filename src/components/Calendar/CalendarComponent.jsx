@@ -31,7 +31,6 @@ const CalendarComponent = ({
         }}
       />
       <AddScheduleButton onClick={() => setIsModalOpen(true)}>+</AddScheduleButton>
-
       <TodayMessage events={events} />
       <Legend />
     </>

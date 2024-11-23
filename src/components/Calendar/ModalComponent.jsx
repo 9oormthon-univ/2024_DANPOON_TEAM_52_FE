@@ -5,8 +5,9 @@ import {
   ModalInput,
   ModalButtonGroup,
   ModalButton,
-  SingleCheckbox,
 } from "../../pages/Calendar/styled"
+import StyledSwitch from "../Switch"
+import { Text } from "../Typo"
 import { DatePicker } from "antd"
 import { useState } from "react"
 import styled from "styled-components"
@@ -15,7 +16,6 @@ const DatePickerWrapper = styled.div`
   width: 100%;
   justify-content: center;
   gap: 10px;
-  margin-top: 20px;
 `
 const DateRangeWrapper = styled.div`
   width: 100%;
@@ -54,6 +54,10 @@ const ModalComponent = ({
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <h3>일정 추가하기</h3>
         <ModalInput onChange={(e) => setTitle(e.target.value)} />
+        <div style={{display:"flex", justifyContent:"space-between"}}>
+        <Text>하루종일</Text>
+        <StyledSwitch onChange={(event)=>{setIsSingleDate(event)}}/>
+        </div>
         <DatePickerWrapper>
           {isSingleDate ? (
             <DatePicker
@@ -105,17 +109,6 @@ const ModalComponent = ({
             </DateRangeWrapper>
           )}
         </DatePickerWrapper>
-        <SingleCheckbox
-          style={{
-            position: "relative",
-            top: "10px",
-            right: "40%",
-            color: "white",
-          }}
-          onChange={handleChecked}
-        >
-          단일
-        </SingleCheckbox>
         <ModalButtonGroup>
           <ModalButton onClick={onClose}>취소</ModalButton>
           <ModalButton
