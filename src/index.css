@@ -246,7 +246,9 @@ body {
   .react-calendar__navigation__arrow, react-calendar__navigation__prev-button {
   background: none !important;
 }
-
+.react-calendar__navigation__label{
+  pointer-events: none !important; /* 클릭 막기 */
+}
 .react-calendar__tile, react-calendar__month-view__days__day{
   aspect-ratio: 1 / 1 !important;
   padding: 0 !important;

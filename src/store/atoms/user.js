@@ -1,3 +1,4 @@
+import { atom } from "recoil";
 const userAtom = atom({
   key: 'userAtom',
   default: {
@@ -5,3 +6,5 @@ const userAtom = atom({
     image_url: ""
   },
 });
+
+export default userAtom;
