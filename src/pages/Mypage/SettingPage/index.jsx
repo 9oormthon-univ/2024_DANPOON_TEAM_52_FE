@@ -51,6 +51,15 @@ const SettingPage = () => {
             }}>변경</Option>
         </SettingItem>
         <SettingItem>
+          <ItemName>맞춤형 지침</ItemName>
+          <div style={{display:"flex", flexDirection:"column"}}>
+          <Content style={{fontSize:"11px"}}>입력시 목표 추천에 도움이 돼요</Content>
+          </div>
+          <Option onClick={()=>{
+            navigate('/custom')
+            }}>입력</Option>
+        </SettingItem>
+        <SettingItem>
           <ItemName>알림설정</ItemName>
           <StyledSwitch />
         </SettingItem>
