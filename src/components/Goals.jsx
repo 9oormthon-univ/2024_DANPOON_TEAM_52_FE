@@ -24,7 +24,7 @@ export const Container = styled(ScrollContainer)`
   }
 `
 
-export default function Goals({ goals, loading }) {
+export default function Goals({ goals, loading, option, onClick }) {
   const navigate = useNavigate()
   return (
     <ShadowContainer>
@@ -42,8 +42,12 @@ export default function Goals({ goals, loading }) {
                 key={index}
                 icon={item.icon}
                 title={item.title}
-                label={item.label}
-                onClick={() => navigate(`${ROUTES_PATH_GOAL}/${item.id}`)}
+                label={option?.labelHidden ? "" : item.label}
+                onClick={
+                  onClick
+                    ? onClick
+                    : () => navigate(`${ROUTES_PATH_QUEST}/${item.id}`)
+                }
               />
             ))}
           </>

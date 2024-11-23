@@ -12,8 +12,10 @@ import {
   ROUTES_PATH_SETTING,
   ROUTES_PATH_CUSTOMGUIDE,
   ROUTES_PATH_RECOMMENDED_GOALS,
-  ROUTES_PATH_GOAL,
+  ROUTES_PATH_QUEST,
   ROUTES_PATH_CALENDAR,
+  ROUTES_PATH_SEARCH
+  ROUTES_PATH_GOAL,
   ROUTES_PATH_GOAL_CONSTELLATION
 } from "./constants/routes"
 import { ApiClientSetting } from "./apis/apiClient"
@@ -28,6 +30,7 @@ import Kakao from "./pages/Login/Kakao"
 import Goal from "./pages/Goal"
 import GoalConstellation from "./pages/Goal/Constellation"
 import CalendarPage from "./pages/Calendar"
+import Search from "./pages/Search"
 import Mypage from "./pages/Mypage"
 import SettingPage from "./pages/Mypage/SettingPage"
 import CustomGuidePage from "./pages/Mypage/CustomGuide"
@@ -55,6 +58,7 @@ export default function App() {
         <Route path={`${ROUTES_PATH_GOAL}/:id`} element={<Goal />} />
         <Route path={`${ROUTES_PATH_GOAL_CONSTELLATION}/:id`} element={<GoalConstellation />} />
         <Route path={`${ROUTES_PATH_QUEST}/:id`} element={<Quest />} />
+        <Route path={ROUTES_PATH_SEARCH} element={<Search />} />
       </Routes>
     </BrowserRouter>
   )
