@@ -11,6 +11,7 @@ const ListItemContainer = styled.div`
   border-radius: 10px;
   backdrop-filter: blur(2px);
   padding: 20px 27px;
+  cursor: pointer;
 `
 
 const Icon = styled.span`

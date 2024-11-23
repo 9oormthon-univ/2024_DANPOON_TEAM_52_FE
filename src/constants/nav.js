@@ -1,5 +1,6 @@
 import {
   ROUTES_PATH_CALENDAR,
+  ROUTES_PATH_GOAL_CONSTELLATION,
   ROUTES_PATH_HOME,
   ROUTES_PATH_MYPAGE,
   ROUTES_PATH_SEARCH
@@ -13,7 +14,7 @@ import { ReactComponent as UserIcon } from "../svgs/User.svg"
 export const NAVS = [
   {
     title: "홈",
-    src: ROUTES_PATH_HOME,
+    src: [ROUTES_PATH_HOME, ROUTES_PATH_GOAL_CONSTELLATION],
     icon: {
       default: <HomeIcon fill="transparent" stroke="#AAA" />,
       highlight: <HomeIcon fill="#FFF" stroke="#FFF" />
@@ -21,7 +22,7 @@ export const NAVS = [
   },
   {
     title: "캘린더",
-    src: ROUTES_PATH_CALENDAR,
+    src: [ROUTES_PATH_CALENDAR],
     icon: {
       default: <CalendarIcon fill="transparent" stroke="#AAA" />,
       highlight: <CalendarIcon fill="#FFF" stroke="#FFF" />
@@ -29,7 +30,7 @@ export const NAVS = [
   },
   {
     title: "탐색",
-    src: ROUTES_PATH_SEARCH,
+    src: [ROUTES_PATH_SEARCH],
     icon: {
       default: <SearchIcon fill="transparent" stroke="#AAA" />,
       highlight: <SearchIcon fill="transparent" stroke="#FFF" />
@@ -37,7 +38,7 @@ export const NAVS = [
   },
   {
     title: "마이페이지",
-    src: ROUTES_PATH_MYPAGE,
+    src: [ROUTES_PATH_MYPAGE],
     icon: {
       default: <UserIcon fill="transparent" stroke="#AAA" />,
       highlight: <UserIcon fill="#FFF" stroke="#FFF" />

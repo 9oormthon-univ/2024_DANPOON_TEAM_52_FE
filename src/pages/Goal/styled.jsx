@@ -2,7 +2,7 @@ import styled from "styled-components"
 import TypoComponent from "../../components/Typo"
 import Button from "../../components/Button"
 
-export const Container = styled.form`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;

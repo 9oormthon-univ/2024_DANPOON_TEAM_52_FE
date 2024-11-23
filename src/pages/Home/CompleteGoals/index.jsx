@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom"
 import Constellation from "../../../components/Constellation"
 import StarBackground from "../../../components/StarBackground"
 import {
@@ -9,24 +10,26 @@ import {
   GoalTitle,
   ConsterllationContainer,
 } from "./styled"
+import { ROUTES_PATH_GOAL_CONSTELLATION } from "../../../constants/routes"
 
 export default function CompleteGoals() {
+  const navigate = useNavigate()
+
+  const onClickConstellation = (id) => {
+    navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${id}`)
+  }
   return (
     <ShadowContainer>
       <Container>
-        {new Array(10).fill().map((_, index) => (
+        {new Array(20).fill().map((_, index) => (
           <MonthContainer key={index}>
             <Month>11월</Month>
-            <GoalContainer direction="left">
-              <ConsterllationContainer>
+            <GoalContainer direction={index % 2 ? "left" : "right"}>
+              <ConsterllationContainer
+                onClick={() => onClickConstellation(index)}
+              >
                 <GoalTitle>🏆 마케팅 아이디어 공모전 동상</GoalTitle>
-                <Constellation id={index * 2 + 0} starCount={4} />
-              </ConsterllationContainer>
-            </GoalContainer>
-            <GoalContainer direction="right">
-              <ConsterllationContainer>
-                <GoalTitle>🏫 마케팅 교육 세미나</GoalTitle>
-                <Constellation id={index * 2 + 1} starCount={4} />
+                <Constellation id={index} starCount={4} />
               </ConsterllationContainer>
             </GoalContainer>
           </MonthContainer>

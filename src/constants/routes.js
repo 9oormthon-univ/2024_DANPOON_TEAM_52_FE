@@ -12,4 +12,5 @@ export const ROUTES_PATH_MYPAGE = "/mypage"
 export const ROUTES_PATH_SETTING = "/setting"
 export const ROUTES_PATH_CUSTOMGUIDE = "/custom"
 export const ROUTES_PATH_RECOMMENDED_GOALS = "/recommended-goals"
-export const ROUTES_PATH_QUEST = '/quest'
+export const ROUTES_PATH_GOAL = '/goal'
+export const ROUTES_PATH_GOAL_CONSTELLATION = '/goal/constellation'
