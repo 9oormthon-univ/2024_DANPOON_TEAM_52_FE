@@ -10,6 +10,7 @@ import BaseLayout from "../../../components/BaseLayout"
 import BackwardButton from "../../../components/BackwardButton"
 import ConstellationCard from "../../../components/ConstellationCard"
 import ShadowContainer from "../../../components/ShadowContainer"
+import { ReactComponent as CheckSVG } from "../../../svgs/Check.svg"
 
 export default function GoalConstellation() {
   const goal = {
@@ -57,7 +58,10 @@ export default function GoalConstellation() {
           <ScrollContainer>
             <QuestsContainer>
               {goal.quests.map((quest) => (
-                <Qeust key={quest.id}>{quest.title}</Qeust>
+                <Qeust key={quest.id}>
+                  <CheckSVG />
+                  {quest.title}
+                </Qeust>
               ))}
             </QuestsContainer>
           </ScrollContainer>

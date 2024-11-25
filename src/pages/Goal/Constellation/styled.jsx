@@ -16,10 +16,12 @@ export const HorizontalContainer = styled.div`
 `
 
 export const StyledText = styled(Text)`
-  color: white;
-  font-size: 11px;
-  font-weight: 400;
-  margin-left: 10px;
+  &&& {
+    color: white;
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0px 0px 0px 10px;
+  }
 `
 
 export const ScrollContainer = styled(ScrollContainerComponent)`
@@ -36,7 +38,7 @@ export const QuestsContainer = styled.ul`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 7px;
+  gap: 10px;
   overflow: hidden;
 `
 
