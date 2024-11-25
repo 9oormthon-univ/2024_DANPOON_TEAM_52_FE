@@ -45,17 +45,18 @@ const Ul = styled.ul`
   margin-left: 20px;
 `
 
-export default function GoalCard() {
+export default function GoalCard({ goal }) {
   return (
     <Container>
       <LabelContainer>
-        <Icon>🏆</Icon>
-        <Label>자격·어학·수상</Label>
+        <Icon>{goal.icon}</Icon>
+        <Label>{goal.category}</Label>
       </LabelContainer>
-      <Title>희망 기업 인턴 합격하기</Title>
+      <Title>{goal.title}</Title>
       <Ul>
-        <li>직무 관련 경험을 얻을 수 있어요</li>
-        <li>해당 분야의 78% 사용자가 설정한 목표예요</li>
+        {goal.description?.map((quest) => (
+          <li key={quest}>{quest}</li>
+        ))}
       </Ul>
     </Container>
   )

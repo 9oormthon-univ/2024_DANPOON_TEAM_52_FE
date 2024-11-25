@@ -3,7 +3,7 @@ import { useSearchParams, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { reqLogin } from "../../../apis/auth"
 import { AUTH_ACCESS_TOKEN, AUTH_REFRESH_TOKEN } from "../../../constants/auth"
-import { ROUTES_PATH_ROOT } from "../../../constants/routes"
+import { ROUTES_PATH_ONBOARD } from "../../../constants/routes"
 
 export default function Kakao() {
   const navigate = useNavigate()
@@ -24,7 +24,7 @@ export default function Kakao() {
         res.data.data.auth_token.refresh_token
       )
       localStorage.setItem("nickname", res.data.data.nickname)
-      navigate(ROUTES_PATH_ROOT)
+      navigate(ROUTES_PATH_ONBOARD)
     } else {
       localStorage.removeItem(AUTH_ACCESS_TOKEN)
       localStorage.removeItem(AUTH_REFRESH_TOKEN)

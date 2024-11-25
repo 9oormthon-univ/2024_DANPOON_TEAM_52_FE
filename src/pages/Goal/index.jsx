@@ -15,76 +15,27 @@ import { Flex } from "antd"
 import Button from "../../components/Button"
 import { ReactComponent as PlusSVG } from "../../svgs/plus.svg"
 import CheckQuests from "../../components/CheckQuests"
+import { useRecoilState } from "recoil"
+import goalAtom from "../../store/atoms/goal"
+import { useState } from "react"
+import { useParams } from "react-router-dom"
 
 export default function Quest() {
-  const goals = {
-    id: 1,
-    title: "희망 기업 인턴 합격하기",
-    icon: "🚀",
-    category: "경험·활동·교육",
-    quests: [
-      {
-        id: 1,
-        title: "희망 기업 인턴 공고 확인하기",
-        isDone: true,
-      },
-      {
-        id: 2,
-        title: "이력서 작성하기",
-        isDone: true,
-      },
-      {
-        id: 3,
-        title: "자기소개서 작성하기",
-        isDone: false,
-      },
-      {
-        id: 4,
-        title: "면접 준비하기",
-        isDone: false,
-      },
-      {
-        id: 5,
-        title: "인턴 면접 보기",
-        isDone: false,
-      },
-      {
-        id: 6,
-        title: "인턴 합격하기",
-        isDone: false,
-      },
-      {
-        id: 7,
-        title: "인턴 시작하기",
-        isDone: false,
-      },
-      {
-        id: 8,
-        title: "인턴 끝내기",
-        isDone: false,
-      },
-      {
-        id: 9,
-        title: "인턴 후기 작성하기",
-        isDone: false,
-      },
-      {
-        id: 10,
-        title: "인턴 후기 제출하기",
-        isDone: false,
-      },
-    ],
-  }
+  const { id } = useParams()
+  const [goals, setGoals] = useRecoilState(goalAtom)
+  const [quests, setQuests] = useState([])
+  console.log(id)
+  const [goal, setGoal] = useState(goals[id - 1])
   return (
     <Container>
       <Header>
         <BackwardButton />
         <HeaderFlex>
           <Flex gap={10} align="end">
-            <Icon>{goals.icon}</Icon>
-            <Label>{goals.category}</Label>
+            <Icon>{goal.icon}</Icon>
+            <Label>{goal.category}</Label>
           </Flex>
-          <Title>{goals.title}</Title>
+          <Title>{goal.title}</Title>
         </HeaderFlex>
       </Header>
       <CompleteButton $variant="secondary">목표 완료</CompleteButton>
@@ -92,7 +43,7 @@ export default function Quest() {
         해당 목표를 위한 <Highlight>퀘스트</Highlight>
       </Description>
       <QuestContainer>
-        <CheckQuests quests={goals.quests} />
+        <CheckQuests quests={goal.quests} />
       </QuestContainer>
       <Button $variant="primary">
         <PlusSVG stroke="#000" /> 퀘스트 추가하기

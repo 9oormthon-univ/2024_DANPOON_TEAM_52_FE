@@ -41,10 +41,11 @@ export default function ProgressGoals() {
   const addGoal = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
+    console.log(CATEGORIES, selectedGoal)
     const data = {
       id: goals.length + 1,
-      // icon: CATEGORIES.find((v) => v.icon === formData.get("category")).icon,
-      category: formData.get("category"),
+      icon: selectedGoal.icon,
+      category: selectedGoal.category,
       title: formData.get("title"),
       quests: [],
     }

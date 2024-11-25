@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { useState } from "react"
 import { jobData } from "../../constants/data"
+
 export default function InfoPage() {
   const { step, paramsInterestItem, updateStep } = useStepNavigation()
   const navigate = useNavigate()
-  const [jobData, setJobData] = useState(null);
+  const [jobData, setJobData] = useState(null)
   const onClickNext = (data) => {
     //jobItem주기
     updateStep("2", data)
@@ -21,6 +22,7 @@ export default function InfoPage() {
       }
     }
   }
+  return (
     <>
       {step === "1" && (
         <SetJob
@@ -35,4 +37,5 @@ export default function InfoPage() {
         ></SetInterest>
       )}
     </>
+  )
 }

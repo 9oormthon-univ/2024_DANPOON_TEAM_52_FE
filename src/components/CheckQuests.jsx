@@ -40,7 +40,7 @@ export default function CheckQuests({ quests, loading }) {
                 key={index}
                 name={"quests"}
                 value={item.id}
-                defaultChecked={item.isDone}
+                defaultChecked={item.isComplete}
               >
                 {item.title}
               </CheckListItem>
