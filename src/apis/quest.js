@@ -13,8 +13,12 @@ export const reqDeleteQuest = async (goalId, questId) => {
   return await apiClient.delete(`/quest/${questId}/goal/${goalId}`);
 }
 
-export const reqPatchQuest = async (data) => {
-  return await apiClient.patch(`/quest`, data);
+export const reqPatchQuest = async (id, data) => {
+  // return await apiClient.patch(`/quest/${id}`, data);
+  return {
+    status: 200,
+    data: {}
+  }
 }
 
 export const reqGetRecommendQuest = async () => {

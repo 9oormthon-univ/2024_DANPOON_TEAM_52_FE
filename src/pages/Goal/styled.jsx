@@ -51,9 +51,13 @@ export const CompleteButton = styled(Button)`
 
 export const Description = styled(TypoComponent.Text)`
   &&& {
+    display: flex;
+    width: 100%;
+    gap: 6px;
     font-size: 16px;
     font-weight: 500;
-    margin-bottom: 14px;
+    margin: 0;
+    height: fit-content;
   }
 `
 
@@ -61,6 +65,16 @@ export const Highlight = styled(TypoComponent.Highlight)`
   font-weight: 500;
   font-size: 16px;
   font-weight: 500;
+`
+
+export const RightText = styled(TypoComponent.Text)`
+  &&& {
+    flex: 1;
+    text-align: right;
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0;
+  }
 `
 
 export const QuestContainer = styled.div`
