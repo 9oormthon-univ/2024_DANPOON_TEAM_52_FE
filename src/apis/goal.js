@@ -10,12 +10,30 @@ export const reqGetGoals = async (params) => {
   };
 }
 
-export const reqPutGoal = async (data) => {
-  return await apiClient.put("/goal", data);
+export const reqPostGoal = async (data) => {
+  // return await apiClient.post("/goal", data);
+  return {
+    status: 201,
+    data: {
+      ...data,
+      id: new Date().getTime(),
+    }
+  }
+}
+
+export const reqPatchGoal = async (data) => {
+  // return await apiClient.patch("/goal", data);
+  return {
+    status: 200,
+    data
+  }
 }
 
 export const reqDeleteGoal = async (id) => {
-  return await apiClient.delete(`/goal/${id}`);
+  // return await apiClient.delete(`/goal/${id}`);
+  return {
+    status: 200,
+  }
 }
 
 export const reqGetRecommendGoal = async () => {

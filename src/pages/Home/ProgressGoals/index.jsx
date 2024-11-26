@@ -23,7 +23,12 @@ import TextInput from "../../../components/TextInput"
 import Button from "../../../components/Button"
 import { useRecoilState } from "recoil"
 import { myGoalsAtom } from "../../../store/atoms/goal"
-import { reqGetGoals } from "../../../apis/goal"
+import {
+  reqGetGoals,
+  reqPostGoal,
+  reqPatchGoal,
+  reqDeleteGoal,
+} from "../../../apis/goal"
 
 export default function ProgressGoals() {
   const navigate = useNavigate()
@@ -45,14 +50,26 @@ export default function ProgressGoals() {
     openModal()
   }
   const onGoalDelete = (goal) => {
+    const res = reqDeleteGoal(goal.id)
+    if (res.status === 200) {
+      alert("목표가 삭제되었습니다.")
+      setGoals((prev) => prev.filter((v) => v.id !== goal.id))
+    } else alert("목표 삭제에 실패했습니다.")
     setGoals((prev) => prev.filter((v) => v.id !== goal.id))
   }
-  const onGoalSave = () => {
-    setGoals((prev) => {
-      const idx = prev.findIndex((v) => v.id === selectedGoal.id)
-      if (idx === -1) return [...prev, { ...selectedGoal, id: Date.now() }]
-      return prev.map((v, i) => (i === idx ? selectedGoal : v))
-    })
+  const onGoalSave = async () => {
+    const goalIdx = goals.findIndex((v) => v.id === selectedGoal.id)
+    const isEdit = goalIdx !== -1
+    const apiFunc = isEdit ? reqPatchGoal : reqPostGoal
+    const res = await apiFunc(selectedGoal)
+    if (res.status === 201 || res.status === 200) {
+      setGoals((prev) => {
+        if (isEdit) return prev.map((v, i) => (i === goalIdx ? res.data : v))
+        return [...prev, res.data]
+      })
+    } else {
+      alert("목표 저장에 실패했습니다.")
+    }
     closeModal()
   }
   const goRecommendedGoals = () => {
@@ -60,14 +77,10 @@ export default function ProgressGoals() {
   }
   const getGoals = async () => {
     setLoading(true)
-    try {
-      const res = await reqGetGoals()
-      setGoals(res.data)
-    } catch (e) {
-      console.error(e)
-    } finally {
-      setLoading(false)
-    }
+    const res = await reqGetGoals()
+    if (res.status === 200) setGoals(res.data)
+    else alert("목표 불러오기에 실패했습니다.")
+    setLoading(false)
   }
   useEffect(() => {
     getGoals()
@@ -120,7 +133,7 @@ export default function ProgressGoals() {
               취소
             </StyledButton>
             <StyledButton $variant="primary" onClick={onGoalSave}>
-              추가
+              {selectedGoal.id === -1 ? "추가" : "수정"}
             </StyledButton>
           </ButtonContainer>
         </ModalContent>
