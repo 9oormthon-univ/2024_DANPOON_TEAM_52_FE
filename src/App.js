@@ -24,7 +24,7 @@ import Splash from "./pages/Splash"
 import InfoPage from "./pages/Info"
 import OnBoardingPage from "./pages/Onboarding"
 import Home from "./pages/Home"
-import RecommandedGoals from "./pages/RecommandedGoals"
+import RecommendedGoals from "./pages/RecommendedGoals"
 import Kakao from "./pages/Login/Kakao"
 import Goal from "./pages/Goal"
 import GoalConstellation from "./pages/Goal/Constellation"
@@ -48,7 +48,7 @@ export default function App() {
           <Route path={ROUTES_PATH_HOME} element={<Home />} />
           <Route
             path={ROUTES_PATH_ROOT}
-            element={localStorage.getItem("visited") ? (<Navigate to={ROUTES_PATH_HOME}/>) : (<Navigate to={ROUTES_PATH_ONBOARD}/>)}
+            element={localStorage.getItem("visited") ? (<Navigate to={ROUTES_PATH_HOME} />) : (<Navigate to={ROUTES_PATH_ONBOARD} />)}
           />
           <Route path={ROUTES_PATH_INFO} element={<InfoPage />} />
           <Route path={ROUTES_PATH_ONBOARD} element={<OnBoardingPage />} />
@@ -56,7 +56,7 @@ export default function App() {
           <Route path={ROUTES_PATH_MYPAGE} element={<Mypage />} />
           <Route path={ROUTES_PATH_SETTING} element={<SettingPage />} />
           <Route path={ROUTES_PATH_CUSTOMGUIDE} element={<CustomGuidePage />} />
-          <Route path={ROUTES_PATH_RECOMMENDED_GOALS} element={<RecommandedGoals />} />
+          <Route path={ROUTES_PATH_RECOMMENDED_GOALS} element={<RecommendedGoals />} />
           <Route path={`${ROUTES_PATH_GOAL}/:id`} element={<Goal />} />
           <Route path={`${ROUTES_PATH_GOAL_CONSTELLATION}/:id`} element={<GoalConstellation />} />
           <Route path={ROUTES_PATH_SEARCH} element={<Search />} />

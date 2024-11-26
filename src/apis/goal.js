@@ -1,5 +1,5 @@
 import apiClient from "./apiClient";
-import { GOALS } from "../constants/dummy"
+import { GOALS, RECOMMENDED_GOALS, RECOMMENDED_GOALS2 } from "../constants/dummy"
 
 export const reqGetGoals = async (params) => {
   const searchParams = new URLSearchParams(params);
@@ -36,6 +36,10 @@ export const reqDeleteGoal = async (id) => {
   }
 }
 
-export const reqGetRecommendGoal = async () => {
-  return await apiClient.get(`/goal/recommend`);
+export const reqGetRecommendGoals = async () => {
+  // return await apiClient.get(`/goal/recommend`);
+  return {
+    status: 200,
+    data: Math.random() > 0.5 ? RECOMMENDED_GOALS : RECOMMENDED_GOALS2
+  }
 }
