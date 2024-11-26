@@ -1,9 +1,6 @@
 import { atom } from 'recoil';
-import { GOALS } from "../../constants/dummy"
 
-const goalAtom = atom({
-  key: 'goalAtom',
-  default: GOALS,
+export const myGoalsAtom = atom({
+  key: 'goalsAtom',
+  default: [],
 });
-
-export default goalAtom;

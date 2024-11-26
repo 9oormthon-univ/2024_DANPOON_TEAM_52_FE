@@ -1,8 +1,13 @@
 import apiClient from "./apiClient";
+import { GOALS } from "../constants/dummy"
 
 export const reqGetGoals = async (params) => {
   const searchParams = new URLSearchParams(params);
-  return await apiClient.get(`/goal?${searchParams}`);
+  // return await apiClient.get(`/goal?${searchParams}`);
+  return {
+    status: 200,
+    data: GOALS
+  };
 }
 
 export const reqPutGoal = async (data) => {

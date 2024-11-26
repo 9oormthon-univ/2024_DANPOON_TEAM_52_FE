@@ -16,13 +16,13 @@ import Button from "../../components/Button"
 import { ReactComponent as PlusSVG } from "../../svgs/plus.svg"
 import CheckQuests from "../../components/CheckQuests"
 import { useRecoilState } from "recoil"
-import goalAtom from "../../store/atoms/goal"
+import { myGoalsAtom } from "../../store/atoms/goal"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 
 export default function Quest() {
   const { id } = useParams()
-  const [goals, setGoals] = useRecoilState(goalAtom)
+  const [goals, setGoals] = useRecoilState(myGoalsAtom)
   const [quests, setQuests] = useState([])
   console.log(id)
   const [goal, setGoal] = useState(goals[id - 1])

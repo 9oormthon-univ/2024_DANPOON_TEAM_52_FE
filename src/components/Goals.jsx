@@ -1,11 +1,7 @@
 import { styled } from "styled-components"
 import ScrollContainer from "./ScrollContainer"
 import ListItem, { ListItemSkeleton } from "./ListItem"
-import { useNavigate } from "react-router-dom"
-import { ROUTES_PATH_GOAL } from "../constants/routes"
 import ShadowContainer from "./ShadowContainer"
-import { useRecoilState } from "recoil"
-import goalAtom from "../store/atoms/goal"
 
 const Container = styled(ScrollContainer)`
   display: flex;
@@ -37,12 +33,14 @@ const Placeholder = styled.div`
   line-height: 1.5;
 `
 
-export default function Goals({ loading, option, onEdit }) {
-  const navigate = useNavigate()
-  const [goals, setGoals] = useRecoilState(goalAtom)
-  const onDelete = (id) => {
-    setGoals((prev) => prev.filter((v) => v.id !== id))
-  }
+export default function Goals({
+  goals,
+  loading,
+  option,
+  onClick,
+  onEdit,
+  onDelete,
+}) {
   return (
     <ShadowContainer>
       <Container>
@@ -54,32 +52,33 @@ export default function Goals({ loading, option, onEdit }) {
           </>
         ) : (
           <>
-            {goals.length === 0 && (
+            {!goals?.length ? (
               <Placeholder>
                 목표를 추가하고
                 <br />
                 퀘스트를 진행하여 달성해요
               </Placeholder>
+            ) : (
+              goals.map((item, index) => (
+                <ListItem
+                  key={index}
+                  icon={item.icon}
+                  title={item.title}
+                  label={
+                    option?.labelHidden
+                      ? ""
+                      : `${item.quests.filter((v) => v.isComplete).length}/${item.quests.length}`
+                  }
+                  onClick={() => onClick?.(item)}
+                  onEdit={() => onEdit?.(item)}
+                  onDelete={() => onDelete?.(item)}
+                  option={{
+                    deleteVisible: option?.deleteVisible,
+                    editVisible: option?.editVisible,
+                  }}
+                />
+              ))
             )}
-            {goals.map((item, index) => (
-              <ListItem
-                key={index}
-                icon={item.icon}
-                title={item.title}
-                label={
-                  option?.labelHidden
-                    ? ""
-                    : `${item.quests.filter((v) => v.isComplete).length}/${item.quests.length}`
-                }
-                onClick={() => navigate(`${ROUTES_PATH_GOAL}/${item.id}`)}
-                onEdit={() => onEdit(item)}
-                onDelete={() => onDelete(item.id)}
-                option={{
-                  deleteVisible: option?.deleteVisible,
-                  editVisible: option?.editVisible,
-                }}
-              />
-            ))}
           </>
         )}
       </Container>

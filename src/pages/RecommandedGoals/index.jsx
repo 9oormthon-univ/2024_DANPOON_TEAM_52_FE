@@ -13,14 +13,14 @@ import { ReactComponent as SwapSVG } from "../../svgs/Swap.svg"
 import { ReactComponent as PlusSVG } from "../../svgs/plus.svg"
 import GoalCard from "../../components/GoalCard"
 import { useState } from "react"
-import goalAtom from "../../store/atoms/goal"
+import { myGoalsAtom } from "../../store/atoms/goal"
 import { useRecoilState } from "recoil"
 import { useNavigate } from "react-router-dom"
 
 export default function RecommandedGoals() {
   const name = "아자아자석영"
   const navigate = useNavigate()
-  const [goal, setGoal] = useRecoilState(goalAtom)
+  const [goal, setGoal] = useRecoilState(myGoalsAtom)
   const [data, setData] = useState([
     {
       icon: "🏫",
