@@ -4,6 +4,7 @@ import { Container, Description, Title } from "./styled"
 import { TabsContent, TabsHeader } from "../../components/Tabs"
 import ProgressGoals from "./ProgressGoals"
 import CompleteGoals from "./CompleteGoals"
+import GradientBackground from "../../components/GradientBackground"
 
 export default function Home() {
   const [selectedTab, setSelectedTab] = useState(0)
@@ -20,13 +21,20 @@ export default function Home() {
     },
   ]
   return (
-    <BaseLayout>
-      <Container>
-        <Title>나의 목표</Title>
-        <Description>{tabs[selectedTab].description}</Description>
-        <TabsHeader tabs={tabs} value={selectedTab} onChange={setSelectedTab} />
-        <TabsContent tabs={tabs} value={selectedTab} />
-      </Container>
-    </BaseLayout>
+    <>
+      <BaseLayout>
+        <Container>
+          <Title>나의 목표</Title>
+          <Description>{tabs[selectedTab].description}</Description>
+          <TabsHeader
+            tabs={tabs}
+            value={selectedTab}
+            onChange={setSelectedTab}
+          />
+          <TabsContent tabs={tabs} value={selectedTab} />
+        </Container>
+      </BaseLayout>
+      <GradientBackground />
+    </>
   )
 }
