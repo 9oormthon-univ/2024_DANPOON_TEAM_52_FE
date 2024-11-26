@@ -18,31 +18,37 @@ import { reqGetRecommendGoals, reqPostGoal } from "../../apis/goal"
 import { ROUTES_PATH_HOME } from "../../constants/routes"
 import { useSetRecoilState } from "recoil"
 import { myGoalsAtom } from "../../store/atoms/goal"
+import { DEFAULT_GOAL } from "../../constants/goal"
+import GoalModal from "../../components/Modals/GoalModal"
 
 export default function RecommendedGoals() {
   const name = "아자아자석영"
   const navigate = useNavigate()
-  const setGoals = useSetRecoilState(myGoalsAtom)
   const [recommendedGoals, setRecommendedGoals] = useState([])
+  const [selectedGoal, setSelectedGoal] = useState(DEFAULT_GOAL)
+  const [open, setOpen] = useState(false)
   const [index, setIndex] = useState(0)
 
-  const addGoal = async () => {
-    const res = await reqPostGoal(recommendedGoals[index])
-    if (res.status === 201) {
-      alert("목표가 추가되었습니다.")
-      setGoals((prev) => [...prev, res.data])
-      navigate(ROUTES_PATH_HOME)
-    } else {
-      alert("목표 추가에 실패했습니다.")
-    }
+  const onSave = () => {
+    navigate(ROUTES_PATH_HOME)
   }
   const onChange = (index) => {
     setIndex(index)
+    setSelectedGoal(recommendedGoals[index])
   }
   const getRecommendedGoals = async () => {
     const res = await reqGetRecommendGoals()
-    if (res.status === 200) setRecommendedGoals(res.data)
-    else alert("추천 목표를 불러오는데 실패했습니다.")
+    if (res.status === 200) {
+      setRecommendedGoals(res.data)
+      setSelectedGoal(res.data[index])
+    } else alert("추천 목표를 불러오는데 실패했습니다.")
+  }
+  const openModal = () => {
+    setOpen(true)
+  }
+  const closeModal = () => {
+    setOpen(false)
+    setSelectedGoal(DEFAULT_GOAL)
   }
   useEffect(() => {
     getRecommendedGoals()
@@ -69,11 +75,17 @@ export default function RecommendedGoals() {
           <SwapSVG />
           목표 새로고침하기
         </Button>
-        <Button $variant="primary" onClick={addGoal}>
+        <Button $variant="primary" onClick={openModal}>
           <PlusSVG stroke="#000" />
           나의 목표에 추가하기
         </Button>
       </Flex>
+      <GoalModal
+        open={open}
+        onClose={closeModal}
+        goal={selectedGoal}
+        onSave={onSave}
+      />
     </Container>
   )
 }
