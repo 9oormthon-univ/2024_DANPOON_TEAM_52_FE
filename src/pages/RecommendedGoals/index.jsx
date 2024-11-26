@@ -39,8 +39,8 @@ export default function RecommendedGoals() {
   const getRecommendedGoals = async () => {
     const res = await reqGetRecommendGoals()
     if (res.status === 200) {
-      setRecommendedGoals(res.data)
-      setSelectedGoal(res.data[index])
+      setRecommendedGoals(res.data.map((goal) => ({ ...goal, id: -1 })))
+      setSelectedGoal({ ...res.data[index], id: -1 })
     } else alert("추천 목표를 불러오는데 실패했습니다.")
   }
   const openModal = () => {
