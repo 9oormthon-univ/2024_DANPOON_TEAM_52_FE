@@ -3,6 +3,8 @@ import Modal from "../Modal"
 import Button from "../Button"
 import Star from "../Star"
 import { ReactComponent as SwapSVG } from "../../svgs/Swap.svg"
+import { reqGetRecommendQuests } from "../../apis/quest"
+import { useState, useEffect } from "react"
 
 const ModalContent = styled.div`
   width: 270px;
@@ -101,9 +103,17 @@ const RefreshButton = styled.button`
 `
 
 export default function RecommendQuestModal({ open, onClose, text, onClick }) {
-  const getRecommendedQuests = () => {
-    // get recommended
+  const [recommendedQuests, setRecommendedQuests] = useState([])
+  const getRecommendedQuests = async () => {
+    const res = await reqGetRecommendQuests()
+    if (res.status === 200) {
+      console.log(res.data)
+      setRecommendedQuests(res.data)
+    }
   }
+  useEffect(() => {
+    getRecommendedQuests()
+  }, [])
   return (
     <Modal open={open} onClose={onClose}>
       <ModalContent>
@@ -114,16 +124,12 @@ export default function RecommendQuestModal({ open, onClose, text, onClick }) {
             <RoundedTriangle />
           </Chat>
         </StarContainer>
-        <StyledButton $variant="secondary" onClick={onClick}>
-          추천 퀘스트1
-        </StyledButton>
-        <StyledButton $variant="secondary" onClick={onClick}>
-          추천 퀘스트2
-        </StyledButton>
-        <StyledButton $variant="secondary" onClick={onClick}>
-          추천 퀘스트3
-        </StyledButton>
-        <RefreshButton>
+        {recommendedQuests.map((quest) => (
+          <StyledButton $variant="secondary" onClick={onClick}>
+            {quest.title}
+          </StyledButton>
+        ))}
+        <RefreshButton onClick={getRecommendedQuests}>
           새로고침
           <SwapSVG width={20} height={20} />
         </RefreshButton>

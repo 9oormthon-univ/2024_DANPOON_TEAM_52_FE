@@ -249,3 +249,26 @@ export const RECOMMENDED_GOALS2 = ([
     quests: [],
   }
 ])
+
+export const RECOMMENDED_QUESTS = [
+  {
+    title: "SpringMVC 인강 수강하기",
+  },
+  {
+    title: "개발 블로그 운영하기",
+  },
+  {
+    title: "데이터 기반 능력 강화하기",
+  },
+]
+export const RECOMMENDED_QUESTS2 = [
+  {
+    title: "회계사 자격증 취득하기",
+  },
+  {
+    title: "프로젝트 매니저 되기",
+  },
+  {
+    title: "네트워크 기반 능력 강화하기",
+  },
+]

@@ -1,4 +1,5 @@
 import apiClient from "./apiClient";
+import { RECOMMENDED_QUESTS, RECOMMENDED_QUESTS2 } from "../constants/dummy";
 
 export const reqGetQuests = async (params) => {
   const searchParams = new URLSearchParams(params);
@@ -21,6 +22,10 @@ export const reqPatchQuest = async (id, data) => {
   }
 }
 
-export const reqGetRecommendQuest = async () => {
-  return await apiClient.get(`/quest/recommend`);
+export const reqGetRecommendQuests = async () => {
+  // return await apiClient.get(`/quest/recommend`);
+  return {
+    status: 200,
+    data: Math.random() > 0.5 ? RECOMMENDED_QUESTS : RECOMMENDED_QUESTS2
+  }
 }
