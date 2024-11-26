@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
 import { useEffect, useState } from "react"
+import ButtonComponent from "./Button"
 
 const Background = styled(motion.div)`
   position: fixed;
@@ -60,5 +61,66 @@ export default function Modal({ children, open, onClose }) {
         </Background>
       )}
     </AnimatePresence>
+  )
+}
+
+export const ModalContent = styled.form`
+  display: flex;
+  width: 270px;
+  flex-direction: column;
+  padding: 20px;
+  gap: 10px;
+`
+
+export const Title = styled.h2`
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  line-height: 1.4;
+  white-space: pre;
+`
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  padding-top: 30px;
+`
+
+export const StyledButton = styled(ButtonComponent)`
+  flex: 1;
+  &&& {
+    padding: 5px;
+  }
+`
+
+export const CheckModal = ({
+  open,
+  title,
+  cancleText,
+  confirmText,
+  onCancle,
+  onConfirm,
+  backgroundChildren,
+}) => {
+  return (
+    <>
+      <Modal open={open} onClose={onCancle}>
+        <ModalContent>
+          <Title>{title}</Title>
+          <ButtonContainer>
+            {cancleText && (
+              <StyledButton onClick={onCancle} $variant="secondary">
+                {cancleText}
+              </StyledButton>
+            )}
+            <StyledButton onClick={onConfirm}>{confirmText}</StyledButton>
+          </ButtonContainer>
+        </ModalContent>
+      </Modal>
+      {backgroundChildren}
+    </>
   )
 }
