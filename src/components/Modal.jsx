@@ -28,6 +28,7 @@ const Container = styled(motion.div)`
   background: #000;
   border-radius: 10px;
   box-shadow: 0px -3px 13.7px 0px rgba(138, 250, 241, 0.4);
+  overflow: visible;
 `
 
 export default function Modal({ children, open, onClose }) {

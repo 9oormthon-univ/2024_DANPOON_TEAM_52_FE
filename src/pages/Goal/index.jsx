@@ -15,6 +15,7 @@ import BackwardButton from "../../components/BackwardButton"
 import { Flex } from "antd"
 import Button from "../../components/Button"
 import { ReactComponent as PlusSVG } from "../../svgs/plus.svg"
+import { ReactComponent as AiSVG } from "../../svgs/Ai.svg"
 import CheckQuests from "../../components/CheckQuests"
 import { useRecoilState } from "recoil"
 import { myGoalsAtom } from "../../store/atoms/goal"
@@ -28,6 +29,7 @@ import { reqPatchGoal } from "../../apis/goal"
 import Confetti from "../../components/Confetti"
 import Loading from "../../components/Loading"
 import { ROUTES_PATH_GOAL_CONSTELLATION } from "../../constants/routes"
+import RecommendQuestModal from "../../components/Modals/RecommendQuestModal"
 
 export default function Quest() {
   const { id } = useParams()
@@ -36,6 +38,7 @@ export default function Quest() {
   const [goal, setGoal] = useState(DEFAULT_GOAL)
   const [isCheckModalOpen, setIsCheckModalOpen] = useState(false)
   const [checkModal, setCheckModal] = useState({})
+  const [recommendQeustModal, setRecommendQuestModal] = useState(true)
   const CONFIRM_COMPLETE_MODAL = {
     title: "진행중인 목표를\n완료하시겠어요?",
     cancleText: "취소",
@@ -80,6 +83,13 @@ export default function Quest() {
             : g
         ),
       ])
+      const isAllComplete = goal.quests.every(
+        (q) => q.isComplete || (q.id === quiestId && isComplete)
+      )
+      if (isAllComplete) {
+        setCheckModal({ ...CONFIRM_COMPLETE_MODAL, onCancle: () => {} })
+        setIsCheckModalOpen(false)
+      }
     }
   }
   const getGoal = async () => {
@@ -97,6 +107,9 @@ export default function Quest() {
   const onClickCompleteButton = () => {
     setIsCheckModalOpen(true)
     setCheckModal(CONFIRM_COMPLETE_MODAL)
+  }
+  const onClickRecommendQuest = () => {
+    setRecommendQuestModal(true)
   }
   useEffect(() => {
     getGoal()
@@ -133,12 +146,23 @@ export default function Quest() {
               onChange={onChangeQuestComplete}
             />
           </QuestContainer>
-          <Button $variant="primary">
-            <PlusSVG stroke="#000" /> 퀘스트 추가하기
-          </Button>
+
+          <Flex vertical gap={14}>
+            <Button>
+              <PlusSVG stroke="#fff" /> 퀘스트 추가하기
+            </Button>
+            <Button $variant="primary" onClick={onClickRecommendQuest}>
+              <AiSVG /> 퀘스트 추천 받기
+            </Button>
+          </Flex>
         </>
       )}
       <CheckModal open={isCheckModalOpen} {...checkModal} />
+      <RecommendQuestModal
+        open={recommendQeustModal}
+        onClose={() => setRecommendQuestModal(false)}
+        text={"잘하고 있어요! 해당 목표와 관련된 다른 퀘스트를 추천해드릴게요."}
+      />
     </Container>
   )
 }
