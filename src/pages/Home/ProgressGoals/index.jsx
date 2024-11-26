@@ -35,8 +35,8 @@ export default function ProgressGoals() {
     setSelectedGoal(goal)
     openModal()
   }
-  const onGoalDelete = (goal) => {
-    const res = reqDeleteGoal(goal.id)
+  const onGoalDelete = async (goal) => {
+    const res = await reqDeleteGoal(goal.id)
     if (res.status === 200) {
       alert("목표가 삭제되었습니다.")
       setGoals((prev) => prev.filter((v) => v.id !== goal.id))

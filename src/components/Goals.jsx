@@ -61,7 +61,7 @@ export default function Goals({
             ) : (
               goals.map((item, index) => (
                 <ListItem
-                  key={index}
+                  key={item.id}
                   icon={item.icon}
                   title={item.title}
                   label={
