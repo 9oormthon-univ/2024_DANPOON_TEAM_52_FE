@@ -125,9 +125,58 @@ export const MypageData = [
 
   // 마이페이지 카테고리
 export const categories = [
-    { id: 1, name: "학력", icon: "/categories/category1.png" },
-    { id: 2, name: "경력", icon: "/categories/category2.png" },
-    { id: 3, name: "자격·어학·수상", icon: "/categories/category3.png" },
-    { id: 4, name: "경험·활동·교육", icon: "/categories/category4.png" },
-    { id: 5, name: "기타", icon: "/categories/category5.png" },
+    { id: 1, name: "학력", icon: "/categories/category1.png"},
+    { id: 2, name: "경력", icon: "/categories/category2.png"},
+    { id: 3, name: "자격·어학·수상", icon: "/categories/category3.png"},
+    { id: 4, name: "경험·활동·교육", icon: "/categories/category4.png"},
+    { id: 5, name: "기타", icon: "/categories/category5.png"},
   ];
+
+//ACADEMY,CAREER,QUALIFICATION,EXPERIENCE,ETC
+export const resumeData = {
+    "academy_list": [
+        {
+            "resume_category": "ACADEMY",
+            "title": "학원 수료",
+            "content": "프론트엔드 개발 과정 이수",
+            "start_date": "2023-01-01",
+            "end_date": "2023-12-31"
+        },
+    ],
+    "career_list": [
+        {
+            "resume_category": "CAREER",
+            "title": "회사 경력",
+            "content": "XYZ 회사에서 2년간 근무",
+            "start_date": "2021-01-01",
+            "end_date": "2023-01-01"
+        }
+    ],
+    "qualification_list": [
+        {
+            "resume_category": "QUALIFICATION",
+            "title": "자격증",
+            "content": "정보처리기사 취득",
+            "start_date": "2022-03-01",
+            "end_date": "2022-03-01"
+        }
+    ],
+    "experience_list": [
+        {
+            "resume_category": "EXPERIENCE",
+            "title": "프로젝트 경험",
+            "content": "럭키톤 해커톤에서 최우수상 수상",
+            "start_date": "2024-07-01",
+            "end_date": "2024-07-05"
+        }
+    ],
+    "etc_list": [
+        {
+            "resume_category": "ETC",
+            "title": "기타 활동",
+            "content": "봉사활동 100시간 달성",
+            "start_date": "2020-01-01",
+            "end_date": "2020-12-31"
+        }
+    ]
+};

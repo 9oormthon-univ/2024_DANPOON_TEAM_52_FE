@@ -91,14 +91,22 @@ export const ItemGroup = styled.div`
 `
 export const ItemDate = styled(Text)`
   &&& {
+    flex:1;
     font-size: 12px;
     color: #b2b2b2;
+    margin-right: 20px;
   }
 `
 export const ItemName = styled(Text)`
   &&& {
+    width:150px;
+    flex:1;
+    font-size:12px;
     font-weight: 500;
-    margin: 0;
+    margin: 0px;
+    white-space: nowrap; /* 텍스트를 한 줄로 유지 */
+    overflow: hidden; /* 넘치는 텍스트를 숨김 */
+    text-overflow: ellipsis; /* 넘치는 텍스트를 ...으로 표시 */
   }
 `
 export const StyledButton = styled.button`

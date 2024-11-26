@@ -22,15 +22,16 @@ import {
   NaviWrapper,
   StyledPlus,
 } from "./styled"
+import { ModalOverlay, ModalContent } from "../Calendar/styled"
 import { ReactComponent as Share } from "../../svgs/share.svg"
 import { ReactComponent as Plus } from "../../svgs/plus.svg"
 import { ReactComponent as Setting } from "../../svgs/Settings.svg"
 import { Highlight } from "../../components/Typo"
-import { categories } from "../../constants/data"
-import { reqGetUser } from "../../apis/user"
+import { reqGetFeedback } from "../../apis/feedback"
 import userAtom from "../../store/atoms/user"
 import { useRecoilState } from "recoil"
-import { reqGetFeedback } from "../../apis/feedback"
+import { resumeData } from "../../constants/data"
+import { reqGetUser } from "../../apis/user"
 
 export default function Mypage() {
   const navigate = useNavigate()
@@ -38,19 +39,27 @@ export default function Mypage() {
   const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false)
   const [feedbackData, setFeedbackData] = useState("")
   const [userData, setUserData] = useRecoilState(userAtom)
-  const [items, setItems] = useState([
-    {
-      category: 1,
-      startDate: "2020-02-10",
-      endDate: "2024-02-28",
-      itemName: "인천대학교 컴퓨터공학과 졸업",
-      detail: "20학번",
-    },
-  ])
 
-  const groupedData = categories.map((category) => ({
-    ...category,
-    items: items.filter((item) => item.category === category.id),
+  // 카테고리 이름과 아이콘 매핑
+  const categoryMapping = {
+    academy_list: { name: "학력", icon: "/categories/category1.png" },
+    career_list: { name: "경력", icon: "/categories/category2.png" },
+    qualification_list: { name: "자격·어학·수상", icon: "/categories/category3.png" },
+    experience_list: { name: "경험·활동·교육", icon: "/categories/category4.png" },
+    etc_list: { name: "기타", icon: "/categories/category5.png" },
+  }
+
+  // groupedData 생성
+  const groupedData = Object.keys(resumeData).map((key) => ({
+    id: key,
+    name: categoryMapping[key]?.name || "UNKNOWN",
+    icon: categoryMapping[key]?.icon || "/default_icon.png",
+    items: resumeData[key].map((item) => ({
+      startDate: item.start_date,
+      endDate: item.end_date,
+      itemName: item.title,
+      detail: item.content,
+    })),
   }))
 
   useEffect(() => {
@@ -67,7 +76,6 @@ export default function Mypage() {
   }, [])
 
   const handleAddCareer = (newCareer) => {
-    setItems((prevItems) => [...prevItems, newCareer])
     setIsModalOpen(false)
   }
 
