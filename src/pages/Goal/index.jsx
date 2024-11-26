@@ -57,6 +57,7 @@ export default function Quest() {
           },
           onCancle: () => {
             setIsCheckModalOpen(false)
+            navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${goal.id}`)
           },
           backgroundChildren: <Confetti />,
         })
