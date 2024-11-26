@@ -14,6 +14,13 @@ export const reqGetResume = async () => {
       return response.data;
 }
 
+//이력추가(/api/resume)
+export const reqPostResume = async (newData) => {
+      const response = await apiClient.post("/resume", newData)
+      return response;
+}
+
+
 //이력수정 /api/resume/{resumeId}
 
 //이력삭제 
