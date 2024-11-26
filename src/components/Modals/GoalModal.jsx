@@ -40,7 +40,7 @@ export const ButtonContainer = styled.div`
 export const StyledButton = styled(ButtonComponent)`
   flex: 1;
   &&& {
-    padding: 10px;
+    padding: 5px;
   }
 `
 
@@ -56,7 +56,9 @@ export default function GoalModal({ open, onClose, goal, onSave }) {
     const goalIdx = goals.findIndex((v) => v.id === selectedGoal.id)
     const isEdit = goalIdx !== -1
     const apiFunc = isEdit ? reqPatchGoal : reqPostGoal
-    const res = await apiFunc(selectedGoal)
+    let res
+    if (isEdit) res = await apiFunc(selectedGoal.id, selectedGoal)
+    else res = await apiFunc(selectedGoal)
     if (res.status === 201 || res.status === 200) {
       setGoals((prev) => {
         if (isEdit) return prev.map((v, i) => (i === goalIdx ? res.data : v))

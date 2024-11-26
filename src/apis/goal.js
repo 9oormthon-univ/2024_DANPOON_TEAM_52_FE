@@ -6,7 +6,7 @@ export const reqGetGoals = async (params) => {
   // return await apiClient.get(`/goal?${searchParams}`);
   return {
     status: 200,
-    data: GOALS
+    data: params?.id ? GOALS.find(v => v.id === +params.id) : GOALS
   };
 }
 
@@ -21,7 +21,7 @@ export const reqPostGoal = async (data) => {
   }
 }
 
-export const reqPatchGoal = async (data) => {
+export const reqPatchGoal = async (id, data) => {
   // return await apiClient.patch("/goal", data);
   return {
     status: 200,
