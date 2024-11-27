@@ -110,8 +110,8 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit,isEdit, editItemId }) => {
       resume_category: selectedCategory.name,
       title: careerName,
       content: detail,
-      start_Date: startDate,
-      end_Date: endDate
+      start_date: startDate,
+      end_date: endDate
     }
     console.log(newCareer)
     // 부모 컴포넌트의 업데이트 함수 호출
@@ -125,13 +125,13 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit,isEdit, editItemId }) => {
       alert("모든 항목을 입력해주세요.")
       return
     }
-    //서버에 등록할 데이터
+    //서버에 수정할 데이터
     const editCareer = {
       resume_category: selectedCategory.name,
       title: careerName,
       content: detail,
-      start_Date: startDate,
-      end_Date: endDate
+      start_date: startDate,
+      end_date: endDate
     }
     reqUpdateResume(id,editCareer);
   }

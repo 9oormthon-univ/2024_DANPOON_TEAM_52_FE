@@ -23,7 +23,7 @@ const CategoryItem = ({ category, onClickOption,isEdit, setIsEdit}) => {
       {category.items.map((item, index) => (
         <ItemGroup key={index}>
           <ItemDate>
-            {item.startDate} ~ {item.endDate}
+            {item.start_date} ~ {item.end_date}
           </ItemDate>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <ItemName>{item.itemName}</ItemName>
