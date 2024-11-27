@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 import calendarAtom from "../../store/atoms/todo";
 import { useRecoilValue } from "recoil";
+import { deleteSchedule } from "../../apis/calendar";
 const MotionContainer = styled(motion.div)`
   width: 100%;
   height: 350px;
@@ -84,8 +85,6 @@ const EventDetails = ({ selectedDate, setShowDetails, getDatesInRange }) => {
     }
   };
   const todo = useRecoilValue(calendarAtom); // Recoil 데이터
-  console.log(todo)
-
   return (
     <AnimatePresence>
       <MotionContainer
@@ -105,11 +104,12 @@ const EventDetails = ({ selectedDate, setShowDetails, getDatesInRange }) => {
         <EventList>
           {todo?.schedule_response_dto_list?.length > 0 ? (
             todo.schedule_response_dto_list.map((el) => {
+              //시작날짜와 종료날짜로 기간 계산 -> 기간 내에 일정표시하기 위함 
               const eventDates = getDatesInRange(el.start_date, el.end_date);
-              console.log(eventDates)
               if (eventDates.includes(selectedDate.toLocaleDateString("en-CA"))) {
                 return (
-                  <EventItem key={el.schedule_id}>
+                  /*일정 수정/삭제 -> key값으로 지정된 각 일정id 사용*/
+                  <EventItem key={el.schedule_id} onClick={()=>{deleteSchedule(el.schedule_id)}}>
                     <EventCategory />
                     <EventDetailsText>
                       <EventDate>
@@ -125,7 +125,7 @@ const EventDetails = ({ selectedDate, setShowDetails, getDatesInRange }) => {
               return null;
             })
           ) : (
-            <p>일정이 없습니다.</p>
+            <p>일정이 존재하지않습니다.</p>
           )}
         </EventList>
       </MotionContainer>

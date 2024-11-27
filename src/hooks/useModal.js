@@ -11,8 +11,6 @@ export function useModal() {
   const { getDatesInRange } = useDateRange(); // 날짜 범위 계산
 
   const selectDate = (date) => {
-    console.log("선택된 날짜:", date);
-
     // 해당 날짜와 일치하는 일정 가져오기
     const matchingEvents = todo.schedule_response_dto_list.filter((event) => {
       const eventDates = getDatesInRange(event.start_date, event.end_date);

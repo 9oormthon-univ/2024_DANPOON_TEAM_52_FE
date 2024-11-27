@@ -25,6 +25,16 @@ export const createSchedule = async (addData) => {
   }
 }
 
+//캘린더 일정 삭제
+export const deleteSchedule = async (scheduleId) => {
+  const response = await apiClient.delete(`/schedule/${scheduleId}`);
+  if (response.status === 200) {
+    alert("해당 일정을 삭제하였습니다.")
+    window.location.reload();
+  } else {
+    console.error("일정 삭제 실패:", response.status)
+  }
+}
 
 /*
 {
