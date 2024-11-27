@@ -47,9 +47,9 @@ export default function Goals({
       <Container>
         {loading ? (
           <>
-            <ListItemSkeleton active={true} />
-            <ListItemSkeleton active={true} />
-            <ListItemSkeleton active={true} />
+            {new Array(3).fill(0).map((_, index) => (
+              <ListItemSkeleton key={index} active={true} />
+            ))}
           </>
         ) : (
           <>
@@ -60,7 +60,7 @@ export default function Goals({
                 퀘스트를 진행하여 달성해요
               </Placeholder>
             ) : (
-              goals.map((item, index) => (
+              goals.map((item) => (
                 <ListItem
                   key={item.id}
                   icon={CATEGORIES.find((v) => v.value === item.category)?.icon}

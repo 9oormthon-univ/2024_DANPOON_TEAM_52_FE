@@ -55,11 +55,10 @@ export default function GoalModal({ open, onClose, goal, onSave }) {
   const onGoalSave = async () => {
     const goalIdx = goals.findIndex((v) => v.id === selectedGoal.id)
     const isEdit = goalIdx !== -1
-    const apiFunc = isEdit ? reqPatchGoal : reqPostGoal
     let res
-    if (isEdit) res = await apiFunc(selectedGoal.id, selectedGoal)
-    else res = await apiFunc(selectedGoal)
-    if (res.status === 201 || res.status === 200) {
+    if (isEdit) res = await reqPatchGoal(selectedGoal.id, selectedGoal)
+    else res = await reqPostGoal(selectedGoal)
+    if (res.status === 200) {
       setGoals((prev) => {
         if (isEdit) return prev.map((v, i) => (i === goalIdx ? res.data : v))
         return [...prev, res.data]

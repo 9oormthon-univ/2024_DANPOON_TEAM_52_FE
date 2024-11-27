@@ -52,7 +52,6 @@ export default function QuestModal({ open, onClose, goalId, quest, onSave }) {
     setSelectedQuest(DEFAULT_QUEST)
   }
   const onQuestSave = async () => {
-    console.log(selectedQuest)
     const isEdit = quest.id !== -1
     const apiFunc = isEdit ? reqPatchQuest : reqPostQuest
     let res

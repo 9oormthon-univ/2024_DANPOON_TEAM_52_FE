@@ -21,7 +21,7 @@ import { useRecoilState } from "recoil"
 import { myGoalsAtom } from "../../store/atoms/goal"
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { reqGetGoals } from "../../apis/goal"
+import { reqGetGoal } from "../../apis/goal"
 import { DEFAULT_GOAL } from "../../constants/goal"
 import { reqPatchQuest } from "../../apis/quest"
 import { CheckModal } from "../../components/Modal"
@@ -31,6 +31,7 @@ import Loading from "../../components/Loading"
 import { ROUTES_PATH_GOAL_CONSTELLATION } from "../../constants/routes"
 import RecommendQuestModal from "../../components/Modals/RecommendQuestModal"
 import QuestModal from "../../components/Modals/QuestModal"
+import { CATEGORIES } from "../../constants/dummy"
 
 export default function Quest() {
   const { id } = useParams()
@@ -134,7 +135,7 @@ export default function Quest() {
       setGoal(existGoal)
       return
     }
-    const res = await reqGetGoals({ id })
+    const res = await reqGetGoal(id)
     if (res.status === 200) {
       if (res.data.isComplete) {
         navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${goal.id}`, {
@@ -143,7 +144,7 @@ export default function Quest() {
         return
       }
       setGoals((prev) => [...prev, res.data])
-      setGoal(res.data)
+      setGoal(res.data[0])
     } else alert("목표를 불러오는데 실패했습니다.")
   }
   const onClickCompleteButton = () => {
@@ -165,6 +166,7 @@ export default function Quest() {
   useEffect(() => {
     getGoal()
   }, [])
+  console.log(goal, goal.category, CATEGORIES)
   return (
     <Container>
       {!goal ? (
@@ -175,7 +177,9 @@ export default function Quest() {
             <BackwardButton />
             <HeaderFlex>
               <Flex gap={10} align="end">
-                <Icon>{goal.icon}</Icon>
+                <Icon>
+                  {CATEGORIES.find((c) => c.value === goal.category).icon}
+                </Icon>
                 <Label>{goal.category}</Label>
               </Flex>
               <Title>{goal.title}</Title>
