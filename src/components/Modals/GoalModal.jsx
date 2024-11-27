@@ -76,7 +76,7 @@ export default function GoalModal({ open, onClose, goal, onSave }) {
   return (
     <Modal open={open} onClose={onClose}>
       <ModalContent>
-        <Title>목표 추가하기</Title>
+        <Title>목표 {selectedGoal.id === -1 ? "추가" : "수정"}하기</Title>
         <Select
           value={selectedGoal.category}
           onChange={(v) =>
