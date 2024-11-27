@@ -180,7 +180,9 @@ export default function Quest() {
                 <Icon>
                   {CATEGORIES.find((c) => c.value === goal.category).icon}
                 </Icon>
-                <Label>{goal.category}</Label>
+                <Label>
+                  {CATEGORIES.find((c) => c.value === goal.category).label}
+                </Label>
               </Flex>
               <Title>{goal.title}</Title>
             </HeaderFlex>
