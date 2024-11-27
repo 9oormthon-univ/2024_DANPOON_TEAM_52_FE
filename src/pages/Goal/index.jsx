@@ -61,11 +61,15 @@ export default function Quest() {
           confirmText: "확인",
           onConfirm: () => {
             setCheckModal({ open: false })
-            navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${goal.id}`)
+            navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${goal.id}`, {
+              replace: true,
+            })
           },
           onCancle: () => {
             setCheckModal({ open: false })
-            navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${goal.id}`)
+            navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${goal.id}`, {
+              replace: true,
+            })
           },
           backgroundChildren: <Confetti />,
         })
@@ -116,11 +120,23 @@ export default function Quest() {
   const getGoal = async () => {
     const existGoal = goals.find((g) => g.id === +id)
     if (existGoal) {
+      if (existGoal.isComplete) {
+        navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${goal.id}`, {
+          replace: true,
+        })
+        return
+      }
       setGoal(existGoal)
       return
     }
     const res = await reqGetGoals({ id })
     if (res.status === 200) {
+      if (res.data.isComplete) {
+        navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${goal.id}`, {
+          replace: true,
+        })
+        return
+      }
       setGoals((prev) => [...prev, res.data])
       setGoal(res.data)
     } else alert("목표를 불러오는데 실패했습니다.")
@@ -133,7 +149,7 @@ export default function Quest() {
   }
   useEffect(() => {
     getGoal()
-  }, [id, goals])
+  }, [])
   return (
     <Container>
       {!goal ? (

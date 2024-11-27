@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useSearchParams, useNavigate } from "react-router-dom"
 import BaseLayout from "../../components/BaseLayout"
 import { Container, Description, Title } from "./styled"
 import { TabsContent, TabsHeader } from "../../components/Tabs"
@@ -7,7 +8,11 @@ import CompleteGoals from "./CompleteGoals"
 import GradientBackground from "../../components/GradientBackground"
 
 export default function Home() {
-  const [selectedTab, setSelectedTab] = useState(0)
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
+  const tab = searchParams.get("tab")
+  const defaultTab = tab === "complete" ? 1 : 0
+  const [selectedTab, setSelectedTab] = useState(defaultTab)
   const tabs = [
     {
       title: "진행중인 목표",
@@ -20,6 +25,12 @@ export default function Home() {
       content: <CompleteGoals />,
     },
   ]
+  useEffect(() => {
+    const searchParmas = new URLSearchParams({
+      tab: selectedTab === 0 ? "progress" : "complete",
+    })
+    navigate({ search: `?${searchParmas.toString()}` }, { replace: true })
+  }, [selectedTab])
   return (
     <>
       <BaseLayout>
