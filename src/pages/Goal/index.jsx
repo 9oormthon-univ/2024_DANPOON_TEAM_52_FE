@@ -30,6 +30,7 @@ import Confetti from "../../components/Confetti"
 import Loading from "../../components/Loading"
 import { ROUTES_PATH_GOAL_CONSTELLATION } from "../../constants/routes"
 import RecommendQuestModal from "../../components/Modals/RecommendQuestModal"
+import QuestModal from "../../components/Modals/QuestModal"
 
 export default function Quest() {
   const { id } = useParams()
@@ -41,6 +42,10 @@ export default function Quest() {
   })
   const [recommendQeustModal, setRecommendQuestModal] = useState({
     open: false,
+  })
+  const [questModal, setQuestModal] = useState({
+    open: false,
+    quest: {},
   })
   const CONFIRM_COMPLETE_MODAL = {
     open: true,
@@ -147,6 +152,16 @@ export default function Quest() {
   const onClickRecommendQuest = () => {
     setRecommendQuestModal(RECOMMEND_QUEST_MODAL)
   }
+  const onClickAddQuest = () => {
+    setQuestModal({
+      open: true,
+      quest: { id: -1, title: "" },
+    })
+  }
+  const onCloseQuestModal = () => {
+    setQuestModal({ open: false })
+  }
+
   useEffect(() => {
     getGoal()
   }, [])
@@ -184,7 +199,7 @@ export default function Quest() {
           </QuestContainer>
 
           <Flex vertical gap={14}>
-            <Button>
+            <Button onClick={onClickAddQuest}>
               <PlusSVG stroke="#fff" /> 퀘스트 추가하기
             </Button>
             <Button $variant="primary" onClick={onClickRecommendQuest}>
@@ -195,6 +210,7 @@ export default function Quest() {
       )}
       <CheckModal {...checkModal} />
       <RecommendQuestModal {...recommendQeustModal} />
+      <QuestModal onClose={onCloseQuestModal} goalId={id} {...questModal} />
     </Container>
   )
 }
