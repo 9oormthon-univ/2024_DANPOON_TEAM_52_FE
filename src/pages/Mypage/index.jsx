@@ -10,115 +10,88 @@ import {
   InfoGroup,
   InfoSubText,
   FeedbackBtn,
-  CategoryWrapper,
-  CategoryIcon,
-  CategoryName,
-  CategoryGroup,
-  ItemDate,
-  ItemGroup,
-  ItemName,
   ContentWrapper,
   StyledButton,
   NaviWrapper,
   StyledPlus,
 } from "./styled"
+import { ModalOverlay, ModalContent } from "../Calendar/styled"
 import { ReactComponent as Share } from "../../svgs/share.svg"
 import { ReactComponent as Plus } from "../../svgs/plus.svg"
 import { ReactComponent as Setting } from "../../svgs/Settings.svg"
 import { Highlight } from "../../components/Typo"
-import { categories } from "../../constants/data"
-import { reqGetUser } from "../../apis/user"
-import userAtom from "../../store/atoms/user"
+import CategoryItem from "./CategoryItem"
+import { useGroupedData, useFeedback } from "../../hooks/useMypage"
+import { reqGetResume } from "../../apis/user"
+import resumeAtom from "../../store/atoms/resume"
 import { useRecoilState } from "recoil"
-import { reqGetFeedback } from "../../apis/feedback"
-
 export default function Mypage() {
+  const [isEdit, setIsEdit] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(null)
+  //이력조회 데이터 테스트용(현재는 더미데이터)
+  const [testData, setTestData] = useRecoilState(resumeAtom);
   const navigate = useNavigate()
+  const groupedData = useGroupedData()
+  const {
+    feedbackData,
+    isFeedbackModalOpen,
+    setIsFeedbackModalOpen,
+    createFeedback,
+  } = useFeedback()
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false)
-  const [feedbackData, setFeedbackData] = useState("")
-  const [userData, setUserData] = useRecoilState(userAtom)
-  const [items, setItems] = useState([
-    {
-      category: 1,
-      startDate: "2020-02-10",
-      endDate: "2024-02-28",
-      itemName: "인천대학교 컴퓨터공학과 졸업",
-      detail: "20학번",
-    },
-  ])
+  const onClickOption = (item) => {
+    console.log(item,"번째 항목 선택");
+    //선택한 항목 Id 설정
+    setSelectedOption(item); 
+    if (selectedOption === item) {
+      setSelectedOption(null) // 동일한 항목 클릭 시 닫기
+    } else {
+      setSelectedOption(item) // 선택된 항목 설정
+    }
+  }
+  useEffect(() => {
+    const fetchResumeData = async () => {
+      try {
+        const response = await reqGetResume();
+        if (response) {
+          console.log("이력 조회 성공:", response.data);
+          setTestData(response.data); // Atom 갱신
+        }
+      } catch (error) {
+        console.error("이력 조회 실패:", error.response?.data || error.message);
+      }
+    };
 
-  const groupedData = categories.map((category) => ({
-    ...category,
-    items: items.filter((item) => item.category === category.id),
-  }))
+    fetchResumeData();
+  }, []);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const res = await reqGetUser()
-      if (res) {
-        setUserData({
-          nickname: res.data.nickname,
-          img: res.data.image_url,
-        })
-      }
-    }
-    fetchUser()
-  }, [])
-
-  const handleAddCareer = (newCareer) => {
-    setItems((prevItems) => [...prevItems, newCareer])
-    setIsModalOpen(false)
-  }
-
-  const createFeedback = async () => {
-    const res = await reqGetFeedback()
-    if (res) {
-      setFeedbackData(res.data.message) // Assuming `message` contains feedback text
-      setIsFeedbackModalOpen(true)
-    }
-  }
-
+    console.log("testData 갱신:", testData); // Atom 갱신 확인
+  }, [testData]);
   return (
     <BaseLayout>
       <Wrapper>
         <ProfileInfo>
-          <ProfileImg src={userData.img} />
+          <ProfileImg src="/default_profile.png" />
           <InfoGroup>
             <InfoText>
-              <Highlight>{userData.nickname}</Highlight>님의 이력
+              <Highlight>사용자</Highlight>님의 이력
             </InfoText>
             <InfoSubText>나의 이력을 추가하고 관리할 수 있어요</InfoSubText>
           </InfoGroup>
         </ProfileInfo>
         <FeedbackBtn onClick={createFeedback}>AI 피드백 받기</FeedbackBtn>
         <ContentWrapper>
+          {/*사용자 이력 렌더링*/}
           {groupedData.map((category) => (
-            <CategoryWrapper key={category.id}>
-              <CategoryGroup>
-                <CategoryIcon src={category.icon}></CategoryIcon>
-                <CategoryName>{category.name}</CategoryName>
-              </CategoryGroup>
-              {category.items.map((item, index) => (
-                <ItemGroup key={index}>
-                  <ItemDate>
-                    {item.startDate} ~ {item.endDate}
-                  </ItemDate>
-                  <div style={{ display: "flex", flexDirection: "column" }}>
-                    <ItemName>{item.itemName}</ItemName>
-                    <ItemName style={{ fontSize: "12px", color: "#C3C3C3" }}>
-                      {item.detail}
-                    </ItemName>
-                  </div>
-                  <img
-                    src="/optionicon.png"
-                    width="2px"
-                    height="10px"
-                    style={{ marginBottom: "15px" }}
-                  />
-                </ItemGroup>
-              ))}
-            </CategoryWrapper>
+            <CategoryItem
+              key={category.id}
+              category={category}
+              onClickOption={onClickOption}
+              selectedOption={selectedOption}
+              isEdit={isEdit}
+              setIsEdit={setIsEdit}
+            />
           ))}
           <NaviWrapper>
             <StyledButton>
@@ -136,15 +109,15 @@ export default function Mypage() {
             <Plus />
           </StyledPlus>
         </ContentWrapper>
-        {isModalOpen && (
-          <AddCareerPage setIsModalOpen={setIsModalOpen} onAddCareer={handleAddCareer} />
-        )}
+        {isModalOpen && <AddCareerPage setIsModalOpen={setIsModalOpen} />}
         {isFeedbackModalOpen && (
           <ModalOverlay>
             <ModalContent>
               <h3>AI 피드백</h3>
               <p>{feedbackData}</p>
-              <button onClick={() => setIsFeedbackModalOpen(false)}>닫기</button>
+              <button onClick={() => setIsFeedbackModalOpen(false)}>
+                닫기
+              </button>
             </ModalContent>
           </ModalOverlay>
         )}
