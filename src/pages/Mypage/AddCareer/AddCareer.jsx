@@ -231,7 +231,7 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit,isEdit, editItemId }) => {
         </DatePickerWrapper>
         <ModalButtonGroup>
           <ModalButton onClick={() => isEdit?setIsEdit(false):setIsModalOpen(false)}>취소</ModalButton>
-          <ModalButton onClick={isEdit?(()=>{onClickEditCareer(editItemId); setIsEdit(false)}):(()=>{onClickAddCareer; setIsModalOpen(false)})}>{isEdit ? "수정" : "추가"}</ModalButton>
+          <ModalButton onClick={isEdit?(()=>{onClickEditCareer(editItemId); setIsEdit(false)}):(()=>{onClickAddCareer(); setIsModalOpen(false)})}>{isEdit ? "수정" : "추가"}</ModalButton>
         </ModalButtonGroup>
       </ModalContent>
     </ModalOverlay>
