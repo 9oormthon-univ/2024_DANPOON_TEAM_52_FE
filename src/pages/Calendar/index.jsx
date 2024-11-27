@@ -11,7 +11,21 @@ import { useModal } from "../../hooks/useModal"
 import { createSchedule } from "../../apis/calendar"
 
 const CalendarPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [editTodo, setEditTodo] = useState(null);
+
+  const openEditModal = (todo) => {
+    setEditTodo(todo);
+    setIsEdit(true);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setEditTodo(null);
+    setIsEdit(false);
+    setIsModalOpen(false);
+  };
 
   const {
     date,
@@ -67,13 +81,14 @@ const CalendarPage = () => {
         />
         <ModalComponent
           isModalOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          onTitleChange={(title) => setNewEvent({ title })}
-          handleSaveEvent={handleSaveEvent}
+          onClose={closeModal}
           setIsModalOpen={setIsModalOpen}
+          handleSaveEvent={handleSaveEvent}
           onClickAddBtn={onClickAddBtn}
           startDate={startDate}
           endDate={endDate}
+          editTodo={editTodo} // 수정할 일정 데이터
+          isEdit={isEdit}     // 수정 모드 여부
         />
         {showDetails && (
           <EventDetails
@@ -81,6 +96,7 @@ const CalendarPage = () => {
             selectedDate={selectedDate}
             getDatesInRange={getDatesInRange}
             todo={todo}
+            openEditModal={openEditModal}
           />
         )}
       </StyledCalendarWrapper>

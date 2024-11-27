@@ -9,8 +9,9 @@ import {
 import StyledSwitch from "../Switch"
 import { Text } from "../Typo"
 import { DatePicker } from "antd"
-import { useState } from "react"
+import { useState, useEffect} from "react"
 import styled from "styled-components"
+import { updateSchedule } from "../../apis/calendar"
 const DatePickerWrapper = styled.div`
   display: flex;
   width: 100%;
@@ -36,27 +37,41 @@ const ModalComponent = ({
   onClickAddBtn,
   startDate,
   endDate,
+  editTodo, // 수정 모드의 데이터
+  isEdit,
 }) => {
   if (!isModalOpen) return null
   const [isSingleDate, setIsSingleDate] = useState(false)
-  const [title, setTitle] = useState("")
-  //일정 객체
+  const [title, setTitle] = useState(editTodo?.content || "") // 초기값 설정
+  // 일정 객체
   const addTodo = {
     content: title,
     start_date: startDate,
     end_date: endDate,
   }
+
+  useEffect(() => {
+    if (editTodo) {
+      console.log(editTodo)
+      setTitle(editTodo.content)
+    }
+  }, [editTodo])
   const handleChecked = (event) => {
     setIsSingleDate(event.target.checked)
   }
   return (
     <ModalOverlay>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <h3>일정 추가하기</h3>
-        <ModalInput onChange={(e) => setTitle(e.target.value)} />
-        <div style={{display:"flex", justifyContent:"space-between"}}>
-        <Text>하루종일</Text>
-        <StyledSwitch onChange={(event)=>{setIsSingleDate(event)}}/>
+        <h3>{isEdit ? "일정 수정하기" : "일정 추가하기"}</h3>{" "}
+        <ModalInput value={title} onChange={(e) => setTitle(e.target.value)} />
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Text>하루종일</Text>
+          <StyledSwitch
+          checked={isSingleDate}
+            onChange={(event) => {
+              setIsSingleDate(event)
+            }}
+          />
         </div>
         <DatePickerWrapper>
           {isSingleDate ? (
@@ -82,6 +97,7 @@ const ModalComponent = ({
                 alignItems: "center",
                 gap: "5px",
               }}
+              value={startDate}
             >
               <DatePicker
                 style={{
@@ -113,11 +129,14 @@ const ModalComponent = ({
           <ModalButton onClick={onClose}>취소</ModalButton>
           <ModalButton
             onClick={() => {
-              onClickAddBtn(addTodo, setIsModalOpen);
-              console.log(addTodo)
+              if (isEdit) {
+                updateSchedule(editTodo.schedule_id, addTodo); // 일정 수정 API 호출
+              } else {
+                onClickAddBtn(addTodo, setIsModalOpen);
+              }
             }}
           >
-            추가
+            {isEdit ? "수정" : "추가"}
           </ModalButton>
         </ModalButtonGroup>
       </ModalContent>

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import calendarAtom from "../../store/atoms/todo";
 import { useRecoilValue } from "recoil";
 import { deleteSchedule } from "../../apis/calendar";
+import { updateSchedule } from "../../apis/calendar";
 const MotionContainer = styled(motion.div)`
   width: 100%;
   height: 350px;
@@ -78,7 +79,7 @@ const EventTitle = styled.div`
   margin-top: 5px;
 `;
 
-const EventDetails = ({ selectedDate, setShowDetails, getDatesInRange }) => {
+const EventDetails = ({ selectedDate, setShowDetails, getDatesInRange, openEditModal }) => {
   const handleDragEnd = (_, info) => {
     if (info.offset.y > 100) {
       setShowDetails(false);
@@ -119,6 +120,23 @@ const EventDetails = ({ selectedDate, setShowDetails, getDatesInRange }) => {
                       </EventDate>
                       <EventTitle>{el.content}</EventTitle>
                     </EventDetailsText>
+                    {/* api테스트용 임시 버튼입니다 */}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation(); // 이벤트 전파 중단
+                        openEditModal(el); // 수정 모달 열기
+                      }}
+                    >
+                      수정
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation(); // 이벤트 전파 중단
+                        deleteSchedule(el.schedule_id); // 삭제 동작
+                      }}
+                    >
+                      삭제
+                    </button>
                   </EventItem>
                 );
               }

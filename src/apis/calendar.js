@@ -36,6 +36,17 @@ export const deleteSchedule = async (scheduleId) => {
   }
 }
 
+//캘린더 일정 수정
+export const updateSchedule = async (scheduleId, updateData) => {
+  const response = await apiClient.patch(`/schedule/${scheduleId}`, updateData);
+  if (response.status === 200) {
+    alert("해당 일정을 수정하였습니다.")
+    window.location.reload();
+  } else {
+    console.error("일정 수정 실패:", response.status)
+  }
+}
+
 /*
 {
     "success": true,
