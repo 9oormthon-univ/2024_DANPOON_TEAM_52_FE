@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CalendarComponent from "../../components/Calendar/CalendarComponent";
 import ModalComponent from "../../components/Calendar/ModalComponent";
 import EventDetails from "../../components/Calendar/EventDetails";
 import { StyledCalendarWrapper } from "./styled";
 import BaseLayout from "../../components/BaseLayout";
-
 // 분리된 훅들 가져오기
 import { useDateRange } from "../../hooks/useDateRange";
 import { useEvents } from "../../hooks/useEvents";
@@ -17,7 +16,6 @@ const CalendarPage = () => {
     startDate: null,
     endDate: null,
   });
-
   const { date, setDate, startDate, setStartDate, endDate, setEndDate, getDatesInRange } =
     useDateRange();
   const { events, setEvents, renderDotsForDate, questData } = useEvents();
