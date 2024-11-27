@@ -156,7 +156,7 @@ export default function Quest() {
   const onClickAddQuest = () => {
     setQuestModal({
       open: true,
-      quest: { id: -1, title: "" },
+      quest: { id: -1, title: "", isComplete: false },
     })
   }
   const onCloseQuestModal = () => {
