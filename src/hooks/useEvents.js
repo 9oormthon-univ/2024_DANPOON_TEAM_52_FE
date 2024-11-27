@@ -1,15 +1,9 @@
-import { useState } from "react";
+import { useRecoilValue } from "recoil";
 import { useDateRange } from "./useDateRange";
+import calendarAtom from "../store/atoms/todo";
 
 export function useEvents() {
-  const [events, setEvents] = useState([
-    {
-      startDate: "2024-11-23",
-      endDate: "2024-11-25",
-      title: "Test",
-    },
-  ]);
-  const questData = []
+  const todo = useRecoilValue(calendarAtom); // Recoil에서 일정 데이터 가져오기
   const { getDatesInRange } = useDateRange(); // 범위 계산 로직 사용
 
   const renderDotsForDate = (tileDate) => {
@@ -20,12 +14,15 @@ export function useEvents() {
 
     if (!formattedDate) return null;
 
-    const matchingEvents = events.filter((event) => {
-      const eventDates = getDatesInRange(event.startDate, event.endDate);
+    const schedules = todo?.schedule_response_dto_list || [];
+    const quests = todo?.quest_response_dto_list || [];
+
+    const matchingEvents = schedules.filter((event) => {
+      const eventDates = getDatesInRange(event.start_date, event.end_date);
       return eventDates.includes(formattedDate);
     });
 
-    const isQuestDate = questData.includes(formattedDate);
+    const isQuestDate = quests.some((quest) => quest.deadline === formattedDate);
 
     if (matchingEvents.length > 0 || isQuestDate) {
       return (
@@ -64,8 +61,6 @@ export function useEvents() {
   };
 
   return {
-    events,
-    setEvents,
     renderDotsForDate,
   };
 }

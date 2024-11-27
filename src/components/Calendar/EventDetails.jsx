@@ -1,7 +1,8 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-import Drawer from "../Drawer"
+import calendarAtom from "../../store/atoms/todo";
+import { useRecoilValue } from "recoil";
 const MotionContainer = styled(motion.div)`
   width: 100%;
   height: 350px;
@@ -16,7 +17,7 @@ const MotionContainer = styled(motion.div)`
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   box-shadow: 5px 10px 15px 10px rgba(138, 250, 241, 0.5);
-  @media (min-width: 520px){
+  @media (min-width: 520px) {
     width: 520px;
   }
 `;
@@ -76,15 +77,17 @@ const EventTitle = styled.div`
   margin-top: 5px;
 `;
 
-const EventDetails = ({ selectedDate, events, setShowDetails, getDatesInRange }) => {
+const EventDetails = ({ selectedDate, setShowDetails, getDatesInRange }) => {
   const handleDragEnd = (_, info) => {
     if (info.offset.y > 100) {
       setShowDetails(false);
     }
   };
+  const todo = useRecoilValue(calendarAtom); // Recoil 데이터
+  console.log(todo)
 
   return (
-    <AnimatePresence> 
+    <AnimatePresence>
       <MotionContainer
         initial={{ y: "100%", opacity: 1 }}
         animate={{ y: "0%", opacity: 1 }}
@@ -97,28 +100,33 @@ const EventDetails = ({ selectedDate, events, setShowDetails, getDatesInRange })
         dragConstraints={{ top: 0, bottom: 300 }}
         onDragEnd={handleDragEnd}
       >
-        <DateText>{selectedDate?.toString().split(" ")[2]}</DateText>
+        <DateText>{selectedDate?.toLocaleDateString("en-CA")}</DateText>
         <DayText>{selectedDate?.toString().split(" ")[0]}</DayText>
         <EventList>
-          {events.map((el, index) => {
-            const eventDates = getDatesInRange(el.startDate, el.endDate);
-            if (eventDates.includes(selectedDate.toLocaleDateString("en-CA"))) {
-              return (
-                <EventItem key={index}>
-                  <EventCategory />
-                  <EventDetailsText>
-                    <EventDate>
-                      {el.startDate === el.endDate
-                        ? `${el.startDate}`
-                        : `${el.startDate} ~ ${el.endDate}`}
-                    </EventDate>
-                    <EventTitle>{el.title}</EventTitle>
-                  </EventDetailsText>
-                </EventItem>
-              );
-            }
-            return null;
-          })}
+          {todo?.schedule_response_dto_list?.length > 0 ? (
+            todo.schedule_response_dto_list.map((el) => {
+              const eventDates = getDatesInRange(el.start_date, el.end_date);
+              console.log(eventDates)
+              if (eventDates.includes(selectedDate.toLocaleDateString("en-CA"))) {
+                return (
+                  <EventItem key={el.schedule_id}>
+                    <EventCategory />
+                    <EventDetailsText>
+                      <EventDate>
+                        {el.start_date === el.end_date
+                          ? `${el.start_date}`
+                          : `${el.start_date} ~ ${el.end_date}`}
+                      </EventDate>
+                      <EventTitle>{el.content}</EventTitle>
+                    </EventDetailsText>
+                  </EventItem>
+                );
+              }
+              return null;
+            })
+          ) : (
+            <p>일정이 없습니다.</p>
+          )}
         </EventList>
       </MotionContainer>
     </AnimatePresence>

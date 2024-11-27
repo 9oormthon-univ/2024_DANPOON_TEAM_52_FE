@@ -11,15 +11,12 @@ export const fetchTodo = async (month) => {
 }
 
 //캘린더 일정 추가
-export const createSchedule = async (content, startDate, endDate) => {
+export const createSchedule = async (addData) => {
   try {
-    const response = await apiClient.post("/schedule", {
-      content: content,
-      start_date: startDate,
-      end_date: endDate,
-    })
+    const response = await apiClient.post("/schedule", addData)
     if (response.status === 200) {
       console.log("일정 생성 성공:", response.data)
+      window.location.reload();
     } else {
       console.error("일정 생성 실패:", response.status)
     }

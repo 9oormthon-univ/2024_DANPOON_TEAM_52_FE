@@ -42,9 +42,9 @@ const ModalComponent = ({
   const [title, setTitle] = useState("")
   //일정 객체
   const addTodo = {
+    content: title,
     start_date: startDate,
     end_date: endDate,
-    title: title,
   }
   const handleChecked = (event) => {
     setIsSingleDate(event.target.checked)
@@ -113,7 +113,8 @@ const ModalComponent = ({
           <ModalButton onClick={onClose}>취소</ModalButton>
           <ModalButton
             onClick={() => {
-              onClickAddBtn(addTodo, setIsModalOpen)
+              onClickAddBtn(addTodo, setIsModalOpen);
+              console.log(addTodo)
             }}
           >
             추가

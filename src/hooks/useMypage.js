@@ -21,8 +21,8 @@ export const useGroupedData = () => {
     icon: categoryMapping[key]?.icon || "/default_icon.png",
     items: realResumeData[key].map((item) => ({
       resume_id: item.resume_id,
-      startDate: item.start_date,
-      endDate: item.end_date,
+      start_date: item.start_date,
+      end_date: item.end_date,
       itemName: item.title,
       detail: item.content,
     })),
