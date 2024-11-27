@@ -75,7 +75,7 @@ const RoundedTriangle = styled.div`
 `
 const StyledButton = styled(Button)`
   &&& {
-    padding: 5px;
+    padding: 10px 0;
     border-radius: 8px;
     font-weight: 400;
   }
@@ -107,7 +107,6 @@ export default function RecommendQuestModal({ open, onClose, text, onClick }) {
   const getRecommendedQuests = async () => {
     const res = await reqGetRecommendQuests()
     if (res.status === 200) {
-      console.log(res.data)
       setRecommendedQuests(res.data)
     }
   }
@@ -124,8 +123,8 @@ export default function RecommendQuestModal({ open, onClose, text, onClick }) {
             <RoundedTriangle />
           </Chat>
         </StarContainer>
-        {recommendedQuests.map((quest) => (
-          <StyledButton $variant="secondary" onClick={onClick}>
+        {recommendedQuests.map((quest, index) => (
+          <StyledButton key={index} $variant="secondary" onClick={onClick}>
             {quest.title}
           </StyledButton>
         ))}
