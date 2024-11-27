@@ -16,11 +16,37 @@ export const reqGetResume = async () => {
 
 //이력추가(/api/resume)
 export const reqPostResume = async (newData) => {
-      const response = await apiClient.post("/resume", newData)
-      return response;
-}
-
+      try {
+        const response = await apiClient.post("/resume", newData); // JSON 데이터를 Body로 전달
+        console.log(response);
+        window.location.reload();
+        return response;
+      } catch (error) {
+        console.error("요청 실패:", error.response?.data || error.message);
+      }
+};
 
 //이력수정 /api/resume/{resumeId}
+export const reqUpdateResume = async (id,item) => {
+      try {
+            const response = await apiClient.patch(`/resume/${id}`, item);
+            console.log(response);
+            window.location.reload();
+            return response;
+          } catch (error) {
+            console.error("요청 실패:", error.response?.data || error.message);
+          }
+}
 
 //이력삭제 
+export const reqDeleteResume = async (item) => {
+      try {
+        const response = await apiClient.delete(`/resume/${item.resume_id}`);
+        console.log("삭제 성공:", response.data);
+        window.location.reload();
+        alert("삭제되었습니다.");
+      } catch (error) {
+        console.error("삭제 실패:", error.response?.data || error.message);
+        alert("삭제 실패! 다시 시도해주세요.");
+      }
+    };

@@ -4,5 +4,4 @@ const userAtom = atom({
   default: {
   },
 });
-
 export default userAtom;

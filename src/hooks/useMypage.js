@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { reqGetFeedback } from "../apis/feedback";
 import { resumeData } from "../constants/data";
-
+import resumeAtom from "../store/atoms/resume";
+import { useRecoilValue } from "recoil";
 export const useGroupedData = () => {
   const categoryMapping = {
     academy_list: { name: "학력", icon: "/categories/category1.png" },
@@ -11,12 +12,14 @@ export const useGroupedData = () => {
     etc_list: { name: "기타", icon: "/categories/category5.png" },
   };
 
-  const groupedData = Object.keys(resumeData).map((key) => ({
-    //카테고리
+  //실제 데이터
+  const realResumeData = useRecoilValue(resumeAtom);
+  const groupedData = Object.keys(realResumeData).map((key) => ({
+    //카테고리  
     id: key,
     name: categoryMapping[key]?.name || "UNKNOWN",
     icon: categoryMapping[key]?.icon || "/default_icon.png",
-    items: resumeData[key].map((item) => ({
+    items: realResumeData[key].map((item) => ({
       resume_id: item.resume_id,
       startDate: item.start_date,
       endDate: item.end_date,

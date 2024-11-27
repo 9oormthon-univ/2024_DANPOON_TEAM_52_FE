@@ -8,8 +8,10 @@ import {
   ItemGroup,
   ItemName,
 } from "./styled";
+import { reqDeleteResume } from "../../apis/user";
+import AddCareerPage from "./AddCareer/AddCareer";
 
-const CategoryItem = ({ category, onClickOption }) => {
+const CategoryItem = ({ category, onClickOption,isEdit, setIsEdit}) => {
   const [selectedOptionId, setSelectedOptionId] = useState(null); // 선택된 항목 ID 관리
 
   return (
@@ -69,7 +71,7 @@ const CategoryItem = ({ category, onClickOption }) => {
                   }}
                   onClick={() => {
                     // 수정 로직 추가
-                    alert(`수정 버튼 클릭: ${item.itemName}`);
+                    setIsEdit(true);
                   }}
                 >
                   수정
@@ -84,13 +86,14 @@ const CategoryItem = ({ category, onClickOption }) => {
                   }}
                   onClick={() => {
                     // 삭제 로직 추가
-                    alert(`삭제 버튼 클릭: ${item.itemName}`);
+                    reqDeleteResume(item);
                   }}
                 >
                   삭제
                 </div>
               </div>
             )}
+            {isEdit && (<AddCareerPage isEdit={isEdit} editItemId={selectedOptionId} setIsEdit={setIsEdit}></AddCareerPage>)}
           </div>
         </ItemGroup>
       ))}

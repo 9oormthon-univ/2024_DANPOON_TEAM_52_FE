@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import BaseLayout from "../../components/BaseLayout"
 import { useNavigate } from "react-router-dom"
 import AddCareerPage from "./AddCareer/AddCareer"
@@ -22,13 +22,16 @@ import { ReactComponent as Setting } from "../../svgs/Settings.svg"
 import { Highlight } from "../../components/Typo"
 import CategoryItem from "./CategoryItem"
 import { useGroupedData, useFeedback } from "../../hooks/useMypage"
-
+import { reqGetResume } from "../../apis/user"
+import resumeAtom from "../../store/atoms/resume"
+import { useRecoilState } from "recoil"
 export default function Mypage() {
+  const [isEdit, setIsEdit] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null)
-
+  //이력조회 데이터 테스트용(현재는 더미데이터)
+  const [testData, setTestData] = useRecoilState(resumeAtom);
   const navigate = useNavigate()
   const groupedData = useGroupedData()
-  console.log(groupedData);
   const {
     feedbackData,
     isFeedbackModalOpen,
@@ -46,6 +49,25 @@ export default function Mypage() {
       setSelectedOption(item) // 선택된 항목 설정
     }
   }
+  useEffect(() => {
+    const fetchResumeData = async () => {
+      try {
+        const response = await reqGetResume();
+        if (response) {
+          console.log("이력 조회 성공:", response.data);
+          setTestData(response.data); // Atom 갱신
+        }
+      } catch (error) {
+        console.error("이력 조회 실패:", error.response?.data || error.message);
+      }
+    };
+
+    fetchResumeData();
+  }, []);
+
+  useEffect(() => {
+    console.log("testData 갱신:", testData); // Atom 갱신 확인
+  }, [testData]);
   return (
     <BaseLayout>
       <Wrapper>
@@ -67,6 +89,8 @@ export default function Mypage() {
               category={category}
               onClickOption={onClickOption}
               selectedOption={selectedOption}
+              isEdit={isEdit}
+              setIsEdit={setIsEdit}
             />
           ))}
           <NaviWrapper>
