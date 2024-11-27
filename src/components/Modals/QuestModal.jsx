@@ -57,29 +57,22 @@ export default function QuestModal({ open, onClose, goalId, quest, onSave }) {
     let res
     if (isEdit) res = await apiFunc(selectedQuest.id, selectedQuest)
     else res = await apiFunc(selectedQuest)
-    if (res.status === 201 || res.status === 200) {
+    if (res.status === 200) {
       setGoals((prev) => {
-        if (isEdit)
-          return [
-            ...prev.map((g) =>
-              g.id === goalId
-                ? {
-                    ...g,
-                    quests: g.quests.map((q) =>
-                      q.id === selectedQuest.id ? { ...q, selectedQuest } : q
-                    ),
-                  }
-                : g
-            ),
-          ]
-        else
-          return [
-            ...prev.map((g) =>
-              g.id === goalId
-                ? { ...g, quests: [...g.quests, selectedQuest] }
-                : g
-            ),
-          ]
+        return [
+          ...prev.map((g) =>
+            g.id === goalId
+              ? {
+                  ...g,
+                  quests: isEdit
+                    ? g.quests.map((q) =>
+                        q.id === selectedQuest.id ? { ...q, selectedQuest } : q
+                      )
+                    : [...g.quests, res.data],
+                }
+              : g
+          ),
+        ]
       })
     } else {
       alert("목표 저장에 실패했습니다.")

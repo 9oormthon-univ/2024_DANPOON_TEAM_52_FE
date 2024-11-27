@@ -144,7 +144,7 @@ export default function Quest() {
         return
       }
       setGoals((prev) => [...prev, res.data])
-      setGoal(res.data[0])
+      setGoal(res.data)
     } else alert("목표를 불러오는데 실패했습니다.")
   }
   const onClickCompleteButton = () => {
@@ -166,7 +166,11 @@ export default function Quest() {
   useEffect(() => {
     getGoal()
   }, [])
-  console.log(goal, goal.category, CATEGORIES)
+
+  useEffect(() => {
+    if (goals.length === 0) return
+    setGoal(goals.find((g) => g.id === +id))
+  }, [goals])
   return (
     <Container>
       {!goal ? (
@@ -216,7 +220,7 @@ export default function Quest() {
       )}
       <CheckModal {...checkModal} />
       <RecommendQuestModal {...recommendQeustModal} />
-      <QuestModal onClose={onCloseQuestModal} goalId={id} {...questModal} />
+      <QuestModal onClose={onCloseQuestModal} goalId={+id} {...questModal} />
     </Container>
   )
 }

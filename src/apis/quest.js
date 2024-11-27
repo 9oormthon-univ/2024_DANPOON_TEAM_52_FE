@@ -9,7 +9,7 @@ export const reqGetQuests = async (params) => {
 export const reqPostQuest = async (data) => {
   // return await apiClient.post("/quest", data);
   return {
-    status: 201,
+    status: 200,
     data: {
       ...data,
       id: new Date().getTime(),
