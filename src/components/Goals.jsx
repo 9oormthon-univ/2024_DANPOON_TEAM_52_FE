@@ -2,6 +2,7 @@ import { styled } from "styled-components"
 import ScrollContainer from "./ScrollContainer"
 import ListItem, { ListItemSkeleton } from "./ListItem"
 import ShadowContainer from "./ShadowContainer"
+import { CATEGORIES } from "../constants/dummy"
 
 const Container = styled(ScrollContainer)`
   display: flex;
@@ -62,7 +63,7 @@ export default function Goals({
               goals.map((item, index) => (
                 <ListItem
                   key={item.id}
-                  icon={item.icon}
+                  icon={CATEGORIES.find((v) => v.value === item.category)?.icon}
                   title={item.title}
                   label={
                     option?.labelHidden

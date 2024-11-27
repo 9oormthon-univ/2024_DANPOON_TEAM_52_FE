@@ -3,11 +3,21 @@ import { GOALS, RECOMMENDED_GOALS, RECOMMENDED_GOALS2 } from "../constants/dummy
 
 export const reqGetGoals = async (params) => {
   const searchParams = new URLSearchParams(params);
-  // return await apiClient.get(`/goal?${searchParams}`);
+  const res = await apiClient.get(`/goal?${searchParams}`);
   return {
-    status: 200,
-    data: params?.id ? GOALS.find(v => v.id === +params.id) : GOALS
-  };
+    status: res.status,
+    data: res.data.data.map(v => ({
+      id: v.member_goal_id,
+      title: v.goal_title,
+      isComplete: v.is_complete,
+      category: v.category,
+      quests: v.quests.map(q => ({
+        id: q.id,
+        title: q.title,
+        isComplete: q.is_complete,
+      }))
+    }))
+  }
 }
 
 export const reqPostGoal = async (data) => {
