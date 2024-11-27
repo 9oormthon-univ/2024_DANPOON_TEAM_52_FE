@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
-
+import Drawer from "../Drawer"
 const MotionContainer = styled(motion.div)`
   width: 100%;
   height: 350px;

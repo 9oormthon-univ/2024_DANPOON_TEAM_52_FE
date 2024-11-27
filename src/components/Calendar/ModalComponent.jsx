@@ -42,8 +42,8 @@ const ModalComponent = ({
   const [title, setTitle] = useState("")
   //일정 객체
   const addTodo = {
-    startDate: startDate,
-    endDate: endDate,
+    start_date: startDate,
+    end_date: endDate,
     title: title,
   }
   const handleChecked = (event) => {
