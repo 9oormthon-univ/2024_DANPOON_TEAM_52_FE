@@ -36,14 +36,18 @@ export default function Quest() {
   const navigate = useNavigate()
   const [goals, setGoals] = useRecoilState(myGoalsAtom)
   const [goal, setGoal] = useState(DEFAULT_GOAL)
-  const [isCheckModalOpen, setIsCheckModalOpen] = useState(false)
-  const [checkModal, setCheckModal] = useState({})
-  const [recommendQeustModal, setRecommendQuestModal] = useState(true)
+  const [checkModal, setCheckModal] = useState({
+    open: false,
+  })
+  const [recommendQeustModal, setRecommendQuestModal] = useState({
+    open: false,
+  })
   const CONFIRM_COMPLETE_MODAL = {
+    open: true,
     title: "진행중인 목표를\n완료하시겠어요?",
     cancleText: "취소",
     confirmText: "완료",
-    onCancle: () => setIsCheckModalOpen(false),
+    onCancle: () => setCheckModal({ open: false }),
     onConfirm: async () => {
       const res = await reqPatchGoal(goal.id, { is_complete: true })
       if (res.status === 200) {
@@ -51,15 +55,16 @@ export default function Quest() {
           prev.map((g) => (g.id === goal.id ? { ...g, isComplete: true } : g))
         )
         setCheckModal({
+          open: true,
           title: "새로운 별자리가\n완성되었어요!",
           cancleText: "",
           confirmText: "확인",
           onConfirm: () => {
-            setIsCheckModalOpen(false)
+            setCheckModal({ open: false })
             navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${goal.id}`)
           },
           onCancle: () => {
-            setIsCheckModalOpen(false)
+            setCheckModal({ open: false })
             navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${goal.id}`)
           },
           backgroundChildren: <Confetti />,
@@ -67,6 +72,11 @@ export default function Quest() {
       }
     },
     backgroundChildren: null,
+  }
+  const RECOMMEND_QUEST_MODAL = {
+    open: true,
+    text: "퀘스트를 추천해드릴게요!",
+    onClose: () => setRecommendQuestModal({ open: false }),
   }
   const onChangeQuestComplete = async (questId, isComplete) => {
     const res = await reqPatchQuest(questId, { is_complete: isComplete })
@@ -84,11 +94,22 @@ export default function Quest() {
         ),
       ])
       const isAllComplete = goal.quests.every(
-        (q) => q.isComplete || (q.id === quiestId && isComplete)
+        (q) =>
+          (q.id !== questId && q.isComplete) || (q.id === questId && isComplete)
       )
       if (isAllComplete) {
-        setCheckModal({ ...CONFIRM_COMPLETE_MODAL, onCancle: () => {} })
-        setIsCheckModalOpen(false)
+        setCheckModal({
+          ...CONFIRM_COMPLETE_MODAL,
+          title: "모든 퀘스트를 완료하셨어요!\n목표를 완료하시겠어요?",
+          onCancle: () => {
+            setCheckModal({ open: false })
+            setRecommendQuestModal({
+              ...RECOMMEND_QUEST_MODAL,
+              text: "잘하고 있어요! 해당 목표와 관련된 다른 퀘스트를 추천해드릴게요.",
+            })
+          },
+          open: true,
+        })
       }
     }
   }
@@ -105,11 +126,10 @@ export default function Quest() {
     } else alert("목표를 불러오는데 실패했습니다.")
   }
   const onClickCompleteButton = () => {
-    setIsCheckModalOpen(true)
     setCheckModal(CONFIRM_COMPLETE_MODAL)
   }
   const onClickRecommendQuest = () => {
-    setRecommendQuestModal(true)
+    setRecommendQuestModal(RECOMMEND_QUEST_MODAL)
   }
   useEffect(() => {
     getGoal()
@@ -157,12 +177,8 @@ export default function Quest() {
           </Flex>
         </>
       )}
-      <CheckModal open={isCheckModalOpen} {...checkModal} />
-      <RecommendQuestModal
-        open={recommendQeustModal}
-        onClose={() => setRecommendQuestModal(false)}
-        text={"잘하고 있어요! 해당 목표와 관련된 다른 퀘스트를 추천해드릴게요."}
-      />
+      <CheckModal {...checkModal} />
+      <RecommendQuestModal {...recommendQeustModal} />
     </Container>
   )
 }
