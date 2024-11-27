@@ -12,17 +12,18 @@ export const useGroupedData = () => {
   };
 
   const groupedData = Object.keys(resumeData).map((key) => ({
+    //카테고리
     id: key,
     name: categoryMapping[key]?.name || "UNKNOWN",
     icon: categoryMapping[key]?.icon || "/default_icon.png",
     items: resumeData[key].map((item) => ({
+      resume_id: item.resume_id,
       startDate: item.start_date,
       endDate: item.end_date,
       itemName: item.title,
       detail: item.content,
     })),
   }));
-
   return groupedData;
 };
 
