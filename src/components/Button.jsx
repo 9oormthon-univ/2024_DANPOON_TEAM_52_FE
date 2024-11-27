@@ -15,13 +15,13 @@ const Button = styled(ButtonComponent)`
         case "primary":
           return "linear-gradient(90deg, #E0FFC6 -16.96%, #8AFAF1 126.4%)"
         case "secondary":
-          return "#2F2F2F"
+          return "#212121"
         default:
-          return "#FFFFFF"
+          return "#3F3F3F"
       }
     }} !important;
     color: ${({ $variant }) =>
-      $variant === "secondary" ? "#FFFFFF" : "#000000"} !important;
+      $variant === "primary" ? "#000000" : "#ffffff"} !important;
     transition: all 0.5s;
     &:hover {
       filter: ${({ $variant }) => {
@@ -33,6 +33,11 @@ const Button = styled(ButtonComponent)`
             return "brightness(0.8)"
         }
       }} !important;
+    }
+    &:disabled {
+      background: #212121 !important;
+      color: #b3b3b3 !important;
+      cursor: not-allowed;
     }
   }
 `

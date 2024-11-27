@@ -23,7 +23,7 @@ export const Container = styled(ScrollContainer)`
   }
 `
 
-export default function CheckQuests({ quests, loading }) {
+export default function CheckQuests({ quests, loading, onChange }) {
   return (
     <ShadowContainer>
       <Container>
@@ -35,16 +35,18 @@ export default function CheckQuests({ quests, loading }) {
           </>
         ) : (
           <>
-            {quests.map((item, index) => (
-              <CheckListItem
-                key={index}
-                name={"quests"}
-                value={item.id}
-                defaultChecked={item.isComplete}
-              >
-                {item.title}
-              </CheckListItem>
-            ))}
+            {[...quests]
+              .sort((a, b) => a.isComplete - b.isComplete)
+              .map((item, index) => (
+                <CheckListItem
+                  key={item.id}
+                  value={item.id}
+                  defaultChecked={item.isComplete}
+                  onChange={(e) => onChange(e.target.value, e.target.checked)}
+                >
+                  {item.title}
+                </CheckListItem>
+              ))}
           </>
         )}
       </Container>

@@ -19,37 +19,3 @@ export const listContainer = styled.div`
   justify-content: start;
   padding: 40px 0;
 `
-
-export const ModalContent = styled.form`
-  display: flex;
-  width: 270px;
-  flex-direction: column;
-  padding: 20px;
-  gap: 10px;
-`
-
-export const Select = styled(SelectComponent)`
-  width: 100%;
-`
-
-export const Title = styled.h2`
-  width: 100%;
-  text-align: center;
-  color: #fff;
-  font-size: 18px;
-  font-weight: 500;
-  margin-bottom: 10px;
-`
-
-export const ButtonContainer = styled.div`
-  display: flex;
-  gap: 10px;
-  padding-top: 10px;
-`
-
-export const StyledButton = styled(ButtonComponent)`
-  flex: 1;
-  &&& {
-    padding: 10px;
-  }
-`

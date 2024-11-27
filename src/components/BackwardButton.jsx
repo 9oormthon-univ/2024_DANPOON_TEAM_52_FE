@@ -15,11 +15,11 @@ const StyledButton = styled.button`
   height: 40px;
 `
 
-export default function BackwardButton() {
+export default function BackwardButton({ ...props }) {
   const navigate = useNavigate()
   const goBack = () => navigate(-1)
   return (
-    <StyledButton onClick={goBack}>
+    <StyledButton onClick={goBack} {...props}>
       <Left />
     </StyledButton>
   )

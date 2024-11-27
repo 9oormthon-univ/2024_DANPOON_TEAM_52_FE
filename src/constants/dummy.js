@@ -182,7 +182,6 @@ export const GOALS = [
   },
 ]
 
-
 export const CATEGORIES = [
   {
     value: "자격·어학·수상",
@@ -203,5 +202,73 @@ export const CATEGORIES = [
     value: "기타",
     label: "기타",
     icon: "💬"
+  },
+]
+
+export const RECOMMENDED_GOALS = ([
+  {
+    icon: "🏫",
+    category: "경험·활동·교육",
+    title: "SpringMVC 인강 수강하기",
+    description: [
+      "직무 기초를 다질 수 있어요.",
+      "해당 분야의 78% 사용자가 설정한 목표예요",
+    ],
+    quests: [],
+  },
+  {
+    icon: "💬",
+    category: "기타",
+    title: "개발 블로그 운영하기",
+    description: [
+      "직무 기초를 다질 수 있어요.",
+      "해당 분야의 83% 사용자가 설정한 목표예요",
+    ],
+    quests: [],
+  },
+])
+export const RECOMMENDED_GOALS2 = ([
+  {
+    icon: "🏆",
+    category: "자격·어학·수상",
+    title: "회계사 자격증 취득하기",
+    description: [
+      "직무 기초를 다질 수 있어요.",
+      "해당 분야의 78% 사용자가 설정한 목표예요",
+    ],
+    quests: [],
+  },
+  {
+    icon: "🪪",
+    category: "경력",
+    title: "프로젝트 매니저 되기",
+    description: [
+      "직무 기초를 다질 수 있어요.",
+      "해당 분야의 83% 사용자가 설정한 목표예요",
+    ],
+    quests: [],
+  }
+])
+
+export const RECOMMENDED_QUESTS = [
+  {
+    title: "SpringMVC 인강 수강하기",
+  },
+  {
+    title: "개발 블로그 운영하기",
+  },
+  {
+    title: "데이터 기반 능력 강화하기",
+  },
+]
+export const RECOMMENDED_QUESTS2 = [
+  {
+    title: "회계사 자격증 취득하기",
+  },
+  {
+    title: "프로젝트 매니저 되기",
+  },
+  {
+    title: "네트워크 기반 능력 강화하기",
   },
 ]

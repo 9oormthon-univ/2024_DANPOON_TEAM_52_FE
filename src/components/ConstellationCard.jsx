@@ -28,7 +28,7 @@ const Title = styled.h3`
 `
 
 const Description = styled.p`
-  font-size: 15px;
+  font-size: 13px;
   color: #828282;
   font-weight: 500;
 `
@@ -48,8 +48,8 @@ const GradientBackground = styled.div`
   top: 50%;
   left: 30px;
   transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   flex-shrink: 0;
   background: linear-gradient(

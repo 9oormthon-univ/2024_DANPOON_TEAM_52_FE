@@ -1,6 +1,7 @@
 import { styled } from "styled-components"
 import { Flex } from "antd"
 import { Skeleton } from "antd"
+import { useRef } from "react"
 
 const ListItemContainer = styled.div`
   display: flex;
@@ -97,9 +98,14 @@ export default function ListItem({
   onDelete,
   option,
 }) {
+  const listItemRef = useRef(null)
+  const eventHandler = (func) => {
+    listItemRef.current.scrollTo({ behavior: "smooth", left: 0 })
+    func()
+  }
   return (
-    <ListItemContainer>
-      <InnerContainer onClick={onClick}>
+    <ListItemContainer ref={listItemRef}>
+      <InnerContainer onClick={() => eventHandler(onClick)}>
         <Icon>{icon}</Icon>
         <Flex vertical flex={1} align="center" gap={5}>
           <Title>{title}</Title>
@@ -108,9 +114,13 @@ export default function ListItem({
         <Label>{label}</Label>
       </InnerContainer>
       <Flex>
-        {option?.editVisible && <EditButton onClick={onEdit}>수정</EditButton>}
+        {option?.editVisible && (
+          <EditButton onClick={() => eventHandler(onEdit)}>수정</EditButton>
+        )}
         {option?.deleteVisible && (
-          <DeleteButton onClick={onDelete}>삭제</DeleteButton>
+          <DeleteButton onClick={() => eventHandler(onDelete)}>
+            삭제
+          </DeleteButton>
         )}
       </Flex>
     </ListItemContainer>

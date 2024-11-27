@@ -1,59 +1,57 @@
-import {
-  Container,
-  ModalContent,
-  Title,
-  ButtonContainer,
-  StyledButton,
-  Select,
-} from "./styled"
+import { Container } from "./styled"
 import { ReactComponent as PlusSVG } from "../../../svgs/plus.svg"
+import { ReactComponent as AiSVG } from "../../../svgs/Ai.svg"
 import Goals from "../../../components/Goals"
 import { Flex } from "antd"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { ROUTES_PATH_RECOMMENDED_GOALS } from "../../../constants/routes"
-import Modal from "../../../components/Modal"
-import TextInput from "../../../components/TextInput"
+import {
+  ROUTES_PATH_RECOMMENDED_GOALS,
+  ROUTES_PATH_GOAL,
+} from "../../../constants/routes"
+import { DEFAULT_GOAL } from "../../../constants/goal"
 import Button from "../../../components/Button"
-import { CATEGORIES } from "../../../constants/dummy"
 import { useRecoilState } from "recoil"
-import goalAtom from "../../../store/atoms/goal"
+import { myGoalsAtom } from "../../../store/atoms/goal"
+import { reqGetGoals, reqDeleteGoal } from "../../../apis/goal"
+import GoalModal from "../../../components/Modals/GoalModal"
 
 export default function ProgressGoals() {
   const navigate = useNavigate()
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
+  const [goals, setGoals] = useRecoilState(myGoalsAtom)
+  const [selectedGoal, setSelectedGoal] = useState(DEFAULT_GOAL)
   const [open, setOpen] = useState(false)
-  const [goals, setGoals] = useRecoilState(goalAtom)
-  const [selectedGoal, setSelectedGoal] = useState({
-    id: 0,
-    icon: "🏆",
-    category: "자격·어학·수상",
-    title: "",
-    quests: [],
-  })
 
+  const openModal = () => setOpen(true)
+  const closeModal = () => {
+    setOpen(false)
+    setSelectedGoal(DEFAULT_GOAL)
+  }
+  const onGoalClick = (goal) => {
+    navigate(`${ROUTES_PATH_GOAL}/${goal.id}`)
+  }
+  const onGoalEdit = (goal) => {
+    setSelectedGoal(goal)
+    openModal()
+  }
+  const onGoalDelete = async (goal) => {
+    const res = await reqDeleteGoal(goal.id)
+    if (res.status === 200) {
+      alert("목표가 삭제되었습니다.")
+      setGoals((prev) => prev.filter((v) => v.id !== goal.id))
+    } else alert("목표 삭제에 실패했습니다.")
+    setGoals((prev) => prev.filter((v) => v.id !== goal.id))
+  }
+  const goRecommendedGoals = () => {
+    navigate(ROUTES_PATH_RECOMMENDED_GOALS)
+  }
   const getGoals = async () => {
     setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-    }, 100)
-  }
-  const addGoal = async (e) => {
-    e.preventDefault()
-    const formData = new FormData(e.target)
-    console.log(CATEGORIES, selectedGoal)
-    const data = {
-      id: goals.length + 1,
-      icon: selectedGoal.icon,
-      category: selectedGoal.category,
-      title: formData.get("title"),
-      quests: [],
-    }
-    setGoals((prev) => [...prev, data])
-    setOpen(false)
-  }
-  const onEdit = (goal) => {
-    console.log(goal)
+    const res = await reqGetGoals()
+    if (res.status === 200) setGoals(res.data)
+    else alert("목표 불러오기에 실패했습니다.")
+    setLoading(false)
   }
   useEffect(() => {
     getGoals()
@@ -64,49 +62,20 @@ export default function ProgressGoals() {
         goals={goals}
         loading={loading}
         option={{ deleteVisible: true, editVisible: true }}
-        onEdit={onEdit}
+        onClick={onGoalClick}
+        onEdit={onGoalEdit}
+        onDelete={onGoalDelete}
       />
       <Flex vertical gap={14}>
-        <Button $variant="secondary" onClick={() => setOpen(true)}>
+        <Button $variant="secondary" onClick={openModal}>
           <PlusSVG stroke="#fff" /> 목표 추가하기
         </Button>
-        <Button
-          $variant="primary"
-          onClick={() => navigate(ROUTES_PATH_RECOMMENDED_GOALS)}
-        >
+        <Button $variant="primary" onClick={goRecommendedGoals}>
+          <AiSVG />
           목표 추천 받기
         </Button>
       </Flex>
-      <Modal open={open} onClose={() => setOpen(false)}>
-        <ModalContent onSubmit={addGoal}>
-          <Title>목표 추가하기</Title>
-          <Select
-            value={selectedGoal.category}
-            onChange={(v) =>
-              setSelectedGoal((v) => ({ ...v, category: v.value }))
-            }
-            options={CATEGORIES.map((v) => ({
-              value: v.value,
-              label: `${v.icon} ${v.label}`,
-            }))}
-          />
-          <TextInput
-            name="title"
-            value={selectedGoal.title}
-            onChange={(v) =>
-              setSelectedGoal((prev) => ({ ...prev, title: v.value }))
-            }
-          />
-          <ButtonContainer>
-            <StyledButton $variant="secondary" onClick={() => setOpen(false)}>
-              취소
-            </StyledButton>
-            <StyledButton $variant="primary" htmlType="submit">
-              추가
-            </StyledButton>
-          </ButtonContainer>
-        </ModalContent>
-      </Modal>
+      <GoalModal open={open} onClose={closeModal} goal={selectedGoal} />
     </Container>
   )
 }
