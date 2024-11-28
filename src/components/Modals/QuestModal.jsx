@@ -102,6 +102,7 @@ export default function QuestModal({ open, onClose, goalId, quest, onSave }) {
   }
   useEffect(() => {
     setSelectedQuest(quest || DEFAULT_QUEST)
+    setVisibleDateSetting(quest?.deadline !== undefined)
   }, [quest])
   return (
     <Modal open={open} onClose={closeModal}>

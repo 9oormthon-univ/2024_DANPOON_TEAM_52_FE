@@ -23,7 +23,7 @@ import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { reqGetGoal } from "../../apis/goal"
 import { DEFAULT_GOAL } from "../../constants/goal"
-import { reqPatchQuest } from "../../apis/quest"
+import { reqPatchQuest, reqDeleteQuest } from "../../apis/quest"
 import { CheckModal } from "../../components/Modal"
 import { reqCompleteGoal } from "../../apis/goal"
 import Confetti from "../../components/Confetti"
@@ -159,6 +159,25 @@ export default function Quest() {
       quest: { id: -1, title: "", isComplete: false },
     })
   }
+  const onEditQuest = (quest) => {
+    setQuestModal({ open: true, quest })
+  }
+  const onDeleteQuest = async (quest) => {
+    const res = await reqDeleteQuest(quest.id)
+    if (res.status === 200) {
+      setGoals((prev) => [
+        ...prev.map((g) =>
+          g.id === goal.id
+            ? {
+                ...g,
+                quests: g.quests.filter((q) => q.id !== quest.id),
+              }
+            : g
+        ),
+      ])
+    }
+  }
+
   const onCloseQuestModal = () => {
     setQuestModal({ open: false })
   }
@@ -205,6 +224,8 @@ export default function Quest() {
             <CheckQuests
               quests={goal.quests}
               onChange={onChangeQuestComplete}
+              onEdit={onEditQuest}
+              onDelete={onDeleteQuest}
             />
           </QuestContainer>
 

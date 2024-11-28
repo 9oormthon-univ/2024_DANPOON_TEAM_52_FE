@@ -19,8 +19,8 @@ export const reqPostQuest = async (data) => {
   }
 }
 
-export const reqDeleteQuest = async (goalId, questId) => {
-  return await apiClient.delete(`/quest/${questId}/goal/${goalId}`);
+export const reqDeleteQuest = async (questId) => {
+  return await apiClient.delete(`/quest/${questId}`);
 }
 
 export const reqPatchQuest = async (id, data) => {
