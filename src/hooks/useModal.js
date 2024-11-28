@@ -10,6 +10,7 @@ export function useModal() {
   const todo = useRecoilValue(calendarAtom); // Recoil 데이터
   const { getDatesInRange } = useDateRange(); // 날짜 범위 계산
 
+  //클릭한 날짜에 해당하는 일정 조회 목적
   const selectDate = (date) => {
     // 해당 날짜와 일치하는 일정 가져오기
     const matchingEvents = todo.schedule_response_dto_list.filter((event) => {
