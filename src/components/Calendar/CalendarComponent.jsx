@@ -13,8 +13,10 @@ const CalendarComponent = ({
   selectDate,
   selectedDate,
 }) => {
-  const [activeStartDate, setActiveStartDate] = useState(new Date()); // 초기값 설정
-  const [todoList, setToDoList] = useRecoilState(calendarAtom); // Recoil 상태 관리
+  //현재 보고있는 달력 상태
+  const [activeStartDate, setActiveStartDate] = useState(new Date());
+  //현재 보고있는 Month의 일정데이터
+  const [todoList, setToDoList] = useRecoilState(calendarAtom);
 
   // month 추출 (해당 month 일정 조회 목적)
   const getCurrentMonth = () => {
@@ -31,14 +33,14 @@ const CalendarComponent = ({
       try {
         const currentMonth = getCurrentMonth();
         const todos = await fetchTodo(currentMonth); // 비동기 호출
-        setToDoList(todos.data); // [퀘스트[], 일정[]] 데이터를 Recoil에 저장
-        console.log(todos.data);
+        setToDoList(todos.data); //조회한 데이터를 Recoil에 저장
+        //console.log(todos.data);
       } catch (error) {
         console.error("일정 조회 실패했습니다.", error);
       }
     };
-    fetchAndSetTodo(); // 함수 실행
-  }, [activeStartDate]); // activeStartDate 변경 시 호출
+    fetchAndSetTodo();
+  }, [activeStartDate]); //달력페이지 변경 시 호출
 
   return (
     <>

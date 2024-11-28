@@ -46,27 +46,3 @@ export const updateSchedule = async (scheduleId, updateData) => {
     console.error("일정 수정 실패:", response.status)
   }
 }
-
-/*
-{
-    "success": true,
-    "data": {
-        "quest_response_dto_list": [],
-        "schedule_response_dto_list": [
-            {
-                "schedule_id": 1,
-                "start_date": "2024-11-22",
-                "end_date": "2024-11-23",
-                "content": "test"
-            },
-            {
-                "schedule_id": 2,
-                "start_date": "2024-11-22",
-                "end_date": "2024-11-23",
-                "content": "개발"
-            }
-        ]
-    },
-    "error": null
-}
-*/
