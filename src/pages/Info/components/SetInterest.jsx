@@ -69,7 +69,7 @@ const SetInterest = ({ onClickNext, detailJob }) => {
             reqPostJob(selectedItems,navigate);
           }}
         >
-          시작하기
+          {localStorage.getItem("backURL")?"수정 완료":"시작하기"}
         </NextBtn>
       </BodyWrapper>
     </Wrapper>

@@ -14,7 +14,12 @@ export const reqPostJob = async (item, navigate) => {
     })
     if (response.status === 200) {
       console.log("일정 생성 성공:", response.data)
-      navigate('/home');
+      if(localStorage.getItem("backURL")){
+        navigate('/setting');
+      }
+      else{
+        navigate('/home')
+      }
     }
     return response
   } catch (error) {
