@@ -11,6 +11,8 @@ export const reqGetGoals = async (params) => {
       title: v.goal_title,
       isComplete: v.is_complete,
       category: v.category,
+      startDate: v.start_date,
+      completedDate: v.completed_date,
       quests: v.quests.map(q => ({
         id: q.id,
         title: q.title,
@@ -29,6 +31,8 @@ export const reqGetGoal = async (id) => {
       title: res.data.data.goal_title,
       isComplete: res.data.data.is_complete,
       category: res.data.data.category,
+      startDate: res.data.data.start_date,
+      completedDate: res.data.data.completed_date,
       quests: res.data.data.quests.map(q => ({
         id: q.id,
         title: q.title,
