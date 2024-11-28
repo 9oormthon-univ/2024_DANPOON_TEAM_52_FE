@@ -181,14 +181,15 @@ body {
   width: 100vw !important;
   background: silver !important;
 }
+
 .ant-picker-dropdown {
   width: 50vw !important; /* 화면 너비를 벗어나지 않도록 제한 */
   overflow: auto !important; /* 넘칠 경우 스크롤 표시 */
   color:white !important;
   background: silver !important;
   box-shadow: 2px 10px 30px 5px rgba(138, 250, 241, 0.3) !important;
-  
 }
+
 .ant-picker-header .ant-picker-next-icon {
   display: inline-block !important; /* 버튼을 강제로 표시 */
   visibility: visible !important;

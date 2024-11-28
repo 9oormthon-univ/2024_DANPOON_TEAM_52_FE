@@ -19,10 +19,9 @@ export const BodyWrapper = styled.div`
 
 export const Content = styled.div`
   font-size: 24px;
-  font-family: Pretendard, sans-serif;
-  font-weight: 700;
+  font-family: "Pretendard";
+  font-weight: bold;
   color: white;
-  margin-left: 32px;
   white-space: pre-wrap; /* 줄바꿈 허용 */
 `
 
@@ -30,27 +29,10 @@ export const SlideImgContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 70px;
+  margin-bottom: 40px;
   position: relative; /* 그라데이션 배치를 위해 relative */
   width: 300px; /* 컨테이너 크기 */
   height: 300px;
-
-  &::before {
-    content: "";
-    position: absolute;
-    width: 120%; /* 이미지 크기에 맞춤 */
-    height: 110%;
-    border-radius: 50%; /* 동그란 효과 */
-    background: radial-gradient(
-      circle,
-      rgba(78, 197, 199, 0.5) 0%,
-      /* 그라데이션 시작 색 (연한 청록색) */ rgba(0, 0, 0, 0) 70%
-        /* 투명한 끝 부분 */
-    );
-    z-index: 0; /* 이미지 뒤로 보내기 */
-  }
-  margin-left: 12vw;
-  margin-top: 86px;
 `
 
 export const SlideImg = styled.img`

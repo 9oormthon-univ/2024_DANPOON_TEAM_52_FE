@@ -29,8 +29,7 @@ import userAtom from "../../store/atoms/user"
 export default function Mypage() {
   const [isEdit, setIsEdit] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null)
-  //이력조회 데이터 테스트용(현재는 더미데이터)
-  const [testData, setTestData] = useRecoilState(resumeAtom);
+  const [resumeData, setResumeData] = useRecoilState(resumeAtom);
   const userData = useRecoilValue(userAtom);
   console.log(userData)
   const navigate = useNavigate()
@@ -58,27 +57,22 @@ export default function Mypage() {
         const response = await reqGetResume();
         if (response) {
           console.log("이력 조회 성공:", response.data);
-          setTestData(response.data); // Atom 갱신
+          setResumeData(response.data); // Atom 갱신
         }
       } catch (error) {
         console.error("이력 조회 실패:", error.response?.data || error.message);
       }
     };
-
     fetchResumeData();
   }, []);
-
-  useEffect(() => {
-    console.log("testData 갱신:", testData); // Atom 갱신 확인
-  }, [testData]);
   return (
     <BaseLayout>
       <Wrapper>
         <ProfileInfo>
-          <ProfileImg src="/default_profile.png" />
+          <ProfileImg src={userData.image_url} />
           <InfoGroup>
             <InfoText>
-              <Highlight>사용자</Highlight>님의 이력
+              <Highlight>{userData.nickname}</Highlight>님의 이력
             </InfoText>
             <InfoSubText>나의 이력을 추가하고 관리할 수 있어요</InfoSubText>
           </InfoGroup>
