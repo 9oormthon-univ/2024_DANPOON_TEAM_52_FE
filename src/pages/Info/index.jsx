@@ -4,7 +4,7 @@ import { useStepNavigation } from "../../hooks/useStepNavigation"
 import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { useState } from "react"
-import { jobData } from "../../constants/data"
+import { reqGetJob } from "../../apis/job"
 
 export default function InfoPage() {
   const { step, paramsInterestItem, updateStep } = useStepNavigation()
@@ -22,18 +22,24 @@ export default function InfoPage() {
       }
     }
   }
+  useEffect(()=>{
+    const response = reqGetJob();
+    setJobData(response);
+  },[])
   return (
     <>
       {step === "1" && (
         <SetJob
           onClickNext={onClickNext}
           interestItem={paramsInterestItem}
+          jobData={jobData}
         ></SetJob>
       )}
       {step === "2" && (
         <SetInterest
           interestItem={paramsInterestItem}
           onClickNext={onClickNext}
+          jobData={jobData}
         ></SetInterest>
       )}
     </>

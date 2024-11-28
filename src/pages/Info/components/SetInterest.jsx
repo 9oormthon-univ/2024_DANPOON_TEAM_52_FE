@@ -12,6 +12,7 @@ import {
   Option,
   Wrapper,
 } from "../styled"
+import { Highlight } from "../../../components/Typo"
 import { useNavigate } from "react-router-dom"
 const SetInterest = ({ onClickNext }) => {
   const { paramsInterestItem, paramsJobItem } = useStepNavigation()
@@ -25,13 +26,13 @@ const SetInterest = ({ onClickNext }) => {
     <Wrapper>
       <Content>
         <MainTitle>
-          <span style={{ color: "#8AFAF1" }}>
+          <Highlight>
             {jobData[parseInt(paramsJobItem)]}
-          </span>
+          </Highlight>
           <span style={{ color: "white" }}> 직무에서</span>
         </MainTitle>
         <MainTitle style={{ color: "white", marginBottom: "10px" }}>
-          세부 관심사를 선택해주세요
+          <Highlight>세부 직무</Highlight>를 선택해주세요
         </MainTitle>
         <Option>중복 선택이 가능해요</Option>
       </Content>
