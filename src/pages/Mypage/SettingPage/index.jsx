@@ -17,10 +17,12 @@ import { useEffect, useState } from "react"
 import NicknamePage from "../Nickname/Nickname"
 import { useRecoilValue } from "recoil"
 import userAtom from "../../../store/atoms/user"
-const SettingPage = ({ userJob }) => {
+import userJobAtom from "../../../store/atoms/userjob"
+const SettingPage = () => {
   //별명변경 모달
   const userData = useRecoilValue(userAtom)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const userJob = useRecoilValue(userJobAtom);
   const navigate = useNavigate()
   useEffect(() => {
     console.log(userJob); // 상태 갱신 확인

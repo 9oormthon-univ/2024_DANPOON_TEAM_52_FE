@@ -27,11 +27,12 @@ import resumeAtom from "../../store/atoms/resume"
 import { useRecoilState, useRecoilValue } from "recoil"
 import userAtom from "../../store/atoms/user"
 import { reqGetUserJob } from "../../apis/job"
+import userJobAtom from "../../store/atoms/userjob"
 export default function Mypage() {
-  const [userJob, setUserJob] = useState([]);
   const [isEdit, setIsEdit] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null)
   const [resumeData, setResumeData] = useRecoilState(resumeAtom)
+  const [userJob, setUserJob] = useRecoilState(userJobAtom);
   const userData = useRecoilValue(userAtom)
   const navigate = useNavigate()
   const groupedData = useGroupedData()
@@ -110,7 +111,6 @@ export default function Mypage() {
                 onClick={() => {
                   navigate("/setting")
                 }}
-                userJob={userJob}
               />
             </StyledButton>
           </NaviWrapper>
