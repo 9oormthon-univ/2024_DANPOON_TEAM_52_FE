@@ -1,49 +1,72 @@
-import React, { useState } from "react";
-import CalendarComponent from "../../components/Calendar/CalendarComponent";
-import ModalComponent from "../../components/Calendar/ModalComponent";
-import EventDetails from "../../components/Calendar/EventDetails";
-import { StyledCalendarWrapper } from "./styled";
-import BaseLayout from "../../components/BaseLayout";
-
+import React, { useEffect, useState } from "react"
+import CalendarComponent from "../../components/Calendar/CalendarComponent"
+import ModalComponent from "../../components/Calendar/ModalComponent"
+import EventDetails from "../../components/Calendar/EventDetails"
+import { StyledCalendarWrapper } from "./styled"
+import BaseLayout from "../../components/BaseLayout"
 // 분리된 훅들 가져오기
-import { useDateRange } from "../../hooks/useDateRange";
-import { useEvents } from "../../hooks/useEvents";
-import { useModal } from "../../hooks/useModal";
+import { useDateRange } from "../../hooks/useDateRange"
+import { useEvents } from "../../hooks/useEvents"
+import { useModal } from "../../hooks/useModal"
+import { createSchedule } from "../../apis/calendar"
 
 const CalendarPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [newEvent, setNewEvent] = useState({
-    title: "",
-    startDate: null,
-    endDate: null,
-  });
+  const [isEdit, setIsEdit] = useState(false);
+  const [editTodo, setEditTodo] = useState(null);
 
-  const { date, setDate, startDate, setStartDate, endDate, setEndDate, getDatesInRange } =
-    useDateRange();
-  const { events, setEvents, renderDotsForDate, questData } = useEvents();
+  const openEditModal = (todo) => {
+    setEditTodo(todo);
+    setIsEdit(true);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setEditTodo(null);
+    setIsEdit(false);
+    setIsModalOpen(false);
+  };
+
+  const {
+    date,
+    setDate,
+    startDate,
+    setStartDate,
+    endDate,
+    setEndDate,
+    getDatesInRange,
+  } = useDateRange()
+  const { renderDotsForDate } = useEvents()
 
   // 모달 및 UI 관리
-  const { showDetails, setShowDetails, selectedDate, setSelectedDate, selectDate } =
-    useModal();
+  const {
+    showDetails,
+    setShowDetails,
+    selectedDate,
+    selectDate,
+    eventsForDate,
+    todo
+  } = useModal()
 
   const handleSaveEvent = (newEvent, option) => {
-    const eventDate = new Date(newEvent);
-    const formattedDate = eventDate.toLocaleDateString("en-CA");
+    const eventDate = new Date(newEvent)
+    const formattedDate = eventDate.toLocaleDateString("en-CA")
 
     if (option === "single") {
-      setStartDate(formattedDate);
-      setEndDate(formattedDate);
+      setStartDate(formattedDate)
+      setEndDate(formattedDate)
     } else if (option === "start") {
-      setStartDate(formattedDate);
+      setStartDate(formattedDate)
     } else if (option === "end") {
-      setEndDate(formattedDate);
+      setEndDate(formattedDate)
     }
-  };
+  }
 
   const onClickAddBtn = (addData, ModalOpen) => {
-    setEvents((prev) => [...prev, addData]);
-    ModalOpen(false);
-  };
+    //setEvents((prev) => [...prev, addData]);
+    createSchedule(addData)
+    ModalOpen(false)
+  }
 
   return (
     <BaseLayout>
@@ -51,37 +74,34 @@ const CalendarPage = () => {
         <CalendarComponent
           date={date}
           onDateChange={setDate}
-          onActiveStartDateChange={(newDate) => setDate(new Date(newDate))} // 항상 Date 객체로 변환
-          renderDotsForDate={(tileDate) => renderDotsForDate(tileDate, questData)}
+          onActiveStartDateChange={(newDate) => setDate(new Date(newDate))}
+          renderDotsForDate={renderDotsForDate} // 함수 자체를 전달
           setIsModalOpen={setIsModalOpen}
           selectDate={selectDate}
-          events={events}
         />
         <ModalComponent
           isModalOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          newEvent={newEvent}
-          onTitleChange={(title) => setNewEvent({ ...newEvent, title })}
-          handleSaveEvent={handleSaveEvent}
+          onClose={closeModal}
           setIsModalOpen={setIsModalOpen}
-          events={events}
+          handleSaveEvent={handleSaveEvent}
           onClickAddBtn={onClickAddBtn}
           startDate={startDate}
           endDate={endDate}
+          editTodo={editTodo} // 수정할 일정 데이터
+          isEdit={isEdit}     // 수정 모드 여부
         />
         {showDetails && (
           <EventDetails
             setShowDetails={setShowDetails}
             selectedDate={selectedDate}
-            events={events}
-            setEvents={setEvents}
-            questData={questData}
             getDatesInRange={getDatesInRange}
+            todo={todo}
+            openEditModal={openEditModal}
           />
         )}
       </StyledCalendarWrapper>
     </BaseLayout>
-  );
-};
+  )
+}
 
-export default CalendarPage;
+export default CalendarPage

@@ -24,12 +24,15 @@ import CategoryItem from "./CategoryItem"
 import { useGroupedData, useFeedback } from "../../hooks/useMypage"
 import { reqGetResume } from "../../apis/user"
 import resumeAtom from "../../store/atoms/resume"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useRecoilValue } from "recoil"
+import userAtom from "../../store/atoms/user"
 export default function Mypage() {
   const [isEdit, setIsEdit] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null)
   //이력조회 데이터 테스트용(현재는 더미데이터)
   const [testData, setTestData] = useRecoilState(resumeAtom);
+  const userData = useRecoilValue(userAtom);
+  console.log(userData)
   const navigate = useNavigate()
   const groupedData = useGroupedData()
   const {
