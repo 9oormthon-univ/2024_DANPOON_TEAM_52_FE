@@ -10,6 +10,8 @@ export default function InfoPage() {
   const { step, paramsInterestItem, updateStep } = useStepNavigation()
   const navigate = useNavigate()
   const [jobData, setJobData] = useState(null)
+  //세부관심직무(선택한 직무에 맞게 갱신)
+  const [detailJob, setDetailJob] = useState();
   const onClickNext = (data) => {
     //jobItem주기
     updateStep("2", data)
@@ -22,10 +24,19 @@ export default function InfoPage() {
       }
     }
   }
+  //Promise가 아닌 resolved 데이터만 전달
   useEffect(()=>{
-    const response = reqGetJob();
-    setJobData(response);
+    const fetchJobList = async() =>{
+      const response = await reqGetJob();
+      const jobArray = Object.entries(response.jobs).map(([key, id]) => ({
+        category: key,
+        id: id,
+      }));
+      setJobData(jobArray);
+    } 
+    fetchJobList();
   },[])
+
   return (
     <>
       {step === "1" && (
@@ -33,13 +44,14 @@ export default function InfoPage() {
           onClickNext={onClickNext}
           interestItem={paramsInterestItem}
           jobData={jobData}
+          setDetailJob={setDetailJob}
         ></SetJob>
       )}
       {step === "2" && (
         <SetInterest
           interestItem={paramsInterestItem}
           onClickNext={onClickNext}
-          jobData={jobData}
+          detailJob={detailJob}
         ></SetInterest>
       )}
     </>

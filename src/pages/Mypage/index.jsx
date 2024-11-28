@@ -26,12 +26,13 @@ import { reqGetResume } from "../../apis/user"
 import resumeAtom from "../../store/atoms/resume"
 import { useRecoilState, useRecoilValue } from "recoil"
 import userAtom from "../../store/atoms/user"
+import { reqGetUserJob } from "../../apis/job"
 export default function Mypage() {
-  const [isEdit, setIsEdit] = useState(false);
+  const [userJob, setUserJob] = useState([]);
+  const [isEdit, setIsEdit] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null)
-  const [resumeData, setResumeData] = useRecoilState(resumeAtom);
-  const userData = useRecoilValue(userAtom);
-  console.log(userData)
+  const [resumeData, setResumeData] = useRecoilState(resumeAtom)
+  const userData = useRecoilValue(userAtom)
   const navigate = useNavigate()
   const groupedData = useGroupedData()
   const {
@@ -42,9 +43,9 @@ export default function Mypage() {
   } = useFeedback()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const onClickOption = (item) => {
-    console.log(item,"번째 항목 선택");
+    console.log(item, "번째 항목 선택")
     //선택한 항목 Id 설정
-    setSelectedOption(item); 
+    setSelectedOption(item)
     if (selectedOption === item) {
       setSelectedOption(null) // 동일한 항목 클릭 시 닫기
     } else {
@@ -54,17 +55,27 @@ export default function Mypage() {
   useEffect(() => {
     const fetchResumeData = async () => {
       try {
-        const response = await reqGetResume();
+        const response = await reqGetResume()
         if (response) {
-          console.log("이력 조회 성공:", response.data);
-          setResumeData(response.data); // Atom 갱신
+          console.log("이력 조회 성공:", response.data)
+          setResumeData(response.data) // Atom 갱신
         }
       } catch (error) {
-        console.error("이력 조회 실패:", error.response?.data || error.message);
+        console.error("이력 조회 실패:", error.response?.data || error.message)
       }
-    };
-    fetchResumeData();
-  }, []);
+    }
+    fetchResumeData()
+  }, [])
+  useEffect(() => {
+    const fetchUserJob = async () => {
+      const response = await reqGetUserJob()
+      if (response) {
+        console.log(response.data.data)
+        setUserJob(response.data.data)
+      }
+    }
+    fetchUserJob()
+  }, [])
   return (
     <BaseLayout>
       <Wrapper>
@@ -99,6 +110,7 @@ export default function Mypage() {
                 onClick={() => {
                   navigate("/setting")
                 }}
+                userJob={userJob}
               />
             </StyledButton>
           </NaviWrapper>

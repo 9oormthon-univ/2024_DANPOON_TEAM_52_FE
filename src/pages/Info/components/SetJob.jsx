@@ -12,7 +12,7 @@ import {
   Option,
 } from "../styled"
 import { Highlight } from "../../../components/Typo"
-const SetJob = ({ onClickNext, jobData }) => {
+const SetJob = ({ onClickNext, jobData, setDetailJob }) => {
   const { selectItem, jobItem, setJobItem } = usePickedItems()
   const { paramsJobItem } = useStepNavigation()
   useEffect(() => {
@@ -33,19 +33,21 @@ const SetJob = ({ onClickNext, jobData }) => {
       <BodyWrapper>
         {jobData && (
           <GridWrapper>
-            {jobData?.jobs?.map((el, index) => (
+            {jobData?.map((el, index) => (
               <ItemBtn
                 isSelected={parseInt(jobItem) === index}
                 key={index}
                 data-index={index}
-                onClick={(event) => selectItem(event)}
+                onClick={(event) => {
+                  selectItem(event);
+                  setDetailJob(el.id);
+                }}
               >
-                {el}
+                {el.category}
               </ItemBtn>
             ))}
           </GridWrapper>
         )}
-
         <NextBtn
           $variant={jobItem.length !== 0 ? "default" : "secondary"}
           disabled={jobItem.length === 0 ? true : false}
