@@ -25,7 +25,7 @@ import { reqGetGoal } from "../../apis/goal"
 import { DEFAULT_GOAL } from "../../constants/goal"
 import { reqPatchQuest } from "../../apis/quest"
 import { CheckModal } from "../../components/Modal"
-import { reqPatchGoal } from "../../apis/goal"
+import { reqCompleteGoal } from "../../apis/goal"
 import Confetti from "../../components/Confetti"
 import Loading from "../../components/Loading"
 import { ROUTES_PATH_GOAL_CONSTELLATION } from "../../constants/routes"
@@ -55,7 +55,7 @@ export default function Quest() {
     confirmText: "완료",
     onCancle: () => setCheckModal({ open: false }),
     onConfirm: async () => {
-      const res = await reqPatchGoal(goal.id, { is_complete: true })
+      const res = await reqCompleteGoal(goal.id)
       if (res.status === 200) {
         setGoals((prev) =>
           prev.map((g) => (g.id === goal.id ? { ...g, isComplete: true } : g))
@@ -89,7 +89,7 @@ export default function Quest() {
     onClose: () => setRecommendQuestModal({ open: false }),
   }
   const onChangeQuestComplete = async (questId, isComplete) => {
-    const res = await reqPatchQuest(questId, { is_complete: isComplete })
+    const res = await reqPatchQuest(questId, { isComplete })
     if (res.status === 200) {
       setGoals((prev) => [
         ...prev.map((g) =>

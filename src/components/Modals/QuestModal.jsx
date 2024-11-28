@@ -12,6 +12,7 @@ import { Flex } from "antd"
 import Switch from "../../components/Switch"
 import DatePicker from "../../components/DatePicker"
 import { motion, AnimatePresence } from "framer-motion"
+import dayjs from "dayjs"
 
 export const ModalContent = styled.form`
   display: flex;
@@ -75,7 +76,7 @@ export default function QuestModal({ open, onClose, goalId, quest, onSave }) {
     const apiFunc = isEdit ? reqPatchQuest : reqPostQuest
     let res
     if (isEdit) res = await apiFunc(selectedQuest.id, selectedQuest)
-    else res = await apiFunc(selectedQuest)
+    else res = await apiFunc({ ...selectedQuest, goalId })
     if (res.status === 200) {
       setGoals((prev) => {
         return [
@@ -127,12 +128,12 @@ export default function QuestModal({ open, onClose, goalId, quest, onSave }) {
               exit={{ height: 0 }}
             >
               <DatePicker
-                value={selectedQuest.deadline}
+                value={selectedQuest.deadline && dayjs(selectedQuest.deadline)}
                 onChange={(date) => {
-                  setSelectedQuest((prev) => ({ ...prev, deadline: date }))
+                  const dateStr = date.format("YYYY-MM-DD")
+                  setSelectedQuest((prev) => ({ ...prev, deadline: dateStr }))
                 }}
                 placeholder="날짜를 선택하세요"
-                format="YYYY-MM-DD"
               />
             </HiddenContainer>
           )}
