@@ -241,6 +241,12 @@ body {
   background-color: #184149 !important;
   opacity: 1;
 }
+.ant-picker-content
+  .ant-picker-cell.ant-picker-cell-today
+  .ant-picker-cell-inner::before {
+  border: #184149 2px solid !important;
+}
+
 .ant-picker-footer {
   display: none !important;
 }
