@@ -5,7 +5,7 @@ import { Switch } from "antd";
 export const Wrapper = styled.div`
     display:flex;
     flex-direction:column;
-    padding: 46px 19px 0px 19px;
+    padding: 70px 25px 0px 25px;
 `
 export const Group = styled.div`
     display:flex;

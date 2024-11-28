@@ -53,7 +53,7 @@ const SettingPage = () => {
         <SettingItem>
           <ItemName>희망직무</ItemName>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <Content>직무</Content>
+            <Content>{userJob[0].category}</Content>
             <Content
               style={{ fontSize: "10px", marginTop: "5px", color: "#C3C3C3" }}
             >
@@ -72,10 +72,10 @@ const SettingPage = () => {
           </Option>
         </SettingItem>
         <SettingItem>
-          <ItemName>맞춤형 지침</ItemName>
+          <ItemName>맞춤형 설정</ItemName>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <Content style={{ fontSize: "11px" }}>
-              입력시 목표 추천에 도움이 돼요
+              개인화된 목표 추천에 도움
             </Content>
           </div>
           <Option
