@@ -8,6 +8,10 @@ import ButtonComponent from "../Button"
 import Modal from "../Modal"
 import TextInput from "../TextInput"
 import { reqPatchQuest, reqPostQuest } from "../../apis/quest"
+import { Flex } from "antd"
+import Switch from "../../components/Switch"
+import DatePicker from "../../components/DatePicker"
+import { motion, AnimatePresence } from "framer-motion"
 
 export const ModalContent = styled.form`
   display: flex;
@@ -30,6 +34,19 @@ export const Title = styled.h2`
   margin-bottom: 10px;
 `
 
+export const Label = styled.label`
+  color: #fff;
+  font-size: 15px;
+  font-weight: 500;
+`
+
+export const HiddenContainer = styled(motion.div)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+`
+
 export const ButtonContainer = styled.div`
   display: flex;
   gap: 10px;
@@ -46,41 +63,35 @@ export const StyledButton = styled(ButtonComponent)`
 export default function QuestModal({ open, onClose, goalId, quest, onSave }) {
   const setGoals = useSetRecoilState(myGoalsAtom)
   const [selectedQuest, setSelectedQuest] = useState(quest || DEFAULT_QUEST)
+  const [visibleDateSetting, setVisibleDateSetting] = useState(false)
 
   const closeModal = () => {
     onClose()
+    setVisibleDateSetting(false)
     setSelectedQuest(DEFAULT_QUEST)
   }
   const onQuestSave = async () => {
-    console.log(selectedQuest)
     const isEdit = quest.id !== -1
     const apiFunc = isEdit ? reqPatchQuest : reqPostQuest
     let res
     if (isEdit) res = await apiFunc(selectedQuest.id, selectedQuest)
     else res = await apiFunc(selectedQuest)
-    if (res.status === 201 || res.status === 200) {
+    if (res.status === 200) {
       setGoals((prev) => {
-        if (isEdit)
-          return [
-            ...prev.map((g) =>
-              g.id === goalId
-                ? {
-                    ...g,
-                    quests: g.quests.map((q) =>
-                      q.id === selectedQuest.id ? { ...q, selectedQuest } : q
-                    ),
-                  }
-                : g
-            ),
-          ]
-        else
-          return [
-            ...prev.map((g) =>
-              g.id === goalId
-                ? { ...g, quests: [...g.quests, selectedQuest] }
-                : g
-            ),
-          ]
+        return [
+          ...prev.map((g) =>
+            g.id === goalId
+              ? {
+                  ...g,
+                  quests: isEdit
+                    ? g.quests.map((q) =>
+                        q.id === selectedQuest.id ? { ...q, selectedQuest } : q
+                      )
+                    : [...g.quests, res.data],
+                }
+              : g
+          ),
+        ]
       })
     } else {
       alert("목표 저장에 실패했습니다.")
@@ -92,7 +103,7 @@ export default function QuestModal({ open, onClose, goalId, quest, onSave }) {
     setSelectedQuest(quest || DEFAULT_QUEST)
   }, [quest])
   return (
-    <Modal open={open} onClose={onClose}>
+    <Modal open={open} onClose={closeModal}>
       <ModalContent>
         <Title>퀘스트 {selectedQuest.id === -1 ? "추가" : "수정"}하기</Title>
         <TextInput
@@ -101,11 +112,37 @@ export default function QuestModal({ open, onClose, goalId, quest, onSave }) {
             setSelectedQuest((prev) => ({ ...prev, title: e.target.value }))
           }
         />
+        <Flex justify="space-between" align="center">
+          <Label>기한 설정</Label>
+          <Switch
+            checked={visibleDateSetting}
+            onChange={(checked) => setVisibleDateSetting(checked)}
+          />
+        </Flex>
+        <AnimatePresence>
+          {visibleDateSetting && (
+            <HiddenContainer
+              initial={{ height: 0 }}
+              animate={{ height: "auto" }}
+              exit={{ height: 0 }}
+            >
+              <DatePicker
+                value={selectedQuest.deadline}
+                onChange={(date) => {
+                  const dateStr = `${date.$y}-${date.$M}-${date.$D}`
+                  setSelectedQuest((prev) => ({ ...prev, deadline: dateStr }))
+                }}
+                placeholder="날짜를 선택하세요"
+                format="YYYY-MM-DD"
+              />
+            </HiddenContainer>
+          )}
+        </AnimatePresence>
         <ButtonContainer>
           <StyledButton $variant="secondary" onClick={closeModal}>
             취소
           </StyledButton>
-          <StyledButton $variant="primary" onClick={onQuestSave}>
+          <StyledButton onClick={onQuestSave}>
             {selectedQuest.id === -1 ? "추가" : "수정"}
           </StyledButton>
         </ButtonContainer>

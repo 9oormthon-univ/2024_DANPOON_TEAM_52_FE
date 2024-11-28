@@ -184,22 +184,22 @@ export const GOALS = [
 
 export const CATEGORIES = [
   {
-    value: "자격·어학·수상",
+    value: "CERTIFICATION",
     label: "자격·어학·수상",
     icon: "🏆"
   },
   {
-    value: "경험·활동·교육",
+    value: "EXPERIENCE",
     label: "경험·활동·교육",
     icon: "🏫"
   },
   {
-    value: "경력",
+    value: "CAREER",
     label: "경력",
     icon: "🪪"
   },
   {
-    value: "기타",
+    value: "ETC",
     label: "기타",
     icon: "💬"
   },
