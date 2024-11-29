@@ -181,6 +181,7 @@ body {
 .ant-picker-header .ant-picker-next-icon {
   display: inline-block !important; /* 버튼을 강제로 표시 */
   visibility: visible !important;
+}
 .ant-picker-dropdown {
   inset-inline-start: calc(50% - 144px) !important;
   border-radius: 10px;
