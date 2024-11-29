@@ -6,7 +6,27 @@ export const reqGetUser = async () => {
       return response.data; // 필요한 데이터만 반환
 }
 
-//사용자정보수정 /api/member patch
+//사용자정보수정
+export const reqUpdateUser = async (item, file) => {
+  try {
+    // FormData 객체 생성
+    const formData = new FormData();
+    // JSON 데이터를 문자열로 변환 후 FormData에 추가
+    formData.append("requestDto", JSON.stringify(item));
+    if (file) {
+      formData.append("file", file);
+    }
+    const response = await apiClient.patch(`/member`, formData);
+
+    // 성공 시 페이지 새로고침
+    window.location.reload();
+    return response;
+
+  } catch (error) {
+    console.error("유저정보 수정 실패:", error.response?.data || error.message);
+    throw error; 
+  }
+};
 
 //이력조회(resumeData)
 export const reqGetResume = async () => {

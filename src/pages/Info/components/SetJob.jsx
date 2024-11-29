@@ -1,4 +1,3 @@
-import { jobData } from "../../../constants/data"
 import { useStepNavigation } from "../../../hooks/useStepNavigation"
 import { usePickedItems } from "../../../hooks/usePickedItems"
 import { useEffect } from "react"
@@ -10,8 +9,10 @@ import {
   MainTitle,
   NextBtn,
   Wrapper,
+  Option,
 } from "../styled"
-const SetJob = ({ onClickNext }) => {
+import { Highlight } from "../../../components/Typo"
+const SetJob = ({ onClickNext, jobData, setDetailJob }) => {
   const { selectItem, jobItem, setJobItem } = usePickedItems()
   const { paramsJobItem } = useStepNavigation()
   useEffect(() => {
@@ -19,29 +20,34 @@ const SetJob = ({ onClickNext }) => {
       setJobItem(paramsJobItem)
     }
   }, [])
+
   return (
     <Wrapper>
       <Content>
         <MainTitle>
-          <span style={{ color: "#8AFAF1" }}>희망 직무</span>
-          <span>를</span>
+          <Highlight>희망 직군</Highlight>을
         </MainTitle>
-        <br />
-        <MainTitle style={{ color: "white" }}>선택해주세요</MainTitle>
+        <MainTitle style={{ marginBottom: "10px" }}>선택해주세요</MainTitle>
+        <Option>마이페이지에서 언제든지 수정할 수 있어요</Option>
       </Content>
       <BodyWrapper>
-        <GridWrapper>
-          {jobData.map((el, index) => (
-            <ItemBtn
-              isSelected={parseInt(jobItem) === index}
-              key={index}
-              data-index={index}
-              onClick={(event) => selectItem(event)}
-            >
-              {el}
-            </ItemBtn>
-          ))}
-        </GridWrapper>
+        {jobData && (
+          <GridWrapper>
+            {jobData?.map((el, index) => (
+              <ItemBtn
+                isSelected={parseInt(jobItem) === index}
+                key={index}
+                data-index={index}
+                onClick={(event) => {
+                  selectItem(event);
+                  setDetailJob(el.id);
+                }}
+              >
+                {el.category}
+              </ItemBtn>
+            ))}
+          </GridWrapper>
+        )}
         <NextBtn
           $variant={jobItem.length !== 0 ? "default" : "secondary"}
           disabled={jobItem.length === 0 ? true : false}
@@ -57,4 +63,4 @@ const SetJob = ({ onClickNext }) => {
   )
 }
 
-export default SetJob;
+export default SetJob

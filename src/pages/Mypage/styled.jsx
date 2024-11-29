@@ -37,7 +37,8 @@ export const FeedbackBtn = styled(Button)`
 &&&{
     width: 100%;
     height: 32px;
-    font-size; 15px;
+    color: black !important;
+    font-size: 15px;
     background: linear-gradient(90deg, #E0FFC6 0%, #8AFAF1 100%) !important;
 }
 `

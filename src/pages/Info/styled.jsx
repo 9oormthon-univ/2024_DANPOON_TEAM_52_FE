@@ -52,7 +52,7 @@ export const ItemBtn = styled.button`
   border-radius: 10px;
   padding: 10px 5px;
   width: calc(33.333% - 10px);
-  font-family: Pretendard;
+  font-family: "Pretendard";
 `
 
 export const NextBtn = styled(Button)`
@@ -66,6 +66,6 @@ export const NextBtn = styled(Button)`
 export const Option = styled.div`
   color: #747474;
   font-weight: bold;
-  font-family: Pretendard;
-  font-size: 18px;
+  font-family: "Pretendard";
+  font-size: 15px;
 `

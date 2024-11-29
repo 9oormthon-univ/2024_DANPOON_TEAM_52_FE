@@ -6,13 +6,16 @@ import { TabsContent, TabsHeader } from "../../components/Tabs"
 import ProgressGoals from "./ProgressGoals"
 import CompleteGoals from "./CompleteGoals"
 import GradientBackground from "../../components/GradientBackground"
-
+import userAtom from "../../store/atoms/user"
+import { useRecoilState } from "recoil"
+import { reqGetUser } from "../../apis/user"
 export default function Home() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const tab = searchParams.get("tab")
   const defaultTab = tab === "complete" ? 1 : 0
   const [selectedTab, setSelectedTab] = useState(defaultTab)
+  const [userData, setUserData] = useRecoilState(userAtom);
   const tabs = [
     {
       title: "진행중인 목표",
@@ -31,6 +34,20 @@ export default function Home() {
     })
     navigate({ search: `?${searchParmas.toString()}` }, { replace: true })
   }, [selectedTab])
+  useEffect(()=>{
+    const fetchUserData = async () => {
+      try {
+        const response = await reqGetUser();
+        if (response) {
+          console.log("유저정보 조회 성공:", response.data);
+          setUserData(response.data); // Atom 갱신
+        }
+      } catch (error) {
+        console.error("유저정보 조회 실패:", error.response?.data || error.message);
+      }
+    };
+    fetchUserData();
+  }, [])
   return (
     <>
       <BaseLayout>

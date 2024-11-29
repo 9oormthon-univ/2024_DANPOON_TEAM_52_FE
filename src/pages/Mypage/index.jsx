@@ -26,13 +26,14 @@ import { reqGetResume } from "../../apis/user"
 import resumeAtom from "../../store/atoms/resume"
 import { useRecoilState, useRecoilValue } from "recoil"
 import userAtom from "../../store/atoms/user"
+import { reqGetUserJob } from "../../apis/job"
+import userJobAtom from "../../store/atoms/userjob"
 export default function Mypage() {
-  const [isEdit, setIsEdit] = useState(false);
+  const [isEdit, setIsEdit] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null)
-  //이력조회 데이터 테스트용(현재는 더미데이터)
-  const [testData, setTestData] = useRecoilState(resumeAtom);
-  const userData = useRecoilValue(userAtom);
-  console.log(userData)
+  const [resumeData, setResumeData] = useRecoilState(resumeAtom)
+  const [userJob, setUserJob] = useRecoilState(userJobAtom);
+  const userData = useRecoilValue(userAtom)
   const navigate = useNavigate()
   const groupedData = useGroupedData()
   const {
@@ -43,9 +44,9 @@ export default function Mypage() {
   } = useFeedback()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const onClickOption = (item) => {
-    console.log(item,"번째 항목 선택");
+    console.log(item, "번째 항목 선택")
     //선택한 항목 Id 설정
-    setSelectedOption(item); 
+    setSelectedOption(item)
     if (selectedOption === item) {
       setSelectedOption(null) // 동일한 항목 클릭 시 닫기
     } else {
@@ -55,30 +56,35 @@ export default function Mypage() {
   useEffect(() => {
     const fetchResumeData = async () => {
       try {
-        const response = await reqGetResume();
+        const response = await reqGetResume()
         if (response) {
-          console.log("이력 조회 성공:", response.data);
-          setTestData(response.data); // Atom 갱신
+          console.log("이력 조회 성공:", response.data)
+          setResumeData(response.data) // Atom 갱신
         }
       } catch (error) {
-        console.error("이력 조회 실패:", error.response?.data || error.message);
+        console.error("이력 조회 실패:", error.response?.data || error.message)
       }
-    };
-
-    fetchResumeData();
-  }, []);
-
+    }
+    fetchResumeData()
+  }, [])
   useEffect(() => {
-    console.log("testData 갱신:", testData); // Atom 갱신 확인
-  }, [testData]);
+    const fetchUserJob = async () => {
+      const response = await reqGetUserJob()
+      if (response) {
+        console.log(response.data.data)
+        setUserJob(response.data.data)
+      }
+    }
+    fetchUserJob()
+  }, [])
   return (
     <BaseLayout>
       <Wrapper>
         <ProfileInfo>
-          <ProfileImg src="/default_profile.png" />
+          <ProfileImg src={userData.image_url} />
           <InfoGroup>
             <InfoText>
-              <Highlight>사용자</Highlight>님의 이력
+              <Highlight>{userData.nickname}</Highlight>님의 이력
             </InfoText>
             <InfoSubText>나의 이력을 추가하고 관리할 수 있어요</InfoSubText>
           </InfoGroup>
