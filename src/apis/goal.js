@@ -17,6 +17,7 @@ export const reqGetGoals = async (params) => {
         id: q.id,
         title: q.title,
         isComplete: q.is_complete,
+        deadline: q.deadline,
       }))
     }))
   }
@@ -37,6 +38,7 @@ export const reqGetGoal = async (id) => {
         id: q.id,
         title: q.title,
         isComplete: q.is_complete,
+        deadline: q.deadline,
       }))
     }
   }
