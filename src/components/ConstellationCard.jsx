@@ -1,6 +1,8 @@
 import styled from "styled-components"
 import { Flex } from "antd"
 import Constellation from "./Constellation"
+import { CATEGORIES } from "../constants/dummy"
+import { formatFullDateKorean } from "../utils/dateFormat"
 
 const Container = styled.div`
   display: flex;
@@ -16,15 +18,20 @@ const Icon = styled.span`
 `
 
 const Label = styled.span`
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
   color: #c3c3c3;
 `
 
 const Title = styled.h3`
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 500;
   color: #fff;
+`
+const Date = styled.span`
+  font-size: 11px;
+  font-weight: 500;
+  color: #c3c3c3;
 `
 
 const Description = styled.p`
@@ -66,10 +73,14 @@ export default function ConstellationCard({ goal }) {
   return (
     <Container>
       <Flex gap={10} align="center">
-        <Icon>{goal.icon}</Icon>
-        <Label>{goal.label}</Label>
+        <Icon>{CATEGORIES.find((c) => c.value === goal.category).icon}</Icon>
+        <Label>{CATEGORIES.find((c) => c.value === goal.category).label}</Label>
       </Flex>
       <Title>{goal.title}</Title>
+      <Date>
+        {formatFullDateKorean(goal.startDate)} ~{" "}
+        {formatFullDateKorean(goal.completedDate)}
+      </Date>
       <Description>{goal.description}</Description>
       <ConsterllationContainer>
         <Constellation id={goal.id} starCount={goal.quests.length} />

@@ -48,8 +48,16 @@ export default function ProgressGoals() {
   }
   const getGoals = async () => {
     setLoading(true)
-    const res = await reqGetGoals()
-    if (res.status === 200) setGoals(res.data)
+    const res = await reqGetGoals({ is_complete: false })
+    if (res.status === 200)
+      setGoals((prev) => {
+        const goals = [...res.data]
+        if (prev.length === 0) return goals
+        prev.forEach((goal) => {
+          if (!goals.find((v) => v.id === goal.id)) goals.push(goal)
+        })
+        return goals
+      })
     else alert("목표 불러오기에 실패했습니다.")
     setLoading(false)
   }
@@ -59,7 +67,7 @@ export default function ProgressGoals() {
   return (
     <Container>
       <Goals
-        goals={goals}
+        goals={goals.filter((v) => !v.isComplete)}
         loading={loading}
         option={{ deleteVisible: true, editVisible: true }}
         onClick={onGoalClick}
