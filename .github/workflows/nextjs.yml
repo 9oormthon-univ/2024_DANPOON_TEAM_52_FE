@@ -1,0 +1,30 @@
+name: Deploy React to Orbit Frontend Server
+
+on:
+  push:
+    branches: ["main"]
+jobs:
+  build:
+    environment:
+      name: deploy-production
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Install dependencies
+        run: npm i
+      - name: Generate Environment Variables File for Production
+        run: |
+          echo "REACT_APP_API_BASE_URL=${{ secrets.API_BASE_URL }}" >> .env.production
+          echo "REACT_APP_KAKAO_JS_KEY=${{ secrets.KAKAO_JS_KEY }}" >> .env.production
+          echo "REACT_APP_BASE_URL=${{ secrets.BASE_URL }}" >> .env.production
+      - name: Build with React
+        run: npm run build
+      - name: Rename Build Folder
+        run: mv build orbit
+      - name: Send Build Files
+        run: scp -r -P ${{ secrets.SERVER_PORT }} orbit ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_PATH }}
