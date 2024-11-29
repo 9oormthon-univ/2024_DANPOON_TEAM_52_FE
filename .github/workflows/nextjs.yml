@@ -26,7 +26,9 @@ jobs:
         run: npm run build
       - name: Rename Build Folder
         run: mv build orbit
-      - name: Add SSH Key to Known Hosts
-        run: ssh-keyscan -H ${{ secrets.SERVER_IP }} >> ~/.ssh/known_hosts
+    - name: Set up SSH key
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
       - name: Send Build Files
         run: scp -r -P ${{ secrets.SERVER_PORT }} orbit ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_PATH }}
