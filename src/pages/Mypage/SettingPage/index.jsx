@@ -15,16 +15,15 @@ import StyledSwitch from "../../../components/Switch"
 import { useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react"
 import NicknamePage from "../Nickname/Nickname"
-import { useRecoilValue } from "recoil"
+import { useRecoilValue} from "recoil"
 import userAtom from "../../../store/atoms/user"
-import { useLocation } from "react-router-dom"
+import userJobAtom from "../../../store/atoms/userjob"
 const SettingPage = () => {
   //별명변경 모달
   const userData = useRecoilValue(userAtom)
-  const location = useLocation()
+  const userJob = useRecoilValue(userJobAtom)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const navigate = useNavigate()
-  const { userJob } = location.state || {} // state에서 userJob 추출
   useEffect(() => {
     console.log(userJob); // 상태 갱신 확인
   }, [userJob]);
@@ -54,7 +53,7 @@ const SettingPage = () => {
         <SettingItem>
           <ItemName>희망직무</ItemName>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <Content>{userJob[0].category}</Content>
+            <Content>{userJob[0]?.category}</Content>
             <Content
               style={{ fontSize: "10px", marginTop: "5px", color: "#C3C3C3" }}
             >

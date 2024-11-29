@@ -7,15 +7,14 @@ export const reqGetJob = async () => {
 }
 //사용자 상세 직무 추가
 export const reqPostJob = async (item, navigate) => {
-
   try {
     const response = await apiClient.put("/job/member", {
       ids: item,
     })
     if (response.status === 200) {
-      console.log("일정 생성 성공:", response.data)
+      console.log("직무추가 성공:", response.data)
       if(localStorage.getItem("backURL")){
-        navigate('/setting');
+        navigate("/setting");
       }
       else{
         navigate('/home')

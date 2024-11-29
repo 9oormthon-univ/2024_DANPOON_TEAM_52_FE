@@ -109,7 +109,7 @@ export default function Mypage() {
             <StyledButton>
               <Setting
                 onClick={() => {
-                  navigate("/setting", { state: { userJob: userJob } }) // state로 데이터 전달
+                  navigate("/setting")
                 }}
               />
             </StyledButton>
