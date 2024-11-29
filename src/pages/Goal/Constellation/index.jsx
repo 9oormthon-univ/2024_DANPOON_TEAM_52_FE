@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import {
   Container,
   HorizontalContainer,
@@ -13,43 +13,34 @@ import ConstellationCard from "../../../components/ConstellationCard"
 import ShadowContainer from "../../../components/ShadowContainer"
 import { ReactComponent as CheckSVG } from "../../../svgs/Check.svg"
 import { ROUTES_PATH_HOME } from "../../../constants/routes"
+import { myGoalsAtom } from "../../../store/atoms/goal"
+import { useRecoilState } from "recoil"
+import { useEffect, useState } from "react"
+import { reqGetGoal } from "../../../apis/goal"
+import { DEFAULT_GOAL } from "../../../constants/goal"
 
 export default function GoalConstellation() {
+  const { id } = useParams()
   const navigate = useNavigate()
   const goCompleteGoal = () => navigate(`${ROUTES_PATH_HOME}?tab=complete`)
-  const goal = {
-    id: 99,
-    icon: "🏫",
-    label: "별자리 이름",
-    title: "Spring Security 인강 듣기",
-    description: "2024년 11월 10일 - 2024년 12월 31일",
-    quests: [
-      {
-        id: 1,
-        title: "SecurityFilterChain 공부하기",
-      },
-      {
-        id: 2,
-        title: "Authentication 이해하기",
-      },
-      {
-        id: 3,
-        title: "Authentication Provider 공부하기",
-      },
-      {
-        id: 4,
-        title: "Authentication Manager 공부하기",
-      },
-      {
-        id: 5,
-        title: "SecurityContextHolder 이해하기",
-      },
-      {
-        id: 6,
-        title: "jwt 구현해보기",
-      },
-    ],
+  const [goals, setGoals] = useRecoilState(myGoalsAtom)
+  const [goal, setGoal] = useState(DEFAULT_GOAL)
+
+  const getGoal = async () => {
+    const existGoal = goals.find((g) => g.id === +id)
+    if (existGoal) {
+      setGoal(existGoal)
+      return
+    }
+    const res = await reqGetGoal(id)
+    if (res.status === 200) {
+      setGoals((prev) => [...prev, res.data])
+      setGoal(res.data)
+    } else alert("목표를 불러오는데 실패했습니다.")
   }
+  useEffect(() => {
+    getGoal()
+  }, [])
   return (
     <BaseLayout>
       <Container>

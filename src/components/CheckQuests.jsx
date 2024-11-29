@@ -23,7 +23,13 @@ export const Container = styled(ScrollContainer)`
   }
 `
 
-export default function CheckQuests({ quests, loading, onChange }) {
+export default function CheckQuests({
+  quests,
+  loading,
+  onChange,
+  onEdit,
+  onDelete,
+}) {
   return (
     <ShadowContainer>
       <Container>
@@ -43,6 +49,12 @@ export default function CheckQuests({ quests, loading, onChange }) {
                   value={item.id}
                   defaultChecked={item.isComplete}
                   onChange={(e) => onChange(e.target.value, e.target.checked)}
+                  onEdit={() => onEdit?.(item)}
+                  onDelete={() => onDelete?.(item)}
+                  option={{
+                    deleteVisible: true,
+                    editVisible: true,
+                  }}
                 >
                   {item.title}
                 </CheckListItem>

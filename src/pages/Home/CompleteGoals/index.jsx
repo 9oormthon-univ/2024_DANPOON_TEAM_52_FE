@@ -11,71 +11,47 @@ import {
   ConsterllationContainer,
 } from "./styled"
 import { ROUTES_PATH_GOAL_CONSTELLATION } from "../../../constants/routes"
+import { useEffect, useState } from "react"
+import { reqGetGoals } from "../../../apis/goal"
+import { useRecoilState } from "recoil"
+import { myGoalsAtom } from "../../../store/atoms/goal"
+import { CATEGORIES } from "../../../constants/dummy"
 
 export default function CompleteGoals() {
   const navigate = useNavigate()
+  const [loading, setLoading] = useState(false)
+  const [goals, setGoals] = useRecoilState(myGoalsAtom)
+  const data = goals.reduce((acc, goal) => {
+    if (!goal.isComplete) return acc
+    const dateSplit = goal.completedDate.split("-")
+    const month = `${dateSplit[0]}년 ${dateSplit[1]}월`
+    if (!acc[month]) acc[month] = []
+    acc[month].push(goal)
+    return acc
+  }, {})
 
   const onClickConstellation = (id) => {
     navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${id}`)
   }
 
-  const data = {
-    "10월": [
-      {
-        id: 99,
-        title: "Spring Security 인강 듣기",
-        starCount: 6,
-      },
-      {
-        title: "영상 처리 공부하기",
-        starCount: 5,
-      },
-      {
-        title: "ADSP 자격증 따기",
-        starCount: 4,
-      },
-      {
-        title: "고전 영상 처리 알고리즘 공부하기",
-        starCount: 6,
-      },
-    ],
-    "11월": [
-      {
-        title: "백엔드 공부하기",
-        starCount: 5,
-      },
-      {
-        title: "Spring Data Jpa 기초 공부하기",
-        starCount: 4,
-      },
-      {
-        title: "sql 기초 공부하기",
-        starCount: 5,
-      },
-      {
-        title: "Spring Security 인강 듣기",
-        starCount: 5,
-      },
-    ],
-    "12월": [
-      {
-        title: "html 태그 공부하기",
-        starCount: 5,
-      },
-      {
-        title: "css 공부하기",
-        starCount: 4,
-      },
-      {
-        title: "tailwind 찍먹해보기",
-        starCount: 3,
-      },
-      {
-        title: "html 프로젝트 진행해보기",
-        starCount: 10,
-      },
-    ],
+  const getGoals = async () => {
+    setLoading(true)
+    const res = await reqGetGoals({ is_complete: true })
+    if (res.status === 200)
+      setGoals((prev) => {
+        const goals = [...res.data]
+        if (prev.length === 0) return goals
+        prev.forEach((goal) => {
+          if (!goals.find((v) => v.id === goal.id)) goals.push(goal)
+        })
+        return goals
+      })
+    else alert("목표 불러오기에 실패했습니다.")
+    setLoading(false)
   }
+  useEffect(() => {
+    getGoals()
+  }, [])
   return (
     <ShadowContainer>
       <Container>
@@ -84,14 +60,17 @@ export default function CompleteGoals() {
             <Month>{month}</Month>
             {data[month].map((goal, index) => (
               <GoalContainer
-                key={index}
+                key={goal.id}
                 direction={index % 2 ? "right" : "left"}
               >
                 <ConsterllationContainer
-                  onClick={() => onClickConstellation(index)}
+                  onClick={() => onClickConstellation(goal.id)}
                 >
-                  <GoalTitle>{goal.title}</GoalTitle>
-                  <Constellation id={index} starCount={goal.starCount} />
+                  <GoalTitle>
+                    {CATEGORIES.find((c) => c.value === goal.category).icon}{" "}
+                    {goal.title}
+                  </GoalTitle>
+                  <Constellation id={goal.id} starCount={goal.quests.length} />
                 </ConsterllationContainer>
               </GoalContainer>
             ))}

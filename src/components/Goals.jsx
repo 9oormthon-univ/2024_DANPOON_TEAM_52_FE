@@ -2,6 +2,7 @@ import { styled } from "styled-components"
 import ScrollContainer from "./ScrollContainer"
 import ListItem, { ListItemSkeleton } from "./ListItem"
 import ShadowContainer from "./ShadowContainer"
+import { CATEGORIES } from "../constants/dummy"
 
 const Container = styled(ScrollContainer)`
   display: flex;
@@ -46,9 +47,9 @@ export default function Goals({
       <Container>
         {loading ? (
           <>
-            <ListItemSkeleton active={true} />
-            <ListItemSkeleton active={true} />
-            <ListItemSkeleton active={true} />
+            {new Array(3).fill(0).map((_, index) => (
+              <ListItemSkeleton key={index} active={true} />
+            ))}
           </>
         ) : (
           <>
@@ -59,10 +60,10 @@ export default function Goals({
                 퀘스트를 진행하여 달성해요
               </Placeholder>
             ) : (
-              goals.map((item, index) => (
+              goals.map((item) => (
                 <ListItem
                   key={item.id}
-                  icon={item.icon}
+                  icon={CATEGORIES.find((v) => v.value === item.category)?.icon}
                   title={item.title}
                   label={
                     option?.labelHidden

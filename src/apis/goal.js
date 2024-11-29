@@ -1,39 +1,81 @@
 import apiClient from "./apiClient";
-import { GOALS, RECOMMENDED_GOALS, RECOMMENDED_GOALS2 } from "../constants/dummy"
+import { CATEGORIES, GOALS, RECOMMENDED_GOALS, RECOMMENDED_GOALS2 } from "../constants/dummy"
 
 export const reqGetGoals = async (params) => {
   const searchParams = new URLSearchParams(params);
-  // return await apiClient.get(`/goal?${searchParams}`);
+  const res = await apiClient.get(`/goal?${searchParams}`);
   return {
-    status: 200,
-    data: params?.id ? GOALS.find(v => v.id === +params.id) : GOALS
-  };
+    status: res.status,
+    data: res.data.data.map(v => ({
+      id: v.member_goal_id,
+      title: v.goal_title,
+      isComplete: v.is_complete,
+      category: v.category,
+      startDate: v.start_date,
+      completedDate: v.completed_date,
+      quests: v.quests.map(q => ({
+        id: q.id,
+        title: q.title,
+        isComplete: q.is_complete,
+        deadline: q.deadline,
+      }))
+    }))
+  }
+}
+
+export const reqGetGoal = async (id) => {
+  const res = await apiClient.get(`/goal/${id}`);
+  return {
+    status: res.status,
+    data: {
+      id: res.data.data.member_goal_id,
+      title: res.data.data.goal_title,
+      isComplete: res.data.data.is_complete,
+      category: res.data.data.category,
+      startDate: res.data.data.start_date,
+      completedDate: res.data.data.completed_date,
+      quests: res.data.data.quests.map(q => ({
+        id: q.id,
+        title: q.title,
+        isComplete: q.is_complete,
+        deadline: q.deadline,
+      }))
+    }
+  }
 }
 
 export const reqPostGoal = async (data) => {
-  // return await apiClient.post("/goal", data);
+  const body = {
+    title: data.title,
+    category: CATEGORIES.find(v => v.value === data.category)?.label,
+  }
+  const res = await apiClient.post("/goal", body);
   return {
-    status: 201,
+    status: res.status,
     data: {
-      ...data,
-      id: new Date().getTime(),
+      id: res.data.data.member_goal_id,
+      title: res.data.data.goal_title,
+      isComplete: res.data.data.is_complete,
+      category: res.data.data.category,
+      quests: []
     }
   }
 }
 
 export const reqPatchGoal = async (id, data) => {
-  // return await apiClient.patch("/goal", data);
+  const body = {
+    title: data.title,
+    category: CATEGORIES.find(v => v.value === data.category)?.label,
+  }
+  const res = await apiClient.patch(`/goal/${id}`, body);
   return {
-    status: 200,
+    status: res.status,
     data
   }
 }
 
 export const reqDeleteGoal = async (id) => {
-  // return await apiClient.delete(`/goal/${id}`);
-  return {
-    status: 200,
-  }
+  return await apiClient.delete(`/goal/${id}`);
 }
 
 export const reqGetRecommendGoals = async () => {
@@ -42,4 +84,8 @@ export const reqGetRecommendGoals = async () => {
     status: 200,
     data: Math.random() > 0.5 ? RECOMMENDED_GOALS : RECOMMENDED_GOALS2
   }
+}
+
+export const reqCompleteGoal = async (id) => {
+  return await apiClient.patch(`/goal/complete/${id}`);
 }

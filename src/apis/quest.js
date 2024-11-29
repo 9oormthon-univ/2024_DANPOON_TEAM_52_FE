@@ -7,25 +7,35 @@ export const reqGetQuests = async (params) => {
 }
 
 export const reqPostQuest = async (data) => {
-  // return await apiClient.post("/quest", data);
+  const body = {
+    goal_id: data.goalId,
+    title: data.title,
+    deadline: data.deadline,
+  }
+  const res = await apiClient.post("/quest", body);
   return {
-    status: 201,
-    data: {
-      ...data,
-      id: new Date().getTime(),
-    }
+    status: res.status,
+    data: res.data.data
   }
 }
 
-export const reqDeleteQuest = async (goalId, questId) => {
-  return await apiClient.delete(`/quest/${questId}/goal/${goalId}`);
+export const reqDeleteQuest = async (questId) => {
+  return await apiClient.delete(`/quest/${questId}`);
 }
 
 export const reqPatchQuest = async (id, data) => {
-  // return await apiClient.patch(`/quest/${id}`, data);
+  const body = {
+    title: data.title,
+    deadline: data.deadline,
+    is_complete: data.isComplete,
+  }
+  const res = await apiClient.patch(`/quest/${id}`, body);
   return {
-    status: 200,
-    data: {}
+    status: res.status,
+    data: {
+      id,
+      ...data
+    }
   }
 }
 

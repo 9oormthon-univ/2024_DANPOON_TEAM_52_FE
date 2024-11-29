@@ -21,16 +21,17 @@ import { useRecoilState } from "recoil"
 import { myGoalsAtom } from "../../store/atoms/goal"
 import { useEffect, useState } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { reqGetGoals } from "../../apis/goal"
+import { reqGetGoal } from "../../apis/goal"
 import { DEFAULT_GOAL } from "../../constants/goal"
-import { reqPatchQuest } from "../../apis/quest"
+import { reqPatchQuest, reqDeleteQuest } from "../../apis/quest"
 import { CheckModal } from "../../components/Modal"
-import { reqPatchGoal } from "../../apis/goal"
+import { reqCompleteGoal } from "../../apis/goal"
 import Confetti from "../../components/Confetti"
 import Loading from "../../components/Loading"
 import { ROUTES_PATH_GOAL_CONSTELLATION } from "../../constants/routes"
 import RecommendQuestModal from "../../components/Modals/RecommendQuestModal"
 import QuestModal from "../../components/Modals/QuestModal"
+import { CATEGORIES } from "../../constants/dummy"
 
 export default function Quest() {
   const { id } = useParams()
@@ -54,7 +55,7 @@ export default function Quest() {
     confirmText: "완료",
     onCancle: () => setCheckModal({ open: false }),
     onConfirm: async () => {
-      const res = await reqPatchGoal(goal.id, { is_complete: true })
+      const res = await reqCompleteGoal(goal.id)
       if (res.status === 200) {
         setGoals((prev) =>
           prev.map((g) => (g.id === goal.id ? { ...g, isComplete: true } : g))
@@ -88,7 +89,7 @@ export default function Quest() {
     onClose: () => setRecommendQuestModal({ open: false }),
   }
   const onChangeQuestComplete = async (questId, isComplete) => {
-    const res = await reqPatchQuest(questId, { is_complete: isComplete })
+    const res = await reqPatchQuest(questId, { isComplete })
     if (res.status === 200) {
       setGoals((prev) => [
         ...prev.map((g) =>
@@ -134,7 +135,7 @@ export default function Quest() {
       setGoal(existGoal)
       return
     }
-    const res = await reqGetGoals({ id })
+    const res = await reqGetGoal(id)
     if (res.status === 200) {
       if (res.data.isComplete) {
         navigate(`${ROUTES_PATH_GOAL_CONSTELLATION}/${goal.id}`, {
@@ -155,9 +156,28 @@ export default function Quest() {
   const onClickAddQuest = () => {
     setQuestModal({
       open: true,
-      quest: { id: -1, title: "" },
+      quest: { id: -1, title: "", isComplete: false },
     })
   }
+  const onEditQuest = (quest) => {
+    setQuestModal({ open: true, quest })
+  }
+  const onDeleteQuest = async (quest) => {
+    const res = await reqDeleteQuest(quest.id)
+    if (res.status === 200) {
+      setGoals((prev) => [
+        ...prev.map((g) =>
+          g.id === goal.id
+            ? {
+                ...g,
+                quests: g.quests.filter((q) => q.id !== quest.id),
+              }
+            : g
+        ),
+      ])
+    }
+  }
+
   const onCloseQuestModal = () => {
     setQuestModal({ open: false })
   }
@@ -165,6 +185,11 @@ export default function Quest() {
   useEffect(() => {
     getGoal()
   }, [])
+
+  useEffect(() => {
+    if (goals.length === 0) return
+    setGoal(goals.find((g) => g.id === +id))
+  }, [goals])
   return (
     <Container>
       {!goal ? (
@@ -175,8 +200,12 @@ export default function Quest() {
             <BackwardButton />
             <HeaderFlex>
               <Flex gap={10} align="end">
-                <Icon>{goal.icon}</Icon>
-                <Label>{goal.category}</Label>
+                <Icon>
+                  {CATEGORIES.find((c) => c.value === goal.category).icon}
+                </Icon>
+                <Label>
+                  {CATEGORIES.find((c) => c.value === goal.category).label}
+                </Label>
               </Flex>
               <Title>{goal.title}</Title>
             </HeaderFlex>
@@ -195,6 +224,8 @@ export default function Quest() {
             <CheckQuests
               quests={goal.quests}
               onChange={onChangeQuestComplete}
+              onEdit={onEditQuest}
+              onDelete={onDeleteQuest}
             />
           </QuestContainer>
 
@@ -210,7 +241,7 @@ export default function Quest() {
       )}
       <CheckModal {...checkModal} />
       <RecommendQuestModal {...recommendQeustModal} />
-      <QuestModal onClose={onCloseQuestModal} goalId={id} {...questModal} />
+      <QuestModal onClose={onCloseQuestModal} goalId={+id} {...questModal} />
     </Container>
   )
 }
