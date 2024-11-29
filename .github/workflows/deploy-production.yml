@@ -30,5 +30,10 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Add SSH key to known hosts
+        run: |
+          mkdir -p ~/.ssh
+          ssh-keyscan -H ${SERVER_IP} >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
       - name: Send Build Files
         run: scp -r -P ${{ secrets.SERVER_PORT }} orbit ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:${{ secrets.SERVER_PATH }}
