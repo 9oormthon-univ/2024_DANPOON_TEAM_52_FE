@@ -17,13 +17,14 @@ import { useEffect, useState } from "react"
 import NicknamePage from "../Nickname/Nickname"
 import { useRecoilValue } from "recoil"
 import userAtom from "../../../store/atoms/user"
-import userJobAtom from "../../../store/atoms/userjob"
+import { useLocation } from "react-router-dom"
 const SettingPage = () => {
   //별명변경 모달
   const userData = useRecoilValue(userAtom)
+  const location = useLocation()
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const userJob = useRecoilValue(userJobAtom);
   const navigate = useNavigate()
+  const { userJob } = location.state || {} // state에서 userJob 추출
   useEffect(() => {
     console.log(userJob); // 상태 갱신 확인
   }, [userJob]);
