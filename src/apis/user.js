@@ -7,21 +7,11 @@ export const reqGetUser = async () => {
 }
 
 //사용자정보수정
-export const reqUpdateUser = async (item, file) => {
+export const reqUpdateUser = async (data) => {
   try {
-    // FormData 객체 생성
-    const formData = new FormData();
-    // JSON 데이터를 문자열로 변환 후 FormData에 추가
-    formData.append("requestDto", JSON.stringify(item));
-    if (file) {
-      formData.append("file", file);
-    }
-    const response = await apiClient.patch(`/member`, formData);
-
-    // 성공 시 페이지 새로고침
-    window.location.reload();
+    const response = await apiClient.patch(`/member`, data);
+    console.log(response)
     return response;
-
   } catch (error) {
     console.error("유저정보 수정 실패:", error.response?.data || error.message);
     throw error; 

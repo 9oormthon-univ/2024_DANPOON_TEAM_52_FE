@@ -1,4 +1,3 @@
-import { ModalInput } from "../../Calendar/styled"
 import {
   Wrapper,
   Group,
@@ -10,101 +9,126 @@ import {
   Option,
   Content,
 } from "./styled"
+import BaseLayout from "../../../components/BaseLayout"
 import BackwardButton from "../../../components/BackwardButton"
 import StyledSwitch from "../../../components/Switch"
 import { useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import NicknamePage from "../Nickname/Nickname"
-import { useRecoilValue} from "recoil"
+import { useRecoilValue, useRecoilState } from "recoil"
 import userAtom from "../../../store/atoms/user"
 import userJobAtom from "../../../store/atoms/userjob"
+import userInfoAtom from "../../../store/atoms/userinfo"
+import promptAtom from "../../../store/atoms/prompt"
+import { reqUpdateUser } from "../../../apis/user"
 const SettingPage = () => {
-  //별명변경 모달
-  const userData = useRecoilValue(userAtom)
-  const userJob = useRecoilValue(userJobAtom)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isSetting, setIsSetiing] = useState({
+    is_notification: false,
+    is_profile: false,
+  })
   const navigate = useNavigate()
-  useEffect(() => {
-    console.log(userJob); // 상태 갱신 확인
-  }, [userJob]);
+  //사용자이름, 프로필사진 데이터
+  const userData = useRecoilValue(userAtom)
+  //사용자가 선택 직무 데이터
+  const userJob = useRecoilValue(userJobAtom)
+  //사용자 설정정보 저장
+  const [userInfo, setUserInfo] = useRecoilState(userInfoAtom)
+  //맞춤형지침 데이터
+  const prompt = useRecoilValue(promptAtom)
+  const handleSaveUserInfo = () => {
+    //사용자 설정 정보 저장
+    setUserInfo({
+      nickname: userData.nickname,
+      known_prompt: prompt.known_prompt,
+      help_prompt: prompt.help_prompt,
+      is_notification: isSetting.is_notification,
+      is_profile: isSetting.is_profile,
+    })
+    reqUpdateUser(userInfo);
+  }
   return (
-    <Wrapper>
-      <BackwardButton
-        onClick={() => {
-          navigate("/mypage")
-        }}
-      />
-      <Group>
-        <Title>환경설정</Title>
-        <Profile src={userData.img} />
-      </Group>
-      <SettingItemWrapper>
-        <SettingItem>
-          <ItemName>별명</ItemName>
-          <Content>{userData.nickname}</Content>
-          <Option
-            onClick={() => {
-              setIsModalOpen(true)
-            }}
-          >
-            변경
-          </Option>
-        </SettingItem>
-        <SettingItem>
-          <ItemName>희망직무</ItemName>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <Content>{userJob[0]?.category}</Content>
-            <Content
-              style={{ fontSize: "10px", marginTop: "5px", color: "#C3C3C3" }}
+    <BaseLayout>
+      <Wrapper>
+        <BackwardButton onClick={handleSaveUserInfo} />
+        <Group>
+          <Title>환경설정</Title>
+          <Profile src={userData.image_url} />
+        </Group>
+        <SettingItemWrapper>
+          <SettingItem>
+            <ItemName>별명</ItemName>
+            <Content>{userData.nickname}</Content>
+            <Option
+              onClick={() => {
+                setIsModalOpen(true)
+              }}
             >
-              {userJob && userJob.length > 0
-                ? userJob.map((job) => job.name).join(", ")
-                : "직무 정보 없음"}
-            </Content>
-          </div>
-          <Option
-            onClick={() => {
-              localStorage.setItem("backURL", "/setting")
-              navigate("/info")
-            }}
-          >
-            변경
-          </Option>
-        </SettingItem>
-        <SettingItem>
-          <ItemName>맞춤형 설정</ItemName>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <Content style={{ fontSize: "11px" }}>
-              개인화된 목표 추천에 도움
-            </Content>
-          </div>
-          <Option
-            onClick={() => {
-              navigate("/custom")
-            }}
-          >
-            입력
-          </Option>
-        </SettingItem>
-        <SettingItem>
-          <ItemName>알림설정</ItemName>
-          <StyledSwitch />
-        </SettingItem>
-        <SettingItem>
-          <ItemName>공개설정</ItemName>
-          <StyledSwitch />
-        </SettingItem>
-        <SettingItem>
-          <ItemName>이력공개</ItemName>
-          <StyledSwitch />
-        </SettingItem>
-        <SettingItem>
-          <ItemName>목표공개</ItemName>
-          <StyledSwitch />
-        </SettingItem>
-      </SettingItemWrapper>
-      {isModalOpen && <NicknamePage setIsModalOpen={setIsModalOpen} />}
-    </Wrapper>
+              변경
+            </Option>
+          </SettingItem>
+          <SettingItem>
+            <ItemName>희망직무</ItemName>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <Content>{userJob[0]?.category}</Content>
+              <Content
+                style={{ fontSize: "10px", marginTop: "5px", color: "#C3C3C3" }}
+              >
+                {userJob && userJob.length > 0
+                  ? userJob.map((job) => job.name).join(", ")
+                  : "직무 정보 없음"}
+              </Content>
+            </div>
+            <Option
+              onClick={() => {
+                localStorage.setItem("backURL", "/setting")
+                navigate("/info")
+              }}
+            >
+              변경
+            </Option>
+          </SettingItem>
+          <SettingItem>
+            <ItemName>맞춤형 설정</ItemName>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <Content style={{ fontSize: "11px" }}>
+                개인화된 목표 추천에 도움
+              </Content>
+            </div>
+            <Option
+              onClick={() => {
+                navigate("/custom")
+              }}
+            >
+              입력
+            </Option>
+          </SettingItem>
+          <SettingItem>
+            <ItemName>알림설정</ItemName>
+            <StyledSwitch
+              onChange={(checked) => {
+                setIsSetiing((prev) => ({
+                  ...prev,
+                  is_notification: checked,
+                }))
+              }}
+            />
+          </SettingItem>
+          <SettingItem>
+            <ItemName>이력공개</ItemName>
+            <StyledSwitch
+              onChange={(checked) => {
+                setIsSetiing((prev) => ({
+                  ...prev,
+                  is_profile: checked,
+                }))
+              }}
+            />
+          </SettingItem>
+        </SettingItemWrapper>
+        {isModalOpen && <NicknamePage setIsEdit={setIsModalOpen} />}
+      </Wrapper>
+    </BaseLayout>
   )
 }
 export default SettingPage
