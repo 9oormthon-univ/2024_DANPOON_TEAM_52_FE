@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import CalendarComponent from "../../components/Calendar/CalendarComponent"
 import ModalComponent from "../../components/Calendar/ModalComponent"
 import EventDetails from "../../components/Calendar/EventDetails"
-import { StyledCalendarWrapper } from "./styled"
+import { StyledCalendarWrapper, Container } from "./styled"
 import BaseLayout from "../../components/BaseLayout"
 // 분리된 훅들 가져오기
 import { useDateRange } from "../../hooks/useDateRange"
@@ -11,21 +11,21 @@ import { useModal } from "../../hooks/useModal"
 import { createSchedule } from "../../apis/calendar"
 
 const CalendarPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEdit, setIsEdit] = useState(false);
-  const [editTodo, setEditTodo] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isEdit, setIsEdit] = useState(false)
+  const [editTodo, setEditTodo] = useState(null)
 
   const openEditModal = (todo) => {
-    setEditTodo(todo);
-    setIsEdit(true);
-    setIsModalOpen(true);
-  };
+    setEditTodo(todo)
+    setIsEdit(true)
+    setIsModalOpen(true)
+  }
 
   const closeModal = () => {
-    setEditTodo(null);
-    setIsEdit(false);
-    setIsModalOpen(false);
-  };
+    setEditTodo(null)
+    setIsEdit(false)
+    setIsModalOpen(false)
+  }
 
   const {
     date,
@@ -45,7 +45,7 @@ const CalendarPage = () => {
     selectedDate,
     selectDate,
     eventsForDate,
-    todo
+    todo,
   } = useModal()
 
   const handleSaveEvent = (newEvent, option) => {
@@ -70,7 +70,8 @@ const CalendarPage = () => {
 
   return (
     <BaseLayout>
-      <StyledCalendarWrapper>
+      <Container>
+        {/* <StyledCalendarWrapper> */}
         <CalendarComponent
           date={date}
           onDateChange={setDate}
@@ -79,6 +80,7 @@ const CalendarPage = () => {
           setIsModalOpen={setIsModalOpen}
           selectDate={selectDate}
         />
+        {/* </StyledCalendarWrapper> */}
         <ModalComponent
           isModalOpen={isModalOpen}
           onClose={closeModal}
@@ -88,7 +90,7 @@ const CalendarPage = () => {
           startDate={startDate}
           endDate={endDate}
           editTodo={editTodo} // 수정할 일정 데이터
-          isEdit={isEdit}     // 수정 모드 여부
+          isEdit={isEdit} // 수정 모드 여부
         />
         {showDetails && (
           <EventDetails
@@ -99,7 +101,7 @@ const CalendarPage = () => {
             openEditModal={openEditModal}
           />
         )}
-      </StyledCalendarWrapper>
+      </Container>
     </BaseLayout>
   )
 }
