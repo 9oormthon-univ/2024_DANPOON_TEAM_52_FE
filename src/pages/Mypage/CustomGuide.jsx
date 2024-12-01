@@ -5,14 +5,14 @@ import { useNavigate } from "react-router-dom"
 import { Text, Highlight } from "../../components/Typo"
 import { useRecoilValue, useRecoilState } from "recoil"
 import { useState } from "react"
-import userAtom from "../../store/atoms/user"
+import userInfoAtom from "../../store/atoms/userinfo"
 import promptAtom from "../../store/atoms/prompt"
 const CustomGuidePage = () => {
   const [prompt, setPrompt] = useState({
     prompt1: "",
     prompt2: "",
   })
-  const userData = useRecoilValue(userAtom)
+  const userData = useRecoilValue(userInfoAtom)
   //사용자 프롬프트 데이터
   const [userPrompt, setUserPrompt] = useRecoilState(promptAtom);
   const navigate = useNavigate()
@@ -49,7 +49,7 @@ const CustomGuidePage = () => {
         subText="희망 직무와 관련된 프로젝트나 연습을 하고 계신 게 있다면 알려주세요."
         start="1"
       />
-      <InfoBox keyname="prompt1" setPrompt={setPrompt}
+      <InfoBox keyname="prompt1" setPrompt={setPrompt} defaultValue={userData.known_prompt}
       />
 
       <TextSection
@@ -58,7 +58,7 @@ const CustomGuidePage = () => {
         start="2"
       />
 
-      <InfoBox keyname="prompt2" setPrompt={setPrompt}/>
+      <InfoBox keyname="prompt2" setPrompt={setPrompt} defaultValue={userData.help_prompt}/>
 
       {/* 저장하기 버튼 */}
       <SaveButton onClick={handleSave} />
@@ -100,7 +100,7 @@ const TextSection = ({ question, subText, start }) => (
 export default CustomGuidePage
 
 // 공통적으로 사용하는 스타일 컴포넌트를 분리
-const InfoBox = ({ children, keyname, setPrompt}) => (
+const InfoBox = ({ defaultValue, keyname, setPrompt}) => (
   <div
     style={{
       width: "100%",
@@ -124,6 +124,7 @@ const InfoBox = ({ children, keyname, setPrompt}) => (
         resize: "none",
         padding: "20px 20px",
       }}
+      defaultValue={defaultValue}
       onChange={(event) =>
         setPrompt((prev) => ({
           ...prev,

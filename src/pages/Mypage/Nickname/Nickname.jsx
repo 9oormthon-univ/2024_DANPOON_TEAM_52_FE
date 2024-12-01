@@ -6,14 +6,14 @@ import {
   ModalButtonGroup,
   ModalButton,
 } from "../../Calendar/styled"
-import userAtom from "../../../store/atoms/user"
-import { useSetRecoilState } from "recoil"
+import userInfoAtom from "../../../store/atoms/userinfo"
+import { useRecoilState } from "recoil"
 const NicknamePage = ({ setIsEdit }) => {
   const [nickname, setNickName] = useState("")
-  const setUserData = useSetRecoilState(userAtom)
+  const [userInfo, setUserInfoData] = useRecoilState(userInfoAtom)
   //변경된 닉네임 아톰에 갱신
   const handleSaveNickname = () => {
-    setUserData((prevData) => ({
+    setUserInfoData((prevData) => ({
       ...prevData,
       nickname: nickname,
     }))
@@ -27,7 +27,6 @@ const NicknamePage = ({ setIsEdit }) => {
           style={{
             height: "40px",
           }}
-          value={nickname}
           onChange={(e) => setNickName(e.target.value)}
         />
         <ModalButtonGroup>

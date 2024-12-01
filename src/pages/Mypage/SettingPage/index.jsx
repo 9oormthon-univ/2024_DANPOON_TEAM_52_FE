@@ -13,7 +13,7 @@ import BaseLayout from "../../../components/BaseLayout"
 import BackwardButton from "../../../components/BackwardButton"
 import StyledSwitch from "../../../components/Switch"
 import { useNavigate } from "react-router-dom"
-import { useState } from "react"
+import { useState, useRef } from "react"
 import NicknamePage from "../Nickname/Nickname"
 import { useRecoilValue, useRecoilState } from "recoil"
 import userAtom from "../../../store/atoms/user"
@@ -30,22 +30,22 @@ const SettingPage = () => {
   const navigate = useNavigate()
   //사용자이름, 프로필사진 데이터
   const userData = useRecoilValue(userAtom)
-  //사용자가 선택 직무 데이터
+  //사용자 직무 저장
   const userJob = useRecoilValue(userJobAtom)
   //사용자 설정정보 저장
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom)
   //맞춤형지침 데이터
   const prompt = useRecoilValue(promptAtom)
-  const handleSaveUserInfo = () => {
-    //사용자 설정 정보 저장
-    setUserInfo({
-      nickname: userData.nickname,
+  const handleSaveUserInfo = async () => {
+    const updatedData = {
+      nickname: userInfo.nickname,
       known_prompt: prompt.known_prompt,
       help_prompt: prompt.help_prompt,
       is_notification: isSetting.is_notification,
       is_profile: isSetting.is_profile,
-    })
-    reqUpdateUser(userInfo);
+    }
+    setUserInfo(updatedData) // Recoil 상태 업데이트
+    await reqUpdateUser(userInfo) // API 호출
   }
   return (
     <BaseLayout>
@@ -58,7 +58,7 @@ const SettingPage = () => {
         <SettingItemWrapper>
           <SettingItem>
             <ItemName>별명</ItemName>
-            <Content>{userData.nickname}</Content>
+            <Content>{userInfo.nickname}</Content>
             <Option
               onClick={() => {
                 setIsModalOpen(true)
@@ -118,6 +118,7 @@ const SettingPage = () => {
             <ItemName>이력공개</ItemName>
             <StyledSwitch
               onChange={(checked) => {
+                console.log(checked)
                 setIsSetiing((prev) => ({
                   ...prev,
                   is_profile: checked,
