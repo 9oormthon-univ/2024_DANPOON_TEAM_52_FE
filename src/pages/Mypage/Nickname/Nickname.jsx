@@ -1,8 +1,24 @@
-import React, { useState } from "react"
-import { ModalOverlay, ModalContent, ModalInput, ModalButtonGroup, ModalButton} from "../../Calendar/styled"
-
-const NicknamePage = ({ setIsModalOpen }) => {
-    const [nickname, setNickName] = useState("");
+import React, { useEffect, useState } from "react"
+import {
+  ModalOverlay,
+  ModalContent,
+  ModalInput,
+  ModalButtonGroup,
+  ModalButton,
+} from "../../Calendar/styled"
+import userInfoAtom from "../../../store/atoms/userinfo"
+import { useRecoilState } from "recoil"
+const NicknamePage = ({ setIsEdit }) => {
+  const [nickname, setNickName] = useState("")
+  const [userInfo, setUserInfoData] = useRecoilState(userInfoAtom)
+  //변경된 닉네임 아톰에 갱신
+  const handleSaveNickname = () => {
+    setUserInfoData((prevData) => ({
+      ...prevData,
+      nickname: nickname,
+    }))
+    setIsEdit(false)
+  }
   return (
     <ModalOverlay>
       <ModalContent onClick={(e) => e.stopPropagation()}>
@@ -11,12 +27,17 @@ const NicknamePage = ({ setIsModalOpen }) => {
           style={{
             height: "40px",
           }}
-          value={nickname}
           onChange={(e) => setNickName(e.target.value)}
         />
         <ModalButtonGroup>
-          <ModalButton onClick={() => setIsModalOpen(false)}>취소</ModalButton>
-          <ModalButton onClick={()=>{/*닉네임변경 api*/ setIsModalOpen(false)}}>완료</ModalButton>
+          <ModalButton onClick={() => setIsEdit(false)}>취소</ModalButton>
+          <ModalButton
+            onClick={() => {
+              handleSaveNickname();
+            }}
+          >
+            완료
+          </ModalButton>
         </ModalButtonGroup>
       </ModalContent>
     </ModalOverlay>

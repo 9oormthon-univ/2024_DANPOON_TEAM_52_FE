@@ -3,15 +3,28 @@ import { Wrapper } from "../Mypage/SettingPage/styled"
 import BackwardButton from "../../components/BackwardButton"
 import { useNavigate } from "react-router-dom"
 import { Text, Highlight } from "../../components/Typo"
-import { useRecoilValue } from "recoil"
-import userAtom from "../../store/atoms/user"
-
+import { useRecoilValue, useRecoilState } from "recoil"
+import { useState } from "react"
+import userInfoAtom from "../../store/atoms/userinfo"
+import promptAtom from "../../store/atoms/prompt"
 const CustomGuidePage = () => {
-  const userData = useRecoilValue(userAtom)
+  const [prompt, setPrompt] = useState({
+    prompt1: "",
+    prompt2: "",
+  })
+  const userData = useRecoilValue(userInfoAtom)
+  //사용자 프롬프트 데이터
+  const [userPrompt, setUserPrompt] = useRecoilState(promptAtom);
   const navigate = useNavigate()
 
   const handleSave = () => {
-    console.log("저장하기 버튼 클릭") // 버튼 동작 구현
+    setUserPrompt({
+      known_prompt:prompt.prompt1,
+      help_prompt:prompt.prompt2
+    })
+    console.log(prompt)
+    alert("맞춤형설정이 완료되었습니다");
+    navigate("/setting");
   }
 
   return (
@@ -36,14 +49,16 @@ const CustomGuidePage = () => {
         subText="희망 직무와 관련된 프로젝트나 연습을 하고 계신 게 있다면 알려주세요."
         start="1"
       />
-      <InfoBox/>
+      <InfoBox keyname="prompt1" setPrompt={setPrompt} defaultValue={userData.known_prompt}
+      />
 
       <TextSection
         question="오르빗에게 어떤 부분에서 더 도움받고 싶나요?"
         subText="ex. 구체적으로 어떤 목표를 추천받고 싶어요. 실무 경험을 쌓으려면 어떤 방법이 있을지 알고 싶어요."
         start="2"
       />
-      <InfoBox />
+
+      <InfoBox keyname="prompt2" setPrompt={setPrompt} defaultValue={userData.help_prompt}/>
 
       {/* 저장하기 버튼 */}
       <SaveButton onClick={handleSave} />
@@ -85,7 +100,7 @@ const TextSection = ({ question, subText, start }) => (
 export default CustomGuidePage
 
 // 공통적으로 사용하는 스타일 컴포넌트를 분리
-const InfoBox = ({ children }) => (
+const InfoBox = ({ defaultValue, keyname, setPrompt}) => (
   <div
     style={{
       width: "100%",
@@ -93,10 +108,30 @@ const InfoBox = ({ children }) => (
       background: "#262827",
       borderRadius: "15px",
       marginBottom: "39px",
-      border:"1px solid black"
+      border: "1px solid black",
     }}
   >
-    {children}
+    <textarea
+      style={{
+        width: "100%",
+        height: "100%",
+        background: "transparent",
+        border: "none",
+        color: "#fff",
+        fontFamily: "Pretendard",
+        fontSize: "14px",
+        outline: "none",
+        resize: "none",
+        padding: "20px 20px",
+      }}
+      defaultValue={defaultValue}
+      onChange={(event) =>
+        setPrompt((prev) => ({
+          ...prev,
+          [keyname]: event.target.value,
+        }))
+      }
+    />
   </div>
 )
 

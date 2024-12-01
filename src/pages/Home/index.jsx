@@ -6,7 +6,7 @@ import { TabsContent, TabsHeader } from "../../components/Tabs"
 import ProgressGoals from "./ProgressGoals"
 import CompleteGoals from "./CompleteGoals"
 import GradientBackground from "../../components/GradientBackground"
-import userAtom from "../../store/atoms/user"
+import userInfoAtom from "../../store/atoms/userinfo"
 import { useRecoilState } from "recoil"
 import { reqGetUser } from "../../apis/user"
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
   const tab = searchParams.get("tab")
   const defaultTab = tab === "complete" ? 1 : 0
   const [selectedTab, setSelectedTab] = useState(defaultTab)
-  const [userData, setUserData] = useRecoilState(userAtom);
+  const [userData, setUserData] = useRecoilState(userInfoAtom);
   const tabs = [
     {
       title: "진행중인 목표",

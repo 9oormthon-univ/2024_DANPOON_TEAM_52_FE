@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { Text } from "../../../components/Typo";
-import { Switch } from "antd";
 
 export const Wrapper = styled.div`
     display:flex;
