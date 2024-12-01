@@ -39,8 +39,8 @@ const SetJob = ({ onClickNext, jobData, setDetailJob }) => {
                 key={index}
                 data-index={index}
                 onClick={(event) => {
-                  selectItem(event);
-                  setDetailJob(el.id);
+                  selectItem(event)
+                  setDetailJob(el.id)
                 }}
               >
                 {el.category}

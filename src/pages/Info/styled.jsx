@@ -9,12 +9,12 @@ export const Wrapper = styled.div`
   overflow: hidden;
   width: 100%;
   height: 100%;
-   background: radial-gradient(
-      circle,
-      rgba(78, 197, 199, 0.2) 0%,
-      /* 그라데이션 시작 색 (연한 청록색) */ rgba(0, 0, 0, 0) 70%
-        /* 투명한 끝 부분 */
-    );
+  background: radial-gradient(
+    circle,
+    rgba(78, 197, 199, 0.2) 0%,
+    /* 그라데이션 시작 색 (연한 청록색) */ rgba(0, 0, 0, 0) 70%
+      /* 투명한 끝 부분 */
+  );
 `
 
 export const Content = styled.div`

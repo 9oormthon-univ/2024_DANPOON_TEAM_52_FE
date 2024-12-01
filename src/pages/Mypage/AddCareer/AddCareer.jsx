@@ -34,7 +34,7 @@ const DateDivide = styled.div`
   color: white;
 `
 
-const AddCareerPage = ({ setIsModalOpen, setIsEdit,isEdit, editItemId }) => {
+const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
   const categories = [
     { id: 1, name: "학력" },
     { id: 2, name: "자격·어학·수상" },
@@ -65,31 +65,31 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit,isEdit, editItemId }) => {
       case 1:
         setSelectedCategory({
           id: "1",
-          name: "ACADEMY"
+          name: "ACADEMY",
         })
         break
       case 2:
         setSelectedCategory({
           id: "2",
-          name: "CAREER"
+          name: "CAREER",
         })
         break
       case 3:
         setSelectedCategory({
           id: "3",
-          name: "QUALIFICATION"
+          name: "QUALIFICATION",
         })
         break
       case 4:
         setSelectedCategory({
           id: "4",
-          name: "EXPERIENCE"
+          name: "EXPERIENCE",
         })
         break
       case 5:
         setSelectedCategory({
           id: "5",
-          name: "ETC"
+          name: "ETC",
         })
         break
     }
@@ -111,16 +111,16 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit,isEdit, editItemId }) => {
       title: careerName,
       content: detail,
       start_date: startDate,
-      end_date: endDate
+      end_date: endDate,
     }
     console.log(newCareer)
     // 부모 컴포넌트의 업데이트 함수 호출
-    reqPostResume(newCareer);
+    reqPostResume(newCareer)
 
     // 모달 닫기
     setIsModalOpen(false)
   }
-  const onClickEditCareer = (id) =>{
+  const onClickEditCareer = (id) => {
     if (!careerName || !selectedCategory.id || !startDate || !endDate) {
       alert("모든 항목을 입력해주세요.")
       return
@@ -131,14 +131,14 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit,isEdit, editItemId }) => {
       title: careerName,
       content: detail,
       start_date: startDate,
-      end_date: endDate
+      end_date: endDate,
     }
-    reqUpdateResume(id,editCareer);
+    reqUpdateResume(id, editCareer)
   }
   return (
     <ModalOverlay>
       <ModalContent onClick={(e) => e.stopPropagation()}>
-        <h3>이력 {isEdit ? <span>수정하기</span>: <span>추가하기</span>}</h3>
+        <h3>이력 {isEdit ? <span>수정하기</span> : <span>추가하기</span>}</h3>
         <S.DropdownWrapper>
           <S.DropdownHeader onClick={toggleDropdown}>
             <div style={{ display: "flex", alignItems: "center" }}>
@@ -149,7 +149,9 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit,isEdit, editItemId }) => {
                   style={{ width: "20px", height: "20px", marginRight: "10px" }}
                 />
               )}
-              <div style={{ textAlign: "center" }}>{categories[parseInt(selectedCategory.id)-1]?.name}</div>
+              <div style={{ textAlign: "center" }}>
+                {categories[parseInt(selectedCategory.id) - 1]?.name}
+              </div>
             </div>
             <S.DropdownArrow isOpen={isOpen}>▼</S.DropdownArrow>
           </S.DropdownHeader>
@@ -230,8 +232,26 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit,isEdit, editItemId }) => {
           )}
         </DatePickerWrapper>
         <ModalButtonGroup>
-          <ModalButton onClick={() => isEdit?setIsEdit(false):setIsModalOpen(false)}>취소</ModalButton>
-          <ModalButton onClick={isEdit?(()=>{onClickEditCareer(editItemId); setIsEdit(false)}):(()=>{onClickAddCareer(); setIsModalOpen(false)})}>{isEdit ? "수정" : "추가"}</ModalButton>
+          <ModalButton
+            onClick={() => (isEdit ? setIsEdit(false) : setIsModalOpen(false))}
+          >
+            취소
+          </ModalButton>
+          <ModalButton
+            onClick={
+              isEdit
+                ? () => {
+                    onClickEditCareer(editItemId)
+                    setIsEdit(false)
+                  }
+                : () => {
+                    onClickAddCareer()
+                    setIsModalOpen(false)
+                  }
+            }
+          >
+            {isEdit ? "수정" : "추가"}
+          </ModalButton>
         </ModalButtonGroup>
       </ModalContent>
     </ModalOverlay>

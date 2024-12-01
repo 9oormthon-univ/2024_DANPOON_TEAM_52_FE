@@ -1,9 +1,9 @@
-import apiClient from "./apiClient";
-import { RECOMMENDED_QUESTS, RECOMMENDED_QUESTS2 } from "../constants/dummy";
+import apiClient from "./apiClient"
+import { RECOMMENDED_QUESTS, RECOMMENDED_QUESTS2 } from "../constants/dummy"
 
 export const reqGetQuests = async (params) => {
-  const searchParams = new URLSearchParams(params);
-  return await apiClient.get(`/quest?${searchParams}`);
+  const searchParams = new URLSearchParams(params)
+  return await apiClient.get(`/quest?${searchParams}`)
 }
 
 export const reqPostQuest = async (data) => {
@@ -12,15 +12,15 @@ export const reqPostQuest = async (data) => {
     title: data.title,
     deadline: data.deadline,
   }
-  const res = await apiClient.post("/quest", body);
+  const res = await apiClient.post("/quest", body)
   return {
     status: res.status,
-    data: res.data.data
+    data: res.data.data,
   }
 }
 
 export const reqDeleteQuest = async (questId) => {
-  return await apiClient.delete(`/quest/${questId}`);
+  return await apiClient.delete(`/quest/${questId}`)
 }
 
 export const reqPatchQuest = async (id, data) => {
@@ -29,13 +29,13 @@ export const reqPatchQuest = async (id, data) => {
     deadline: data.deadline,
     is_complete: data.isComplete,
   }
-  const res = await apiClient.patch(`/quest/${id}`, body);
+  const res = await apiClient.patch(`/quest/${id}`, body)
   return {
     status: res.status,
     data: {
       id,
-      ...data
-    }
+      ...data,
+    },
   }
 }
 
@@ -43,6 +43,6 @@ export const reqGetRecommendQuests = async () => {
   // return await apiClient.get(`/quest/recommend`);
   return {
     status: 200,
-    data: Math.random() > 0.5 ? RECOMMENDED_QUESTS : RECOMMENDED_QUESTS2
+    data: Math.random() > 0.5 ? RECOMMENDED_QUESTS : RECOMMENDED_QUESTS2,
   }
 }

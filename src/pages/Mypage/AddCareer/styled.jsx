@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from "styled-components"
 export const DropdownWrapper = styled.div`
   width: 300px;
   position: relative;
   margin-top: 10px;
   margin-bottom: 10px;
   font-family: "Pretendard", sans-serif;
-`;
+`
 
 export const DropdownHeader = styled.div`
   background-color: #262626;
@@ -19,17 +19,17 @@ export const DropdownHeader = styled.div`
   cursor: pointer;
   font-size: 16px;
   font-weight: semibold;
-  color: #C3C3C3;
+  color: #c3c3c3;
 
   &:hover {
     background-color: #303030;
   }
-`;
+`
 
 export const DropdownArrow = styled.span`
   transform: ${(props) => (props.isOpen ? "rotate(180deg)" : "rotate(0deg)")};
   transition: transform 0.1s ease-in-out;
-`;
+`
 
 export const DropdownMenu = styled.ul`
   background-color: #1a1a1a;
@@ -45,13 +45,13 @@ export const DropdownMenu = styled.ul`
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   z-index: 100;
-    &.open {
+  &.open {
     display: block;
   }
   &.closed {
     display: none;
   }
-`;
+`
 
 export const MenuItem = styled.li`
   display: flex;
@@ -74,4 +74,4 @@ export const MenuItem = styled.li`
     width: 20px;
     height: 20px;
   }
-`;
+`

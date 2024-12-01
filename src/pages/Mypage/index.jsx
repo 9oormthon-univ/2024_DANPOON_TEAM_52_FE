@@ -32,7 +32,7 @@ export default function Mypage() {
   const [isEdit, setIsEdit] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null)
   const [resumeData, setResumeData] = useRecoilState(resumeAtom)
-  const [userJob, setUserJob] = useRecoilState(userJobAtom);
+  const [userJob, setUserJob] = useRecoilState(userJobAtom)
   const userData = useRecoilValue(userAtom)
   const navigate = useNavigate()
   const groupedData = useGroupedData()

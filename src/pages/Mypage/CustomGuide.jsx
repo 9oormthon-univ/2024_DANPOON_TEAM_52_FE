@@ -14,17 +14,17 @@ const CustomGuidePage = () => {
   })
   const userData = useRecoilValue(userInfoAtom)
   //사용자 프롬프트 데이터
-  const [userPrompt, setUserPrompt] = useRecoilState(promptAtom);
+  const [userPrompt, setUserPrompt] = useRecoilState(promptAtom)
   const navigate = useNavigate()
 
   const handleSave = () => {
     setUserPrompt({
-      known_prompt:prompt.prompt1,
-      help_prompt:prompt.prompt2
+      known_prompt: prompt.prompt1,
+      help_prompt: prompt.prompt2,
     })
     console.log(prompt)
-    alert("맞춤형설정이 완료되었습니다");
-    navigate("/setting");
+    alert("맞춤형설정이 완료되었습니다")
+    navigate("/setting")
   }
 
   return (
@@ -49,7 +49,10 @@ const CustomGuidePage = () => {
         subText="희망 직무와 관련된 프로젝트나 연습을 하고 계신 게 있다면 알려주세요."
         start="1"
       />
-      <InfoBox keyname="prompt1" setPrompt={setPrompt} defaultValue={userData.known_prompt}
+      <InfoBox
+        keyname="prompt1"
+        setPrompt={setPrompt}
+        defaultValue={userData.known_prompt}
       />
 
       <TextSection
@@ -58,7 +61,11 @@ const CustomGuidePage = () => {
         start="2"
       />
 
-      <InfoBox keyname="prompt2" setPrompt={setPrompt} defaultValue={userData.help_prompt}/>
+      <InfoBox
+        keyname="prompt2"
+        setPrompt={setPrompt}
+        defaultValue={userData.help_prompt}
+      />
 
       {/* 저장하기 버튼 */}
       <SaveButton onClick={handleSave} />
@@ -100,7 +107,7 @@ const TextSection = ({ question, subText, start }) => (
 export default CustomGuidePage
 
 // 공통적으로 사용하는 스타일 컴포넌트를 분리
-const InfoBox = ({ defaultValue, keyname, setPrompt}) => (
+const InfoBox = ({ defaultValue, keyname, setPrompt }) => (
   <div
     style={{
       width: "100%",

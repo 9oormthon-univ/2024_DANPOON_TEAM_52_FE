@@ -15,7 +15,7 @@ import {
   ROUTES_PATH_CALENDAR,
   ROUTES_PATH_SEARCH,
   ROUTES_PATH_GOAL,
-  ROUTES_PATH_GOAL_CONSTELLATION
+  ROUTES_PATH_GOAL_CONSTELLATION,
 } from "./constants/routes"
 import { ApiClientSetting } from "./apis/apiClient"
 import KakaoInit from "./components/KakaoInit"
@@ -48,7 +48,13 @@ export default function App() {
           <Route path={ROUTES_PATH_HOME} element={<Home />} />
           <Route
             path={ROUTES_PATH_ROOT}
-            element={localStorage.getItem("visited") ? (<Navigate to={ROUTES_PATH_HOME} />) : (<Navigate to={ROUTES_PATH_ONBOARD} />)}
+            element={
+              localStorage.getItem("visited") ? (
+                <Navigate to={ROUTES_PATH_HOME} />
+              ) : (
+                <Navigate to={ROUTES_PATH_ONBOARD} />
+              )
+            }
           />
           <Route path={ROUTES_PATH_INFO} element={<InfoPage />} />
           <Route path={ROUTES_PATH_ONBOARD} element={<OnBoardingPage />} />
@@ -56,9 +62,15 @@ export default function App() {
           <Route path={ROUTES_PATH_MYPAGE} element={<Mypage />} />
           <Route path={ROUTES_PATH_SETTING} element={<SettingPage />} />
           <Route path={ROUTES_PATH_CUSTOMGUIDE} element={<CustomGuidePage />} />
-          <Route path={ROUTES_PATH_RECOMMENDED_GOALS} element={<RecommendedGoals />} />
+          <Route
+            path={ROUTES_PATH_RECOMMENDED_GOALS}
+            element={<RecommendedGoals />}
+          />
           <Route path={`${ROUTES_PATH_GOAL}/:id`} element={<Goal />} />
-          <Route path={`${ROUTES_PATH_GOAL_CONSTELLATION}/:id`} element={<GoalConstellation />} />
+          <Route
+            path={`${ROUTES_PATH_GOAL_CONSTELLATION}/:id`}
+            element={<GoalConstellation />}
+          />
           <Route path={ROUTES_PATH_SEARCH} element={<Search />} />
         </Routes>
       </BrowserRouter>

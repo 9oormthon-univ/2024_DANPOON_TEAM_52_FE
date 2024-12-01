@@ -16,7 +16,7 @@ export const createSchedule = async (addData) => {
     const response = await apiClient.post("/schedule", addData)
     if (response.status === 200) {
       console.log("일정 생성 성공:", response.data)
-      window.location.reload();
+      window.location.reload()
     } else {
       console.error("일정 생성 실패:", response.status)
     }
@@ -27,10 +27,10 @@ export const createSchedule = async (addData) => {
 
 //캘린더 일정 삭제
 export const deleteSchedule = async (scheduleId) => {
-  const response = await apiClient.delete(`/schedule/${scheduleId}`);
+  const response = await apiClient.delete(`/schedule/${scheduleId}`)
   if (response.status === 200) {
     alert("해당 일정을 삭제하였습니다.")
-    window.location.reload();
+    window.location.reload()
   } else {
     console.error("일정 삭제 실패:", response.status)
   }
@@ -38,10 +38,10 @@ export const deleteSchedule = async (scheduleId) => {
 
 //캘린더 일정 수정
 export const updateSchedule = async (scheduleId, updateData) => {
-  const response = await apiClient.patch(`/schedule/${scheduleId}`, updateData);
+  const response = await apiClient.patch(`/schedule/${scheduleId}`, updateData)
   if (response.status === 200) {
     alert("해당 일정을 수정하였습니다.")
-    window.location.reload();
+    window.location.reload()
   } else {
     console.error("일정 수정 실패:", response.status)
   }

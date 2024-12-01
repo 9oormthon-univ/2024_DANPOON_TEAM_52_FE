@@ -9,7 +9,7 @@ import {
 import StyledSwitch from "../Switch"
 import { Text } from "../Typo"
 import { DatePicker } from "antd"
-import { useState, useEffect} from "react"
+import { useState, useEffect } from "react"
 import styled from "styled-components"
 import { updateSchedule } from "../../apis/calendar"
 const DatePickerWrapper = styled.div`
@@ -67,7 +67,7 @@ const ModalComponent = ({
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <Text>하루종일</Text>
           <StyledSwitch
-          checked={isSingleDate}
+            checked={isSingleDate}
             onChange={(event) => {
               setIsSingleDate(event)
             }}
@@ -130,9 +130,9 @@ const ModalComponent = ({
           <ModalButton
             onClick={() => {
               if (isEdit) {
-                updateSchedule(editTodo.schedule_id, addTodo); // 일정 수정 API 호출
+                updateSchedule(editTodo.schedule_id, addTodo) // 일정 수정 API 호출
               } else {
-                onClickAddBtn(addTodo, setIsModalOpen);
+                onClickAddBtn(addTodo, setIsModalOpen)
               }
             }}
           >

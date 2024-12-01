@@ -1,28 +1,28 @@
-import { useRecoilValue } from "recoil";
-import { useDateRange } from "./useDateRange";
-import calendarAtom from "../store/atoms/todo";
+import { useRecoilValue } from "recoil"
+import { useDateRange } from "./useDateRange"
+import calendarAtom from "../store/atoms/todo"
 
 export function useEvents() {
-  const todo = useRecoilValue(calendarAtom); // Recoil에서 일정 데이터 가져오기
-  const { getDatesInRange } = useDateRange(); // 범위 계산 로직 사용
+  const todo = useRecoilValue(calendarAtom) // Recoil에서 일정 데이터 가져오기
+  const { getDatesInRange } = useDateRange() // 범위 계산 로직 사용
 
   const renderDotsForDate = (tileDate) => {
     const formattedDate =
       tileDate.date instanceof Date && !isNaN(tileDate.date)
         ? tileDate.date.toLocaleDateString("en-CA")
-        : null;
+        : null
 
-    if (!formattedDate) return null;
+    if (!formattedDate) return null
 
-    const schedules = todo?.schedule_response_dto_list || [];
-    const quests = todo?.quest_response_dto_list || [];
+    const schedules = todo?.schedule_response_dto_list || []
+    const quests = todo?.quest_response_dto_list || []
 
     const matchingEvents = schedules.filter((event) => {
-      const eventDates = getDatesInRange(event.start_date, event.end_date);
-      return eventDates.includes(formattedDate);
-    });
+      const eventDates = getDatesInRange(event.start_date, event.end_date)
+      return eventDates.includes(formattedDate)
+    })
 
-    const isQuestDate = quests.some((quest) => quest.deadline === formattedDate);
+    const isQuestDate = quests.some((quest) => quest.deadline === formattedDate)
 
     if (matchingEvents.length > 0 || isQuestDate) {
       return (
@@ -54,13 +54,13 @@ export function useEvents() {
             />
           )}
         </div>
-      );
+      )
     }
 
-    return null;
-  };
+    return null
+  }
 
   return {
     renderDotsForDate,
-  };
+  }
 }

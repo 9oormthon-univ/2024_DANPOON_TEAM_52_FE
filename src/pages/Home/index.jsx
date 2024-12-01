@@ -15,7 +15,7 @@ export default function Home() {
   const tab = searchParams.get("tab")
   const defaultTab = tab === "complete" ? 1 : 0
   const [selectedTab, setSelectedTab] = useState(defaultTab)
-  const [userData, setUserData] = useRecoilState(userInfoAtom);
+  const [userData, setUserData] = useRecoilState(userInfoAtom)
   const tabs = [
     {
       title: "진행중인 목표",
@@ -34,19 +34,22 @@ export default function Home() {
     })
     navigate({ search: `?${searchParmas.toString()}` }, { replace: true })
   }, [selectedTab])
-  useEffect(()=>{
+  useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await reqGetUser();
+        const response = await reqGetUser()
         if (response) {
-          console.log("유저정보 조회 성공:", response.data);
-          setUserData(response.data); // Atom 갱신
+          console.log("유저정보 조회 성공:", response.data)
+          setUserData(response.data) // Atom 갱신
         }
       } catch (error) {
-        console.error("유저정보 조회 실패:", error.response?.data || error.message);
+        console.error(
+          "유저정보 조회 실패:",
+          error.response?.data || error.message
+        )
       }
-    };
-    fetchUserData();
+    }
+    fetchUserData()
   }, [])
   return (
     <>

@@ -6,7 +6,7 @@ export function usePickedItems(initialItems, popStateHandler) {
     initialItems ? initialItems.split(" ") : []
   )
   const [jobItem, setJobItem] = useState("")
-  const {updateStep} = useStepNavigation();
+  const { updateStep } = useStepNavigation()
   useEffect(() => {
     if (popStateHandler) {
       popStateHandler()
@@ -20,11 +20,11 @@ export function usePickedItems(initialItems, popStateHandler) {
   }
 
   const selectItem = (event) => {
-    const index = event.target.dataset.index;
-    setJobItem(index);
+    const index = event.target.dataset.index
+    setJobItem(index)
     updateStep(1, jobItem)
-  };
-  
+  }
+
   //callback : 서버에 데이터 전송(선택항목)
   const sendData = (callback) => {
     if (callback) callback()

@@ -33,7 +33,7 @@ const NicknamePage = ({ setIsEdit }) => {
           <ModalButton onClick={() => setIsEdit(false)}>취소</ModalButton>
           <ModalButton
             onClick={() => {
-              handleSaveNickname();
+              handleSaveNickname()
             }}
           >
             완료

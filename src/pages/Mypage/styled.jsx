@@ -34,13 +34,13 @@ export const InfoSubText = styled.div`
 `
 
 export const FeedbackBtn = styled(Button)`
-&&&{
+  &&& {
     width: 100%;
     height: 32px;
     color: black !important;
     font-size: 15px;
-    background: linear-gradient(90deg, #E0FFC6 0%, #8AFAF1 100%) !important;
-}
+    background: linear-gradient(90deg, #e0ffc6 0%, #8afaf1 100%) !important;
+  }
 `
 export const ContentWrapper = styled.div`
   max-height: 600px;
@@ -92,7 +92,7 @@ export const ItemGroup = styled.div`
 `
 export const ItemDate = styled(Text)`
   &&& {
-    flex:1;
+    flex: 1;
     font-size: 12px;
     color: #b2b2b2;
     margin-right: 20px;
@@ -100,9 +100,9 @@ export const ItemDate = styled(Text)`
 `
 export const ItemName = styled(Text)`
   &&& {
-    width:150px;
-    flex:1;
-    font-size:12px;
+    width: 150px;
+    flex: 1;
+    font-size: 12px;
     font-weight: 500;
     margin: 0px;
     white-space: nowrap; /* 텍스트를 한 줄로 유지 */
@@ -126,17 +126,17 @@ export const StyledButton = styled.button`
 
 export const StyledPlus = styled(StyledButton)`
   &&& {
-    width:47px;
-    height:47px;
+    width: 47px;
+    height: 47px;
     position: absolute;
     right: 20px;
     bottom: 140px;
-    background: #4D4D4D;
+    background: #4d4d4d;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
-  @media (min-width: 573px) {
-    bottom: 180px;
+    @media (min-width: 573px) {
+      bottom: 180px;
+    }
   }
-}
 `
 export const NaviWrapper = styled.div`
   display: flex;

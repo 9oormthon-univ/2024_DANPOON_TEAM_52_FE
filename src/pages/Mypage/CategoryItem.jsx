@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from "react"
 import {
   CategoryWrapper,
   CategoryGroup,
@@ -7,12 +7,12 @@ import {
   ItemDate,
   ItemGroup,
   ItemName,
-} from "./styled";
-import { reqDeleteResume } from "../../apis/user";
-import AddCareerPage from "./AddCareer/AddCareer";
+} from "./styled"
+import { reqDeleteResume } from "../../apis/user"
+import AddCareerPage from "./AddCareer/AddCareer"
 
-const CategoryItem = ({ category, onClickOption,isEdit, setIsEdit}) => {
-  const [selectedOptionId, setSelectedOptionId] = useState(null); // 선택된 항목 ID 관리
+const CategoryItem = ({ category, onClickOption, isEdit, setIsEdit }) => {
+  const [selectedOptionId, setSelectedOptionId] = useState(null) // 선택된 항목 ID 관리
 
   return (
     <CategoryWrapper key={category.id}>
@@ -31,7 +31,7 @@ const CategoryItem = ({ category, onClickOption,isEdit, setIsEdit}) => {
               {item.detail}
             </ItemName>
           </div>
-          <div style={{ position:"relative" }}>
+          <div style={{ position: "relative" }}>
             <img
               src="/optionicon.png"
               width="2px"
@@ -41,8 +41,8 @@ const CategoryItem = ({ category, onClickOption,isEdit, setIsEdit}) => {
                 // 상태 업데이트
                 setSelectedOptionId(
                   item.resume_id === selectedOptionId ? null : item.resume_id
-                );
-                onClickOption(item.resume_id);
+                )
+                onClickOption(item.resume_id)
               }}
             />
             {selectedOptionId === item.resume_id && (
@@ -56,7 +56,7 @@ const CategoryItem = ({ category, onClickOption,isEdit, setIsEdit}) => {
                   justifyContent: "center",
                   borderRadius: "6px",
                   position: "absolute",
-                  right:"-20px",
+                  right: "-20px",
                   zIndex: 10,
                 }}
               >
@@ -67,11 +67,11 @@ const CategoryItem = ({ category, onClickOption,isEdit, setIsEdit}) => {
                     borderBottom: "0.5px solid white",
                     padding: "10px",
                     cursor: "pointer",
-                    fontSize:"10px"
+                    fontSize: "10px",
                   }}
                   onClick={() => {
                     // 수정 로직 추가
-                    setIsEdit(true);
+                    setIsEdit(true)
                   }}
                 >
                   수정
@@ -82,23 +82,29 @@ const CategoryItem = ({ category, onClickOption,isEdit, setIsEdit}) => {
                     fontFamily: "Pretendard",
                     padding: "10px",
                     cursor: "pointer",
-                    fontSize:"10px"
+                    fontSize: "10px",
                   }}
                   onClick={() => {
                     // 삭제 로직 추가
-                    reqDeleteResume(item);
+                    reqDeleteResume(item)
                   }}
                 >
                   삭제
                 </div>
               </div>
             )}
-            {isEdit && (<AddCareerPage isEdit={isEdit} editItemId={selectedOptionId} setIsEdit={setIsEdit}></AddCareerPage>)}
+            {isEdit && (
+              <AddCareerPage
+                isEdit={isEdit}
+                editItemId={selectedOptionId}
+                setIsEdit={setIsEdit}
+              ></AddCareerPage>
+            )}
           </div>
         </ItemGroup>
       ))}
     </CategoryWrapper>
-  );
-};
+  )
+}
 
-export default CategoryItem;
+export default CategoryItem

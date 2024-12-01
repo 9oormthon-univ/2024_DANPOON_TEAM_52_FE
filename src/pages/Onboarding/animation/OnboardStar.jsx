@@ -4,7 +4,7 @@ import LottieStar from "../../../lotties/OnboardStar.json"
 
 const Container = styled.div`
   position: relative;
-  display: flex;    
+  display: flex;
   height: 100%;
   flex-direction: column;
   justify-content: center;

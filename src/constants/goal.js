@@ -12,5 +12,5 @@ export const DEFAULT_QUEST = {
   id: -1,
   title: "",
   isComplete: false,
-  deadline: ""
+  deadline: "",
 }

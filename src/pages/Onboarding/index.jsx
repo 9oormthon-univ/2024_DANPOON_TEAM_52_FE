@@ -61,4 +61,4 @@ const OnBoardingPage = () => {
   )
 }
 
-export default OnBoardingPage;
+export default OnBoardingPage

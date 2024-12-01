@@ -13,11 +13,10 @@ export const reqPostJob = async (item, navigate) => {
     })
     if (response.status === 200) {
       console.log("직무추가 성공:", response.data)
-      if(localStorage.getItem("backURL")){
-        navigate("/setting");
-      }
-      else{
-        navigate('/home')
+      if (localStorage.getItem("backURL")) {
+        navigate("/setting")
+      } else {
+        navigate("/home")
       }
     }
     return response
@@ -29,14 +28,14 @@ export const reqPostJob = async (item, navigate) => {
 
 //사용자 직무 조회
 export const reqGetUserJob = async () => {
-    try {
-      const response = await apiClient.get("/job/member")
-      if (response.status === 200) {
-        console.log("유저 직무 조회 성공:", response)
-      }
-      return response
-    } catch (error) {
-      console.error("유저 직무 조회 실패!", error)
-      throw error
+  try {
+    const response = await apiClient.get("/job/member")
+    if (response.status === 200) {
+      console.log("유저 직무 조회 성공:", response)
     }
+    return response
+  } catch (error) {
+    console.error("유저 직무 조회 실패!", error)
+    throw error
   }
+}
