@@ -13,7 +13,8 @@ export const reqPostJob = async (item, navigate) => {
     })
     if (response.status === 200) {
       console.log("직무추가 성공:", response.data)
-      if (localStorage.getItem("backURL")) {
+      if (localStorage.getItem("backURL") == "true") {
+        localStorage.setItem("backURL", "false")
         navigate("/setting")
       } else {
         navigate("/home")

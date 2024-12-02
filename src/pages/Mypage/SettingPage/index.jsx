@@ -13,7 +13,7 @@ import BaseLayout from "../../../components/BaseLayout"
 import BackwardButton from "../../../components/BackwardButton"
 import StyledSwitch from "../../../components/Switch"
 import { useNavigate } from "react-router-dom"
-import { useState, useRef } from "react"
+import { useState } from "react"
 import NicknamePage from "../Nickname/Nickname"
 import { useRecoilValue, useRecoilState } from "recoil"
 import userAtom from "../../../store/atoms/user"
@@ -22,35 +22,29 @@ import userInfoAtom from "../../../store/atoms/userinfo"
 import promptAtom from "../../../store/atoms/prompt"
 import { reqUpdateUser } from "../../../apis/user"
 const SettingPage = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [isSetting, setIsSetiing] = useState({
-    is_notification: false,
-    is_profile: false,
-  })
-  const navigate = useNavigate()
-  //사용자이름, 프로필사진 데이터
+  //사용자이름, 프로필사진 데이터(프로필사진만 사용중)
   const userData = useRecoilValue(userAtom)
   //사용자 직무 저장
   const userJob = useRecoilValue(userJobAtom)
   //사용자 설정정보 저장
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom)
   //맞춤형지침 데이터
-  const prompt = useRecoilValue(promptAtom)
-  const handleSaveUserInfo = async () => {
-    const updatedData = {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const settingBackBtn = () => {
+    reqUpdateUser({
       nickname: userInfo.nickname,
-      known_prompt: prompt.known_prompt,
-      help_prompt: prompt.help_prompt,
-      is_notification: isSetting.is_notification,
-      is_profile: isSetting.is_profile,
-    }
-    setUserInfo(updatedData) // Recoil 상태 업데이트
-    await reqUpdateUser(userInfo) // API 호출
+      known_prompt: userInfo.known_prompt,
+      help_prompt: userInfo.help_prompt,
+      is_notification: userInfo.is_notification,
+      is_profile: userInfo.is_profile,
+    })
+    navigate("/mypage")
   }
+  const navigate = useNavigate()
   return (
     <BaseLayout>
       <Wrapper>
-        <BackwardButton onClick={handleSaveUserInfo} />
+        <BackwardButton onClick={settingBackBtn} />
         <Group>
           <Title>환경설정</Title>
           <Profile src={userData.image_url} />
@@ -81,7 +75,7 @@ const SettingPage = () => {
             </div>
             <Option
               onClick={() => {
-                localStorage.setItem("backURL", "/setting")
+                localStorage.setItem("backURL", true)
                 navigate("/info")
               }}
             >
@@ -106,8 +100,9 @@ const SettingPage = () => {
           <SettingItem>
             <ItemName>알림설정</ItemName>
             <StyledSwitch
+              defaultChecked={userInfo.is_notification}
               onChange={(checked) => {
-                setIsSetiing((prev) => ({
+                setUserInfo((prev) => ({
                   ...prev,
                   is_notification: checked,
                 }))
@@ -117,9 +112,9 @@ const SettingPage = () => {
           <SettingItem>
             <ItemName>이력공개</ItemName>
             <StyledSwitch
+              defaultChecked={userInfo.is_profile}
               onChange={(checked) => {
-                console.log(checked)
-                setIsSetiing((prev) => ({
+                setUserInfo((prev) => ({
                   ...prev,
                   is_profile: checked,
                 }))

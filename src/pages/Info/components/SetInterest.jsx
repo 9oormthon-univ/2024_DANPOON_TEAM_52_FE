@@ -16,8 +16,10 @@ import {
 import { Highlight } from "../../../components/Typo"
 import { useState } from "react"
 import { reqPostJob } from "../../../apis/job"
-
+import userJobAtom from "../../../store/atoms/userjob"
+import { useResetRecoilState } from "recoil"
 const SetInterest = ({ onClickNext, detailJob }) => {
+  const setUserJob = useResetRecoilState(userJobAtom)
   const navigate = useNavigate() // 컴포넌트 내부에서 useNavigate 호출
   const { paramsInterestItem, paramsJobItem } = useStepNavigation()
   const { pickedItems, toggleItem, sendData } = usePickedItems(
@@ -55,7 +57,7 @@ const SetInterest = ({ onClickNext, detailJob }) => {
         <GridWrapper>
           {detailJob?.map((job) => (
             <ItemBtn
-              key={job.id} // 고유 id를 key로 사용
+              key={job.id}
               isSelected={selectedItems.includes(job.id)} // 선택 여부 확인
               onClick={() => handleSelectItem(job.id)} // 클릭 시 선택/해제
             >
@@ -66,8 +68,8 @@ const SetInterest = ({ onClickNext, detailJob }) => {
         <NextBtn
           $variant={selectedItems.length !== 0 ? "primary" : "secondary"}
           disabled={selectedItems.length === 0} // 선택된 항목이 없으면 비활성화
-          onClick={() => {
-            reqPostJob(selectedItems, navigate)
+          onClick={async () => {
+            await reqPostJob(selectedItems, navigate)
           }}
         >
           {localStorage.getItem("backURL") ? "수정 완료" : "시작하기"}

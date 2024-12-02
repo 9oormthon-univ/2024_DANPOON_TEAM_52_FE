@@ -3,27 +3,33 @@ import { Wrapper } from "../Mypage/SettingPage/styled"
 import BackwardButton from "../../components/BackwardButton"
 import { useNavigate } from "react-router-dom"
 import { Text, Highlight } from "../../components/Typo"
-import { useRecoilValue, useRecoilState } from "recoil"
+import { useRecoilState } from "recoil"
 import { useState } from "react"
 import userInfoAtom from "../../store/atoms/userinfo"
-import promptAtom from "../../store/atoms/prompt"
+import { reqUpdateUser } from "../../apis/user"
 const CustomGuidePage = () => {
+  const [userData, setUserData] = useRecoilState(userInfoAtom)
   const [prompt, setPrompt] = useState({
-    prompt1: "",
-    prompt2: "",
+    prompt1: userData.known_prompt,
+    prompt2: userData.help_prompt,
   })
-  const userData = useRecoilValue(userInfoAtom)
   //사용자 프롬프트 데이터
-  const [userPrompt, setUserPrompt] = useRecoilState(promptAtom)
+  //const [userPrompt, setUserPrompt] = useRecoilState(promptAtom)
   const navigate = useNavigate()
 
   const handleSave = () => {
-    setUserPrompt({
+    setUserData((prev) => ({
+      ...prev,
       known_prompt: prompt.prompt1,
       help_prompt: prompt.prompt2,
+    }))
+    reqUpdateUser({
+      nickname: userData.nickname,
+      known_prompt: prompt.prompt1,
+      help_prompt: prompt.prompt2,
+      is_notification: userData.is_notification,
+      is_profile: userData.is_profile,
     })
-    console.log(prompt)
-    alert("맞춤형설정이 완료되었습니다")
     navigate("/setting")
   }
 

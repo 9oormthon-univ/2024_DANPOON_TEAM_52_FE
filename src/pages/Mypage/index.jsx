@@ -24,8 +24,8 @@ import CategoryItem from "./CategoryItem"
 import { useGroupedData, useFeedback } from "../../hooks/useMypage"
 import { reqGetResume } from "../../apis/user"
 import resumeAtom from "../../store/atoms/resume"
+import userInfoAtom from "../../store/atoms/userinfo"
 import { useRecoilState, useRecoilValue } from "recoil"
-import userAtom from "../../store/atoms/user"
 import { reqGetUserJob } from "../../apis/job"
 import userJobAtom from "../../store/atoms/userjob"
 export default function Mypage() {
@@ -33,7 +33,7 @@ export default function Mypage() {
   const [selectedOption, setSelectedOption] = useState(null)
   const [resumeData, setResumeData] = useRecoilState(resumeAtom)
   const [userJob, setUserJob] = useRecoilState(userJobAtom)
-  const userData = useRecoilValue(userAtom)
+  const userData = useRecoilValue(userInfoAtom)
   const navigate = useNavigate()
   const groupedData = useGroupedData()
   const {
@@ -44,7 +44,7 @@ export default function Mypage() {
   } = useFeedback()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const onClickOption = (item) => {
-    console.log(item, "번째 항목 선택")
+    //console.log(item, "번째 항목 선택")
     //선택한 항목 Id 설정
     setSelectedOption(item)
     if (selectedOption === item) {
