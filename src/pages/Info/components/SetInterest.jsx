@@ -17,9 +17,9 @@ import { Highlight } from "../../../components/Typo"
 import { useState } from "react"
 import { reqPostJob } from "../../../apis/job"
 import userJobAtom from "../../../store/atoms/userjob"
-import { useResetRecoilState } from "recoil"
-const SetInterest = ({ onClickNext, detailJob }) => {
-  const setUserJob = useResetRecoilState(userJobAtom)
+import { useSetRecoilState } from "recoil"
+const SetInterest = ({ detailJob }) => {
+  const setUserJob = useSetRecoilState(userJobAtom)
   const navigate = useNavigate() // 컴포넌트 내부에서 useNavigate 호출
   const { paramsInterestItem, paramsJobItem } = useStepNavigation()
   const { pickedItems, toggleItem, sendData } = usePickedItems(
@@ -69,7 +69,7 @@ const SetInterest = ({ onClickNext, detailJob }) => {
           $variant={selectedItems.length !== 0 ? "primary" : "secondary"}
           disabled={selectedItems.length === 0} // 선택된 항목이 없으면 비활성화
           onClick={async () => {
-            await reqPostJob(selectedItems, navigate)
+            await reqPostJob(selectedItems, navigate, setUserJob)
           }}
         >
           {localStorage.getItem("backURL") ? "수정 완료" : "시작하기"}
