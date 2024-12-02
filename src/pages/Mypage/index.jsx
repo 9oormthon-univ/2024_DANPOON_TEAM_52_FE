@@ -119,7 +119,7 @@ export default function Mypage() {
           </StyledPlus>
         </ContentWrapper>
         {isModalOpen && <AddCareerPage setIsModalOpen={setIsModalOpen} />}
-        {isFeedBack && <AiFeedBack></AiFeedBack>}
+        {isFeedBack && <AiFeedBack setIsFeedBack={setIsFeedBack}></AiFeedBack>}
       </Wrapper>
     </BaseLayout>
   )

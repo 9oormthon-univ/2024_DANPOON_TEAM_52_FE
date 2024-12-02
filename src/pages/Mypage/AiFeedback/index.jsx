@@ -8,7 +8,7 @@ import { ReactComponent as StarIcon } from "../../../svgs/star2.svg"
 import { ReactComponent as Swap } from "../../../svgs/Swap.svg"
 import Confetti from "../../../components/Confetti"
 import Star from "../../../components/Star"
-export default function AiFeedBack() {
+export default function AiFeedBack({ setIsFeedBack }) {
   const [feedback, setFeedBack] = useRecoilState(feedbackAtom)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -51,7 +51,11 @@ export default function AiFeedBack() {
   }
 
   return (
-    <ModalOverlay>
+    <ModalOverlay
+      onClick={() => {
+        setIsFeedBack(false)
+      }}
+    >
       {!isLoading && (
         <StarContainer onClick={onClickRefresh}>
           <Star />
