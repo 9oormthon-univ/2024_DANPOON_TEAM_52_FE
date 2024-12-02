@@ -143,13 +143,12 @@ export const NaviWrapper = styled.div`
   position: absolute;
   gap: 5px;
   @media (min-width: 573px) {
-    left: 420px;
-    bottom: 520px;
+    right: 20px;
+    top: 80px;
   }
 
   @media (max-width: 573px) {
-    left: 75vw;
+    left: 330px;
     top: 70px;
-    width: 100vw;
   }
 `
