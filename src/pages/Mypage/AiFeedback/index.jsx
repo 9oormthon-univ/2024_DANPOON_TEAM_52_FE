@@ -51,11 +51,7 @@ export default function AiFeedBack() {
   }
 
   return (
-    <ModalOverlay
-      onClick={() => {
-        setIsLoading(false) // 상태를 false로 변경
-      }}
-    >
+    <ModalOverlay>
       {!isLoading && (
         <StarContainer onClick={onClickRefresh}>
           <Star />
