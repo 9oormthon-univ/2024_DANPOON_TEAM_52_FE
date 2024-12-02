@@ -20,28 +20,23 @@ import { ReactComponent as Plus } from "../../svgs/plus.svg"
 import { ReactComponent as Setting } from "../../svgs/Settings.svg"
 import { Highlight } from "../../components/Typo"
 import CategoryItem from "./CategoryItem"
-import { useGroupedData, useFeedback } from "../../hooks/useMypage"
+import { useGroupedData } from "../../hooks/useMypage"
 import { reqGetResume } from "../../apis/user"
 import resumeAtom from "../../store/atoms/resume"
 import userInfoAtom from "../../store/atoms/userinfo"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { reqGetUserJob } from "../../apis/job"
 import userJobAtom from "../../store/atoms/userjob"
-import AIFeedbackLoading from "../../components/AIFeedbackLoading"
+import AiFeedBack from "./AiFeedback"
 export default function Mypage() {
   const [isEdit, setIsEdit] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null)
+  const [isFeedBack, setIsFeedBack] = useState(false)
   const [resumeData, setResumeData] = useRecoilState(resumeAtom)
   const [userJob, setUserJob] = useRecoilState(userJobAtom)
   const userData = useRecoilValue(userInfoAtom)
   const navigate = useNavigate()
   const groupedData = useGroupedData()
-  const {
-    feedbackData,
-    isFeedbackModalOpen,
-    setIsFeedbackModalOpen,
-    createFeedback,
-  } = useFeedback()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const onClickOption = (item) => {
     //console.log(item, "번째 항목 선택")
@@ -88,7 +83,13 @@ export default function Mypage() {
             <InfoSubText>나의 이력을 추가하고 관리할 수 있어요</InfoSubText>
           </InfoGroup>
         </ProfileInfo>
-        <FeedbackBtn onClick={createFeedback}>AI 피드백 받기</FeedbackBtn>
+        <FeedbackBtn
+          onClick={() => {
+            setIsFeedBack(true)
+          }}
+        >
+          AI 피드백 받기
+        </FeedbackBtn>
         <ContentWrapper>
           {/*사용자 이력 렌더링*/}
           {groupedData.map((category) => (
@@ -118,13 +119,7 @@ export default function Mypage() {
           </StyledPlus>
         </ContentWrapper>
         {isModalOpen && <AddCareerPage setIsModalOpen={setIsModalOpen} />}
-        {isFeedbackModalOpen && (
-          <div>
-            <AIFeedbackLoading></AIFeedbackLoading>
-            <p>{feedbackData}</p>
-            <button onClick={() => setIsFeedbackModalOpen(false)}>닫기</button>
-          </div>
-        )}
+        {isFeedBack && <AiFeedBack setIsFeedBack={setIsFeedBack}></AiFeedBack>}
       </Wrapper>
     </BaseLayout>
   )
