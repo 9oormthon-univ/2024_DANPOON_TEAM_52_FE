@@ -1,6 +1,3 @@
-import { useState } from "react"
-import { reqGetFeedback } from "../apis/feedback"
-import { resumeData } from "../constants/data"
 import resumeAtom from "../store/atoms/resume"
 import { useRecoilValue } from "recoil"
 export const useGroupedData = () => {
@@ -34,24 +31,4 @@ export const useGroupedData = () => {
     })),
   }))
   return groupedData
-}
-
-export const useFeedback = () => {
-  const [feedbackData, setFeedbackData] = useState("")
-  const [isFeedbackModalOpen, setIsFeedbackModalOpen] = useState(false)
-
-  const createFeedback = async () => {
-    const res = await reqGetFeedback()
-    if (res) {
-      setFeedbackData(res.data.message)
-      setIsFeedbackModalOpen(true)
-    }
-  }
-
-  return {
-    feedbackData,
-    isFeedbackModalOpen,
-    setIsFeedbackModalOpen,
-    createFeedback,
-  }
 }
