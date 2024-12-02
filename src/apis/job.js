@@ -9,9 +9,6 @@ export const reqGetJob = async () => {
 export const reqGetUserJob = async () => {
   try {
     const response = await apiClient.get("/job/member")
-    if (response.status === 200) {
-      console.log("유저 직무 조회 성공:", response)
-    }
     return response
   } catch (error) {
     console.error("유저 직무 조회 실패!", error)
@@ -25,7 +22,7 @@ export const reqPostJob = async (item, navigate, setAtom) => {
       ids: item,
     })
     if (response.status === 200) {
-      console.log("직무추가 성공:", response.data)
+      //console.log("직무추가 성공:", response.data)
       const data = await reqGetUserJob()
       setAtom(data.data.data)
       if (localStorage.getItem("backURL") == "true") {

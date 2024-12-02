@@ -15,7 +15,6 @@ import {
   NaviWrapper,
   StyledPlus,
 } from "./styled"
-import { ModalOverlay, ModalContent } from "../Calendar/styled"
 import { ReactComponent as Share } from "../../svgs/share.svg"
 import { ReactComponent as Plus } from "../../svgs/plus.svg"
 import { ReactComponent as Setting } from "../../svgs/Settings.svg"
@@ -28,6 +27,7 @@ import userInfoAtom from "../../store/atoms/userinfo"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { reqGetUserJob } from "../../apis/job"
 import userJobAtom from "../../store/atoms/userjob"
+import AIFeedbackLoading from "../../components/AIFeedbackLoading"
 export default function Mypage() {
   const [isEdit, setIsEdit] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null)
@@ -58,7 +58,7 @@ export default function Mypage() {
       try {
         const response = await reqGetResume()
         if (response) {
-          console.log("이력 조회 성공:", response.data)
+          //console.log("이력 조회 성공:", response.data)
           setResumeData(response.data) // Atom 갱신
         }
       } catch (error) {
@@ -71,7 +71,6 @@ export default function Mypage() {
     const fetchUserJob = async () => {
       const response = await reqGetUserJob()
       if (response) {
-        console.log(response.data.data)
         setUserJob(response.data.data)
       }
     }
@@ -120,15 +119,11 @@ export default function Mypage() {
         </ContentWrapper>
         {isModalOpen && <AddCareerPage setIsModalOpen={setIsModalOpen} />}
         {isFeedbackModalOpen && (
-          <ModalOverlay>
-            <ModalContent>
-              <h3>AI 피드백</h3>
-              <p>{feedbackData}</p>
-              <button onClick={() => setIsFeedbackModalOpen(false)}>
-                닫기
-              </button>
-            </ModalContent>
-          </ModalOverlay>
+          <div>
+            <AIFeedbackLoading></AIFeedbackLoading>
+            <p>{feedbackData}</p>
+            <button onClick={() => setIsFeedbackModalOpen(false)}>닫기</button>
+          </div>
         )}
       </Wrapper>
     </BaseLayout>

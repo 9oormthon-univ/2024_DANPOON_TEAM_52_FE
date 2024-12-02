@@ -39,7 +39,7 @@ export default function Home() {
       try {
         const response = await reqGetUser()
         if (response) {
-          console.log("유저정보 조회 성공:", response.data)
+          //console.log("유저정보 조회 성공:", response.data)
           setUserData(response.data) // Atom 갱신
         }
       } catch (error) {

@@ -26,7 +26,6 @@ const SettingPage = () => {
   const userData = useRecoilValue(userAtom)
   //사용자 직무 저장
   const userJob = useRecoilValue(userJobAtom)
-  console.log(userJob)
   //사용자 설정정보 저장
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom)
   //맞춤형지침 데이터

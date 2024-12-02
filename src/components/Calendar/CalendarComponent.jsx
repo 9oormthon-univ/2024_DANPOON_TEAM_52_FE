@@ -3,7 +3,7 @@ import { StyledCalendar, AddScheduleButton } from "../../pages/Calendar/styled"
 import Legend from "./Legend"
 import TodayMessage from "./TodayMessage"
 import { fetchTodo } from "../../apis/calendar"
-import { useRecoilState } from "recoil"
+import { useSetRecoilState } from "recoil"
 import calendarAtom from "../../store/atoms/todo"
 
 const CalendarComponent = ({
@@ -15,8 +15,8 @@ const CalendarComponent = ({
 }) => {
   //현재 보고있는 달력 상태
   const [activeStartDate, setActiveStartDate] = useState(new Date())
-  //현재 보고있는 Month의 일정데이터
-  const [todoList, setToDoList] = useRecoilState(calendarAtom)
+  //현재 보고있는 Month의 일정데이터 수정
+  const setToDoList = useSetRecoilState(calendarAtom)
 
   // month 추출 (해당 month 일정 조회 목적)
   const getCurrentMonth = () => {
@@ -25,14 +25,15 @@ const CalendarComponent = ({
     }
     const year = activeStartDate.getFullYear()
     const month = activeStartDate.getMonth() + 1 // 0부터 시작
-    return `${month < 10 ? `0${month}` : month}` // YYYY-MM 형식
+    console.log(year, month)
+    return { year, month } // 연, 월 추출
   }
 
   useEffect(() => {
     const fetchAndSetTodo = async () => {
       try {
-        const currentMonth = getCurrentMonth()
-        const todos = await fetchTodo(currentMonth) // 비동기 호출
+        const { year, month } = getCurrentMonth()
+        const todos = await fetchTodo(year, month) // 비동기 호출
         setToDoList(todos.data) //조회한 데이터를 Recoil에 저장
         //console.log(todos.data);
       } catch (error) {

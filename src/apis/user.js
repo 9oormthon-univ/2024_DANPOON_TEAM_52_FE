@@ -10,7 +10,7 @@ export const reqGetUser = async () => {
 export const reqUpdateUser = async (data) => {
   try {
     const response = await apiClient.patch(`/member`, data)
-    console.log(response)
+    //console.log(response)
     return response
   } catch (error) {
     console.error("유저정보 수정 실패:", error.response?.data || error.message)
@@ -28,7 +28,6 @@ export const reqGetResume = async () => {
 export const reqPostResume = async (newData) => {
   try {
     const response = await apiClient.post("/resume", newData) // JSON 데이터를 Body로 전달
-    console.log(response)
     window.location.reload()
     return response
   } catch (error) {
@@ -40,7 +39,6 @@ export const reqPostResume = async (newData) => {
 export const reqUpdateResume = async (id, item) => {
   try {
     const response = await apiClient.patch(`/resume/${id}`, item)
-    console.log(response)
     window.location.reload()
     return response
   } catch (error) {
@@ -52,7 +50,7 @@ export const reqUpdateResume = async (id, item) => {
 export const reqDeleteResume = async (item) => {
   try {
     const response = await apiClient.delete(`/resume/${item.resume_id}`)
-    console.log("삭제 성공:", response.data)
+    //console.log("삭제 성공:", response.data)
     window.location.reload()
     alert("삭제되었습니다.")
   } catch (error) {
