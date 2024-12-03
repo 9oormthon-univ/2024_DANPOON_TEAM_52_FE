@@ -1,5 +1,5 @@
 import axios from "axios"
-import { AUTH_ACCESS_TOKEN } from "../constants/auth"
+import { AUTH_ACCESS_TOKEN, AUTH_REFRESH_TOKEN } from "../constants/auth"
 
 export const apiClient = axios.create()
 
@@ -18,7 +18,13 @@ export function ApiClientSetting() {
       return response
     },
     (error) => {
-      if (error.message) alert(error.message)
+      if (error.response.status === 401) {
+        alert("로그인이 만료되었습니다. 다시 로그인해주세요.")
+        window.localStorage.removeItem(AUTH_ACCESS_TOKEN)
+        window.localStorage.removeItem(AUTH_REFRESH_TOKEN)
+        window.location.href = "/login"
+      }
+      else if (error.message) alert(error.message)
       return Promise.reject(error)
     }
   )
