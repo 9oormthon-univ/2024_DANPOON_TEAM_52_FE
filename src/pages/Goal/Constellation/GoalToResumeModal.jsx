@@ -126,7 +126,7 @@ export default function GoalToResumeModal({ open, onClose, goal }) {
               selectedResume.start_date && dayjs(selectedResume.start_date)
             }
             onChange={(date) => {
-              const dateStr = date.format("YYYY-MM-DD")
+              const dateStr = date && date.format("YYYY-MM-DD")
               setSelectedResume((prev) => ({ ...prev, start_date: dateStr }))
             }}
             placeholder="시작 날짜"
@@ -139,7 +139,7 @@ export default function GoalToResumeModal({ open, onClose, goal }) {
                   selectedResume.end_date && dayjs(selectedResume.end_date)
                 }
                 onChange={(date) => {
-                  const dateStr = date.format("YYYY-MM-DD")
+                  const dateStr = date && date.format("YYYY-MM-DD")
                   setSelectedResume((prev) => ({ ...prev, end_date: dateStr }))
                 }}
                 placeholder="종료 날짜"

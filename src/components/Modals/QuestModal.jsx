@@ -131,7 +131,7 @@ export default function QuestModal({ open, onClose, goalId, quest, onSave }) {
               <DatePicker
                 value={selectedQuest.deadline && dayjs(selectedQuest.deadline)}
                 onChange={(date) => {
-                  const dateStr = date.format("YYYY-MM-DD")
+                  const dateStr = date && date.format("YYYY-MM-DD")
                   setSelectedQuest((prev) => ({ ...prev, deadline: dateStr }))
                 }}
                 placeholder="날짜를 선택하세요"
