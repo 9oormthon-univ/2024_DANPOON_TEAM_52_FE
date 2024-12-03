@@ -57,12 +57,21 @@ export default function AiFeedBack({ setIsFeedBack }) {
       }}
     >
       {!isLoading && (
-        <StarContainer onClick={onClickRefresh}>
+        <StarContainer
+          onClick={(e) => {
+            onClickRefresh()
+            e.stopPropagation() // 이벤트 전파 차단
+          }}
+        >
           <Star />
           <Confetti />
         </StarContainer>
       )}
-      <ModalContent>
+      <ModalContent
+        onClick={(e) => {
+          e.stopPropagation() // 이벤트 전파 차단
+        }}
+      >
         {isLoading && (
           <div>
             <AIFeedbackLoading />
@@ -91,7 +100,7 @@ export default function AiFeedBack({ setIsFeedBack }) {
               >
                 <StarIcon /> AI 피드백이 작성되었어요
               </div>
-              <Swap onClick={onClickRefresh} />
+              <Swap />
             </div>
             <div
               style={{
@@ -132,25 +141,23 @@ const ModalContent = styled.div`
   color: white;
   position: absolute;
   z-index: 0;
-  /* 스크롤 활성화 */
-  overflow-y: auto; /* 세로 스크롤 */
-  overflow-x: hidden; /* 가로 스크롤 비활성화 */
-  scrollbar-width: 10px; /* 스크롤바 두께 조정 (Firefox 지원) */
-  scrollbar-color: #888 #444; /* 스크롤바 색상 조정 (Firefox 지원) */
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: 10px;
+  scrollbar-color: #888 #444;
 
-  /* 웹킷 기반 브라우저 스크롤바 스타일링 */
   &::-webkit-scrollbar {
-    width: 12px; /* 스크롤바 너비 */
+    width: 12px;
     height: 5px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #888; /* 스크롤바 색상 */
-    border-radius: 4px; /* 스크롤바 모서리 둥글게 */
+    background-color: #888;
+    border-radius: 4px;
   }
 
   &::-webkit-scrollbar-track {
-    background-color: #444; /* 스크롤바 배경 */
+    background-color: #444;
   }
 `
 const StarContainer = styled.div`
@@ -158,8 +165,8 @@ const StarContainer = styled.div`
   display: flex;
   justify-content: center;
   bottom: 340px;
-  height: 300px; /* 높이 수정 */
-  width: 100%; /* 너비 수정 */
+  height: 300px;
+  width: 100%;
   overflow: visible;
   background: radial-gradient(
     50% 70% at 50% 130%,

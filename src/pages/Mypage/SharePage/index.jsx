@@ -28,9 +28,11 @@ export default function ShareResume() {
   return (
     <S.Wrapper>
       <S.ProfileInfo>
-        <S.ProfileImg src={tmpUser.image_url} />
+        {/* api 수정되면 groupedData.image_url */}
+        <S.ProfileImg src={tmpUser.image_url} alt="이미지없음" />
         <S.InfoGroup>
           <S.InfoText>
+            {/* api 수정되면 groupedData.nickname */}
             <Highlight>{tmpUser.nickname}</Highlight>님의 이력
           </S.InfoText>
         </S.InfoGroup>
