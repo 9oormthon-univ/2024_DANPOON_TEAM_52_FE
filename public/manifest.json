@@ -1,9 +1,14 @@
 {
   "name": "오르빛",
-  "theme_color": "#000000",
+  "theme_color": "#8afaf1",
   "background_color": "#000000",
+  "dir": "ltr",
+  "scope": "https://m.danpoong-orbit.shop",
+  "lang": "ko",
   "short_name": "오르빛",
   "id": "오르빛",
+  "start_url": "https://m.danpoong-orbit.shop",
+  "display": "fullscreen",
   "description": "당신의 미래를 밝히는 별자리, 오르빛과 함께 목표를 세우고 세부 퀘스트를 수행해요",
   "categories": ["education", "lifestyle", "personalization", "social"],
   "shortcuts": [
