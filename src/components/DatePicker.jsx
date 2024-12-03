@@ -21,6 +21,9 @@ const StyledDatePicker = styled(DatePicker)`
         fill: #7d7d7d;
       }
     }
+    .ant-picker-clear {
+      color: #7d7d7d;
+    }
   }
 `
 
