@@ -35,6 +35,14 @@ import SettingPage from "./pages/Mypage/SettingPage"
 import CustomGuidePage from "./pages/Mypage/CustomGuide"
 import { RecoilRoot } from "recoil"
 
+const RootNavigator = () => {
+  const isVisited = localStorage.getItem("visited")
+  const isLogin = localStorage.getItem("access_token")
+  if (!isLogin) return <Navigate to={ROUTES_PATH_LOGIN} />
+  if (isVisited) return <Navigate to={ROUTES_PATH_HOME} />
+  return <Navigate to={ROUTES_PATH_ONBOARD} />
+}
+
 export default function App() {
   return (
     <RecoilRoot>
@@ -48,13 +56,7 @@ export default function App() {
           <Route path={ROUTES_PATH_HOME} element={<Home />} />
           <Route
             path={ROUTES_PATH_ROOT}
-            element={
-              localStorage.getItem("visited") ? (
-                <Navigate to={ROUTES_PATH_HOME} />
-              ) : (
-                <Navigate to={ROUTES_PATH_ONBOARD} />
-              )
-            }
+            element={<RootNavigator />}
           />
           <Route path={ROUTES_PATH_INFO} element={<InfoPage />} />
           <Route path={ROUTES_PATH_ONBOARD} element={<OnBoardingPage />} />
