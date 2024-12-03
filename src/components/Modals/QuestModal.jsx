@@ -18,7 +18,7 @@ const ModalContent = styled.form`
   display: flex;
   width: 270px;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px 0px 0px;
   gap: 10px;
 `
 

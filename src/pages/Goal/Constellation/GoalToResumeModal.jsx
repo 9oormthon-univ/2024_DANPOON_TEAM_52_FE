@@ -16,9 +16,9 @@ import { ROUTES_PATH_MYPAGE } from "../../../constants/routes"
 
 const ModalContent = styled.form`
   display: flex;
-  width: 360px;
+  width: fit-content;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px 0px 0px;
   gap: 10px;
 `
 
