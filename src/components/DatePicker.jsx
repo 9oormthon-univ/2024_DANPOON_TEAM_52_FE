@@ -11,6 +11,7 @@ const StyledDatePicker = styled(DatePicker)`
     input {
       color: #fff;
       padding-left: 10px;
+      width: 95px;
     }
     input::placeholder {
       color: #7d7d7d;
@@ -22,7 +23,7 @@ const StyledDatePicker = styled(DatePicker)`
       }
     }
     .ant-picker-clear {
-      color: #7d7d7d;
+      display: none;
     }
   }
 `
