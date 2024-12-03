@@ -22,7 +22,7 @@ import { DEFAULT_GOAL } from "../../constants/goal"
 import GoalModal from "../../components/Modals/GoalModal"
 
 export default function RecommendedGoals() {
-  const name = "아자아자석영"
+  const name = localStorage.getItem("nickname")
   const navigate = useNavigate()
   const [recommendedGoals, setRecommendedGoals] = useState([])
   const [selectedGoal, setSelectedGoal] = useState(DEFAULT_GOAL)
