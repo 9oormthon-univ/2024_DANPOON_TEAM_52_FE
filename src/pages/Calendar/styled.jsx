@@ -21,6 +21,7 @@ export const StyledCalendar = styled(Calendar)`
   height: 100%;
   background: #000;
   padding: 30px 32px;
+  border: none;
   .react-calendar__navigation {
     justify-content: center;
     margin-bottom: 50px;
