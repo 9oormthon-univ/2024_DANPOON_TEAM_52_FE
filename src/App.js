@@ -16,6 +16,7 @@ import {
   ROUTES_PATH_SEARCH,
   ROUTES_PATH_GOAL,
   ROUTES_PATH_GOAL_CONSTELLATION,
+  ROUTES_PATH_RESUME_SHARE,
 } from "./constants/routes"
 import { ApiClientSetting } from "./apis/apiClient"
 import KakaoInit from "./components/KakaoInit"
@@ -34,6 +35,7 @@ import Mypage from "./pages/Mypage"
 import SettingPage from "./pages/Mypage/SettingPage"
 import CustomGuidePage from "./pages/Mypage/CustomGuide"
 import { RecoilRoot } from "recoil"
+import ShareResume from "./pages/Mypage/SharePage"
 
 const RootNavigator = () => {
   const isVisited = localStorage.getItem("visited")
@@ -54,10 +56,7 @@ export default function App() {
           <Route path={ROUTES_PATH_LOGIN_KAKAO} element={<Kakao />} />
           <Route path={ROUTES_PATH_SPLASH} element={<Splash />} />
           <Route path={ROUTES_PATH_HOME} element={<Home />} />
-          <Route
-            path={ROUTES_PATH_ROOT}
-            element={<RootNavigator />}
-          />
+          <Route path={ROUTES_PATH_ROOT} element={<RootNavigator />} />
           <Route path={ROUTES_PATH_INFO} element={<InfoPage />} />
           <Route path={ROUTES_PATH_ONBOARD} element={<OnBoardingPage />} />
           <Route path={ROUTES_PATH_CALENDAR} element={<CalendarPage />} />
@@ -74,6 +73,7 @@ export default function App() {
             element={<GoalConstellation />}
           />
           <Route path={ROUTES_PATH_SEARCH} element={<Search />} />
+          <Route path={ROUTES_PATH_RESUME_SHARE} element={<ShareResume />} />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
