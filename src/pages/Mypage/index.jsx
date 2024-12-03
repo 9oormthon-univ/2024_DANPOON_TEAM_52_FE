@@ -36,7 +36,7 @@ export default function Mypage() {
   const [userJob, setUserJob] = useRecoilState(userJobAtom)
   const userData = useRecoilValue(userInfoAtom)
   const navigate = useNavigate()
-  const groupedData = useGroupedData()
+  const groupedData = useGroupedData(resumeData)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const onClickOption = (item) => {
     //console.log(item, "번째 항목 선택")
@@ -104,7 +104,11 @@ export default function Mypage() {
           ))}
           <NaviWrapper>
             <StyledButton>
-              <Share />
+              <Share
+                onClick={() => {
+                  navigate(`/resume/${userData.member_id}`)
+                }}
+              />
             </StyledButton>
             <StyledButton>
               <Setting

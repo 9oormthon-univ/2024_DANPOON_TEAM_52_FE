@@ -13,7 +13,6 @@ import AddCareerPage from "./AddCareer/AddCareer"
 
 const CategoryItem = ({ category, onClickOption, isEdit, setIsEdit }) => {
   const [selectedOptionId, setSelectedOptionId] = useState(null) // 선택된 항목 ID 관리
-
   return (
     <CategoryWrapper key={category.id}>
       <CategoryGroup>
