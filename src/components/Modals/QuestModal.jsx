@@ -14,7 +14,7 @@ import DatePicker from "../../components/DatePicker"
 import { motion, AnimatePresence } from "framer-motion"
 import dayjs from "dayjs"
 
-export const ModalContent = styled.form`
+const ModalContent = styled.form`
   display: flex;
   width: 270px;
   flex-direction: column;
@@ -22,11 +22,11 @@ export const ModalContent = styled.form`
   gap: 10px;
 `
 
-export const Select = styled(SelectComponent)`
+const Select = styled(SelectComponent)`
   width: 100%;
 `
 
-export const Title = styled.h2`
+const Title = styled.h2`
   width: 100%;
   text-align: center;
   color: #fff;
@@ -35,26 +35,26 @@ export const Title = styled.h2`
   margin-bottom: 10px;
 `
 
-export const Label = styled.label`
+const Label = styled.label`
   color: #fff;
   font-size: 15px;
   font-weight: 500;
 `
 
-export const HiddenContainer = styled(motion.div)`
+const HiddenContainer = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 `
 
-export const ButtonContainer = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   gap: 10px;
   padding-top: 10px;
 `
 
-export const StyledButton = styled(ButtonComponent)`
+const StyledButton = styled(ButtonComponent)`
   flex: 1;
   &&& {
     padding: 5px;

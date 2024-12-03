@@ -4,7 +4,7 @@ import CheckListItem from "./CheckListItem"
 import { ListItemSkeleton } from "./ListItem"
 import ShadowContainer from "./ShadowContainer"
 
-export const Container = styled(ScrollContainer)`
+const Container = styled(ScrollContainer)`
   display: flex;
   flex-direction: column;
   width: 100%;

@@ -14,7 +14,7 @@ import dayjs from "dayjs"
 import { Flex } from "antd"
 import { ROUTES_PATH_MYPAGE } from "../../../constants/routes"
 
-export const ModalContent = styled.form`
+const ModalContent = styled.form`
   display: flex;
   width: 360px;
   flex-direction: column;
@@ -22,11 +22,11 @@ export const ModalContent = styled.form`
   gap: 10px;
 `
 
-export const Select = styled(SelectComponent)`
+const Select = styled(SelectComponent)`
   width: 100%;
 `
 
-export const Title = styled.h2`
+const Title = styled.h2`
   width: 100%;
   text-align: center;
   color: #fff;
@@ -35,20 +35,20 @@ export const Title = styled.h2`
   margin-bottom: 10px;
 `
 
-export const ButtonContainer = styled.div`
+const ButtonContainer = styled.div`
   display: flex;
   gap: 10px;
   padding-top: 10px;
 `
 
-export const StyledButton = styled(ButtonComponent)`
+const StyledButton = styled(ButtonComponent)`
   flex: 1;
   &&& {
     padding: 5px;
   }
 `
 
-export const Label = styled.label`
+const Label = styled.label`
   color: #fff;
   font-size: 15px;
   font-weight: 500;
