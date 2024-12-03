@@ -4,6 +4,7 @@ import { DatePicker } from "antd"
 const StyledDatePicker = styled(DatePicker)`
   display: flex;
   width: 100%;
+  min-width: fit-content;
   background-color: #262827 !important;
   border: none;
   .ant-picker-input {
@@ -19,6 +20,9 @@ const StyledDatePicker = styled(DatePicker)`
       svg {
         fill: #7d7d7d;
       }
+    }
+    .ant-picker-clear {
+      color: #7d7d7d;
     }
   }
 `

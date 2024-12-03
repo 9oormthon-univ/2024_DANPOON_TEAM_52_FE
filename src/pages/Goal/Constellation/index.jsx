@@ -7,6 +7,7 @@ import {
   StyledText,
   ScrollContainer,
 } from "./styled"
+import Button from "../../../components/Button"
 import BaseLayout from "../../../components/BaseLayout"
 import BackwardButton from "../../../components/BackwardButton"
 import ConstellationCard from "../../../components/ConstellationCard"
@@ -18,13 +19,17 @@ import { useRecoilState } from "recoil"
 import { useEffect, useState } from "react"
 import { reqGetGoal } from "../../../apis/goal"
 import { DEFAULT_GOAL } from "../../../constants/goal"
+import GoalToResumeModal from "./GoalToResumeModal"
 
 export default function GoalConstellation() {
   const { id } = useParams()
   const navigate = useNavigate()
   const goCompleteGoal = () => navigate(`${ROUTES_PATH_HOME}?tab=complete`)
+  const [open, setOpen] = useState(false)
   const [goals, setGoals] = useRecoilState(myGoalsAtom)
   const [goal, setGoal] = useState(DEFAULT_GOAL)
+  const onClickAddResume = () => setOpen(true)
+  const onClose = () => setOpen(false)
 
   const getGoal = async () => {
     const existGoal = goals.find((g) => g.id === +id)
@@ -61,6 +66,10 @@ export default function GoalConstellation() {
             </QuestsContainer>
           </ScrollContainer>
         </ShadowContainer>
+        {!goal.isResume && (
+          <Button onClick={onClickAddResume}>이력에 추가하기</Button>
+        )}
+        <GoalToResumeModal open={open} goal={goal} onClose={onClose} />
       </Container>
     </BaseLayout>
   )

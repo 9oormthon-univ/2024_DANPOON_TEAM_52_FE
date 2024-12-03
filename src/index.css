@@ -255,3 +255,16 @@ body {
 .ant-picker-footer {
   display: none !important;
 }
+
+.ant-select-dropdown {
+  background: #262827;
+}
+.ant-select-item-option-content {
+  color: #b2b2b2;
+}
+.ant-select-item-option-selected {
+  background-color: #184149 !important;
+}
+.ant-select-item-option-selected .ant-select-item-option-content {
+  color: #fff;
+}

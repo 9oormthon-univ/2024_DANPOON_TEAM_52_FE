@@ -197,7 +197,7 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
               }}
               placeholder="날짜"
               onChange={(date) => {
-                const formattedDate = date.format("YYYY-MM-DD")
+                const formattedDate = date && date.format("YYYY-MM-DD")
                 setStartDate(formattedDate)
                 setEndDate(formattedDate)
               }}
@@ -213,7 +213,9 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
                   color: "white",
                 }}
                 placeholder="시작 날짜"
-                onChange={(date) => setStartDate(date.format("YYYY-MM-DD"))}
+                onChange={(date) =>
+                  setStartDate(date && date.format("YYYY-MM-DD"))
+                }
                 format="YYYY-MM-DD"
               />
               <DateDivide>~</DateDivide>
@@ -225,7 +227,9 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
                   color: "white",
                 }}
                 placeholder="종료 날짜"
-                onChange={(date) => setEndDate(date.format("YYYY-MM-DD"))}
+                onChange={(date) =>
+                  setEndDate(date && date.format("YYYY-MM-DD"))
+                }
                 format="YYYY-MM-DD"
               />
             </DateRangeWrapper>
