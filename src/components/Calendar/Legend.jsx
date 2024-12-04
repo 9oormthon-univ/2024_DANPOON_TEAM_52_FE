@@ -1,7 +1,6 @@
 import React from "react"
 import styled from "styled-components"
 
-// Wrapper for the legend
 const LegendWrapper = styled.div`
   display: flex;
   justify-content: center;
@@ -12,14 +11,12 @@ const LegendWrapper = styled.div`
   right: 50px;
 `
 
-// Wrapper for each legend item
 const LegendItem = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
 `
 
-// Circle indicator for legend items
 const LegendCircle = styled.div`
   background: ${(props) =>
     props.color || "white"}; // 동그라미 색상 (기본: 흰색)
@@ -28,7 +25,6 @@ const LegendCircle = styled.div`
   border-radius: 50%; // 동그라미 모양
 `
 
-// Text for legend items
 const LegendText = styled.span`
   font-size: 11px;
   color: white; // 텍스트 색상
