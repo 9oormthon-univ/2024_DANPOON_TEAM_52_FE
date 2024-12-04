@@ -74,7 +74,7 @@ export const CategoryGroup = styled.div`
   text-align: center;
   gap: 9px;
 `
-export const CategoryIcon = styled.img`
+export const CategoryIcon = styled.div`
   width: 18px;
   height: 18px;
   margin-top: 3px;

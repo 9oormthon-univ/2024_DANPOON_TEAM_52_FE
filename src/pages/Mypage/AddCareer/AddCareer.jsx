@@ -6,7 +6,6 @@ import {
   ModalButtonGroup,
   ModalButton,
 } from "../../Calendar/styled"
-import * as S from "./styled"
 import styled from "styled-components"
 import { DatePicker } from "antd"
 import { useDateRange } from "../../../hooks/useDateRange"
@@ -20,7 +19,6 @@ const DatePickerWrapper = styled.div`
   width: 100%;
   justify-content: center;
   gap: 10px;
-  margin-top: 20px;
 `
 
 const DateRangeWrapper = styled.div`
@@ -40,26 +38,11 @@ const Select = styled(SelectComponent)`
   width: 100%;
 `
 const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
-  const categories = [
-    { id: 1, name: "학력" },
-    { id: 2, name: "자격·어학·수상" },
-    { id: 3, name: "경험·활동·교육" },
-    { id: 4, name: "경력" },
-    { id: 5, name: "기타" },
-  ]
-
-  const [isOpen, setIsOpen] = useState(false)
   const [isSingleDate, setIsSingleDate] = useState(false)
   const [careerName, setCareerName] = useState("")
   const [selectedResume, setSelectedResume] = useState(DEFAULT_RESUME)
   const [detail, setDetail] = useState("")
-  // const [selectedCategory, setSelectedCategory] = useState({
-  //   id: "",
-  //   name: "",
-  // })
-
   const { startDate, setStartDate, endDate, setEndDate } = useDateRange()
-
   const onClickAddCareer = () => {
     if (
       !careerName ||
@@ -79,10 +62,7 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
       end_date: endDate,
     }
     console.log(NewCareer)
-
-    // 부모 컴포넌트의 업데이트 함수 호출
     reqPostResume(NewCareer)
-    // 모달 닫기
     setIsModalOpen(false)
   }
   const onClickEditCareer = (id) => {
@@ -110,6 +90,7 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <h3>이력 {isEdit ? <span>수정하기</span> : <span>추가하기</span>}</h3>
         <Select
+          style={{ marginTop: "20px" }}
           value={selectedResume.resume_category}
           onChange={(v) => {
             setSelectedResume((prev) => ({
@@ -125,10 +106,6 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
             label: `${v.icon} ${v.label}`,
           }))}
         />
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <Text>하루종일</Text>
-          <StyledSwitch onChange={(checked) => setIsSingleDate(checked)} />
-        </div>
         <ModalInput
           style={{ height: "40px" }}
           placeholder="활동명"
@@ -141,6 +118,17 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
           value={detail}
           onChange={(e) => setDetail(e.target.value)}
         />
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            marginTop: "20px",
+          }}
+        >
+          <Text>하루종일</Text>
+          <StyledSwitch onChange={(checked) => setIsSingleDate(checked)} />
+        </div>
         <DatePickerWrapper>
           {isSingleDate ? (
             <DatePicker

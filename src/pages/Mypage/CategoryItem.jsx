@@ -16,7 +16,7 @@ const CategoryItem = ({ category, onClickOption, isEdit, setIsEdit }) => {
   return (
     <CategoryWrapper key={category.id}>
       <CategoryGroup>
-        <CategoryIcon src={category.icon} />
+        <CategoryIcon>{category.icon}</CategoryIcon>
         <CategoryName>{category.name}</CategoryName>
       </CategoryGroup>
       {category.items.map((item, index) => (

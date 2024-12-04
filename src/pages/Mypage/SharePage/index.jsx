@@ -37,7 +37,7 @@ export default function ShareResume() {
           </S.InfoText>
         </S.InfoGroup>
       </S.ProfileInfo>
-      <S.ContentWrapper>
+      <S.ContentWrapper style={{ maxHeight: "70vh" }}>
         {groupedData?.map((category) => (
           <CategoryItem key={category.id} category={category} />
         ))}
