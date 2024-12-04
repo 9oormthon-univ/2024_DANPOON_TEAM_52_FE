@@ -22,8 +22,8 @@ const CategoryItem = ({ category, onClickOption, isEdit, setIsEdit }) => {
       {category.items.map((item, index) => (
         <ItemGroup key={index}>
           <ItemDate>
-            {dayjs(item.start_date).format("YY.MM.DD")} ~{" "}
-            {dayjs(item.end_date).format("YY.MM.DD")}
+            {dayjs(item.start_date).format("YY.MM.DD.")} ~{" "}
+            {dayjs(item.end_date).format("YY.MM.DD.")}
           </ItemDate>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <ItemName>{item.itemName}</ItemName>
