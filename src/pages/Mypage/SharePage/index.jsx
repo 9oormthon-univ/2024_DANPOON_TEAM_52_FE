@@ -7,10 +7,6 @@ import CategoryItem from "../CategoryItem"
 import { useGroupedData } from "../../../hooks/useMypage"
 export default function ShareResume() {
   const [groupedData, setGroupedData] = useState()
-  const tmpUser = {
-    nickname: "임시이름",
-    image_url: "",
-  }
   const { id } = useParams() // URL의 :id 값 추출
   useEffect(() => {
     const fetchData = async () => {
@@ -18,7 +14,6 @@ export default function ShareResume() {
         const response = await reqGetShareResume(id)
         const grouped = useGroupedData(response)
         setGroupedData(grouped)
-        console.log(grouped)
       } catch (error) {
         console.error("잘못된 접근입니다!", error)
       }
@@ -28,12 +23,10 @@ export default function ShareResume() {
   return (
     <S.Wrapper>
       <S.ProfileInfo>
-        {/* api 수정되면 groupedData.image_url */}
-        <S.ProfileImg src={tmpUser.image_url} alt="이미지없음" />
+        <S.ProfileImg src={groupedData.profile_image} alt="이미지없음" />
         <S.InfoGroup>
           <S.InfoText>
-            {/* api 수정되면 groupedData.nickname */}
-            <Highlight>{tmpUser.nickname}</Highlight>님의 이력
+            <Highlight>{groupedData.nickname}</Highlight>님의 이력
           </S.InfoText>
         </S.InfoGroup>
       </S.ProfileInfo>
