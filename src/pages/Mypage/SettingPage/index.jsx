@@ -52,7 +52,9 @@ const SettingPage = () => {
         <SettingItemWrapper>
           <SettingItem>
             <ItemName>별명</ItemName>
-            <Content>{userInfo.nickname}</Content>
+            <Content defaultValue={userData.nickname}>
+              {userInfo.nickname}
+            </Content>
             <Option
               onClick={() => {
                 setIsModalOpen(true)
@@ -63,7 +65,12 @@ const SettingPage = () => {
           </SettingItem>
           <SettingItem>
             <ItemName>희망직무</ItemName>
-            <div style={{ display: "flex", flexDirection: "column" }}>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+              }}
+            >
               <Content>{userJob[0]?.category}</Content>
               <Content
                 style={{ fontSize: "10px", marginTop: "5px", color: "#C3C3C3" }}

@@ -29,6 +29,8 @@ export const MainTitle = styled(Title)`
 `
 
 export const GridWrapper = styled.div`
+  max-height: 300px;
+  overflow-y: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 15px;

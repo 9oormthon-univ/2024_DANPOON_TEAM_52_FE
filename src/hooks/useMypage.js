@@ -1,16 +1,16 @@
 export const useGroupedData = (resumeData) => {
   const categoryMapping = {
-    academy_list: { name: "학력", icon: "/categories/category1.png" },
-    career_list: { name: "경력", icon: "/categories/category2.png" },
+    academy_list: { name: "학력", icon: "🏛️" },
+    career_list: { name: "경력", icon: "🪪" },
     qualification_list: {
       name: "자격·어학·수상",
-      icon: "/categories/category3.png",
+      icon: "🏆",
     },
     experience_list: {
       name: "경험·활동·교육",
-      icon: "/categories/category4.png",
+      icon: "🏫",
     },
-    etc_list: { name: "기타", icon: "/categories/category5.png" },
+    etc_list: { name: "기타", icon: "💬" },
   }
   const groupedData = Object.keys(resumeData).map((key) => ({
     //카테고리

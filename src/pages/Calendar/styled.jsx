@@ -150,7 +150,7 @@ export const ModalInput = styled.input`
   height: 50px;
   padding: 10px 20px;
   font-family: "Pretendard";
-  margin-top: 10px;
+  margin-top: 20px;
   font-size: 16px;
   border: 1px solid #333;
   border-radius: 10px;
@@ -159,7 +159,6 @@ export const ModalInput = styled.input`
   &:focus {
     outline: none;
   }
-  margin-bottom: 10px;
 `
 
 export const SingleCheckbox = styled(Checkbox)`

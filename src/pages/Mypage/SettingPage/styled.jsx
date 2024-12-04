@@ -4,7 +4,7 @@ import { Text } from "../../../components/Typo"
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 70px 25px 0px 25px;
+  padding: 30px 25px 0px 25px;
 `
 export const Group = styled.div`
   display: flex;
@@ -25,6 +25,8 @@ export const Profile = styled.img`
 `
 
 export const SettingItemWrapper = styled.div`
+  max-height: 50vh;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -36,6 +38,7 @@ export const SettingItem = styled.div`
   height: 60px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: rgba(44, 44, 44, 0.8);
   border-radius: 15px;
   padding: 20px 20px;
@@ -45,11 +48,10 @@ export const ItemName = styled.div`
   color: #b2b2b2;
   font-size: 15px;
   font-weight: semibold;
-  flex: 1;
 `
 
 export const Content = styled.div`
-  width: 200px;
+  width: 150px;
   font-size: 15px;
   color: white;
 `

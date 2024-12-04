@@ -43,7 +43,7 @@ export const FeedbackBtn = styled(Button)`
   }
 `
 export const ContentWrapper = styled.div`
-  max-height: 600px;
+  max-height: 50vh;
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 8px;
@@ -74,7 +74,7 @@ export const CategoryGroup = styled.div`
   text-align: center;
   gap: 9px;
 `
-export const CategoryIcon = styled.img`
+export const CategoryIcon = styled.div`
   width: 18px;
   height: 18px;
   margin-top: 3px;
@@ -148,7 +148,7 @@ export const NaviWrapper = styled.div`
   }
 
   @media (max-width: 573px) {
-    left: 330px;
+    right: 20px;
     top: 70px;
   }
 `
