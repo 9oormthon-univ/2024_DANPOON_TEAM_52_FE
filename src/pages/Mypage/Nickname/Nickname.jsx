@@ -18,6 +18,7 @@ const NicknamePage = ({ setIsEdit }) => {
       ...prev,
       nickname: nickname,
     }))
+    localStorage.setItem("nickname", nickname)
     reqUpdateUser({
       nickname: nickname,
       known_prompt: prompt.prompt1,
