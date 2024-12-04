@@ -4,6 +4,7 @@ import { usePickedItems } from "../../../hooks/usePickedItems"
 import { useStepNavigation } from "../../../hooks/useStepNavigation"
 import { useNavigate } from "react-router-dom"
 import {
+  BackBtn,
   BodyWrapper,
   Content,
   GridWrapper,
@@ -55,6 +56,7 @@ const SetInterest = ({ detailJob, setDetailJob }) => {
 
   return (
     <Wrapper>
+      <BackBtn />
       <Content>
         <MainTitle>
           <Highlight>{jobData[parseInt(paramsJobItem)]}</Highlight>

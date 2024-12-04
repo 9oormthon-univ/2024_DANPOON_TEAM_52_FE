@@ -1,19 +1,19 @@
 import styled from "styled-components"
 import { Title, Text } from "../../components/Typo"
 import Button from "../../components/Button"
-
+import BackwardBtn from "../../components/BackwardButton"
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
+  padding: 0px 10px;
   width: 100%;
   height: 100%;
   background: radial-gradient(
     circle,
     rgba(78, 197, 199, 0.2) 0%,
-    /* 그라데이션 시작 색 (연한 청록색) */ rgba(0, 0, 0, 0) 70%
-      /* 투명한 끝 부분 */
+    rgba(0, 0, 0, 0) 70%
   );
 `
 
@@ -29,13 +29,15 @@ export const MainTitle = styled(Title)`
 `
 
 export const GridWrapper = styled.div`
-  max-height: 300px;
+  height: 400px;
+  max-height: 400px;
   overflow-y: auto;
   display: flex;
   flex-wrap: wrap;
   gap: 15px;
-  justify-content: center;
+  justify-content: left;
   padding: 0px 10px;
+  align-content: start;
 `
 
 export const BodyWrapper = styled.div`
@@ -51,8 +53,8 @@ export const ItemBtn = styled.button`
   color: white;
   text-align: center;
   border: none;
-  border-radius: 10px;
-  padding: 10px 5px;
+  border-radius: 15px;
+  padding: 12px 5px;
   width: calc(33.333% - 10px);
   font-family: "Pretendard";
 `
@@ -70,4 +72,9 @@ export const Option = styled.div`
   font-weight: bold;
   font-family: "Pretendard";
   font-size: 15px;
+`
+
+export const BackBtn = styled(BackwardBtn)`
+  margin-left: 20px;
+  margin-bottom: 30px;
 `
