@@ -8,6 +8,8 @@ const Background = styled(motion.div)`
   align-items: end;
   width: 100%;
   height: 100%;
+  min-width: 370px;
+  max-width: 576px !important;
   background: rgba(32, 48, 55, 0.6);
   overflow: hidden;
   z-index: 100;
@@ -19,6 +21,8 @@ const Container = styled(motion.div)`
   flex-direction: column;
   width: 100%;
   height: fit-content;
+  min-width: 370px;
+  max-width: 576px !important;
   overflow: hidden;
   padding: 25px 18px;
   background: #000000cc;
@@ -30,8 +34,7 @@ const Container = styled(motion.div)`
 
 export default function Drawer({ children, open, onClose }) {
   const [isOpen, setIsOpen] = useState(open)
-  const close = (e) => {
-    console.log(e)
+  const close = () => {
     setIsOpen(false)
     onClose()
   }
