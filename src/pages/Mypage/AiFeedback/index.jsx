@@ -34,8 +34,7 @@ export default function AiFeedBack({ setIsFeedBack }) {
     try {
       setIsLoading(true)
       const newFeedBack = await reqPostFeedback()
-      console.log(newFeedBack)
-      setFeedBack(newFeedBack)
+      setFeedBack(newFeedBack.feedback)
       if (newFeedBack) {
         setIsLoading(false)
       }

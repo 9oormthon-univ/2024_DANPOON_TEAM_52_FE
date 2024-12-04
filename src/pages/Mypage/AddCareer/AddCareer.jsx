@@ -20,7 +20,17 @@ const DatePickerWrapper = styled.div`
   justify-content: center;
   gap: 10px;
 `
-
+const CustomDatePicker = styled(DatePicker)`
+  width: 100%;
+  background: #262827;
+  border: none;
+  color: white;
+  .ant-picker-input {
+    .ant-picker-suffix {
+      color: white;
+    }
+  }
+`
 const DateRangeWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -35,6 +45,7 @@ const DateDivide = styled.div`
 `
 
 const Select = styled(SelectComponent)`
+  text-align: left;
   width: 100%;
 `
 const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
@@ -131,7 +142,7 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
         </div>
         <DatePickerWrapper>
           {isSingleDate ? (
-            <DatePicker
+            <CustomDatePicker
               style={{
                 width: "100%",
                 background: "#262827",
@@ -148,13 +159,7 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
             />
           ) : (
             <DateRangeWrapper>
-              <DatePicker
-                style={{
-                  width: "100%",
-                  background: "#262827",
-                  border: "none",
-                  color: "white",
-                }}
+              <CustomDatePicker
                 placeholder="시작 날짜"
                 onChange={(date) =>
                   setStartDate(date && date.format("YYYY-MM-DD"))
@@ -162,13 +167,7 @@ const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
                 format="YYYY-MM-DD"
               />
               <DateDivide>~</DateDivide>
-              <DatePicker
-                style={{
-                  width: "100%",
-                  background: "#262827",
-                  border: "none",
-                  color: "white",
-                }}
+              <CustomDatePicker
                 placeholder="종료 날짜"
                 onChange={(date) =>
                   setEndDate(date && date.format("YYYY-MM-DD"))
