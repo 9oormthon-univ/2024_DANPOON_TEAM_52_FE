@@ -8,8 +8,9 @@ import {
   Label,
   QuestContainer,
   Title,
-  Highlight,
   RightText,
+  SubDescription,
+  Link,
 } from "./styled"
 import BackwardButton from "../../components/BackwardButton"
 import { Flex } from "antd"
@@ -28,7 +29,10 @@ import { CheckModal } from "../../components/Modal"
 import { reqCompleteGoal } from "../../apis/goal"
 import Confetti from "../../components/Confetti"
 import Loading from "../../components/Loading"
-import { ROUTES_PATH_GOAL_CONSTELLATION } from "../../constants/routes"
+import {
+  ROUTES_PATH_GOAL_CONSTELLATION,
+  ROUTES_PATH_CUSTOMGUIDE,
+} from "../../constants/routes"
 import RecommendQuestModal from "../../components/Modals/RecommendQuestModal"
 import QuestModal from "../../components/Modals/QuestModal"
 import { CATEGORIES } from "../../constants/dummy"
@@ -213,13 +217,19 @@ export default function Quest() {
           <CompleteButton $variant="secondary" onClick={onClickCompleteButton}>
             목표 완료
           </CompleteButton>
-          <Description>
-            해당 목표를 위한 <Highlight>퀘스트</Highlight>
+          <Flex justify="space-between">
+            <Flex gap={6} vertical>
+              <Description>해당 목표를 위한 퀘스트</Description>
+              <SubDescription>
+                <Link to={ROUTES_PATH_CUSTOMGUIDE}>맞춤형 설정</Link>을 입력하면
+                더 개인화된 추천을 받을 수 있어요
+              </SubDescription>
+            </Flex>
             <RightText>
               {goal.quests.filter((q) => q.isComplete).length}/
               {goal.quests.length}
             </RightText>
-          </Description>
+          </Flex>
           <QuestContainer>
             <CheckQuests
               quests={goal.quests}

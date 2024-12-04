@@ -3,6 +3,8 @@ import {
   GradientBackground,
   RecommendedGoalsContainer,
   Title,
+  Description,
+  Link,
 } from "./styled"
 import BackwardButton from "../../components/BackwardButton"
 import Typo from "../../components/Typo"
@@ -14,10 +16,11 @@ import { ReactComponent as PlusSVG } from "../../svgs/plus.svg"
 import GoalCard from "../../components/GoalCard"
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { reqGetRecommendGoals, reqPostGoal } from "../../apis/goal"
-import { ROUTES_PATH_HOME } from "../../constants/routes"
-import { useSetRecoilState } from "recoil"
-import { myGoalsAtom } from "../../store/atoms/goal"
+import { reqGetRecommendGoals } from "../../apis/goal"
+import {
+  ROUTES_PATH_CUSTOMGUIDE,
+  ROUTES_PATH_HOME,
+} from "../../constants/routes"
 import { DEFAULT_GOAL } from "../../constants/goal"
 import GoalModal from "../../components/Modals/GoalModal"
 
@@ -62,6 +65,10 @@ export default function RecommendedGoals() {
         <br />
         추천하는 목표예요
       </Title>
+      <Description>
+        <Link to={ROUTES_PATH_CUSTOMGUIDE}>맞춤형 설정</Link>을 입력하면 더
+        개인화된 추천을 받을 수 있어요
+      </Description>
       <RecommendedGoalsContainer>
         <GradientBackground />
         <Carousel dots={true} afterChange={onChange}>
