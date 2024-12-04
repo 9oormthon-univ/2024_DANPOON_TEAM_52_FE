@@ -25,9 +25,9 @@ export const reqGetResume = async () => {
 }
 
 //이력추가(/api/resume)
-export const reqPostResume = async ({ goalId, ...newData } = {}) => {
+export const reqPostResume = async (newData) => {
   try {
-    const response = await apiClient.post(`/resume${goalId && `/${goalId}`}`, newData) // JSON 데이터를 Body로 전달
+    const response = await apiClient.post(`/resume`, newData) // JSON 데이터를 Body로 전달
     window.location.reload()
     return response
   } catch (error) {
@@ -36,7 +36,7 @@ export const reqPostResume = async ({ goalId, ...newData } = {}) => {
 }
 
 export const reqPostResumeByGoal = async ({ goalId, ...newData } = {}) => {
-  return await apiClient.post(`/resume${goalId && `/${goalId}`}`, newData)
+  return await apiClient.post(`/resume${goalId ? `/${goalId}` : ''}`, newData)
 }
 
 //이력수정 /api/resume/{resumeId}
