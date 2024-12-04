@@ -148,7 +148,7 @@ export const NaviWrapper = styled.div`
   }
 
   @media (max-width: 573px) {
-    left: 330px;
+    right: 20px;
     top: 70px;
   }
 `
