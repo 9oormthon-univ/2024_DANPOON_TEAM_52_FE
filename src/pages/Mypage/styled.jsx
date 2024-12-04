@@ -43,7 +43,7 @@ export const FeedbackBtn = styled(Button)`
   }
 `
 export const ContentWrapper = styled.div`
-  max-height: 600px;
+  max-height: 50vh;
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 8px;
