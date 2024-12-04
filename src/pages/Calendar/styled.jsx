@@ -197,24 +197,24 @@ export const AddScheduleButton = styled.button`
   position: absolute;
   top: 37px;
   right: 40px;
-  background: #2f2f2f; /* 버튼 배경색 */
-  color: white; /* 텍스트 색상 */
-  border: none; /* 테두리 없음 */
-  border-radius: 50%; /* 완전한 원 모양 */
-  width: 35px; /* 버튼 크기 (너비) */
-  height: 35px; /* 버튼 크기 (높이) */
-  font-size: 24px; /* 텍스트 크기 */
-  cursor: pointer; /* 마우스 커서 변경 */
-  display: flex; /* 내용 중앙 정렬을 위한 flexbox */
-  align-items: center; /* 세로 중앙 정렬 */
-  justify-content: center; /* 가로 중앙 정렬 */
+  background: #2f2f2f;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
-    background: #3d3d3d; /* 호버 시 배경색 */
+    background: #3d3d3d;
   }
 
   &:active {
-    background: #1f1f1f; /* 클릭 시 배경색 */
+    background: #1f1f1f;
   }
 `
 
@@ -225,7 +225,7 @@ export const StyledDatePicker = styled(DatePicker)`
   color: "white";
 
   .ant-picker-suffix {
-    color: white !important; /* 달력 아이콘 색상 */
+    color: white !important;
   }
 `
 
@@ -233,47 +233,46 @@ export const StyledRangePicker = styled(DatePicker.RangePicker)`
   &&& {
     width: 100%;
     font-family: "Pretendard";
-    background-color: #262827; /* 배경색 */
-    color: white; /* 글씨 색상 */
-    border: none; /* 테두리 제거 */
-    border-radius: 8px; /* 둥근 모서리 */
+    background-color: #262827;
+    color: white;
+    border: none;
+    border-radius: 8px;
     padding: 8px 12px;
     .ant-picker-input > input {
-      color: white !important; /* 입력 글씨 색상 */
-      border: none; /* 입력 필드 테두리 제거 */
-      outline: none; /* 포커스 시 외곽선 제거 */
+      color: white !important;
+      border: none;
+      outline: none;
     }
     .ant-picker-suffix {
-      color: white !important; /* 달력 아이콘 색상 */
+      color: white !important;
     }
     &:hover {
-      border: none; /* 호버 시 테두리 제거 */
+      border: none;
     }
   }
 `
 
-/* 드롭다운 스타일 강제 적용 */
 export const GlobalStyle = styled.div`
   .ant-picker-dropdown {
-    width: 50% !important; /* 드롭다운 너비를 RangePicker와 동일하게 설정 */
-    max-width: unset !important; /* 기본 최대 너비 제한 제거 */
-    min-width: 50px !important; /* 최소 너비를 RangePicker 너비로 설정 */
-    background-color: #262827 !important; /* 드롭다운 배경색 */
+    width: 50% !important;
+    max-width: unset !important;
+    min-width: 50px !important;
+    background-color: #262827 !important;
   }
 
   .ant-picker-panel-container {
-    background-color: #262827 !important; /* 패널 배경색 */
+    background-color: #262827 !important;
   }
 
   .ant-picker-cell-inner {
-    color: white !important; /* 드롭다운 날짜 글씨 색상 */
+    color: white !important;
   }
 
   .ant-picker-cell-inner:hover {
-    background-color: #3d3f40 !important; /* 날짜 호버 시 배경색 */
+    background-color: #3d3f40 !important;
   }
 
   .ant-picker-footer {
-    background-color: #262827 !important; /* 드롭다운 하단 배경색 */
+    background-color: #262827 !important;
   }
 `

@@ -92,8 +92,8 @@ const EventDetails = ({
 export default EventDetails
 const MotionContainer = styled(motion.div)`
   width: 100%;
-  height: 350px;
-  position: fixed;
+  height: 30vh;
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
@@ -104,9 +104,6 @@ const MotionContainer = styled(motion.div)`
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   box-shadow: 5px 10px 15px 10px rgba(138, 250, 241, 0.5);
-  @media (min-width: 520px) {
-    width: 520px;
-  }
 `
 
 const DateText = styled.div`
