@@ -14,21 +14,34 @@ import {
   Wrapper,
 } from "../styled"
 import { Highlight } from "../../../components/Typo"
-import { useState } from "react"
-import { reqPostJob } from "../../../apis/job"
+import { useEffect, useState } from "react"
+import { reqGetJob, reqPostJob } from "../../../apis/job"
 import userJobAtom from "../../../store/atoms/userjob"
-import { useSetRecoilState } from "recoil"
-const SetInterest = ({ detailJob }) => {
-  const setUserJob = useSetRecoilState(userJobAtom)
+import { useRecoilState } from "recoil"
+const SetInterest = ({ detailJob, setDetailJob }) => {
+  const [userJob, setUserJob] = useRecoilState(userJobAtom)
   const navigate = useNavigate() // 컴포넌트 내부에서 useNavigate 호출
   const { paramsInterestItem, paramsJobItem } = useStepNavigation()
-  const { pickedItems, toggleItem, sendData } = usePickedItems(
-    paramsInterestItem,
-    () => popStateFunc(2, paramsJobItem, pickedItems)
+  const { pickedItems } = usePickedItems(paramsInterestItem, () =>
+    popStateFunc(2, paramsJobItem, pickedItems)
   )
-
   // 선택된 아이템을 저장할 상태
   const [selectedItems, setSelectedItems] = useState([])
+  useEffect(() => {
+    const fetchJobList = async () => {
+      const response = await reqGetJob()
+      const jobArray = Object.entries(response.jobs).map(([key, id]) => ({
+        category: key,
+        id: id,
+      }))
+      setUserJob(jobArray)
+      //홈에서 뒤로가기 발생 시, params 활용하여 상세 직무 가져오기
+      if (!detailJob) {
+        setDetailJob(jobArray[paramsJobItem].id)
+      }
+    }
+    fetchJobList()
+  }, [])
 
   // 선택/해제 함수
   const handleSelectItem = (id) => {
@@ -72,7 +85,9 @@ const SetInterest = ({ detailJob }) => {
             await reqPostJob(selectedItems, navigate, setUserJob)
           }}
         >
-          {localStorage.getItem("backURL") ? "수정 완료" : "시작하기"}
+          {localStorage.getItem("backURL") === "true"
+            ? "수정 완료"
+            : "시작하기"}
         </NextBtn>
       </BodyWrapper>
     </Wrapper>

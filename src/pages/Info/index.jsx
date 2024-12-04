@@ -13,18 +13,18 @@ export default function InfoPage() {
   //세부관심직무(선택한 직무에 맞게 갱신)
   const [detailJob, setDetailJob] = useState()
   const onClickNext = (data) => {
+    const backURL = localStorage.getItem("backURL")
     //jobItem주기
     updateStep("2", data)
     if (step == "2") {
-      //서버데이터 전송
-      if (localStorage.getItem("backURL")) {
+      //환경설정과 온보딩 구분 목적
+      if (backURL === "true") {
         navigate("/setting")
-      } else {
+      } else if (backURL === "false") {
         navigate("/home")
       }
     }
   }
-  //Promise가 아닌 resolved 데이터만 전달
   useEffect(() => {
     const fetchJobList = async () => {
       const response = await reqGetJob()
@@ -51,6 +51,7 @@ export default function InfoPage() {
         <SetInterest
           interestItem={paramsInterestItem}
           onClickNext={onClickNext}
+          setDetailJob={setDetailJob}
           detailJob={detailJob}
         ></SetInterest>
       )}
