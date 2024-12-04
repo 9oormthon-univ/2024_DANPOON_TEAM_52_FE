@@ -10,7 +10,7 @@ import {
 } from "./styled"
 import { reqDeleteResume } from "../../apis/user"
 import AddCareerPage from "./AddCareer/AddCareer"
-
+import dayjs from "dayjs"
 const CategoryItem = ({ category, onClickOption, isEdit, setIsEdit }) => {
   const [selectedOptionId, setSelectedOptionId] = useState(null) // 선택된 항목 ID 관리
   return (
@@ -22,7 +22,8 @@ const CategoryItem = ({ category, onClickOption, isEdit, setIsEdit }) => {
       {category.items.map((item, index) => (
         <ItemGroup key={index}>
           <ItemDate>
-            {item.start_date} ~ {item.end_date}
+            {dayjs(item.start_date).format("YY.MM.DD")} ~{" "}
+            {dayjs(item.end_date).format("YY.MM.DD")}
           </ItemDate>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <ItemName>{item.itemName}</ItemName>
