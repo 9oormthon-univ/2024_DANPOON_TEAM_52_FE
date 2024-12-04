@@ -34,8 +34,7 @@ const Container = styled(motion.div)`
 
 export default function Drawer({ children, open, onClose }) {
   const [isOpen, setIsOpen] = useState(open)
-  const close = (e) => {
-    console.log(e)
+  const close = () => {
     setIsOpen(false)
     onClose()
   }
