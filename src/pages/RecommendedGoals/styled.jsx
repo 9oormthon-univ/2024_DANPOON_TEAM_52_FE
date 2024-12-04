@@ -1,5 +1,6 @@
 import { styled } from "styled-components"
 import TypoComponent from "../../components/Typo"
+import { Link as LinkComponent } from "react-router-dom"
 
 export const Container = styled.div`
   display: flex;
@@ -7,11 +8,35 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   padding: 30px 20px 20px;
-  gap: 42px;
   overflow: hidden;
 `
 export const Title = styled(TypoComponent.Title)`
+  margin: 42px 0 42px 12px;
+`
+
+export const Description = styled(TypoComponent.Text)`
   margin-left: 12px;
+  &&& {
+    font-size: 11px;
+    color: #c3c3c3;
+    font-weight: 400;
+  }
+`
+
+export const Link = styled(LinkComponent)`
+  &&& {
+    position: relative;
+    color: #8afaf1;
+    text-decoration: none;
+    &:after {
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0;
+      content: "";
+      width: 100%;
+      border-bottom: 0.5px solid #8afaf1;
+    }
+  }
 `
 
 export const RecommendedGoalsContainer = styled.div`

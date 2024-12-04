@@ -1,6 +1,7 @@
 import styled from "styled-components"
 import TypoComponent from "../../components/Typo"
 import Button from "../../components/Button"
+import { Link as LinkComponent } from "react-router-dom"
 
 export const Container = styled.div`
   display: flex;
@@ -61,10 +62,28 @@ export const Description = styled(TypoComponent.Text)`
   }
 `
 
-export const Highlight = styled(TypoComponent.Highlight)`
-  font-weight: 500;
-  font-size: 16px;
-  font-weight: 500;
+export const SubDescription = styled(TypoComponent.Text)`
+  &&& {
+    font-size: 11px;
+    color: #c3c3c3;
+    font-weight: 400;
+  }
+`
+
+export const Link = styled(LinkComponent)`
+  &&& {
+    position: relative;
+    color: #8afaf1;
+    text-decoration: none;
+    &:after {
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0;
+      content: "";
+      width: 100%;
+      border-bottom: 0.5px solid #8afaf1;
+    }
+  }
 `
 
 export const RightText = styled(TypoComponent.Text)`
