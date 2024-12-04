@@ -12,6 +12,7 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   pointer-events: none;
+  filter: blur(40px);
   & div {
     width: 100vw;
     height: 100dvh;
