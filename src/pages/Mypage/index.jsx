@@ -21,20 +21,20 @@ import { ReactComponent as Setting } from "../../svgs/Settings.svg"
 import { Highlight } from "../../components/Typo"
 import CategoryItem from "./CategoryItem"
 import { useGroupedData } from "../../hooks/useMypage"
-import { reqGetResume } from "../../apis/user"
+import { reqGetResume, reqGetUser } from "../../apis/user"
 import resumeAtom from "../../store/atoms/resume"
-import userInfoAtom from "../../store/atoms/userinfo"
 import { useRecoilState, useRecoilValue } from "recoil"
 import { reqGetUserJob } from "../../apis/job"
 import userJobAtom from "../../store/atoms/userjob"
 import AiFeedBack from "./AiFeedback"
+import userAtom from "../../store/atoms/user"
 export default function Mypage() {
   const [isEdit, setIsEdit] = useState(false)
   const [selectedOption, setSelectedOption] = useState(null)
   const [isFeedBack, setIsFeedBack] = useState(false)
   const [resumeData, setResumeData] = useRecoilState(resumeAtom)
   const [userJob, setUserJob] = useRecoilState(userJobAtom)
-  const userData = useRecoilValue(userInfoAtom)
+  const [userData, setUserData] = useRecoilState(userAtom)
   const navigate = useNavigate()
   const groupedData = useGroupedData(resumeData)
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -49,27 +49,30 @@ export default function Mypage() {
     }
   }
   useEffect(() => {
-    const fetchResumeData = async () => {
+    const fetchData = async () => {
       try {
-        const response = await reqGetResume()
-        if (response) {
-          //console.log("이력 조회 성공:", response.data)
-          setResumeData(response.data) // Atom 갱신
+        // 병렬로 API 호출
+        const [resumeResponse, userJobResponse, userResponse] =
+          await Promise.all([reqGetResume(), reqGetUserJob(), reqGetUser()])
+
+        if (resumeResponse) {
+          setResumeData(resumeResponse.data)
+        }
+        if (userJobResponse) {
+          setUserJob(userJobResponse.data.data)
+        }
+        if (userResponse) {
+          setUserData(userResponse.data)
         }
       } catch (error) {
-        console.error("이력 조회 실패:", error.response?.data || error.message)
+        console.error(
+          "데이터 조회 실패:",
+          error.response?.data || error.message
+        )
       }
     }
-    fetchResumeData()
-  }, [])
-  useEffect(() => {
-    const fetchUserJob = async () => {
-      const response = await reqGetUserJob()
-      if (response) {
-        setUserJob(response.data.data)
-      }
-    }
-    fetchUserJob()
+
+    fetchData()
   }, [])
   return (
     <BaseLayout>
