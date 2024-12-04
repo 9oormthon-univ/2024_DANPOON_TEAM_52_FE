@@ -35,6 +35,7 @@ const DateDivide = styled.div`
 `
 
 const Select = styled(SelectComponent)`
+  text-align: left;
   width: 100%;
 `
 const AddCareerPage = ({ setIsModalOpen, setIsEdit, isEdit, editItemId }) => {
