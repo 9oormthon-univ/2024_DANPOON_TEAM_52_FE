@@ -19,6 +19,7 @@ export const reqGetGoals = async (params) => {
       startDate: v.start_date,
       completedDate: v.completed_date,
       isResume: v.is_resume,
+      sequence: v.sequence,
       quests: v.quests.map((q) => ({
         id: q.id,
         title: q.title,
@@ -41,6 +42,7 @@ export const reqGetGoal = async (id) => {
       startDate: res.data.data.start_date,
       completedDate: res.data.data.completed_date,
       isResume: res.data.data.is_resume,
+      sequence: res.data.data.sequence,
       quests: res.data.data.quests.map((q) => ({
         id: q.id,
         title: q.title,
@@ -67,6 +69,14 @@ export const reqPostGoal = async (data) => {
       quests: [],
     },
   }
+}
+
+export const reqPatchGoals = async (data) => {
+  const body = data.map((v) => ({
+    member_goal_id: v.id,
+    sequence: v.sequence,
+  }))
+  return await apiClient.patch("/goal", body)
 }
 
 export const reqPatchGoal = async (id, data) => {

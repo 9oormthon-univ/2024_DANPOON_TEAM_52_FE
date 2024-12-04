@@ -13,7 +13,7 @@ import { DEFAULT_GOAL } from "../../../constants/goal"
 import Button from "../../../components/Button"
 import { useRecoilState } from "recoil"
 import { myGoalsAtom } from "../../../store/atoms/goal"
-import { reqGetGoals, reqDeleteGoal } from "../../../apis/goal"
+import { reqGetGoals, reqDeleteGoal, reqPatchGoals } from "../../../apis/goal"
 import GoalModal from "../../../components/Modals/GoalModal"
 
 export default function ProgressGoals() {
@@ -61,6 +61,13 @@ export default function ProgressGoals() {
     else alert("목표 불러오기에 실패했습니다.")
     setLoading(false)
   }
+  const onChangeSequence = async (sortedGoals) => {
+    const data = sortedGoals.map((v, idx) => ({ ...v, sequence: idx }))
+    const res = await reqPatchGoals(data)
+    if (res.status === 200) {
+      setGoals(data)
+    }
+  }
   useEffect(() => {
     getGoals()
   }, [])
@@ -69,10 +76,11 @@ export default function ProgressGoals() {
       <Goals
         goals={goals.filter((v) => !v.isComplete)}
         loading={loading}
-        option={{ deleteVisible: true, editVisible: true }}
+        option={{ deleteVisible: true, editVisible: true, draggable: true }}
         onClick={onGoalClick}
         onEdit={onGoalEdit}
         onDelete={onGoalDelete}
+        onChangeSequence={onChangeSequence}
       />
       <Flex vertical gap={14}>
         <Button $variant="secondary" onClick={openModal}>
