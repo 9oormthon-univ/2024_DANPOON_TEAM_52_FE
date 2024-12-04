@@ -31,20 +31,20 @@ const CategoryItem = ({ category, onClickOption, isEdit, setIsEdit }) => {
               {item.detail}
             </ItemName>
           </div>
+          <img
+            src="/optionicon.png"
+            width="2px"
+            height="10px"
+            style={{ marginBottom: "15px" }}
+            onClick={() => {
+              // 상태 업데이트
+              setSelectedOptionId(
+                item.resume_id === selectedOptionId ? null : item.resume_id
+              )
+              onClickOption(item.resume_id)
+            }}
+          />
           <div style={{ position: "relative" }}>
-            <img
-              src="/optionicon.png"
-              width="2px"
-              height="10px"
-              style={{ marginBottom: "15px" }}
-              onClick={() => {
-                // 상태 업데이트
-                setSelectedOptionId(
-                  item.resume_id === selectedOptionId ? null : item.resume_id
-                )
-                onClickOption(item.resume_id)
-              }}
-            />
             {selectedOptionId === item.resume_id && (
               <div
                 style={{
