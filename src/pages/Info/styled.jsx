@@ -29,7 +29,7 @@ export const MainTitle = styled(Title)`
 `
 
 export const GridWrapper = styled.div`
-  height: 400px;
+  height: 40vh;
   max-height: 400px;
   overflow-y: auto;
   display: flex;
