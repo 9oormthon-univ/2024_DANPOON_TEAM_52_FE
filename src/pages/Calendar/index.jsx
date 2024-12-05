@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
-import CalendarComponent from "../../components/Calendar/CalendarComponent"
-import ModalComponent from "../../components/Calendar/ModalComponent"
-import EventDetails from "../../components/Calendar/EventDetails"
+import CalendarComponent from "./CalendarComponent"
+import ModalComponent from "./ModalComponent"
+import EventDetails from "./EventDetails"
 import { StyledCalendarWrapper, Container } from "./styled"
 import BaseLayout from "../../components/BaseLayout"
 // 분리된 훅들 가져오기

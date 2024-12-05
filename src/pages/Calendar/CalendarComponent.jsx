@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { StyledCalendar, AddScheduleButton } from "../../pages/Calendar/styled"
+import { StyledCalendar, AddScheduleButton } from "./styled"
 import Legend from "./Legend"
 import TodayMessage from "./TodayMessage"
 import { fetchTodo } from "../../apis/calendar"

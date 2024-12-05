@@ -5,9 +5,9 @@ import {
   ModalInput,
   ModalButtonGroup,
   ModalButton,
-} from "../../pages/Calendar/styled"
-import StyledSwitch from "../Switch"
-import { Text } from "../Typo"
+} from "./styled"
+import StyledSwitch from "../../components/Switch"
+import { Text } from "../../components/Typo"
 import { DatePicker } from "antd"
 import { useState, useEffect } from "react"
 import styled from "styled-components"
