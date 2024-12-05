@@ -93,8 +93,6 @@ export default function ListItem({
   icon,
   title,
   description,
-  label,
-  onClick,
   onEdit,
   onDelete,
   option,
@@ -106,7 +104,7 @@ export default function ListItem({
   }
   return (
     <ListItemContainer ref={listItemRef}>
-      <InnerContainer onClick={() => eventHandler(onClick)}>
+      <InnerContainer>
         <Icon>{icon}</Icon>
         <Flex vertical flex={1} align="center" gap={5}>
           {description && <Description>{description}</Description>}
