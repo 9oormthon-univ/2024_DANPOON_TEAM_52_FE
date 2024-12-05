@@ -132,7 +132,12 @@ export default function Mypage() {
             <Plus />
           </StyledPlus>
         </ContentWrapper>
-        {isModalOpen && <AddCareerPage setIsModalOpen={setIsModalOpen} />}
+        {isModalOpen && (
+          <AddCareerPage
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
+        )}
         {isFeedBack && (
           <AiFeedBack
             isFeedBack={isFeedBack}
