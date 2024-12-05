@@ -10,6 +10,7 @@
     "antd": "^5.22.1",
     "axios": "^1.7.7",
     "dayjs": "^1.11.13",
+    "firebase": "^11.0.2",
     "lottie-react": "^2.4.0",
     "motion": "^11.11.17",
     "rdndmb-html5-to-touch": "^8.0.3",

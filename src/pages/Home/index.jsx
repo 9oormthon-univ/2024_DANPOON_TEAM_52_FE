@@ -9,6 +9,8 @@ import GradientBackground from "../../components/GradientBackground"
 import userInfoAtom from "../../store/atoms/userinfo"
 import { useRecoilState } from "recoil"
 import { reqGetUser } from "../../apis/user"
+import { requestPermission, getDeviceToken } from "../../utils/notification"
+
 export default function Home() {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
@@ -50,6 +52,11 @@ export default function Home() {
       }
     }
     fetchUserData()
+  }, [])
+
+  useEffect(() => {
+    requestPermission()
+    const token = getDeviceToken()
   }, [])
   return (
     <>
