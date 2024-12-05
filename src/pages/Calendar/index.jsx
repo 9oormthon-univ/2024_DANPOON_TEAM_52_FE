@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import CalendarComponent from "./CalendarComponent"
 import ModalComponent from "./ModalComponent"
 import EventDetails from "./EventDetails"
-import { StyledCalendarWrapper, Container } from "./styled"
+import { Container } from "./styled"
 import BaseLayout from "../../components/BaseLayout"
 // 분리된 훅들 가져오기
 import { useDateRange } from "../../hooks/useDateRange"
@@ -15,8 +15,8 @@ const CalendarPage = () => {
   const [isEdit, setIsEdit] = useState(false)
   const [editTodo, setEditTodo] = useState(null)
 
-  const openEditModal = (todo) => {
-    setEditTodo(todo)
+  const openEditModal = (id) => {
+    setEditTodo(id)
     setIsEdit(true)
     setIsModalOpen(true)
   }

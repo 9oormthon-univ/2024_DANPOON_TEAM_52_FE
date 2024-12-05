@@ -6,6 +6,9 @@ import { Checkbox, DatePicker } from "antd"
 export const Container = styled.div`
   position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   flex: 1;
   overflow: hidden;
@@ -71,7 +74,7 @@ export const StyledCalendar = styled(Calendar)`
     transform: translate(-50%, -50%);
     width: 60%;
     height: 60%;
-    background: #4d4d4d;
+    background: #1d5a40;
     z-index: 0;
     border-radius: 50%;
   }
@@ -86,7 +89,7 @@ export const StyledCalendar = styled(Calendar)`
     height: 60%;
     z-index: 0;
     border-radius: 50%;
-    border: 1px solid #8afaf1;
+    background: #4d4d4d;
   }
 
   .react-calendar__tile abbr {
@@ -134,15 +137,12 @@ export const ModalOverlay = styled.div`
   z-index: 1000;
 `
 
-export const ModalContent = styled.div`
-  background: black;
+export const ModalContent = styled.form`
+  display: flex;
+  width: 270px;
+  flex-direction: column;
   padding: 20px;
-  border-radius: 8px;
-  width: 80%;
-  max-width: 400px;
-  text-align: center;
-  color: white;
-  box-shadow: 1px 1px 13.7px 0px rgba(138, 250, 241, 0.3);
+  gap: 10px;
 `
 
 export const ModalInput = styled.input`

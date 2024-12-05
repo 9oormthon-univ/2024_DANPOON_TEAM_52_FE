@@ -26,10 +26,7 @@ const TodayMessage = () => {
   return (
     <MessageContainer>
       {todaysEvents.length > 0 ? (
-        <p>
-          {new Date().getDate()}일, 오늘 일정을 확인하세요!
-          <br />({todaysEvents.length}개의 일정)
-        </p>
+        <p>{new Date().getDate()}일, 오늘 일정을 확인해보세요!</p>
       ) : (
         <p>{new Date().getDate()}일, 오늘은 일정이 없어요</p>
       )}
