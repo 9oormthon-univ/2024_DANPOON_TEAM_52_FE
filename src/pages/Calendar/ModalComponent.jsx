@@ -59,24 +59,21 @@ const ModalComponent = ({
 }) => {
   if (!isModalOpen) return null
   const [isSingleDate, setIsSingleDate] = useState(false)
-  const [title, setTitle] = useState(editTodo?.content || "") // 초기값 설정
+  const [title, setTitle] = useState("") // 초기값 설정
   // 일정 객체
   const addTodo = {
     content: title,
     start_date: startDate,
     end_date: endDate,
   }
-
-  useEffect(() => {
-    if (editTodo) {
-      console.log(editTodo)
-      setTitle(editTodo.content)
-    }
-  }, [editTodo])
+  console.log(addTodo)
   return (
     <Modal
       open={isModalOpen}
-      onClose={() => setIsModalOpen(false)}
+      onClose={(e) => {
+        e.stopPropagation() // 부모 이벤트 전파 차단
+        setIsModalOpen(false)
+      }}
       children={
         <ModalContent onClick={(e) => e.stopPropagation()}>
           <Main_Title>{isEdit ? "일정 수정하기" : "일정 추가하기"}</Main_Title>{" "}
@@ -151,11 +148,11 @@ const ModalComponent = ({
             <ModalButton onClick={onClose}>취소</ModalButton>
             <ModalButton
               onClick={(e) => {
-                e.preventDefault() // 기본 동작 방지
-                console.log(addTodo)
+                e.stopPropagation()
+                console.log("onClick 실행") // 이 로그가 표시되지 않으면 핸들러가 호출되지 않음
                 if (isEdit) {
                   console.log(addTodo)
-                  updateSchedule(editTodo.schedule_id, addTodo) // 일정 수정 API 호출
+                  updateSchedule(editTodo, addTodo) // 일정 수정 API 호출
                 } else {
                   onClickAddBtn(addTodo, setIsModalOpen)
                 }
