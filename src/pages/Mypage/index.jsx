@@ -87,6 +87,22 @@ export default function Mypage() {
             </InfoText>
             <InfoSubText>나의 이력을 추가하고 관리할 수 있어요</InfoSubText>
           </InfoGroup>
+          <NaviWrapper>
+            <StyledButton>
+              <Share
+                onClick={() => {
+                  navigate(`/resume/${userData.member_id}`)
+                }}
+              />
+            </StyledButton>
+            <StyledButton>
+              <Setting
+                onClick={() => {
+                  navigate("/setting")
+                }}
+              />
+            </StyledButton>
+          </NaviWrapper>
         </ProfileInfo>
         <FeedbackBtn
           onClick={() => {
@@ -110,22 +126,6 @@ export default function Mypage() {
             ))}
           </CustomScrollContainer>
         </ShadowContainer>
-        <NaviWrapper>
-          <StyledButton>
-            <Share
-              onClick={() => {
-                navigate(`/resume/${userData.member_id}`)
-              }}
-            />
-          </StyledButton>
-          <StyledButton>
-            <Setting
-              onClick={() => {
-                navigate("/setting")
-              }}
-            />
-          </StyledButton>
-        </NaviWrapper>
         <StyledPlus onClick={() => setIsModalOpen(true)}>
           <Plus />
         </StyledPlus>
