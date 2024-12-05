@@ -15,6 +15,7 @@ self.addEventListener('push', e => {
   const options = {
     body: resultData.body,
     icon: resultData.image,
+    image: resultData.image,
   };
   e.waitUntil(
     self.registration.showNotification(resultData.title, options)
