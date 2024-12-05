@@ -45,7 +45,7 @@ const drawStar = (ctx, x, y, radius, points) => {
   ctx.beginPath()
   for (let i = 0; i < 2 * points; i++) {
     const angle = i * step
-    const radiusModifier = i % 2 === 0 ? radius : radius / 2
+    const radiusModifier = i % 2 === 0 ? radius : radius / 2.5
     const posX = x + radiusModifier * Math.cos(angle)
     const posY = y + radiusModifier * Math.sin(angle)
     if (i === 0) {
@@ -128,7 +128,7 @@ export default function Constellation({ starCount, id }) {
         ctx.shadowOffsetY = 0
         ctx.beginPath()
         if (index === 0) {
-          ctx.fillStyle = "#87CDC8"
+          ctx.fillStyle = "#8afaf1"
           drawStar(ctx, x, y, size, 7)
         } else {
           const gradient = ctx.createLinearGradient(
