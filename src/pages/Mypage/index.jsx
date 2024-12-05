@@ -10,7 +10,6 @@ import {
   InfoGroup,
   InfoSubText,
   FeedbackBtn,
-  ContentWrapper,
   StyledButton,
   NaviWrapper,
   StyledPlus,
@@ -96,42 +95,40 @@ export default function Mypage() {
         >
           AI 피드백 받기
         </FeedbackBtn>
-        <ContentWrapper>
-          <ShadowContainer>
-            <CustomScrollContainer>
-              {/*사용자 이력 렌더링*/}
-              {groupedData.map((category) => (
-                <CategoryItem
-                  key={category.id}
-                  category={category}
-                  onClickOption={onClickOption}
-                  selectedOption={selectedOption}
-                  isEdit={isEdit}
-                  setIsEdit={setIsEdit}
-                />
-              ))}
-            </CustomScrollContainer>
-          </ShadowContainer>
-          <NaviWrapper>
-            <StyledButton>
-              <Share
-                onClick={() => {
-                  navigate(`/resume/${userData.member_id}`)
-                }}
+        <ShadowContainer>
+          <CustomScrollContainer>
+            {/*사용자 이력 렌더링*/}
+            {groupedData.map((category) => (
+              <CategoryItem
+                key={category.id}
+                category={category}
+                onClickOption={onClickOption}
+                selectedOption={selectedOption}
+                isEdit={isEdit}
+                setIsEdit={setIsEdit}
               />
-            </StyledButton>
-            <StyledButton>
-              <Setting
-                onClick={() => {
-                  navigate("/setting")
-                }}
-              />
-            </StyledButton>
-          </NaviWrapper>
-          <StyledPlus onClick={() => setIsModalOpen(true)}>
-            <Plus />
-          </StyledPlus>
-        </ContentWrapper>
+            ))}
+          </CustomScrollContainer>
+        </ShadowContainer>
+        <NaviWrapper>
+          <StyledButton>
+            <Share
+              onClick={() => {
+                navigate(`/resume/${userData.member_id}`)
+              }}
+            />
+          </StyledButton>
+          <StyledButton>
+            <Setting
+              onClick={() => {
+                navigate("/setting")
+              }}
+            />
+          </StyledButton>
+        </NaviWrapper>
+        <StyledPlus onClick={() => setIsModalOpen(true)}>
+          <Plus />
+        </StyledPlus>
         {isModalOpen && (
           <AddCareerPage
             isModalOpen={isModalOpen}
