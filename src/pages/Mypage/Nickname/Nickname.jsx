@@ -6,10 +6,12 @@ import {
   ModalButtonGroup,
   ModalButton,
 } from "../../Calendar/styled"
+import { Text } from "../../../components/Typo"
 import { reqUpdateUser } from "../../../apis/user"
 import userInfoAtom from "../../../store/atoms/userinfo"
 import { useRecoilState } from "recoil"
-const NicknamePage = ({ setIsEdit }) => {
+import Modal from "../../../components/Modal"
+const NicknamePage = ({ setIsEdit, isEdit }) => {
   const [userData, setUserData] = useRecoilState(userInfoAtom)
   const [nickname, setNickName] = useState(userData.nickname)
   //변경된 닉네임 아톰에 갱신
@@ -18,6 +20,7 @@ const NicknamePage = ({ setIsEdit }) => {
       ...prev,
       nickname: nickname,
     }))
+    localStorage.setItem("nickname", nickname)
     reqUpdateUser({
       nickname: nickname,
       known_prompt: prompt.prompt1,
@@ -29,25 +32,35 @@ const NicknamePage = ({ setIsEdit }) => {
   }
   return (
     <ModalOverlay>
-      <ModalContent onClick={(e) => e.stopPropagation()}>
-        <h3>변경할 닉네임을 입력하세요</h3>
-        <ModalInput
-          style={{
-            height: "40px",
-          }}
-          onChange={(e) => setNickName(e.target.value)}
-        />
-        <ModalButtonGroup>
-          <ModalButton onClick={() => setIsEdit(false)}>취소</ModalButton>
-          <ModalButton
-            onClick={() => {
-              handleSaveNickname()
-            }}
-          >
-            완료
-          </ModalButton>
-        </ModalButtonGroup>
-      </ModalContent>
+      <Modal
+        open={isEdit}
+        onClose={() => {
+          setIsEdit(false)
+        }}
+        children={
+          <>
+            <Text style={{ color: "white", textAlign: "center" }}>
+              변경할 닉네임을 입력하세요
+            </Text>
+            <ModalInput
+              style={{
+                height: "40px",
+              }}
+              onChange={(e) => setNickName(e.target.value)}
+            />
+            <ModalButtonGroup>
+              <ModalButton onClick={() => setIsEdit(false)}>취소</ModalButton>
+              <ModalButton
+                onClick={() => {
+                  handleSaveNickname()
+                }}
+              >
+                완료
+              </ModalButton>
+            </ModalButtonGroup>
+          </>
+        }
+      />
     </ModalOverlay>
   )
 }

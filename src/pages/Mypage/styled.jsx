@@ -1,11 +1,15 @@
 import styled from "styled-components"
 import Button from "../../components/Button"
 import { Text } from "../../components/Typo"
+import ScrollContainer from "../../components/ScrollContainer"
+import ShadowContainer from "../../components/ShadowContainer"
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 19px;
-  padding: 100px 19px;
+  padding: 30px 19px 0px;
+  height: 100%;
+  overflow: hidden;
 `
 export const ProfileInfo = styled.div`
   display: flex;
@@ -43,8 +47,6 @@ export const FeedbackBtn = styled(Button)`
   }
 `
 export const ContentWrapper = styled.div`
-  max-height: 50vh;
-  overflow-y: auto;
   ::-webkit-scrollbar {
     width: 8px;
     height: 10px;
@@ -87,7 +89,7 @@ export const CategoryName = styled(Text)`
 `
 export const ItemGroup = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `
 export const ItemDate = styled(Text)`
@@ -95,19 +97,17 @@ export const ItemDate = styled(Text)`
     flex: 1;
     font-size: 12px;
     color: #b2b2b2;
-    margin-right: 20px;
   }
 `
 export const ItemName = styled(Text)`
   &&& {
-    width: 150px;
-    flex: 1;
+    width: 40vw;
     font-size: 12px;
     font-weight: 500;
-    margin: 0px;
     white-space: nowrap; /* 텍스트를 한 줄로 유지 */
     overflow: hidden; /* 넘치는 텍스트를 숨김 */
     text-overflow: ellipsis; /* 넘치는 텍스트를 ...으로 표시 */
+    text-align: left;
   }
 `
 export const StyledButton = styled.button`
@@ -133,6 +133,7 @@ export const StyledPlus = styled(StyledButton)`
     bottom: 140px;
     background: #4d4d4d;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.6);
+    z-index: 100;
     @media (min-width: 573px) {
       bottom: 180px;
     }
@@ -144,11 +145,34 @@ export const NaviWrapper = styled.div`
   gap: 5px;
   @media (min-width: 573px) {
     right: 20px;
-    top: 80px;
+    top: 15px;
   }
 
   @media (max-width: 573px) {
     right: 20px;
-    top: 70px;
+    top: 15px;
   }
+`
+export const CustomScrollContainer = styled(ScrollContainer)`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  gap: 16px;
+  & > div:first-child {
+    margin-top: 30px;
+  }
+  & > div:last-child {
+    margin-bottom: 30px;
+  }
+  &::-webkit-scrollbar-button:vertical:start:increment,
+  &::-webkit-scrollbar-button:vertical:end:decrement {
+    display: block;
+    height: 30px;
+  }
+`
+export const CustomShadowContainer = styled(ShadowContainer)`
+  display: flex;
+  flex: 1;
+  overflow-y: hidden;
 `

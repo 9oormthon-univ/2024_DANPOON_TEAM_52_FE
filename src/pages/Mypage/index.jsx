@@ -14,7 +14,10 @@ import {
   StyledButton,
   NaviWrapper,
   StyledPlus,
+  CustomScrollContainer,
 } from "./styled"
+import ShadowContainer from "../../components/ShadowContainer"
+import ScrollContainer from "../../components/ScrollContainer"
 import { ReactComponent as Share } from "../../svgs/share.svg"
 import { ReactComponent as Plus } from "../../svgs/plus.svg"
 import { ReactComponent as Setting } from "../../svgs/Settings.svg"
@@ -94,17 +97,21 @@ export default function Mypage() {
           AI 피드백 받기
         </FeedbackBtn>
         <ContentWrapper>
-          {/*사용자 이력 렌더링*/}
-          {groupedData.map((category) => (
-            <CategoryItem
-              key={category.id}
-              category={category}
-              onClickOption={onClickOption}
-              selectedOption={selectedOption}
-              isEdit={isEdit}
-              setIsEdit={setIsEdit}
-            />
-          ))}
+          <ShadowContainer>
+            <CustomScrollContainer>
+              {/*사용자 이력 렌더링*/}
+              {groupedData.map((category) => (
+                <CategoryItem
+                  key={category.id}
+                  category={category}
+                  onClickOption={onClickOption}
+                  selectedOption={selectedOption}
+                  isEdit={isEdit}
+                  setIsEdit={setIsEdit}
+                />
+              ))}
+            </CustomScrollContainer>
+          </ShadowContainer>
           <NaviWrapper>
             <StyledButton>
               <Share
@@ -125,8 +132,18 @@ export default function Mypage() {
             <Plus />
           </StyledPlus>
         </ContentWrapper>
-        {isModalOpen && <AddCareerPage setIsModalOpen={setIsModalOpen} />}
-        {isFeedBack && <AiFeedBack setIsFeedBack={setIsFeedBack}></AiFeedBack>}
+        {isModalOpen && (
+          <AddCareerPage
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+          />
+        )}
+        {isFeedBack && (
+          <AiFeedBack
+            isFeedBack={isFeedBack}
+            setIsFeedBack={setIsFeedBack}
+          ></AiFeedBack>
+        )}
       </Wrapper>
     </BaseLayout>
   )

@@ -10,6 +10,7 @@ import {
   NextBtn,
   Wrapper,
   Option,
+  BackBtn,
 } from "../styled"
 import { Highlight } from "../../../components/Typo"
 const SetJob = ({ onClickNext, jobData, setDetailJob }) => {
@@ -23,6 +24,7 @@ const SetJob = ({ onClickNext, jobData, setDetailJob }) => {
 
   return (
     <Wrapper>
+      <BackBtn />
       <Content>
         <MainTitle>
           <Highlight>희망 직군</Highlight>을

@@ -5,7 +5,10 @@ import LottieAiFeedback from "../lotties/ai-feedback.json"
 const Container = styled.div`
   position: relative;
   display: flex;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
+  max-width: 300px;
+  max-height: 500px;
   flex-direction: column;
   justify-content: center;
   align-items: center;

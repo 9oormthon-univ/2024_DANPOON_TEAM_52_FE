@@ -129,7 +129,9 @@ const SettingPage = () => {
             />
           </SettingItem>
         </SettingItemWrapper>
-        {isModalOpen && <NicknamePage setIsEdit={setIsModalOpen} />}
+        {isModalOpen && (
+          <NicknamePage isEdit={isModalOpen} setIsEdit={setIsModalOpen} />
+        )}
       </Wrapper>
     </BaseLayout>
   )

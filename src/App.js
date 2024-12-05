@@ -73,7 +73,10 @@ export default function App() {
             element={<GoalConstellation />}
           />
           <Route path={ROUTES_PATH_SEARCH} element={<Search />} />
-          <Route path={ROUTES_PATH_RESUME_SHARE} element={<ShareResume />} />
+          <Route
+            path={`${ROUTES_PATH_RESUME_SHARE}/:id`}
+            element={<ShareResume />}
+          />
         </Routes>
       </BrowserRouter>
     </RecoilRoot>
