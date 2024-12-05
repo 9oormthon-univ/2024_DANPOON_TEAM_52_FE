@@ -21,11 +21,12 @@ export const ProfileInfo = styled.div`
 export const ProfileImg = styled.img`
   width: 50px;
   height: 50px;
+  border-radius: 50%;
 `
 export const InfoGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 10px;
 `
 export const InfoText = styled.div`
   font-size: 20px;

@@ -32,6 +32,7 @@ import Loading from "../../components/Loading"
 import {
   ROUTES_PATH_GOAL_CONSTELLATION,
   ROUTES_PATH_CUSTOMGUIDE,
+  ROUTES_PATH_HOME,
 } from "../../constants/routes"
 import RecommendQuestModal from "../../components/Modals/RecommendQuestModal"
 import QuestModal from "../../components/Modals/QuestModal"
@@ -201,7 +202,7 @@ export default function Quest() {
       ) : (
         <>
           <Header>
-            <BackwardButton />
+            <BackwardButton onClick={() => navigate(ROUTES_PATH_HOME)} />
             <HeaderFlex>
               <Flex gap={10} align="end">
                 <Icon>
