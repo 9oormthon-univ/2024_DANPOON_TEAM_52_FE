@@ -10,6 +10,7 @@ import userInfoAtom from "../../store/atoms/userinfo"
 import { useRecoilState } from "recoil"
 import { reqGetUser } from "../../apis/user"
 import { requestPermission, getDeviceToken } from "../../utils/notification"
+import { reqPostFcm } from "../../apis/fcm"
 
 export default function Home() {
   const [searchParams] = useSearchParams()
@@ -55,8 +56,12 @@ export default function Home() {
   }, [])
 
   useEffect(() => {
-    requestPermission()
-    const token = getDeviceToken()
+    const setFcm = async () => {
+      await requestPermission()
+      const token = await getDeviceToken()
+      await reqPostFcm(token)
+    }
+    setFcm()
   }, [])
   return (
     <>
