@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import { CATEGORIES } from "../constants/dummy"
 
 const Container = styled.div`
   display: flex;
@@ -49,13 +50,13 @@ export default function GoalCard({ goal }) {
   return (
     <Container>
       <LabelContainer>
-        <Icon>{goal.icon}</Icon>
-        <Label>{goal.category}</Label>
+        <Icon>{CATEGORIES.find((c) => c.value === goal.category).icon}</Icon>
+        <Label>{CATEGORIES.find((c) => c.value === goal.category).label}</Label>
       </LabelContainer>
       <Title>{goal.title}</Title>
       <Ul>
-        {goal.description?.map((quest) => (
-          <li key={quest}>{quest}</li>
+        {goal.descriptions?.map((desc) => (
+          <li key={desc}>{desc}</li>
         ))}
       </Ul>
     </Container>
