@@ -110,7 +110,12 @@ export default function List() {
             </OptionList>
           </IconButton>
         </ListTopHeader>
-        <Goals goals={list} loading={loading} option={{ labelHidden: true }} />
+        <Goals
+          goals={list}
+          loading={loading}
+          option={{ labelHidden: true }}
+          placeholder="조회된 목표가 없습니다."
+        />
       </Container>
       <FilterDrawer
         open={open}
