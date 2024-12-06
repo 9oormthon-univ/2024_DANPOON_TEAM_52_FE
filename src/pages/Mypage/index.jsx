@@ -65,6 +65,7 @@ export default function Mypage() {
         }
         if (userResponse) {
           setUserData(userResponse.data)
+          localStorage.setItem("nickname", userResponse.data.nickname)
         }
       } catch (error) {
         console.error(

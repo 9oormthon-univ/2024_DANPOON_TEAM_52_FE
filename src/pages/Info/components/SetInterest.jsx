@@ -19,7 +19,7 @@ import { useEffect, useState } from "react"
 import { reqGetJob, reqPostJob } from "../../../apis/job"
 import userJobAtom from "../../../store/atoms/userjob"
 import { useRecoilState } from "recoil"
-const SetInterest = ({ detailJob, setDetailJob }) => {
+const SetInterest = ({ detailJob, setDetailJob, allJobData }) => {
   const [userJob, setUserJob] = useRecoilState(userJobAtom)
   const navigate = useNavigate() // 컴포넌트 내부에서 useNavigate 호출
   const { paramsInterestItem, paramsJobItem } = useStepNavigation()
@@ -43,7 +43,26 @@ const SetInterest = ({ detailJob, setDetailJob }) => {
     }
     fetchJobList()
   }, [])
+  useEffect(() => {
+    const handlePopState = () => {
+      const updatedParams = new URLSearchParams(window.location.search)
+      const newJobItem = updatedParams.get("jobItem")
+      const newInterestItem = updatedParams.get("interestItem")
 
+      if (newJobItem && !isNaN(parseInt(newJobItem))) {
+        setDetailJob(userJob[parseInt(newJobItem)].id)
+      }
+
+      if (newInterestItem) {
+        setSelectedItems(newInterestItem.split(","))
+      }
+    }
+
+    window.addEventListener("popstate", handlePopState)
+    return () => {
+      window.removeEventListener("popstate", handlePopState)
+    }
+  }, [userJob, setDetailJob])
   // 선택/해제 함수
   const handleSelectItem = (id) => {
     setSelectedItems(
