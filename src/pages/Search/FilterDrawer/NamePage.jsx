@@ -9,31 +9,48 @@ import {
   LeftIcon,
   CheckGroup,
 } from "./styled"
-import { useState } from "react"
+import { useRecoilState, useRecoilValue } from "recoil"
+import {
+  recommendFilterAtom,
+  selectedRecommendFilterAtom,
+} from "../../../store/atoms/recommendFilter"
 
-export default function NamePage({ setFilter, setStatus, close }) {
-  const [selected, setSelected] = useState([])
-  const options = [
-    {
-      label: "기획 · 전략",
-      value: "기획 · 전략",
-    },
-    {
-      label: "마케팅 · 홍보 · 조사",
-      value: "마케팅 · 홍보 · 조사",
-    },
-  ]
+export default function NamePage() {
+  const [selectedRecommendFilter, setSelectedRecommendFilter] = useRecoilState(
+    selectedRecommendFilterAtom
+  )
+  const recommendFilter = useRecoilValue(recommendFilterAtom)
+  const options = Object.values(
+    recommendFilter[selectedRecommendFilter.category]
+  )
+    .flat()
+    .map((v) => ({
+      label: v.name,
+      value: v.id,
+    }))
   return (
     <Container>
       <Header>
-        <LeftIcon onClick={() => setStatus("filter")} />
+        <LeftIcon
+          onClick={() => {
+            setSelectedRecommendFilter((prev) => ({
+              ...prev,
+              status: "category",
+            }))
+          }}
+        />
         <Title>직군 선택</Title>
       </Header>
       <ListContainer>
         <CheckGroup
           options={options}
-          value={selected}
-          onChange={(e) => setSelected(e)}
+          value={selectedRecommendFilter.name}
+          onChange={(e) => {
+            setSelectedRecommendFilter((prev) => ({
+              ...prev,
+              name: e,
+            }))
+          }}
         />
       </ListContainer>
       <ButtonContainer>
@@ -41,8 +58,10 @@ export default function NamePage({ setFilter, setStatus, close }) {
         <SaveButton
           $variant="secondary"
           onClick={() => {
-            setFilter((prev) => ({ ...prev, name: selected }))
-            close()
+            setSelectedRecommendFilter((prev) => ({
+              ...prev,
+              status: "filter",
+            }))
           }}
         >
           선택완료

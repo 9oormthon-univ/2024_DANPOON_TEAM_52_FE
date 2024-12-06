@@ -3,50 +3,37 @@ import { useEffect, useState } from "react"
 import FilterPage from "./FilterPage"
 import CategoryPage from "./CategoryPage"
 import NamePage from "./NamePage"
+import { reqGetJob } from "../../../apis/job"
+import { useRecoilValue, useSetRecoilState } from "recoil"
+import {
+  recommendFilterAtom,
+  selectedRecommendFilterAtom,
+} from "../../../store/atoms/recommendFilter"
 
 export default function FilterDrawer({ open, onClose }) {
   const [isOpen, setIsOpen] = useState(open)
-  const [status, setStatus] = useState("filter")
-  const [filter, setFilter] = useState({
-    category: "all",
-    name: "all",
-  })
-  const close = () => {
-    setIsOpen(false)
-    onClose(filter)
+  const selectedFilter = useRecoilValue(selectedRecommendFilterAtom)
+  const setRecommendFilter = useSetRecoilState(recommendFilterAtom)
+
+  const getJobs = async () => {
+    const res = await reqGetJob()
+    setRecommendFilter(res.jobs)
   }
   useEffect(() => {
     setIsOpen(open)
   }, [open])
-  console.log(filter, status)
+  useEffect(() => {
+    getJobs()
+  }, [])
+
+  console.log("selectedFilter", selectedFilter)
+
   return (
     <>
-      <Drawer open={isOpen} onClose={close}>
-        {status === "filter" && (
-          <FilterPage
-            filter={filter}
-            setFilter={setFilter}
-            status={status}
-            setStatus={setStatus}
-          />
-        )}
-        {status === "category" && (
-          <CategoryPage
-            filter={filter}
-            setFilter={setFilter}
-            status={status}
-            setStatus={setStatus}
-          />
-        )}
-        {status === "name" && (
-          <NamePage
-            filter={filter}
-            setFilter={setFilter}
-            status={status}
-            setStatus={setStatus}
-            close={close}
-          />
-        )}
+      <Drawer open={isOpen} onClose={onClose}>
+        {selectedFilter.status === "filter" && <FilterPage onSave={onClose} />}
+        {selectedFilter.status === "category" && <CategoryPage />}
+        {selectedFilter.status === "name" && <NamePage />}
       </Drawer>
     </>
   )

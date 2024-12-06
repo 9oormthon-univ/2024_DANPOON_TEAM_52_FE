@@ -13,74 +13,56 @@ import {
 import { ReactComponent as SortSVG } from "../../svgs/Sort.svg"
 import { ReactComponent as DownSVG } from "../../svgs/Down.svg"
 import FilterDrawer from "./FilterDrawer"
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { reqGetSearchGoals } from "../../apis/goal"
+import { CATEGORIES } from "../../constants/dummy"
+import { selectedRecommendFilterAtom } from "../../store/atoms/recommendFilter"
+import { useRecoilValue } from "recoil"
 
 export default function Search() {
   const [open, setOpen] = useState(false)
-  const [category, setCategory] = useState("all")
-  const [title, setTitle] = useState("전체 목표 탐색")
-  const loading = false
-  const list = [
-    {
-      id: 1,
-      icon: "️🗓️",
-      title: "구름톤 회의",
-    },
-    {
-      id: 2,
-      icon: "📝",
-      title: "구름톤 회의록 작성",
-    },
-    {
-      id: 3,
-      icon: "📞",
-      title: "구름톤 회의록 검토",
-    },
-    {
-      id: 4,
-      icon: "📞",
-      title: "구름톤 회의록 검토",
-    },
-    {
-      id: 5,
-      icon: "📞",
-      title: "구름톤 회의록 검토",
-    },
-    {
-      id: 6,
-      icon: "📞",
-      title: "구름톤 회의록 검토",
-    },
-    {
-      id: 7,
-      icon: "📞",
-      title: "구름톤 회의록 검토",
-    },
-    {
-      id: 7,
-      icon: "📞",
-      title: "구름톤 회의록 검토",
-    },
-    {
-      id: 7,
-      icon: "📞",
-      title: "구름톤 회의록 검토",
-    },
-  ]
+  const [loading, setLoading] = useState(false)
+  const [list, setList] = useState([])
+  const selectedRecommendFilter = useRecoilValue(selectedRecommendFilterAtom)
   const categories = [
     { label: "전체", value: "all" },
-    { label: "🏆 자격·어학·수상", value: "schedule" },
-    { label: "🏫 경험·활동·교육", value: "goal" },
-    { label: "🪪 경력", value: "history" },
-    { label: "🎸 기타", value: "etc" },
+    ...CATEGORIES.map((category) => ({
+      label: `${category.icon} ${category.label}`,
+      value: category.value,
+    })),
   ]
+  const [category, setCategory] = useState("all")
+  const getGoalsSearch = async () => {
+    const data = {
+      size: 30,
+      sort: "count",
+    }
+    if (selectedRecommendFilter.name !== "all")
+      data.jobIds = selectedRecommendFilter.name
+    if (category !== "all") data.category = category
+    const res = await reqGetSearchGoals(data)
+    if (res.status === 200) {
+      setList(res.data)
+    }
+  }
+
+  useEffect(() => {
+    getGoalsSearch()
+  }, [])
+
+  useEffect(() => {
+    getGoalsSearch()
+  }, [category])
+
   return (
     <BaseLayout>
       <Container>
         <Header>
           <Flex vertical gap={12}>
             <TitleButton onClick={() => setOpen(true)}>
-              {title}
+              {selectedRecommendFilter.category === "all"
+                ? "전체 직무 탐색"
+                : selectedRecommendFilter.category}
               <DownSVG />
             </TitleButton>
             <Description>
@@ -103,9 +85,9 @@ export default function Search() {
       </Container>
       <FilterDrawer
         open={open}
-        onClose={(filter) => {
+        onClose={() => {
           setOpen(false)
-          setTitle(filter.category)
+          getGoalsSearch()
         }}
       />
     </BaseLayout>

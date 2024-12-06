@@ -111,3 +111,15 @@ export const reqGetRecommendGoals = async () => {
 export const reqCompleteGoal = async (id) => {
   return await apiClient.patch(`/goal/complete/${id}`)
 }
+
+export const reqGetSearchGoals = async (params) => {
+  const searchParams = new URLSearchParams(params)
+  const res = await apiClient.get(`/goal/search?${searchParams}`)
+  return {
+    status: res.status,
+    data: res.data.data.content.map((v) => ({
+      id: v.goal_id,
+      title: v.title
+    }))
+  }
+}
