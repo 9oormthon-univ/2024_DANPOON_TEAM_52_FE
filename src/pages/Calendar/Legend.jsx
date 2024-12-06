@@ -7,8 +7,8 @@ const LegendWrapper = styled.div`
   align-items: center;
   gap: 10px;
   position: absolute;
-  top: 150px;
-  right: 50px;
+  top: 140px;
+  right: 35px;
 `
 
 const LegendItem = styled.div`
@@ -26,7 +26,7 @@ const LegendCircle = styled.div`
 `
 
 const LegendText = styled.span`
-  font-size: 11px;
+  font-size: 14px;
   color: white; // 텍스트 색상
   font-family: "Pretendard", sans-serif;
 `
