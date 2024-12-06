@@ -5,12 +5,7 @@ import { useRecoilValue } from "recoil"
 import { deleteSchedule } from "../../apis/calendar"
 import ListItem from "./CalendarListItem"
 import { CATEGORIES } from "../../constants/dummy"
-const EventDetails = ({
-  selectedDate,
-  getDatesInRange,
-  openEditModal,
-  isModalOpen,
-}) => {
+const EventDetails = ({ selectedDate, getDatesInRange, openEditModal }) => {
   const todo = useRecoilValue(calendarAtom) // Recoil 데이터
   return (
     <ScrollContainer>
@@ -48,7 +43,7 @@ const EventDetails = ({
                   description={`${el.start_date} ~ ${el.end_date}`}
                   title={el.content}
                   onEdit={() => {
-                    console.log(el)
+                    console.log(el.schedule_id)
                     openEditModal(el.schedule_id) // 수정 모달 열기
                   }}
                   onDelete={() => {

@@ -66,7 +66,6 @@ const ModalComponent = ({
     start_date: startDate,
     end_date: endDate,
   }
-  console.log(addTodo)
   return (
     <Modal
       open={isModalOpen}
@@ -149,10 +148,8 @@ const ModalComponent = ({
             <ModalButton
               onClick={(e) => {
                 e.stopPropagation()
-                console.log("onClick 실행") // 이 로그가 표시되지 않으면 핸들러가 호출되지 않음
                 if (isEdit) {
-                  console.log(addTodo)
-                  updateSchedule(editTodo, addTodo) // 일정 수정 API 호출
+                  updateSchedule(editTodo, addTodo)
                 } else {
                   onClickAddBtn(addTodo, setIsModalOpen)
                 }

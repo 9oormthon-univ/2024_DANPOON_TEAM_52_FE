@@ -91,7 +91,6 @@ export const CategoryName = styled(Text)`
 export const ItemGroup = styled.div`
   display: flex;
   justify-content: space-around;
-  align-items: center;
 `
 export const ItemDate = styled(Text)`
   &&& {

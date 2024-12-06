@@ -27,7 +27,14 @@ const CategoryItem = ({ category, onClickOption, isEdit, setIsEdit }) => {
               ? dayjs(item.end_date)?.format("YY.MM.DD.")
               : "진행중"}{" "}
           </ItemDate>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
             <ItemName>{item.itemName}</ItemName>
             <ItemName style={{ fontSize: "12px", color: "#C3C3C3" }}>
               {item.detail}
@@ -37,7 +44,6 @@ const CategoryItem = ({ category, onClickOption, isEdit, setIsEdit }) => {
             src="/optionicon.png"
             width="2px"
             height="10px"
-            style={{ marginBottom: "15px" }}
             onClick={() => {
               // 상태 업데이트
               setSelectedOptionId(
