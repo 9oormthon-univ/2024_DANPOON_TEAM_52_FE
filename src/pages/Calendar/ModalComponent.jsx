@@ -3,12 +3,13 @@ import {
   ModalContent,
   ModalInput,
   ModalButtonGroup,
-  ModalButton,
+  CancelButton,
+  SubmitButton,
 } from "../../pages/Calendar/styled"
 import StyledSwitch from "../../components/Switch"
 import { Text, Title } from "../../components/Typo"
 import { DatePicker } from "antd"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import styled from "styled-components"
 import { updateSchedule } from "../../apis/calendar"
 import Modal from "../../components/Modal"
@@ -144,8 +145,8 @@ const ModalComponent = ({
             )}
           </DatePickerWrapper>
           <ModalButtonGroup>
-            <ModalButton onClick={onClose}>취소</ModalButton>
-            <ModalButton
+            <CancelButton onClick={onClose}>취소</CancelButton>
+            <SubmitButton
               onClick={(e) => {
                 e.stopPropagation()
                 if (isEdit) {
@@ -156,7 +157,7 @@ const ModalComponent = ({
               }}
             >
               {isEdit ? "수정" : "추가"}
-            </ModalButton>
+            </SubmitButton>
           </ModalButtonGroup>
         </ModalContent>
       }

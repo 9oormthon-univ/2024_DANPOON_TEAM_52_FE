@@ -186,11 +186,19 @@ export const ModalButtonGroup = styled.div`
 export const ModalButton = styled.button`
   width: 50%;
   padding: 10px 20px;
-  font-size: 14px;
+  font-size: 15px;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   font-family: "Pretendard";
+`
+export const CancelButton = styled(ModalButton)`
+  background-color: #212121;
+  color: #b2b2b2;
+`
+export const SubmitButton = styled(ModalButton)`
+  background-color: #3f3f3f;
+  color: white;
 `
 
 export const AddScheduleButton = styled.button`
