@@ -22,6 +22,7 @@ export const Title = styled(Text)`
 export const Profile = styled.img`
   width: 81px;
   height: auto;
+  border-radius: 50%;
 `
 
 export const SettingItemWrapper = styled.div`
