@@ -16,7 +16,7 @@ const Container = styled.div`
   & div {
     width: 100vw;
     height: 100dvh;
-    opacity: 0.5;
+    opacity: 0.7;
   }
 `
 
