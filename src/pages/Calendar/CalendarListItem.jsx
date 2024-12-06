@@ -6,7 +6,7 @@ import { useRef } from "react"
 const ListItemContainer = styled.div`
   display: flex;
   min-height: 60px;
-  width: 80%;
+  width: 100%;
   border-radius: 10px;
   margin-bottom: 16px;
   cursor: pointer;
