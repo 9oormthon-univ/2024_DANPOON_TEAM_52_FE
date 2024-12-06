@@ -17,25 +17,34 @@ const CustomGuidePage = () => {
   //const [userPrompt, setUserPrompt] = useRecoilState(promptAtom)
   const navigate = useNavigate()
 
-  const handleSave = () => {
-    setUserData((prev) => ({
+  const handleSave = async () => {
+    await setUserData((prev) => ({
       ...prev,
       known_prompt: prompt.prompt1,
       help_prompt: prompt.prompt2,
     }))
-    reqUpdateUser({
+    await reqUpdateUser({
       nickname: userData.nickname,
       known_prompt: prompt.prompt1,
       help_prompt: prompt.prompt2,
       is_notification: userData.is_notification,
       is_profile: userData.is_profile,
     })
-    navigate("/setting")
+    await onClickBack()
   }
 
+  const onClickBack = () => {
+    //setting or quest
+    const route = localStorage.getItem("guideURL")
+    if (!route) navigate("/setting")
+    else {
+      localStorage.removeItem("guideURL")
+      navigate(`/${route}`)
+    }
+  }
   return (
     <Wrapper>
-      <BackwardButton onClick={() => navigate("/mypage")} />
+      <BackwardButton onClick={onClickBack} />
       <Text
         style={{
           fontSize: "16px",
