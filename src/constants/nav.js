@@ -37,7 +37,7 @@ export const NAVS = [
     },
   },
   {
-    title: "마이페이지",
+    title: "이력",
     src: [ROUTES_PATH_MYPAGE],
     icon: {
       default: <UserIcon fill="transparent" stroke="#AAA" />,

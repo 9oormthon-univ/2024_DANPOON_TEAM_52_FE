@@ -23,7 +23,7 @@ export const StyledCalendar = styled(Calendar)`
   width: 100%;
   height: 100%;
   background: #000;
-  padding: 30px 32px;
+  padding: 30px 20px;
   border: none;
   .react-calendar__navigation {
     justify-content: center;
@@ -33,13 +33,13 @@ export const StyledCalendar = styled(Calendar)`
     color: white;
     max-width: fit-content;
     padding: 0px 20px;
-    font-size: 24px;
+    font-size: 28px;
     font-family: "Pretendard";
     font-weight: 600;
   }
   .react-calendar__navigation__arrow {
     color: white;
-    font-size: 24px;
+    font-size: 28px;
     font-family: "Pretendard";
   }
   .react-calendar__navigation__label:disabled,
@@ -64,6 +64,7 @@ export const StyledCalendar = styled(Calendar)`
     position: relative;
     aspect-ratio: 1/1;
     background: transparent !important;
+    z-index: 10;
   }
   .react-calendar__tile:enabled:focus:before,
   .react-calendar__tile:enabled:hover:before {

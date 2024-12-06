@@ -88,12 +88,7 @@ const AddCareerPage = ({
   const [detail, setDetail] = useState("")
   const { startDate, setStartDate, endDate, setEndDate } = useDateRange()
   const onClickAddCareer = () => {
-    if (
-      !careerName ||
-      !selectedResume.resume_category ||
-      !startDate ||
-      !endDate
-    ) {
+    if (!careerName || !selectedResume.resume_category || !startDate) {
       alert("모든 항목을 입력해주세요.")
       return
     }
@@ -110,12 +105,7 @@ const AddCareerPage = ({
     setIsModalOpen(false)
   }
   const onClickEditCareer = (id) => {
-    if (
-      !careerName ||
-      !selectedResume.resume_category ||
-      !startDate ||
-      !endDate
-    ) {
+    if (!careerName || !selectedResume.resume_category || !startDate) {
       alert("모든 항목을 입력해주세요.")
       return
     }

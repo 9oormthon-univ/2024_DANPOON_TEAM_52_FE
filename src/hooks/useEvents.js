@@ -28,14 +28,22 @@ export function useEvents() {
       return (
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            gap: "2px",
+            position: "relative",
+            top: "5px",
+            transform:
+              matchingEvents.length > 0 && isQuestDate
+                ? "translateX(-5px)" // 두 요소가 동시에 존재하면 왼쪽으로 이동
+                : "none",
           }}
         >
+          {/* 일정 표시 타일 */}
           {matchingEvents.length > 0 && (
             <div
               style={{
+                position: "absolute",
+                bottom: "-10px",
+                left: "50%",
+                transform: "translateX(-50%)",
                 background: "white",
                 width: "8px",
                 height: "8px",
@@ -43,9 +51,14 @@ export function useEvents() {
               }}
             />
           )}
+          {/* 퀘스트 표시 타일 */}
           {isQuestDate && (
             <div
               style={{
+                position: "absolute",
+                bottom: "-10px",
+                left: matchingEvents.length > 0 ? "calc(50% + 10px)" : "50%",
+                transform: "translateX(-50%)",
                 background: "#8AFAF1",
                 width: "8px",
                 height: "8px",
