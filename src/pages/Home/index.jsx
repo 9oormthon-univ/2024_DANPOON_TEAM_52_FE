@@ -58,8 +58,16 @@ export default function Home() {
   useEffect(() => {
     const setFcm = async () => {
       await requestPermission()
-      const token = await getDeviceToken()
-      await reqPostFcm(token)
+      const retryCount = 3
+      for (let i = 0; i < retryCount; i++) {
+        try {
+          const token = await getDeviceToken()
+          await reqPostFcm(token)
+          break
+        } catch (e) {
+          console.error("fcm 등록 실패:", i, e)
+        }
+      }
     }
     setFcm()
   }, [])
