@@ -89,7 +89,7 @@ export default function Search() {
             <SortSVG />
             <OptionList visible={sortVisible}>
               <OptionButton
-                selected={(sort === "count").toString()}
+                selected={sort === "count"}
                 onClick={(e) => {
                   e.stopPropagation()
                   setSort("count")
@@ -99,7 +99,7 @@ export default function Search() {
                 추천 순
               </OptionButton>
               <OptionButton
-                selected={(sort === "latest").toString()}
+                selected={sort === "latest"}
                 onClick={(e) => {
                   e.stopPropagation()
                   setSort("latest")

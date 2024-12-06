@@ -37,7 +37,7 @@ export const Description = styled.span`
   font-weight: 500;
 `
 
-export const IconButton = styled.button`
+export const IconButton = styled.div`
   position: relative;
   background-color: #222;
   border: none;
@@ -113,7 +113,7 @@ export const OptionButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${({ selected }) => (selected === "true" ? "#43b6ae" : "white")};
+  color: ${({ selected }) => (selected ? "#43b6ae" : "white")};
   font-size: 12px;
   font-weight: 500;
   background: black;
