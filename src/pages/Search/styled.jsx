@@ -38,6 +38,7 @@ export const Description = styled.span`
 `
 
 export const IconButton = styled.button`
+  position: relative;
   background-color: #222;
   border: none;
   border-radius: 50%;
@@ -95,4 +96,34 @@ export const ListTopHeader = styled.div`
   align-items: center;
   gap: 10px;
   margin-top: 12px;
+`
+
+export const OptionList = styled.div`
+  position: absolute;
+  top: calc(100% + 5px);
+  right: 0;
+  display: ${({ visible }) => (visible === "true" ? "flex" : "none")};
+  flex-direction: column;
+  z-index: 100;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 0px 15px 0px rgba(138, 250, 241, 0.25);
+`
+export const OptionButton = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${({ selected }) => (selected === "true" ? "#43b6ae" : "white")};
+  font-size: 12px;
+  font-weight: 500;
+  background: black;
+  border: none;
+  outline: none;
+  padding: 10px 20px;
+  margin: 0;
+  cursor: pointer;
+  white-space: nowrap;
+  &:not(:last-child) {
+    border-bottom: 1px solid #333;
+  }
 `
