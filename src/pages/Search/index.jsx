@@ -33,6 +33,7 @@ export default function Search() {
   ]
   const [category, setCategory] = useState("all")
   const getGoalsSearch = async () => {
+    setLoading(true)
     const data = {
       size: 30,
       sort: "count",
@@ -44,6 +45,7 @@ export default function Search() {
     if (res.status === 200) {
       setList(res.data)
     }
+    setLoading(false)
   }
 
   useEffect(() => {
