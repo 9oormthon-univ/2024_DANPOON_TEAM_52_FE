@@ -17,7 +17,7 @@ export const Title = styled(TypoComponent.Title)`
 export const Description = styled(TypoComponent.Text)`
   margin-left: 12px;
   &&& {
-    font-size: 11px;
+    font-size: 13px;
     color: #c3c3c3;
     font-weight: 400;
   }
