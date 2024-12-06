@@ -23,7 +23,9 @@ const CategoryItem = ({ category, onClickOption, isEdit, setIsEdit }) => {
         <ItemGroup key={index}>
           <ItemDate>
             {dayjs(item.start_date).format("YY.MM.DD.")} ~{" "}
-            {dayjs(item.end_date).format("YY.MM.DD.")}
+            {item.end_date !== null
+              ? dayjs(item.end_date)?.format("YY.MM.DD.")
+              : "진행중"}{" "}
           </ItemDate>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <ItemName>{item.itemName}</ItemName>
