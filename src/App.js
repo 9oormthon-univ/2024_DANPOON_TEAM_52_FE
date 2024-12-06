@@ -31,6 +31,7 @@ import Goal from "./pages/Goal"
 import GoalConstellation from "./pages/Goal/Constellation"
 import CalendarPage from "./pages/Calendar"
 import Search from "./pages/Search"
+import SearchGoal from "./pages/SearchGoal"
 import Mypage from "./pages/Mypage"
 import SettingPage from "./pages/Mypage/SettingPage"
 import CustomGuidePage from "./pages/Mypage/CustomGuide"
@@ -73,6 +74,7 @@ export default function App() {
             element={<GoalConstellation />}
           />
           <Route path={ROUTES_PATH_SEARCH} element={<Search />} />
+          <Route path={`${ROUTES_PATH_SEARCH}/:id`} element={<SearchGoal />} />
           <Route
             path={`${ROUTES_PATH_RESUME_SHARE}/:id`}
             element={<ShareResume />}

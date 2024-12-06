@@ -64,7 +64,7 @@ export const Description = styled(TypoComponent.Text)`
 
 export const SubDescription = styled(TypoComponent.Text)`
   &&& {
-    font-size: 11px;
+    font-size: 13px;
     color: #c3c3c3;
     font-weight: 400;
   }

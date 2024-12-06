@@ -56,6 +56,7 @@ function Goals({
   onEdit,
   onDelete,
   onChangeSequence,
+  placeholder,
 }) {
   const scrollContainerRef = useRef()
   useDndScrolling(scrollContainerRef)
@@ -88,9 +89,13 @@ function Goals({
         <>
           {!goals?.length ? (
             <Placeholder>
-              목표를 추가하고
-              <br />
-              퀘스트를 진행하여 달성해요
+              {placeholder || (
+                <>
+                  목표를 추가하고
+                  <br />
+                  퀘스트를 진행하여 달성해요
+                </>
+              )}
             </Placeholder>
           ) : (
             sortedGoals.map((item, idx) => (
@@ -98,6 +103,7 @@ function Goals({
                 key={item.id}
                 icon={CATEGORIES.find((v) => v.value === item.category)?.icon}
                 title={item.title}
+                description={item.description}
                 label={
                   option?.labelHidden
                     ? ""

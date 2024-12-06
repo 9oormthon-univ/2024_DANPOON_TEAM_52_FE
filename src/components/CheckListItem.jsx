@@ -34,6 +34,7 @@ const InnerContainer = styled(Checkbox)`
   font-weight: 500;
   overflow: hidden;
   & .ant-checkbox-inner {
+    display: ${({ $checkboxVisible }) => ($checkboxVisible ? "block" : "none")};
     background-color: #000;
     outline: none;
     border: none;
@@ -87,6 +88,7 @@ const CheckListItem = ({
     <CheckListItemContainer layoutId={props.value} ref={listItemRef}>
       <InnerContainer
         {...props}
+        $checkboxVisible={option?.$checkboxVisible ?? true}
         checked={isChecked}
         onChange={(e) => {
           setIsChecked(e.target.checked)

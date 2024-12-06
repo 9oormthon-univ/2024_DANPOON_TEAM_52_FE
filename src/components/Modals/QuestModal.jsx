@@ -115,7 +115,7 @@ export default function QuestModal({ open, onClose, goalId, quest, onSave }) {
           }
         />
         <Flex justify="space-between" align="center">
-          <Label>기한 설정</Label>
+          <Label>마감일 설정</Label>
           <Switch
             checked={visibleDateSetting}
             onChange={(checked) => setVisibleDateSetting(checked)}
