@@ -7,13 +7,13 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  padding: 20px 20px 0 33px;
+  padding: 30px 20px 0 30px;
 `
 
 export const Header = styled.header`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  gap: 7px;
   margin-bottom: 30px;
 `
 export const TitleButton = styled.button`
@@ -46,8 +46,8 @@ export const IconButton = styled.button`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
 `
 
 export const CategoryContainer = styled.div`
@@ -87,4 +87,12 @@ export const Category = styled(Radio.Group)`
     background-color: #43b6ae;
     color: black !important;
   }
+`
+
+export const ListTopHeader = styled.div`
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
 `

@@ -9,6 +9,7 @@ import {
   TitleButton,
   CategoryContainer,
   Category,
+  ListTopHeader,
 } from "./styled"
 import { ReactComponent as SortSVG } from "../../svgs/Sort.svg"
 import { ReactComponent as DownSVG } from "../../svgs/Down.svg"
@@ -60,7 +61,6 @@ export default function Search() {
     <BaseLayout>
       <Container>
         <Header>
-          <Flex vertical gap={12}>
             <TitleButton onClick={() => setOpen(true)}>
               {selectedRecommendFilter.category === "all"
                 ? "전체 직무 탐색"
@@ -70,10 +70,6 @@ export default function Search() {
             <Description>
               다른 사람들의 목표와 이력을 탐색할 수 있어요
             </Description>
-          </Flex>
-          <IconButton>
-            <SortSVG />
-          </IconButton>
         </Header>
         <CategoryContainer>
           <Category
@@ -83,6 +79,12 @@ export default function Search() {
             onChange={(category) => setCategory(category.target.value)}
           />
         </CategoryContainer>
+        <ListTopHeader>
+          <Description>{list.length}개의 목표</Description>
+          <IconButton>
+            <SortSVG />
+          </IconButton>
+        </ListTopHeader>
         <Goals goals={list} loading={loading} option={{ labelHidden: true }} />
       </Container>
       <FilterDrawer
