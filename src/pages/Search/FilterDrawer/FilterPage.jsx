@@ -1,3 +1,8 @@
+import { useRecoilState, useRecoilValue } from "recoil"
+import {
+  selectedRecommendFilterAtom,
+  recommendFilterAtom,
+} from "../../../store/atoms/recommendFilter"
 import {
   Container,
   Header,
@@ -9,27 +14,56 @@ import {
   RightIcon,
 } from "./styled"
 
-export default function FilterPage({ filter, setStatus }) {
+export default function FilterPage({ onSave }) {
+  const recommendFilter = useRecoilValue(recommendFilterAtom)
+  const [selectedRecommendFilter, setSelectedRecommendFilter] = useRecoilState(
+    selectedRecommendFilterAtom
+  )
   return (
     <Container>
       <Header>
         <Title>필터</Title>
       </Header>
       <ListContainer>
-        <CategoryButton onClick={() => setStatus("category")}>
-          직군 전체
+        <CategoryButton
+          onClick={() =>
+            setSelectedRecommendFilter((prev) => ({
+              ...prev,
+              status: "category",
+            }))
+          }
+        >
+          {selectedRecommendFilter.category === "all"
+            ? "직군 전체"
+            : selectedRecommendFilter.category}
           <RightIcon />
         </CategoryButton>
         <CategoryButton
-          disabled={filter.category === "all"}
-          onClick={() => setStatus("name")}
+          disabled={selectedRecommendFilter.category === "all"}
+          onClick={() =>
+            setSelectedRecommendFilter((prev) => ({
+              ...prev,
+              status: "name",
+            }))
+          }
         >
-          직무 전체
+          {selectedRecommendFilter.name === "all"
+            ? "직무 전체"
+            : selectedRecommendFilter.name
+                .map(
+                  (v) =>
+                    Object.values(recommendFilter)
+                      .flat()
+                      .find((f) => f.id === v).name
+                )
+                .join(", ")}
           <RightIcon />
         </CategoryButton>
       </ListContainer>
       <ButtonContainer>
-        <SaveButton $variant="secondary">적용</SaveButton>
+        <SaveButton $variant="secondary" onClick={onSave}>
+          적용
+        </SaveButton>
       </ButtonContainer>
     </Container>
   )

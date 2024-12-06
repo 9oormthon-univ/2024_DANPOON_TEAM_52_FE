@@ -31,6 +31,7 @@ export const ListContainer = styled(motion.div)`
   gap: 24px;
   padding: 0 18px;
   height: 70dvh;
+  overflow-y: auto;
 `
 
 export const CategoryButton = styled.button`

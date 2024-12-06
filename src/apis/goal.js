@@ -96,13 +96,30 @@ export const reqDeleteGoal = async (id) => {
 }
 
 export const reqGetRecommendGoals = async () => {
-  // return await apiClient.get(`/goal/recommend`);
+  const res = await apiClient.post(`/goal/recommend`);
   return {
-    status: 200,
-    data: Math.random() > 0.5 ? RECOMMENDED_GOALS : RECOMMENDED_GOALS2,
+    status: res.status,
+    data: res.data.data.items.map((v) => ({
+      id: v.goal_id,
+      title: v.title,
+      category: v.category,
+      descriptions: v.descriptions
+    }))
   }
 }
 
 export const reqCompleteGoal = async (id) => {
   return await apiClient.patch(`/goal/complete/${id}`)
+}
+
+export const reqGetSearchGoals = async (params) => {
+  const searchParams = new URLSearchParams(params)
+  const res = await apiClient.get(`/goal/search?${searchParams}`)
+  return {
+    status: res.status,
+    data: res.data.data.content.map((v) => ({
+      id: v.goal_id,
+      title: v.title
+    }))
+  }
 }

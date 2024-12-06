@@ -40,9 +40,9 @@ export const reqPatchQuest = async (id, data) => {
 }
 
 export const reqGetRecommendQuests = async () => {
-  // return await apiClient.get(`/quest/recommend`);
+  const res = await apiClient.get(`/goal/recommend`);
   return {
-    status: 200,
-    data: Math.random() > 0.5 ? RECOMMENDED_QUESTS : RECOMMENDED_QUESTS2,
+    status: res.status,
+    data: res.data.data.items
   }
 }

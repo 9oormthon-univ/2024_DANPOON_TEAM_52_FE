@@ -1,4 +1,9 @@
 import {
+  recommendFilterAtom,
+  selectedRecommendFilterAtom,
+} from "../../../store/atoms/recommendFilter"
+import { useRecoilState, useRecoilValue } from "recoil"
+import {
   Container,
   Header,
   Title,
@@ -9,44 +14,59 @@ import {
   LeftIcon,
   RadioGroup,
 } from "./styled"
-import { useState } from "react"
 
-export default function CategoryPage({ filter, setFilter, setStatus }) {
-  const [selected, setSelected] = useState(filter.category)
-  const options = [
-    {
-      label: "직군 전체",
-      value: "all",
-    },
-    {
-      label: "기획 · 전략",
-      value: "기획 · 전략",
-    },
-    {
-      label: "마케팅 · 홍보 · 조사",
-      value: "마케팅 · 홍보 · 조사",
-    },
-  ]
+export default function CategoryPage() {
+  const [selectedRecommendFilter, setSelectedRecommendFilter] = useRecoilState(
+    selectedRecommendFilterAtom
+  )
+  const recommendFilter = useRecoilValue(recommendFilterAtom)
+  const options = Object.keys(recommendFilter).map((v) => ({
+    label: v,
+    value: v,
+  }))
   return (
     <Container>
       <Header>
-        <LeftIcon onClick={() => setStatus("filter")} />
+        <LeftIcon
+          onClick={() =>
+            setSelectedRecommendFilter((prev) => ({
+              ...prev,
+              status: "filter",
+            }))
+          }
+        />
         <Title>직군 선택</Title>
       </Header>
       <ListContainer>
         <RadioGroup
           options={options}
-          value={selected}
-          onChange={(e) => setSelected(e.target.value)}
+          value={selectedRecommendFilter.category}
+          onChange={(e) =>
+            setSelectedRecommendFilter((prev) => ({
+              ...prev,
+              category: e.target.value,
+            }))
+          }
         />
       </ListContainer>
       <ButtonContainer>
-        <InitButton>초기화</InitButton>
+        <InitButton
+          onClick={() => {
+            setSelectedRecommendFilter((prev) => ({
+              ...prev,
+              category: "all",
+            }))
+          }}
+        >
+          초기화
+        </InitButton>
         <SaveButton
           $variant="secondary"
           onClick={() => {
-            setFilter((prev) => ({ ...prev, category: selected }))
-            setStatus("name")
+            setSelectedRecommendFilter((prev) => ({
+              ...prev,
+              status: "name",
+            }))
           }}
         >
           선택완료

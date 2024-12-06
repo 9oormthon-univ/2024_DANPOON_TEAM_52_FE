@@ -131,7 +131,7 @@ export default function Mypage() {
           </CustomScrollContainer>
         </ShadowContainer>
         <StyledPlus onClick={() => setIsModalOpen(true)}>
-          <Plus />
+          <Plus stroke="white" />
         </StyledPlus>
         {isModalOpen && (
           <AddCareerPage
