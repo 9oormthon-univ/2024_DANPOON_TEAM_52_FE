@@ -119,7 +119,9 @@ export const reqGetSearchGoals = async (params) => {
     status: res.status,
     data: res.data.data.content.map((v) => ({
       id: v.goal_id,
-      title: v.title
+      title: v.title,
+      category: v.category,
+      description: `${v.count}명의 목표`,
     }))
   }
 }

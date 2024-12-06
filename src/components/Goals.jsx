@@ -103,6 +103,7 @@ function Goals({
                 key={item.id}
                 icon={CATEGORIES.find((v) => v.value === item.category)?.icon}
                 title={item.title}
+                description={item.description}
                 label={
                   option?.labelHidden
                     ? ""

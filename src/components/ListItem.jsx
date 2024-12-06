@@ -49,6 +49,7 @@ const Icon = styled.span`
 const Title = styled.h3`
   font-size: 15px;
   font-weight: 600;
+  line-height: 1.1;
   color: #fff;
   width: 100%;
   overflow: hidden;
@@ -153,11 +154,15 @@ export default function ListItem({
   return (
     <ListItemContainer ref={listItemRef} style={{ opacity }}>
       <InnerContainer onClick={() => eventHandler(onClick)}>
-        {option?.draggable && <Grab ref={(node) => drag(node)}>::</Grab>}
+        {option?.draggable ? (
+          <Grab ref={(node) => drag(node)}>::</Grab>
+        ) : (
+          <div style={{ width: 10 }} />
+        )}
         <Icon>{icon}</Icon>
         <Flex vertical flex={1} align="center" gap={5}>
-          <Title>{title}</Title>
           {description && <Description>{description}</Description>}
+          <Title>{title}</Title>
         </Flex>
         <Label>{label}</Label>
       </InnerContainer>
