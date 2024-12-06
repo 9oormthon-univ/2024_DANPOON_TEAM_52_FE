@@ -26,8 +26,6 @@ export default function FilterDrawer({ open, onClose }) {
     getJobs()
   }, [])
 
-  console.log("selectedFilter", selectedFilter)
-
   return (
     <>
       <Drawer open={isOpen} onClose={onClose}>
