@@ -1,6 +1,7 @@
 import { useStepNavigation } from "../../../hooks/useStepNavigation"
 import { usePickedItems } from "../../../hooks/usePickedItems"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import {
   BodyWrapper,
   Content,
@@ -14,6 +15,7 @@ import {
 } from "../styled"
 import { Highlight } from "../../../components/Typo"
 const SetJob = ({ onClickNext, jobData, setDetailJob }) => {
+  const navigate = useNavigate()
   const { selectItem, jobItem, setJobItem } = usePickedItems()
   const { paramsJobItem } = useStepNavigation()
   useEffect(() => {
@@ -24,7 +26,16 @@ const SetJob = ({ onClickNext, jobData, setDetailJob }) => {
 
   return (
     <Wrapper>
-      <BackBtn />
+      <BackBtn
+        onClick={() => {
+          if (localStorage.getItem("backURL") === "true") {
+            localStorage.removeItem("backURL")
+            navigate("/setting")
+          } else {
+            navigate("/onboard")
+          }
+        }}
+      />
       <Content>
         <MainTitle>
           <Highlight>희망 직군</Highlight>을
@@ -41,6 +52,7 @@ const SetJob = ({ onClickNext, jobData, setDetailJob }) => {
                 key={index}
                 data-index={index}
                 onClick={(event) => {
+                  console.log(event)
                   selectItem(event)
                   setDetailJob(el.id)
                 }}
@@ -53,7 +65,6 @@ const SetJob = ({ onClickNext, jobData, setDetailJob }) => {
         <NextBtn
           $variant={jobItem.length !== 0 ? "default" : "secondary"}
           disabled={jobItem.length === 0 ? true : false}
-          hasContent={jobItem !== ""}
           onClick={() => {
             onClickNext(jobItem)
           }}

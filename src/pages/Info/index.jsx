@@ -53,6 +53,7 @@ export default function InfoPage() {
           onClickNext={onClickNext}
           setDetailJob={setDetailJob}
           detailJob={detailJob}
+          allJobData={jobData}
         ></SetInterest>
       )}
     </>

@@ -19,7 +19,6 @@ import { useRecoilValue, useRecoilState } from "recoil"
 import userAtom from "../../../store/atoms/user"
 import userJobAtom from "../../../store/atoms/userjob"
 import userInfoAtom from "../../../store/atoms/userinfo"
-import promptAtom from "../../../store/atoms/prompt"
 import { reqUpdateUser } from "../../../apis/user"
 const SettingPage = () => {
   //사용자이름, 프로필사진 데이터(프로필사진만 사용중)
