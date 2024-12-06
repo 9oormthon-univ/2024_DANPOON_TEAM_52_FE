@@ -1,9 +1,5 @@
 import React, { useState } from "react"
-import {
-  ModalInput,
-  ModalButtonGroup,
-  ModalButton,
-} from "../../Calendar/styled"
+import { ModalInput, ModalButtonGroup } from "../../Calendar/styled"
 import styled from "styled-components"
 import { DatePicker } from "antd"
 import { useDateRange } from "../../../hooks/useDateRange"
@@ -58,6 +54,24 @@ const DateRangeWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 5px;
+`
+
+export const ModalButton = styled.button`
+  width: 50%;
+  padding: 10px 20px;
+  font-size: 15px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-family: "Pretendard";
+`
+export const CancelButton = styled(ModalButton)`
+  background-color: #212121;
+  color: #b2b2b2;
+`
+export const SubmitButton = styled(ModalButton)`
+  background-color: #3f3f3f;
+  color: white;
 `
 
 const DateDivide = styled.div`
@@ -206,14 +220,14 @@ const AddCareerPage = ({
             )}
           </DatePickerWrapper>
           <ModalButtonGroup>
-            <ModalButton
+            <CancelButton
               onClick={() =>
                 isEdit ? setIsEdit(false) : setIsModalOpen(false)
               }
             >
               취소
-            </ModalButton>
-            <ModalButton
+            </CancelButton>
+            <SubmitButton
               onClick={
                 isEdit
                   ? () => {
@@ -227,7 +241,7 @@ const AddCareerPage = ({
               }
             >
               {isEdit ? "수정" : "추가"}
-            </ModalButton>
+            </SubmitButton>
           </ModalButtonGroup>
         </ModalContent>
       }
