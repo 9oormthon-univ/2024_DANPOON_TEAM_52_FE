@@ -52,7 +52,7 @@ const SettingPage = () => {
           <SettingItem>
             <ItemName>별명</ItemName>
             <Content defaultValue={userData.nickname}>
-              {userInfo.nickname}
+              {localStorage.getItem("nickname") || userInfo.nickname}
             </Content>
             <Option
               onClick={() => {

@@ -84,7 +84,10 @@ export default function Mypage() {
           <ProfileImg src={userData.image_url} />
           <InfoGroup>
             <InfoText>
-              <Highlight>{userData.nickname}</Highlight>님의 이력
+              <Highlight>
+                {localStorage.getItem("nickname") || userData.nickname}
+              </Highlight>
+              님의 이력
             </InfoText>
             <InfoSubText>나의 이력을 추가하고 관리할 수 있어요</InfoSubText>
           </InfoGroup>

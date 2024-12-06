@@ -30,7 +30,7 @@ const SetJob = ({ onClickNext, jobData, setDetailJob }) => {
         onClick={() => {
           if (localStorage.getItem("backURL") === "true") {
             localStorage.removeItem("backURL")
-            navigate("/setting")
+            navigate("/mypage")
           } else {
             navigate("/onboard")
           }
