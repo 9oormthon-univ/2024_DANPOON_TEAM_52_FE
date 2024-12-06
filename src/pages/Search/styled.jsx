@@ -7,7 +7,7 @@ export const Container = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  padding: 20px 33px 0;
+  padding: 20px 20px 0 33px;
 `
 
 export const Header = styled.header`
