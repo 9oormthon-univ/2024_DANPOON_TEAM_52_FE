@@ -58,6 +58,7 @@ export const reqPostGoal = async (data) => {
     title: data.title,
     category: CATEGORIES.find((v) => v.value === data.category)?.label,
   }
+  if (data.quests) body.quests = data.quests
   const res = await apiClient.post("/goal", body)
   return {
     status: res.status,
@@ -123,5 +124,19 @@ export const reqGetSearchGoals = async (params) => {
       category: v.category,
       description: `${v.count}명의 목표`,
     }))
+  }
+}
+
+export const reqGetSearchGoal = async (id) => {
+  const res = await apiClient.get(`/goal/search/${id}`)
+  return {
+    status: res.status,
+    data: {
+      category: res.data.data.category,
+      title: res.data.data.goal_name,
+      quests: res.data.data.quests.map((q) => ({
+        title: q,
+      })),
+    },
   }
 }

@@ -15,6 +15,7 @@ import { ReactComponent as SortSVG } from "../../svgs/Sort.svg"
 import { ReactComponent as DownSVG } from "../../svgs/Down.svg"
 import FilterDrawer from "./FilterDrawer"
 import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import { reqGetSearchGoals } from "../../apis/goal"
 import { CATEGORIES } from "../../constants/dummy"
 import { selectedRecommendFilterAtom } from "../../store/atoms/recommendFilter"
@@ -22,6 +23,7 @@ import { useRecoilValue } from "recoil"
 import BaseLayout from "../../components/BaseLayout"
 
 export default function List() {
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
   const [loading, setLoading] = useState(false)
   const [list, setList] = useState([])
@@ -115,6 +117,7 @@ export default function List() {
           loading={loading}
           option={{ labelHidden: true }}
           placeholder="조회된 목표가 없습니다."
+          onClick={(goal) => navigate(`/search/${goal.id}`)}
         />
       </Container>
       <FilterDrawer

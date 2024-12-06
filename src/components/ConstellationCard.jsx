@@ -78,8 +78,12 @@ export default function ConstellationCard({ goal }) {
       </Flex>
       <Title>{goal.title}</Title>
       <Date>
-        {formatFullDateKorean(goal.startDate)} ~{" "}
-        {formatFullDateKorean(goal.completedDate)}
+        {goal.startDate && goal.completedDate && (
+          <>
+            {formatFullDateKorean(goal.startDate)} ~{" "}
+            {formatFullDateKorean(goal.completedDate)}
+          </>
+        )}
       </Date>
       <Description>{goal.description}</Description>
       <ConsterllationContainer>
