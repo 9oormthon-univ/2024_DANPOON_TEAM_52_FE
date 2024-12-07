@@ -53,6 +53,12 @@ export default function Quest() {
     open: false,
     quest: {},
   })
+  const onAddRecommendQuest = (title) => {
+    setQuestModal({
+      open: true,
+      quest: { id: -1, title: title, isComplete: false },
+    })
+  }
   const CONFIRM_COMPLETE_MODAL = {
     open: true,
     title: "진행중인 목표를\n완료하시겠어요?",
@@ -92,6 +98,7 @@ export default function Quest() {
     open: true,
     text: "퀘스트를 추천해드릴게요!",
     onClose: () => setRecommendQuestModal({ open: false }),
+    onClick: onAddRecommendQuest,
   }
   const onChangeQuestComplete = async (questId, isComplete) => {
     const res = await reqPatchQuest(questId, { isComplete })

@@ -5,9 +5,10 @@ import Star from "../Star"
 import { ReactComponent as SwapSVG } from "../../svgs/Swap.svg"
 import { reqGetRecommendQuests } from "../../apis/quest"
 import { useState, useEffect } from "react"
+import { useParams } from "react-router-dom"
 
 const ModalContent = styled.div`
-  width: 270px;
+  max-width: 576px;
   height: fit-content;
   display: flex;
   overflow: visible;
@@ -75,7 +76,7 @@ const RoundedTriangle = styled.div`
 `
 const StyledButton = styled(Button)`
   &&& {
-    padding: 10px 0;
+    padding: 10px 20px;
     border-radius: 8px;
     font-weight: 400;
   }
@@ -103,9 +104,10 @@ const RefreshButton = styled.button`
 `
 
 export default function RecommendQuestModal({ open, onClose, text, onClick }) {
+  const { id } = useParams()
   const [recommendedQuests, setRecommendedQuests] = useState([])
   const getRecommendedQuests = async () => {
-    const res = await reqGetRecommendQuests()
+    const res = await reqGetRecommendQuests(id)
     if (res.status === 200) {
       setRecommendedQuests(res.data)
     }
@@ -124,7 +126,11 @@ export default function RecommendQuestModal({ open, onClose, text, onClick }) {
           </Chat>
         </StarContainer>
         {recommendedQuests.map((quest, index) => (
-          <StyledButton key={index} $variant="secondary" onClick={onClick}>
+          <StyledButton
+            key={index}
+            $variant="secondary"
+            onClick={() => onClick(quest.title)}
+          >
             {quest.title}
           </StyledButton>
         ))}
