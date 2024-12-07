@@ -23,8 +23,8 @@ export default function SearchGoal() {
   const goCompleteGoal = () => navigate(ROUTES_PATH_SEARCH)
   const [goal, setGoal] = useState(DEFAULT_GOAL)
   const [quests, setQuests] = useState([])
-  const onClickAddResume = () => {
-    const res = reqPostGoal({
+  const onClickAddResume = async () => {
+    const res = await reqPostGoal({
       title: goal.title,
       category: goal.category,
       quests: quests.map((quest) => ({ title: quest })),

@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 const CheckListItemContainer = styled(motion.div)`
   display: flex;
   width: 100%;
-  height: fit-content;
+  min-height: fit-content;
   border-radius: 10px;
   margin: 0px;
   cursor: pointer;
