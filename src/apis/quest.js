@@ -15,7 +15,13 @@ export const reqPostQuest = async (data) => {
   const res = await apiClient.post("/quest", body)
   return {
     status: res.status,
-    data: res.data.data,
+    data: {
+      id: res.data.data.quest_id,
+      deadline: res.data.data.deadline,
+      isComplete: res.data.data.is_complete,
+      sequence: res.data.data.sequence,
+      title: res.data.data.title,
+    },
   }
 }
 
@@ -39,8 +45,11 @@ export const reqPatchQuest = async (id, data) => {
   }
 }
 
-export const reqGetRecommendQuests = async () => {
-  const res = await apiClient.get(`/goal/recommend`);
+export const reqGetRecommendQuests = async (goalId) => {
+  const body = {
+    goal_id: goalId,
+  }
+  const res = await apiClient.post(`/quest/recommend`, body);
   return {
     status: res.status,
     data: res.data.data.items
