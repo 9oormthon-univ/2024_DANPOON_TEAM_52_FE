@@ -46,10 +46,7 @@ export const reqPatchQuest = async (id, data) => {
 }
 
 export const reqGetRecommendQuests = async (goalId) => {
-  const body = {
-    goal_id: goalId,
-  }
-  const res = await apiClient.post(`/quest/recommend`, body);
+  const res = await apiClient.post(`/quest/recommend/${goalId}`);
   return {
     status: res.status,
     data: res.data.data.items
