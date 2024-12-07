@@ -63,6 +63,7 @@ const EventDetails = ({ selectedDate, getDatesInRange, openEditModal }) => {
 export default EventDetails
 
 const ScrollContainer = styled.div`
+  width: 80%;
   height: 300px;
   max-height: 30vh;
   overflow: auto;
