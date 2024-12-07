@@ -56,7 +56,8 @@ export const reqGetGoal = async (id) => {
 export const reqPostGoal = async (data) => {
   const body = {
     title: data.title,
-    category: CATEGORIES.find((v) => v.value === data.category)?.label,
+    category: data.category,
+    quests: data.quests || [],
   }
   if (data.quests) body.quests = data.quests
   const res = await apiClient.post("/goal", body)
