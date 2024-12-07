@@ -70,16 +70,16 @@ export const ModalContent = styled.form`
   width: 270px;
   flex-direction: column;
   padding: 20px;
-  gap: 10px;
+  gap: 90px;
 `
 
 export const Title = styled.h2`
   width: 100%;
+  margin-bottom: 20px;
   text-align: center;
   color: #fff;
   font-size: 18px;
   font-weight: 500;
-  margin-bottom: 10px;
   line-height: 1.4;
   white-space: pre;
 `
@@ -100,28 +100,35 @@ export const StyledButton = styled(ButtonComponent)`
 export const CheckModal = ({
   open,
   title,
-  cancleText,
+  cancelText,
   confirmText,
-  onCancle,
+  onCancel,
   onConfirm,
   backgroundChildren,
 }) => {
   return (
-    <>
-      <Modal open={open} onClose={onCancle}>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Modal open={open} onClose={onCancel}>
         <ModalContent>
           <Title>{title}</Title>
+          {backgroundChildren}
           <ButtonContainer>
-            {cancleText && (
-              <StyledButton onClick={onCancle} $variant="secondary">
-                {cancleText}
+            {cancelText && (
+              <StyledButton onClick={onCancel} $variant="secondary">
+                {cancelText}
               </StyledButton>
             )}
             <StyledButton onClick={onConfirm}>{confirmText}</StyledButton>
           </ButtonContainer>
         </ModalContent>
       </Modal>
-      {backgroundChildren}
-    </>
+    </div>
   )
 }
