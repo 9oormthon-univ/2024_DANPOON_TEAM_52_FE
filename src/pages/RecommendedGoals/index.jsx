@@ -51,7 +51,6 @@ export default function RecommendedGoals() {
   }
   const closeModal = () => {
     setOpen(false)
-    setSelectedGoal(DEFAULT_GOAL)
   }
   useEffect(() => {
     getRecommendedGoals()
