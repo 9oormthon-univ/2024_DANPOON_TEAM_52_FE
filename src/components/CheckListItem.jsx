@@ -18,8 +18,6 @@ const CheckListItemContainer = styled(motion.div)`
   &::-webkit-scrollbar {
     width: 0px;
     height: 0px;
-  }
-  &::-webkit-scrollbar-thumb {
     display: none;
   }
 `
