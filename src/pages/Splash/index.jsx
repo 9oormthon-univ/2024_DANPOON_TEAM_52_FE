@@ -9,7 +9,7 @@ import {
 import Logo from "../../components/Logo"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
-import { ROUTES_PATH_LOGIN } from "../../constants/routes"
+import { ROUTES_PATH_ROOT } from "../../constants/routes"
 
 const starVariants = {
   initial: {
@@ -63,7 +63,7 @@ export default function Splash() {
             setVariant("shiny")
           } else if (variant === "shiny") {
             setTimeout(() => {
-              navigate(ROUTES_PATH_LOGIN)
+              navigate(ROUTES_PATH_ROOT)
             }, 1000)
           }
         }}
