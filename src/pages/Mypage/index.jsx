@@ -15,8 +15,8 @@ import {
   StyledPlus,
   CustomScrollContainer,
 } from "./styled"
+import { CheckModal } from "../../components/Modal"
 import ShadowContainer from "../../components/ShadowContainer"
-import ScrollContainer from "../../components/ScrollContainer"
 import { ReactComponent as Share } from "../../svgs/share.svg"
 import { ReactComponent as Plus } from "../../svgs/plus.svg"
 import { ReactComponent as Setting } from "../../svgs/Settings.svg"
@@ -40,9 +40,9 @@ export default function Mypage() {
   const navigate = useNavigate()
   const groupedData = useGroupedData(resumeData)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isShareModal, setIsShareModal] = useState(false)
+  const url = `${window.location.origin}/resume/${userData.member_id}`
   const onClickOption = (item) => {
-    //console.log(item, "번째 항목 선택")
-    //선택한 항목 Id 설정
     setSelectedOption(item)
     if (selectedOption === item) {
       setSelectedOption(null) // 동일한 항목 클릭 시 닫기
@@ -95,7 +95,8 @@ export default function Mypage() {
             <StyledButton>
               <Share
                 onClick={() => {
-                  navigate(`/resume/${userData.member_id}`)
+                  setIsShareModal(true)
+                  navigator.clipboard.writeText(url).then(() => {})
                 }}
               />
             </StyledButton>
@@ -145,6 +146,14 @@ export default function Mypage() {
             setIsFeedBack={setIsFeedBack}
           ></AiFeedBack>
         )}
+        <CheckModal
+          open={isShareModal}
+          onConfirm={() => {
+            setIsShareModal(false)
+          }}
+          title="클립보드에 복사되었습니다"
+          confirmText="확인"
+        />
       </Wrapper>
     </BaseLayout>
   )
