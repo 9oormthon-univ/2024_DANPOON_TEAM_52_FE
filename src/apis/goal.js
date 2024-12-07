@@ -84,7 +84,7 @@ export const reqPatchGoals = async (data) => {
 export const reqPatchGoal = async (id, data) => {
   const body = {
     title: data.title,
-    category: CATEGORIES.find((v) => v.value === data.category)?.label,
+    category: data.category
   }
   const res = await apiClient.patch(`/goal/${id}`, body)
   return {
