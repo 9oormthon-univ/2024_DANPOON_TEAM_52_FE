@@ -16,13 +16,15 @@ import { useEffect, useState } from "react"
 import { reqGetSearchGoal, reqPostGoal } from "../../apis/goal"
 import { DEFAULT_GOAL } from "../../constants/goal"
 import CheckListItem from "../../components/CheckListItem"
-
+import { CheckModal } from "../../components/Modal"
+import Confetti2 from "../../components/Confetti2"
 export default function SearchGoal() {
   const { id } = useParams()
   const navigate = useNavigate()
   const goCompleteGoal = () => navigate(ROUTES_PATH_SEARCH)
   const [goal, setGoal] = useState(DEFAULT_GOAL)
   const [quests, setQuests] = useState([])
+  const [isSuccess, setIsSuccess] = useState(false)
   const onClickAddResume = async () => {
     const res = await reqPostGoal({
       title: goal.title,
@@ -30,8 +32,7 @@ export default function SearchGoal() {
       quests: quests.map((quest) => ({ title: quest })),
     })
     if (res.status === 200) {
-      alert("목표와 퀘스트가 추가되었습니다.")
-      navigate(ROUTES_PATH_HOME)
+      setIsSuccess(true)
     } else alert("목표와 퀘스트 추가에 실패했습니다.")
   }
 
@@ -80,6 +81,18 @@ export default function SearchGoal() {
             목표와 퀘스트 추가하기
           </Button>
         )}
+        <CheckModal
+          open={isSuccess}
+          onCancel={() => {
+            setIsSuccess(false)
+          }}
+          title="목표 추가 성공!"
+          onConfirm={() => {
+            navigate(ROUTES_PATH_HOME)
+          }}
+          confirmText="확인"
+          backgroundChildren={<Confetti2 />}
+        />
       </Container>
     </BaseLayout>
   )
