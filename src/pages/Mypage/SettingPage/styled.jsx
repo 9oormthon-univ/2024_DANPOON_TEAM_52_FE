@@ -50,6 +50,15 @@ export const ItemName = styled.div`
   font-size: 15px;
   font-weight: semibold;
 `
+export const Logout = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff6d6d;
+  font-size: 15px;
+  font-weight: semibold;
+`
 
 export const Content = styled.div`
   width: 150px;

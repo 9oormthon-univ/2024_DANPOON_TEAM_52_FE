@@ -8,6 +8,7 @@ import {
   ItemName,
   Option,
   Content,
+  Logout,
 } from "./styled"
 import BaseLayout from "../../../components/BaseLayout"
 import BackwardButton from "../../../components/BackwardButton"
@@ -20,6 +21,7 @@ import userAtom from "../../../store/atoms/user"
 import userJobAtom from "../../../store/atoms/userjob"
 import userInfoAtom from "../../../store/atoms/userinfo"
 import { reqUpdateUser } from "../../../apis/user"
+import { CheckModal } from "../../../components/Modal"
 const SettingPage = () => {
   //사용자이름, 프로필사진 데이터(프로필사진만 사용중)
   const userData = useRecoilValue(userAtom)
@@ -29,6 +31,7 @@ const SettingPage = () => {
   const [userInfo, setUserInfo] = useRecoilState(userInfoAtom)
   //맞춤형지침 데이터
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false)
   const settingBackBtn = () => {
     reqUpdateUser({
       nickname: userInfo.nickname,
@@ -127,11 +130,25 @@ const SettingPage = () => {
               }}
             />
           </SettingItem>
+          <SettingItem onClick={() => setIsLogoutModalOpen(true)}>
+            <Logout>로그아웃</Logout>
+          </SettingItem>
         </SettingItemWrapper>
         {isModalOpen && (
           <NicknamePage isEdit={isModalOpen} setIsEdit={setIsModalOpen} />
         )}
       </Wrapper>
+      <CheckModal
+        open={isLogoutModalOpen}
+        title="로그아웃 하시겠습니까?"
+        cancleText="아니오"
+        confirmText="네"
+        onCancle={() => setIsLogoutModalOpen(false)}
+        onConfirm={() => {
+          localStorage.clear()
+          navigate("/splash")
+        }}
+      />
     </BaseLayout>
   )
 }
