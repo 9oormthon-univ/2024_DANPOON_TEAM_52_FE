@@ -22,10 +22,13 @@ const CategoryItem = ({ category, onClickOption, isEdit, setIsEdit }) => {
       {category.items.map((item, index) => (
         <ItemGroup key={index}>
           <ItemDate>
-            {dayjs(item.start_date).format("YY.MM.DD.")} ~{" "}
-            {item.end_date !== null
-              ? dayjs(item.end_date)?.format("YY.MM.DD.")
-              : "진행중"}{" "}
+            {dayjs(item.start_date).isSame(dayjs(item.end_date), "day")
+              ? `${dayjs(item.start_date).format("YY.MM.DD.")}`
+              : `${dayjs(item.start_date).format("YY.MM.DD.")} ~ ${
+                  item.end_date !== null
+                    ? dayjs(item.end_date)?.format("YY.MM.DD.")
+                    : "진행중"
+                }`}
           </ItemDate>
           <div
             style={{
